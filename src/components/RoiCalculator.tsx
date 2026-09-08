@@ -131,8 +131,12 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
                       <DollarSign className="w-4 h-4 text-emerald-400" />
                       <span>Dinero Protegido al Mes</span>
                     </div>
-                    <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">
-                      ${recoveredMoneyPerMonth.toLocaleString()} <span className="text-sm text-slate-400 font-normal">USD</span>
+                    <div
+                      suppressHydrationWarning
+                      className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono"
+                    >
+                      ${recoveredMoneyPerMonth.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                      <span className="text-sm text-slate-400 font-normal">USD</span>
                     </div>
                     <p className="text-[11px] text-slate-400 mt-1">
                       Evitando descuadres de caja no detectados y robos hormiga con arqueo ciego.

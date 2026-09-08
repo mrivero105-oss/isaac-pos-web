@@ -242,7 +242,7 @@ export const InteractivePosDemo: React.FC = () => {
                   <div className="w-full bg-white text-slate-900 rounded-lg p-4 font-mono text-left text-xs mb-6 shadow-xl border border-slate-300">
                     <div className="text-center font-bold pb-2 border-b border-dashed border-slate-400">
                       *** ISAAC POS TICKET ***
-                      <div className="text-[10px] font-normal text-slate-600">
+                      <div suppressHydrationWarning className="text-[10px] font-normal text-slate-600">
                         {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}
                       </div>
                     </div>

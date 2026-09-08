@@ -102,7 +102,7 @@ export const Footer: React.FC = () => {
 
         {/* Certificaciones y Copyright */}
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300">
-          <div>
+          <div suppressHydrationWarning>
             © {new Date().getFullYear()} Isaac POS. Todos los derechos reservados.
           </div>
           <div className="flex items-center gap-4 text-slate-300">
