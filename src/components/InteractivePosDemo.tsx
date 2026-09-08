@@ -25,28 +25,30 @@ interface Product {
   category: string;
   price: number;
   stock: number;
-  icon: string;
+  image: string;
 }
 
-const SAMPLE_PRODUCTS: Product[] = [
-  { id: "1", name: "Café Americano Grande", category: "Bebidas", price: 3.5, stock: 124, icon: "☕" },
-  { id: "2", name: "Capuchino Vainilla", category: "Bebidas", price: 4.5, stock: 89, icon: "🥛" },
-  { id: "3", name: "Croissant de Mantequilla", category: "Panadería", price: 2.75, stock: 45, icon: "🥐" },
-  { id: "4", name: "Sandwich Artesanal Jamón", category: "Alimentos", price: 6.5, stock: 32, icon: "🥪" },
-  { id: "5", name: "Jugo Natural de Naranja", category: "Bebidas", price: 3.0, stock: 60, icon: "🍊" },
-  { id: "6", name: "Tarta de Chocolate Belga", category: "Postres", price: 5.0, stock: 18, icon: "🍰" },
+const REAL_PRODUCTS: Product[] = [
+  { id: "1", name: "Arroz Clásico Primor 1Kg", category: "Víveres", price: 1.45, stock: 120, image: "/real-products/arroz_clasico.png" },
+  { id: "2", name: "Café Molido Arauca 200g", category: "Víveres", price: 2.80, stock: 85, image: "/real-products/cafe_arauca.png" },
+  { id: "3", name: "Aceite Vegetal Vatel 1L", category: "Víveres", price: 2.95, stock: 64, image: "/real-products/aceite_vatel.png" },
+  { id: "4", name: "Natuchips Platanitos 150g", category: "Snacks", price: 1.25, stock: 48, image: "/real-products/natuchips.png" },
+  { id: "5", name: "Refresco Pepsi Cola 1.5L", category: "Bebidas", price: 1.80, stock: 92, image: "/real-products/pepsi.jpg" },
+  { id: "6", name: "Pasta Primor Corta 500g", category: "Víveres", price: 1.10, stock: 140, image: "/real-products/pasta_primor.png" },
+  { id: "7", name: "Leche Completa Amanecer", category: "Lácteos", price: 3.20, stock: 35, image: "/real-products/leche_amanecer.png" },
+  { id: "8", name: "Galletas Doraditas Paquete", category: "Snacks", price: 0.90, stock: 75, image: "/real-products/doradita.png" },
 ];
 
 export const InteractivePosDemo: React.FC = () => {
   const [cart, setCart] = useState<{ product: Product; quantity: number }[]>([
-    { product: SAMPLE_PRODUCTS[0], quantity: 2 },
-    { product: SAMPLE_PRODUCTS[2], quantity: 1 },
+    { product: REAL_PRODUCTS[0], quantity: 2 },
+    { product: REAL_PRODUCTS[2], quantity: 1 },
   ]);
   const [isOffline, setIsOffline] = useState(false);
   const [paymentDone, setPaymentDone] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
-  const categories = ["Todos", "Bebidas", "Panadería", "Alimentos", "Postres"];
+  const categories = ["Todos", "Víveres", "Snacks", "Bebidas", "Lácteos"];
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -90,15 +92,15 @@ export const InteractivePosDemo: React.FC = () => {
   const resetCheckout = () => {
     setPaymentDone(false);
     setCart([
-      { product: SAMPLE_PRODUCTS[1], quantity: 1 },
-      { product: SAMPLE_PRODUCTS[3], quantity: 1 },
+      { product: REAL_PRODUCTS[0], quantity: 1 },
+      { product: REAL_PRODUCTS[3], quantity: 2 },
     ]);
   };
 
   const filteredProducts =
     selectedCategory === "Todos"
-      ? SAMPLE_PRODUCTS
-      : SAMPLE_PRODUCTS.filter((p) => p.category === selectedCategory);
+      ? REAL_PRODUCTS
+      : REAL_PRODUCTS.filter((p) => p.category === selectedCategory);
 
   return (
     <section id="simulador" className="py-20 relative">
@@ -199,7 +201,9 @@ export const InteractivePosDemo: React.FC = () => {
                       className="bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 hover:border-emerald-500/50 rounded-xl p-3 text-left transition-all hover:scale-[1.02] flex flex-col justify-between h-28 group relative overflow-hidden"
                     >
                       <div className="flex justify-between items-start">
-                        <span className="text-2xl">{p.icon}</span>
+                        <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/10 p-1 border border-slate-700/60 flex items-center justify-center shrink-0">
+                          <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+                        </div>
                         <span className="text-[10px] text-slate-400 bg-slate-900/80 px-1.5 py-0.5 rounded font-mono">
                           Stock: {p.stock}
                         </span>
@@ -305,12 +309,17 @@ export const InteractivePosDemo: React.FC = () => {
                             key={item.product.id}
                             className="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 text-xs"
                           >
-                            <div className="flex-1 min-w-0 mr-2">
-                              <div className="font-semibold text-slate-200 truncate">
-                                {item.product.name}
+                            <div className="flex items-center gap-2 flex-1 min-w-0 mr-2">
+                              <div className="w-8 h-8 rounded bg-white/10 p-0.5 shrink-0 flex items-center justify-center">
+                                <img src={item.product.image} alt={item.product.name} className="w-full h-full object-contain" />
                               </div>
-                              <div className="text-slate-400 text-[11px] font-mono">
-                                ${item.product.price.toFixed(2)} c/u
+                              <div className="min-w-0 flex-1">
+                                <div className="font-semibold text-slate-200 truncate">
+                                  {item.product.name}
+                                </div>
+                                <div className="text-slate-400 text-[11px] font-mono">
+                                  ${item.product.price.toFixed(2)} c/u
+                                </div>
                               </div>
                             </div>
                             <div className="flex items-center gap-2">

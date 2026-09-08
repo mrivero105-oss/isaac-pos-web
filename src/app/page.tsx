@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { InteractivePosDemo } from "@/components/InteractivePosDemo";
+import { RealSystemShowcase } from "@/components/RealSystemShowcase";
 import { Features } from "@/components/Features";
 import { HardwareSection } from "@/components/HardwareSection";
 import { SecurityTrust } from "@/components/SecurityTrust";
@@ -34,6 +35,7 @@ export default function Home() {
       {/* Contenido Principal */}
       <main className="flex-1">
         <Hero onOpenModal={handleOpenModal} />
+        <RealSystemShowcase />
         <InteractivePosDemo />
         <Features />
         <HardwareSection />

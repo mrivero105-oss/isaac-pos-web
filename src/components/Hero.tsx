@@ -58,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
           </div>
 
           {/* Badges de Confianza Rápidos */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-slate-800/80">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-slate-800/80 mb-14">
             <div className="flex items-center justify-center gap-2 text-slate-300 text-xs sm:text-sm">
               <Zap className="w-4 h-4 text-amber-400 shrink-0" />
               <span>Cobros en &lt; 3 seg</span>
@@ -74,6 +74,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
             <div className="flex items-center justify-center gap-2 text-slate-300 text-xs sm:text-sm">
               <Award className="w-4 h-4 text-indigo-400 shrink-0" />
               <span>Soporte 24/7 en Español</span>
+            </div>
+          </div>
+
+          {/* Vista Previa Real del Sistema en el Hero */}
+          <div className="relative max-w-5xl mx-auto">
+            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div className="relative bg-slate-900 rounded-2xl sm:rounded-3xl border-2 border-slate-700/80 p-2 sm:p-3 shadow-2xl">
+              <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800 mb-2 text-xs font-mono text-slate-400">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+                  <span className="text-slate-300 text-[11px] ml-2">Terminal de Ventas Isaac POS (Pantalla Real)</span>
+                </div>
+                <span className="text-emerald-400 font-bold">Multimoneda USD / Bs Activo</span>
+              </div>
+              <img
+                src="/real-system/ui_terminal_ventas.png"
+                alt="Pantalla Real de Isaac POS"
+                className="w-full h-auto rounded-xl shadow-inner"
+              />
             </div>
           </div>
         </div>

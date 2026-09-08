@@ -46,6 +46,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
 
           {/* Navegación Desktop */}
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+            <a href="#sistema-real" className="hover:text-emerald-400 transition-colors text-emerald-400 font-semibold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              Sistema Real
+            </a>
             <a href="#funciones" className="hover:text-emerald-400 transition-colors">
               Funcionalidades
             </a>
