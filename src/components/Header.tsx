@@ -29,17 +29,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo & Marca */}
+          {/* Logo & Marca Real de Isaac POS */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-              <Shield className="w-5 h-5 text-slate-950 stroke-[2.5]" />
+            <div className="relative w-11 h-11 rounded-2xl overflow-hidden shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform shrink-0 border border-cyan-500/30 bg-slate-900">
+              <img
+                src="/isaac-icon-3d.png"
+                alt="Isaac POS Icon"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
-              <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                ISAAC <span className="text-emerald-400">POS</span>
+              <span className="text-xl font-black tracking-tight text-white flex items-center gap-1.5">
+                ISAAC <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">POS</span>
+                <span className="text-[10px] bg-blue-500/20 text-cyan-300 border border-cyan-500/30 font-mono font-bold px-1.5 py-0.5 rounded-md ml-1">v24.04</span>
               </span>
               <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
-                <Lock className="w-2.5 h-2.5 text-emerald-400" /> SECURE ENTERPRISE
+                <Lock className="w-2.5 h-2.5 text-emerald-400" /> SECURE ENTERPRISE POS
               </span>
             </div>
           </a>

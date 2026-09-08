@@ -109,19 +109,67 @@ const SHOWCASE_ITEMS: ShowcaseItem[] = [
     ],
   },
   {
+    id: "crm",
+    tabTitle: "Directorio de Clientes",
+    icon: Users,
+    badge: "CRM Comercial",
+    title: "Directorio Centralizado de Clientes y Fidelización",
+    description:
+      "Registra clientes con cédula/RIF, teléfono y dirección. Consulta su historial completo de compras, frecuencia de visitas y asigna listas de precios especiales para clientes mayoristas o frecuentes.",
+    image: "/real-system/ui_crm_clientes.png",
+    highlights: [
+      "Búsqueda instantánea por Cédula, RIF o Nombre comercial",
+      "Historial de compras y tickets emitidos por cliente",
+      "Asignación de límites y condiciones de crédito comercial",
+      "Envío directo de facturas y promociones por WhatsApp",
+    ],
+  },
+  {
+    id: "proveedores",
+    tabTitle: "Proveedores & Compras",
+    icon: Boxes,
+    badge: "Gestión de Abastecimiento",
+    title: "Administración de Proveedores y Recepción de Mercancía",
+    description:
+      "Controla a quién le compras, los días de crédito que te otorgan y las órdenes de compra pendientes. Vincula las entradas de mercancía directamente al inventario para mantener tus costos siempre actualizados.",
+    image: "/real-system/ui_proveedores.png",
+    highlights: [
+      "Directorio de distribuidores y empresas mayoristas",
+      "Cálculo de cuentas por pagar y fechas de vencimiento de facturas",
+      "Recepción y cotejo de mercancía contra orden de compra",
+      "Actualización automática de precios de costo e historial de compras",
+    ],
+  },
+  {
+    id: "gastos",
+    tabTitle: "Gastos & Sucursales",
+    icon: FileSpreadsheet,
+    badge: "Control Operativo",
+    title: "Registro de Gastos Operativos y Control Multi-Sucursal",
+    description:
+      "Registra cada egreso de caja chica, pago de servicios, nómina o flete. Isaac POS descuenta los gastos del flujo diario para entregarte la ganancia neta real de cada sucursal o caja.",
+    image: "/real-system/ui_gestion_gastos.png",
+    highlights: [
+      "Clasificación de egresos por rubro (servicios, nómina, logística)",
+      "Afectación directa del balance de caja y utilidad neta del día",
+      "Consolidación de múltiples sucursales en un único panel central",
+      "Auditoría con usuario responsable de cada salida de dinero",
+    ],
+  },
+  {
     id: "ajustes",
     tabTitle: "Configuración Multimoneda",
     icon: Sliders,
     badge: "Ajustes Globales",
-    title: "Sincronización de Tasas, Impuestos y Roles de Usuario",
+    title: "Sincronización de Tasas BCV, Impuestos y Roles de Usuario",
     description:
-      "Configuración centralizada para adaptarse a la realidad económica de tu país: sincronización de tasas oficiales y de mercado, esquemas tributarios IVA/IGTF y permisos jerárquicos por usuario.",
+      "Configuración centralizada adaptada a la realidad comercial venezolana: sincronización con la tasa oficial BCV, esquemas tributarios IVA (16%) e IGTF (3%), identidad fiscal (RIF Bodega Sigfrido) y permisos jerárquicos.",
     image: "/real-system/ui_configuracion_multimoneda.png",
     highlights: [
-      "Actualización automática de tasas de cambio con 1 clic",
-      "Reglas tributarias configurables por tipo de transacción",
+      "Actualización automática de la tasa BCV con 1 clic",
+      "Esquemas de impuestos configurables (IVA general, exento, IGTF)",
       "Roles protegidos por PIN de seguridad para cajeros y supervisores",
-      "Respaldos locales y en la nube con cifrado militar",
+      "Respaldos locales instantáneos y compatibilidad con impresoras térmicas",
     ],
   },
 ];

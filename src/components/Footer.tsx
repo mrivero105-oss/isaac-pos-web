@@ -8,18 +8,23 @@ export const Footer: React.FC = () => {
     <footer className="bg-slate-950 border-t border-slate-800/80 pt-16 pb-12 text-slate-400 text-xs sm:text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-          {/* Col 1 & 2: Marca y Misión */}
+          {/* Col 1 & 2: Marca y Misión Real */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-slate-950 font-black shadow-md shadow-emerald-500/20">
-                <Shield className="w-5 h-5 text-slate-950 stroke-[2.5]" />
+              <div className="relative w-10 h-10 rounded-2xl overflow-hidden shadow-lg border border-cyan-500/30 shrink-0 bg-slate-900">
+                <img
+                  src="/isaac-icon-3d.png"
+                  alt="Isaac POS"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">
-                ISAAC <span className="text-emerald-400">POS</span>
+              <span className="text-xl font-black tracking-tight text-white">
+                ISAAC <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">POS</span>
+                <span className="text-[10px] bg-slate-800 text-cyan-300 font-mono px-2 py-0.5 rounded-full ml-2 border border-slate-700">v24.04</span>
               </span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed max-w-sm mb-6">
-              El sistema de punto de venta más rápido, intuitivo y blindado para comercios. Facturación instantánea, inventario en tiempo real y ventas continuas sin internet.
+              El sistema de punto de venta más rápido, intuitivo y blindado para comercios. Tasa BCV oficial en vivo, facturación instantánea, inventario en tiempo real y ventas continuas sin internet.
             </p>
             <div className="flex items-center gap-3 text-slate-300 text-xs">
               <span className="flex items-center gap-1 text-emerald-400 font-mono">

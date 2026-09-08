@@ -17,50 +17,50 @@ import {
 const FEATURES_LIST = [
   {
     icon: Zap,
-    title: "Cobros en menos de 3 segundos",
+    title: "Cobros Duales en < 2s con Tasa BCV",
     description:
-      "Interfaz táctil de alta respuesta diseñada para eliminar filas en tu negocio. Búsqueda instantánea por código de barras o imagen de producto.",
-    badge: "Alta Velocidad",
+      "Maneja simultáneamente precios en USD ($) y Bolívares (Bs.S) con sincronización automática de la tasa oficial del Banco Central de Venezuela. Atajos F2 para cobrar y F4 para búsqueda express.",
+    badge: "Multimoneda Nativa",
     color: "from-amber-500/20 to-amber-500/0 text-amber-400 border-amber-500/30",
   },
   {
     icon: WifiOff,
-    title: "Operación 100% Offline",
+    title: "Sincronización WiFi Local P2P",
     description:
-      "Si se corta el internet o la luz, Isaac POS no se detiene. Continúa cobrando con base de datos local y sincroniza de forma segura al restablecer la red.",
-    badge: "Cero Caídas",
+      "Conecta múltiples tablets Android de pasillo directamente a la PC central por la red WiFi de tu tienda sin depender de internet externo ni servicios en la nube. Base de datos SQLite local ultra-rápida.",
+    badge: "100% Sin Internet",
     color: "from-cyan-500/20 to-cyan-500/0 text-cyan-400 border-cyan-500/30",
   },
   {
-    icon: PackageCheck,
-    title: "Inventario en Tiempo Real",
-    description:
-      "Kardex automático, alertas de bajo stock, control de lotes y fechas de vencimiento. Evita pérdidas y quiebres de inventario sin esfuerzo.",
-    badge: "Control Total",
-    color: "from-emerald-500/20 to-emerald-500/0 text-emerald-400 border-emerald-500/30",
-  },
-  {
     icon: Calculator,
-    title: "Arqueo Ciego y Cortes X y Z",
+    title: "Arqueo Ciego de Caja por Turno",
     description:
-      "Blindaje anti-robo: el cajero cuenta el dinero sin ver el total del sistema. Detección automática de faltantes o sobrantes por turno.",
-    badge: "Anti-Fraude",
+      "Blindaje anti-fraude: el cajero cuenta y declara físicamente los billetes en divisas y bolívares sin ver el total esperado del sistema. Detección automática e instantánea de cualquier faltante.",
+    badge: "Anti-Robo Hormiga",
     color: "from-rose-500/20 to-rose-500/0 text-rose-400 border-rose-500/30",
   },
   {
-    icon: LineChart,
-    title: "Reportes Financieros y Métricas",
+    icon: PackageCheck,
+    title: "Importador IA de Catálogos PDF",
     description:
-      "Visualiza tus ventas por hora, margen de ganancia neta, productos estrella y rendimiento de tus cajeros desde tu celular o computadora.",
-    badge: "Inteligencia",
+      "Con el motor Flash Engine exclusivo impulsado por Google Gemini, suelta la lista de precios en PDF de Empresas Polar, Nestlé o mayoristas y la IA extrae códigos, bultos y costos en segundos.",
+    badge: "Gemini Flash AI",
+    color: "from-emerald-500/20 to-emerald-500/0 text-emerald-400 border-emerald-500/30",
+  },
+  {
+    icon: LineChart,
+    title: "Tickets y Notas a WhatsApp",
+    description:
+      "Ahorra en rollos de papel térmico. Despacha el ticket digital, cotización o estado de deuda con un solo toque directo al WhatsApp del cliente con número de control y desglose en divisas.",
+    badge: "Cero Gasto de Papel",
     color: "from-indigo-500/20 to-indigo-500/0 text-indigo-400 border-indigo-500/30",
   },
   {
     icon: LockKeyhole,
-    title: "Permisos y Auditoría Estricta",
+    title: "Pagos Mixtos y Créditos (Fiados)",
     description:
-      "Roles definidos (Cajero, Encargado, Administrador). Cada descuento, anulación de comanda o apertura manual de cajón queda registrada con firma de usuario.",
-    badge: "Seguridad Bancaria",
+      "Cobra dividiendo el pago: parte en efectivo dólares, parte en Pago Móvil y parte con tarjeta de débito. Gestión de cuentas por cobrar indexadas en dólares con historial de abonos.",
+    badge: "Flexibilidad Total",
     color: "from-teal-500/20 to-teal-500/0 text-teal-400 border-teal-500/30",
   },
 ];

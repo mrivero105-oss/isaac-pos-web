@@ -17,14 +17,19 @@ export const metadata: Metadata = {
     "corte de caja",
   ],
   authors: [{ name: "Isaac POS Team" }],
+  icons: {
+    icon: "/isaac-icon-3d.png",
+    shortcut: "/isaac-icon-3d.png",
+    apple: "/isaac-icon-3d.png",
+  },
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "Isaac POS - El Sistema de Punto de Venta más Rápido y Seguro",
+    title: "Isaac POS V24.04 - El Sistema de Punto de Venta más Rápido y Seguro",
     description:
-      "Vende sin interrupciones incluso sin internet. Cifrado bancario, control de inventario y máxima seguridad para tu comercio.",
+      "Vende sin interrupciones incluso sin internet. Tasa BCV en vivo, Arqueo Ciego anti-robo, Importador IA y máxima seguridad para tu comercio.",
     type: "website",
     locale: "es_LA",
   },

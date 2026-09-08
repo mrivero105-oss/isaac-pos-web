@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { PromotionalShowcase } from "@/components/PromotionalShowcase";
 import { InteractivePosDemo } from "@/components/InteractivePosDemo";
 import { RealSystemShowcase } from "@/components/RealSystemShowcase";
 import { Features } from "@/components/Features";
@@ -35,6 +36,7 @@ export default function Home() {
       {/* Contenido Principal */}
       <main className="flex-1">
         <Hero onOpenModal={handleOpenModal} />
+        <PromotionalShowcase />
         <RealSystemShowcase />
         <InteractivePosDemo />
         <Features />
