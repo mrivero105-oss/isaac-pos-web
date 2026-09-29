@@ -1,40 +1,30 @@
 import { z } from "zod";
 
-// Esquema de validación estricta para solicitud de Demo o Cotización
+// Esquema de validación flexible y amigable para solicitud de Demo o Cotización
 export const LeadFormSchema = z.object({
   fullName: z
     .string()
     .trim()
-    .min(2, "El nombre debe tener al menos 2 caracteres")
-    .max(80, "El nombre es demasiado largo")
-    .regex(/^[a-zA-ZÀ-ÿ\s'-]+$/, "El nombre contiene caracteres no válidos"),
+    .min(2, "Por favor ingresa tu nombre completo")
+    .max(100, "El nombre es demasiado largo"),
   email: z
     .string()
     .trim()
     .email("Ingresa un correo electrónico válido")
-    .max(100, "El correo es demasiado largo"),
+    .max(120, "El correo es demasiado largo"),
   phone: z
     .string()
     .trim()
-    .min(7, "El teléfono debe tener al menos 7 dígitos")
-    .max(20, "El teléfono es demasiado largo")
-    .regex(/^[+0-9\s()-]+$/, "El formato de teléfono no es válido"),
+    .min(6, "Ingresa un número de teléfono o WhatsApp válido")
+    .max(30, "El teléfono es demasiado largo"),
   businessName: z
     .string()
     .trim()
-    .min(2, "El nombre de tu negocio es requerido")
-    .max(100, "Nombre de negocio muy largo"),
-  businessType: z.enum([
-    "restaurante",
-    "cafeteria",
-    "tienda_retail",
-    "minimarket",
-    "farmacia",
-    "servicios",
-    "otro",
-  ]),
-  branchesCount: z.enum(["1", "2-5", "6-10", "10+"]),
-  planInterested: z.enum(["basico", "pro", "vitalicia", "demo_gratis"]),
+    .min(1, "El nombre de tu negocio es requerido")
+    .max(120, "Nombre de negocio muy largo"),
+  businessType: z.string().optional().default("otro"),
+  branchesCount: z.string().optional().default("1"),
+  planInterested: z.string().optional().default("pro_anual"),
   message: z.string().trim().max(500, "Mensaje muy largo").optional(),
   // Campo Honeypot para neutralizar bots automatizados
   website_url_hp: z.string().max(0, "Acceso no autorizado").optional(),
@@ -42,15 +32,15 @@ export const LeadFormSchema = z.object({
 
 export type LeadFormData = z.infer<typeof LeadFormSchema>;
 
-// Esquema de validación para intención de compra directa multimoneda y multipasarela
+// Esquema de validación para intención de compra o acuerdo directo
 export const CheckoutIntentSchema = z.object({
-  planId: z.enum(["basico_mensual", "basico_anual", "pro_mensual", "pro_anual", "vitalicia"]),
+  planId: z.string().default("pro_anual"),
   currency: z.enum(["USD", "VES", "EUR", "MXN"]).default("USD"),
   customerEmail: z.string().trim().email("Correo electrónico no válido"),
   customerName: z.string().trim().min(2, "Nombre requerido"),
-  customerPhone: z.string().trim().min(7, "Teléfono requerido").optional(),
+  customerPhone: z.string().trim().min(6, "Teléfono requerido").optional(),
   companyTaxId: z.string().trim().max(30).optional(),
-  paymentMethod: z.enum(["pago_movil", "zelle", "binance", "card"]).default("pago_movil"),
+  paymentMethod: z.string().default("acuerdo_directo"),
   paymentReference: z.string().trim().max(50).optional(),
 });
 

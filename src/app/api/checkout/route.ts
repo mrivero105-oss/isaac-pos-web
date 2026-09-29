@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
       paymentReference,
     } = parsed.data;
 
-    const selectedPlan = PLAN_PRICES[planId];
+    const selectedPlan = PLAN_PRICES[planId as keyof typeof PLAN_PRICES];
 
     if (!selectedPlan) {
       return NextResponse.json({ error: "El plan seleccionado no existe." }, { status: 404 });
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
       },
       paymentMethod,
       paymentReference: paymentReference || null,
-      instructions: PAYMENT_INSTRUCTIONS[paymentMethod],
+      instructions: PAYMENT_INSTRUCTIONS[paymentMethod as keyof typeof PAYMENT_INSTRUCTIONS] || null,
       whatsappConfirmationUrl: whatsappUrl,
       pciCompliant: true,
       encryption: "TLS 1.3 / SHA-256",
