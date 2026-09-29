@@ -42,13 +42,16 @@ export const LeadFormSchema = z.object({
 
 export type LeadFormData = z.infer<typeof LeadFormSchema>;
 
-// Esquema de validación para intención de compra directa
+// Esquema de validación para intención de compra directa multimoneda y multipasarela
 export const CheckoutIntentSchema = z.object({
   planId: z.enum(["basico_mensual", "basico_anual", "pro_mensual", "pro_anual", "vitalicia"]),
-  currency: z.enum(["USD", "MXN", "EUR"]),
+  currency: z.enum(["USD", "VES", "EUR", "MXN"]).default("USD"),
   customerEmail: z.string().trim().email("Correo electrónico no válido"),
   customerName: z.string().trim().min(2, "Nombre requerido"),
+  customerPhone: z.string().trim().min(7, "Teléfono requerido").optional(),
   companyTaxId: z.string().trim().max(30).optional(),
+  paymentMethod: z.enum(["pago_movil", "zelle", "binance", "card"]).default("pago_movil"),
+  paymentReference: z.string().trim().max(50).optional(),
 });
 
 export type CheckoutIntentData = z.infer<typeof CheckoutIntentSchema>;

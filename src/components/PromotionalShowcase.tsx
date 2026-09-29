@@ -5,7 +5,6 @@ import {
   Smartphone,
   Monitor,
   Wifi,
-  Sparkles,
   Zap,
   TrendingUp,
   Receipt,
@@ -27,60 +26,60 @@ export const PromotionalShowcase: React.FC = () => {
       badge: "TERMINAL DE VENTAS EXPRESS",
       title: "Cobro Táctil Dual USD / Bs.S en 2 Segundos",
       description:
-        "Diseñado para bodegas, supermercados, farmacias y comercios de alto flujo. El cajero busca con F4, escanea con código de barra o selecciona la foto del producto. El cálculo de tasa BCV es automático y transparente.",
-      image: "/real-system/ui_terminal_ventas.png",
+        "Diseñado para bodegas, supermercados, farmacias y comercios de alto flujo. Catálogo visual con fotos, 14+ categorías, filtros por POPULARES, OFERTAS y NUEVOS. Tasa BCV automática en pantalla.",
+      image: "/real-system/ui_terminal_ventas_dark.png",
       tag: "F2: Cobro Rápido",
       stats: "2.4 seg por cliente",
     },
     {
-      id: "bcv",
-      badge: "MULTIMONEDA AUTOMÁTICA",
-      title: "Sincronización Oficial BCV en Tiempo Real",
+      id: "fiscal",
+      badge: "GESTIÓN FISCAL SENIAT",
+      title: "Libros de Compras y Ventas Oficiales con IVA e IGTF",
       description:
-        "Protege tu margen de ganancia contra la devaluación. Isaac POS actualiza la tasa oficial del Banco Central de Venezuela en segundo plano y recalcula todos tus precios en bolívares al instante.",
-      image: "/real-system/ui_configuracion_multimoneda.png",
-      tag: "Tasa BCV en Vivo",
-      stats: "100% Automatizado",
+        "Genera automáticamente los libros fiscales exigidos por el SENIAT. IVA 16%, base imponible, alícuota, ventas exentas, IGTF 3% en divisas, Notas de Crédito y comprobantes de retención listos para declarar.",
+      image: "/real-system/ui_gestion_fiscal_seniat.png",
+      tag: "SENIAT Compliant",
+      stats: "Libros 100% Automatizados",
     },
     {
-      id: "ia",
-      badge: "MOTOR FLASH ENGINE IA",
-      title: "Importador Inteligente de Catálogos PDF",
+      id: "inteligencia",
+      badge: "BUSINESS INTELLIGENCE",
+      title: "Análisis de Rentabilidad P&L y Métricas Ejecutivas",
       description:
-        "¿Recibiste la lista de precios de Empresas Polar, Nestlé o Vatel en PDF? Suéltala en el importador: la IA de Gemini extrae descripciones, empaques, bultos y costos mayoristas sin digitar nada a mano.",
-      image: "/real-system/ui_importador_ia.png",
-      tag: "Gemini Flash AI",
-      stats: "Ahorra 15h semanales",
+        "Módulo gerencial con Profit & Loss, márgenes de utilidad por categoría, mapa de calor de intensidad horaria, proyecciones de ventas y exportación de reportes para la junta directiva.",
+      image: "/real-system/ui_inteligencia_pl.png",
+      tag: "Inteligencia P&L",
+      stats: "Márgenes en Tiempo Real",
     },
     {
       id: "dashboard",
-      badge: "INTELIGENCIA EMPRESARIAL",
-      title: "Dashboard de Ganancia Neta y Flujo de Caja",
+      badge: "REPORTES GENERALES",
+      title: "Dashboard de Métricas en Vivo y Stock Crítico",
       description:
-        "Conoce tu rentabilidad real después de descontar el costo de la mercancía y los gastos operativos del negocio. Gráficos de Ventas vs Utilidad y ticket promedio accesibles en cualquier momento.",
+        "Toma decisiones con números exactos. Ingresos totales, ganancia neta, ticket promedio, margen bruto, mapa de calor por turnos horarios y alertas automáticas de inventario agotado.",
       image: "/real-system/ui_dashboard_reportes.png",
-      tag: "Métricas Reales",
-      stats: "+32% Margen Operativo",
+      tag: "Live Analytics",
+      stats: "Alertas en Tiempo Real",
     },
     {
-      id: "fiados",
-      badge: "CONTROL DE CRÉDITO Y FIADOS",
-      title: "Cuentas por Cobrar Indexadas en Divisas",
+      id: "importador",
+      badge: "IMPORTADOR CON IA",
+      title: "Actualiza Costos desde Facturas PDF con Inteligencia Artificial",
       description:
-        "Otorga crédito con total tranquilidad. Asigna límites máximos a clientes de confianza, registra abonos parciales y envía recordatorios de cobro directamente a WhatsApp con el monto indexado.",
-      image: "/real-system/ui_cuentas_por_cobrar.png",
-      tag: "Cero Deudas Olvidadas",
-      stats: "Recupera tu Capital",
+        "Arrastra una factura de tu proveedor y el motor de IA extrae automáticamente los precios. Escanea desde impresora, webcam o archivo. Actualización masiva de costos en segundos.",
+      image: "/real-system/ui_importador_ia.png",
+      tag: "Inteligencia Artificial",
+      stats: "100s de productos/minuto",
     },
     {
       id: "inventario",
-      badge: "KARDEX & MULTI-ALMACÉN",
-      title: "Control de Stock con Alertas de Quiebre",
+      badge: "CONTROL DE STOCK POSTGRESQL",
+      title: "Inventario Masivo con 1.200+ SKUs y Alertas de Reposición",
       description:
-        "Supervisa existencias mínimas en tiempo real, traslados entre depósitos y almacenes, y genera catálogos completos en PDF con tus fotos de producto para tus clientes mayoristas.",
+        "Supervisa existencias en tiempo real con Kardex inteligente. Fotos reales, código de barras, precios duales (USD/Bs), stock mínimo, proveedor asignado, modo farmacia y valorización total del almacén.",
       image: "/real-system/ui_control_inventario.png",
-      tag: "Kardex Automatizado",
-      stats: "0% Pérdidas de Mercancía",
+      tag: "PostgreSQL + SQLite",
+      stats: "1.200+ Productos en Vivo",
     },
   ];
 
@@ -92,10 +91,6 @@ export const PromotionalShowcase: React.FC = () => {
         
         {/* Encabezado Principal de la Sección */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-4 shadow-inner">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span>Imágenes y Pantallas Reales de Isaac POS V24.04</span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
             Así es como se ve la tecnología de vanguardia en tu mostrador
           </h2>
@@ -184,7 +179,7 @@ export const PromotionalShowcase: React.FC = () => {
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
                     <span className="ml-2 text-slate-200 font-bold text-[11px]">
-                      ISAAC POS • Bodega Sigfrido
+                      ISAAC POS • Supermercado Demo
                     </span>
                   </div>
                   <div className="flex items-center gap-3">

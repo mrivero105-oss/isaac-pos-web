@@ -20,27 +20,27 @@ const HARDWARE_ITEMS = [
   {
     icon: Printer,
     title: "Impresoras Térmicas (58mm / 80mm)",
-    desc: "Soporte nativo para el protocolo ESC/POS vía Bluetooth, USB o Red LAN/Wi-Fi. Cero configuración compleja.",
+    desc: "Conexión directa vía Bluetooth, USB o cable de red. Imprime tickets y comandas al instante sin configuraciones complejas.",
   },
   {
     icon: Barcode,
-    title: "Lectores de Códigos 1D / 2D",
+    title: "Lectores de Códigos de Barra",
     desc: "Lectura instantánea de códigos de barras tradicionales y códigos QR para agilizar cobros e inventarios masivos.",
   },
   {
     icon: Coins,
-    title: "Cajones Portamonedas RJ11",
-    desc: "Apertura eléctrica automática mediante pulso de la impresora al confirmar el pago en efectivo.",
+    title: "Gavetas Portamonedas",
+    desc: "Apertura eléctrica automática al momento de confirmar cualquier cobro en efectivo.",
   },
   {
     icon: Scale,
-    title: "Básculas Digitales de Precisión",
-    desc: "Conexión serial o USB para venta de productos pesados (carnicerías, fruterías, cafeterías y granel).",
+    title: "Básculas y Balanzas Digitales",
+    desc: "Conexión directa para venta de productos pesados (carnicerías, fruterías, charcuterías y granel).",
   },
   {
     icon: Cpu,
-    title: "PC / Laptops y Navegadores",
-    desc: "Accede al panel de administración, compras y métricas avanzadas desde cualquier navegador web moderno con TLS 1.3.",
+    title: "Computadoras y Laptops",
+    desc: "Controla tu inventario, ventas y reportes gerenciales desde cualquier computadora con total comodidad.",
   },
 ];
 

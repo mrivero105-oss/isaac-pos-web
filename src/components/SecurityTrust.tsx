@@ -15,33 +15,33 @@ import {
 const SECURITY_PILLARS = [
   {
     icon: Lock,
-    title: "Cifrado Militar AES-256 y TLS 1.3",
-    desc: "Toda la información de ventas, inventarios y clientes viaja por canales criptográficos seguros de última generación y se almacena con cifrado robusto.",
+    title: "Protección Total de tus Datos",
+    desc: "Toda la información de ventas, inventario y clientes está protegida contra accesos no autorizados y se resguarda de forma segura en tu equipo.",
   },
   {
     icon: FileCheck,
-    title: "Cumplimiento Financiero PCI-DSS",
-    desc: "Los cobros con tarjeta se procesan en bóvedas certificadas de nivel bancario. Tu negocio nunca almacena ni corre el riesgo de filtrar datos de tarjetas.",
+    title: "Cobros Confiables y Claros",
+    desc: "Registro exacto de cada cobro por Pago Móvil, punto de venta o divisas, asegurando que cada bolívar y dólar esté perfectamente cuadrado.",
   },
   {
     icon: ShieldCheck,
-    title: "Arqueo Ciego Anti-Robo Hormiga",
-    desc: "El sistema no revela el monto esperado de caja al momento del cierre. El empleado cuenta físicamente el dinero, impidiendo discrepancias y alteraciones.",
+    title: "Arqueo Ciego Anti-Pérdidas",
+    desc: "El cajero cuenta físicamente el dinero sin ver el monto esperado del sistema, impidiendo alteraciones y detectando faltantes de inmediato.",
   },
   {
     icon: UserCheck,
-    title: "Control de Acceso Basado en Roles (RBAC)",
-    desc: "Asigna permisos diferenciados para cajeros, meseros, supervisores y gerentes con autenticación por PIN o contraseña cifrada.",
+    title: "Permisos de Cajero y Supervisor",
+    desc: "Asigna claves diferenciadas para cajeros y supervisores, evitando que el personal anule tickets o modifique precios sin autorización previa.",
   },
   {
     icon: KeyRound,
-    title: "Firmas Criptográficas de Auditoría",
-    desc: "Cada descuento aplicado, ticket anulado o reimpresión de comanda genera un registro con fecha, hora y firma digital del operador.",
+    title: "Registro de Anulaciones y Descuentos",
+    desc: "Cada descuento aplicado, devolución o ticket anulado queda registrado con la fecha, hora exacta y nombre del cajero que lo realizó.",
   },
   {
     icon: ServerCrash,
-    title: "Respaldo Automático con Redundancia",
-    desc: "Copias de seguridad continuas y automáticas en la nube para que nunca pierdas tu catálogo ni tu historial de ventas ante pérdida o robo de dispositivo.",
+    title: "Copias de Seguridad Fáciles",
+    desc: "Guarda respaldos rápidos de todo tu catálogo y ventas para que tu negocio siempre esté protegido ante cualquier imprevisto.",
   },
 ];
 
@@ -52,13 +52,13 @@ export const SecurityTrust: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-4">
             <ShieldCheck className="w-4 h-4" />
-            <span>Seguridad de Grado Financiero</span>
+            <span>Control y Confianza Total</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
             Máxima Seguridad para tu Dinero y tus Datos
           </h2>
           <p className="text-slate-300 text-base sm:text-lg">
-            En un negocio de ventas, la seguridad no es opcional. Isaac POS fue diseñado con arquitectura *Zero-Trust* para proteger cada centavo que entra a tu caja.
+            En un negocio comercial, la seguridad de la caja es primordial. Isaac POS fue diseñado para proteger cada centavo que entra a tu mostrador.
           </p>
         </div>
 
