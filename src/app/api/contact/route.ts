@@ -129,6 +129,19 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
+    const emailText = 
+      `🔔 NUEVA SOLICITUD DE DEMO - ISAAC POS ULTRA\n\n` +
+      `Cliente: ${fullName}\n` +
+      `Correo: ${email}\n` +
+      `Teléfono: ${phone}\n` +
+      `Comercio: ${businessName}\n` +
+      `Rubro: ${businessType}\n` +
+      `Cajas / Terminales: ${branchesCount}\n` +
+      `Plan de Interés: ${planInterested}\n` +
+      (message ? `Mensaje: ${message}\n` : "") +
+      `Fecha: ${timestamp}\n\n` +
+      `Atender por WhatsApp: https://wa.me/${cleanPhone}`;
+
     // 1. Envío por Gmail SMTP si GMAIL_PASS está configurado
     if (gmailPass) {
       try {
@@ -140,16 +153,23 @@ export async function POST(req: NextRequest) {
           },
         });
 
-        await transporter.sendMail({
-          from: `"Isaac POS Ultra" <${gmailUser}>`,
-          to: RECIPIENT_EMAILS,
-          replyTo: email,
-          subject: emailSubject,
-          html: emailHtml,
-        });
-
-        emailSent = true;
-        console.log(`[EMAIL OK - GMAIL SMTP] Notificación enviada a: ${RECIPIENT_EMAILS.join(", ")}`);
+        // Enviar a cada destinatario por separado para entrega 100% directa en bandeja principal
+        for (const recipient of RECIPIENT_EMAILS) {
+          try {
+            await transporter.sendMail({
+              from: `"Isaac POS Ultra" <${gmailUser}>`,
+              to: recipient,
+              replyTo: email,
+              subject: emailSubject,
+              text: emailText,
+              html: emailHtml,
+            });
+            emailSent = true;
+            console.log(`[EMAIL OK - GMAIL SMTP] Notificación entregada a: ${recipient}`);
+          } catch (rErr) {
+            console.error(`[EMAIL ERROR - GMAIL SMTP to ${recipient}]`, rErr);
+          }
+        }
       } catch (err) {
         console.error(`[EMAIL ERROR - GMAIL SMTP]`, err);
       }
