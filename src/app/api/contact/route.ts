@@ -157,27 +157,35 @@ export async function POST(req: NextRequest) {
     // 2. Fallback con Resend API si RESEND_API_KEY está configurada
     else if (resendApiKey) {
       try {
-        const resendRes = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${resendApiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: "Isaac POS Leads <onboarding@resend.dev>",
-            to: RECIPIENT_EMAILS,
-            reply_to: email,
-            subject: emailSubject,
-            html: emailHtml,
-          }),
-        });
+        // Enviar a cada destinatario por separado para que la restricción de pruebas de Resend
+        // no bloquee a la cuenta propietaria (mrivero105@gmail.com)
+        for (const recipient of RECIPIENT_EMAILS) {
+          try {
+            const resendRes = await fetch("https://api.resend.com/emails", {
+              method: "POST",
+              headers: {
+                "Authorization": `Bearer ${resendApiKey}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                from: "Isaac POS Leads <onboarding@resend.dev>",
+                to: [recipient],
+                reply_to: email,
+                subject: emailSubject,
+                html: emailHtml,
+              }),
+            });
 
-        if (resendRes.ok) {
-          emailSent = true;
-          console.log(`[EMAIL OK - RESEND] Notificación enviada exitosamente a: ${RECIPIENT_EMAILS.join(", ")}`);
-        } else {
-          const errData = await resendRes.text();
-          console.error(`[EMAIL ERROR RESEND]`, errData);
+            if (resendRes.ok) {
+              emailSent = true;
+              console.log(`[EMAIL OK - RESEND] Notificación enviada exitosamente a: ${recipient}`);
+            } else {
+              const errData = await resendRes.text();
+              console.warn(`[EMAIL NOTICE - RESEND] Respuesta para ${recipient}:`, errData);
+            }
+          } catch (itemErr) {
+            console.error(`[EMAIL ERROR RESEND INDIVIDUAL]`, itemErr);
+          }
         }
       } catch (err) {
         console.error(`[EMAIL DISPATCH ERROR - RESEND]`, err);
