@@ -135,7 +135,7 @@ Al generar tu orden en la web, recibes tu número de orden y puedes confirmarla 
     title: "Atención y Soporte Técnico Directo",
     reply: `**Estamos a tu disposición para ayudarte:** 👨‍💻📞
 
-* **WhatsApp Oficial:** [+58 424-8302226](https://wa.me/584248302226)
+* **WhatsApp Oficial:** [Contactar Asesor por WhatsApp](https://wa.me/584248302226)
 * **Correo Electrónico:** isaacpospage@gmail.com
 * **Horario de Soporte:** 24/7 en español.
 * **Instalación:** Te acompañamos paso a paso por llamada o acceso remoto para dejar tu punto de venta 100% operativo en menos de 15 minutos.`,
@@ -276,7 +276,7 @@ Características clave:
 - Precios: Plan Básico ($29/m o $290/a), Plan Profesional ($59/m o $590/a), Licencia Vitalicia ($499 pago único).
 - Hardware: Tablets Android 7.0+, impresoras térmicas ESC/POS (58mm/80mm), lectores de barras, gavetas RJ11.
 - Métodos de pago para comprar: Pago Móvil BCV, Zelle, Binance Pay USDT, Tarjetas.
-- WhatsApp de atención: +58 424-8302226.
+- Canal de atención: Contacto directo por WhatsApp oficial desde los botones de la web.
 
 Responde de forma concisa, profesional, persuasiva y amigable en formato markdown.
 Pregunta del usuario: "${userMessage}"`,

@@ -104,7 +104,6 @@ const jsonLd = {
       logo: "https://isaacpos.com/isaac-icon-3d.png",
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+58-424-8302226",
         contactType: "customer support",
         availableLanguage: ["Spanish"],
       },

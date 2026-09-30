@@ -68,10 +68,10 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
 
             <button
               onClick={handleSend}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 transition-all"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
-              <span>Abrir Chat de WhatsApp (+58 424-8302226)</span>
+              <span>Abrir Chat de WhatsApp</span>
             </button>
           </div>
         </div>
