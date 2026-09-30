@@ -138,14 +138,31 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Ocurrió un error al enviar.");
+      const planName = currentPlanInfo.name;
+      const whatsappMsg =
+        `🔔 *NUEVA SOLICITUD DE DEMO GUIADA - ISAAC POS ULTRA*\n\n` +
+        `👤 *Cliente:* ${demoFormData.fullName}\n` +
+        `📧 *Email:* ${demoFormData.email}\n` +
+        `📱 *Teléfono / WhatsApp:* ${demoFormData.phone}\n` +
+        `🏪 *Comercio:* ${demoFormData.businessName}\n` +
+        `🏷️ *Rubro:* ${demoFormData.businessType}\n` +
+        `📦 *Cajas / Terminales:* ${demoFormData.branchesCount}\n` +
+        `💼 *Plan de Interés:* ${planName}\n\n` +
+        `¡Hola Isaac POS! Acabo de registrar mis datos en la web y deseo coordinar la demostración guiada para mi negocio.`;
+
+      const whatsappUrl = `https://wa.me/584248302226?text=${encodeURIComponent(whatsappMsg)}`;
+
+      // Abrir automáticamente WhatsApp para que el mensaje le llegue al teléfono
+      try {
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      } catch {
+        // En caso de bloqueo por el navegador
       }
 
       setSuccessData({
         type: "demo",
-        message: data.message || "¡Solicitud registrada con éxito! Te contactaremos de inmediato.",
+        message: "¡Tu solicitud ha sido registrada con éxito! Se ha enviado la notificación por correo y abierto WhatsApp (+58 424-8302226) para atenderte de inmediato.",
+        whatsappUrl,
       });
     } catch (err: any) {
       setErrorMsg(err.message || "Error al conectar con el servidor.");

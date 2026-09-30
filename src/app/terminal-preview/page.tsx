@@ -218,12 +218,12 @@ export default function TerminalPreviewPage() {
           </div>
 
           <div className="flex items-center gap-2 pl-3 border-l border-slate-800">
-            <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs">
-              M
+            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-600 to-emerald-500 text-slate-950 font-black flex items-center justify-center text-xs">
+              IP
             </div>
             <div className="text-left leading-none">
-              <div className="text-xs font-bold text-white">Manuel</div>
-              <div className="text-[9px] text-emerald-400 font-mono">SUPERADMIN</div>
+              <div className="text-xs font-bold text-white">Isaac POS</div>
+              <div className="text-[9px] text-emerald-400 font-mono">ADMINISTRADOR</div>
             </div>
           </div>
         </div>
