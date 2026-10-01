@@ -50,35 +50,36 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
             </div>
           </a>
 
-          {/* Navegación Desktop - Solo 4 enlaces esenciales con espacio generoso */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
-            <a
-              href="#edicion-ultra"
-              className="hover:text-cyan-400 transition-colors whitespace-nowrap"
-            >
-              Edición Ultra
-            </a>
+          {/* Navegación Desktop - Enlaces corporativos claros */}
+          <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
             <a
               href="#sistema-real"
-              className="hover:text-cyan-400 transition-colors whitespace-nowrap"
+              className="hover:text-emerald-400 transition-colors whitespace-nowrap"
             >
-              Módulos
+              Módulos del Sistema
             </a>
             <a
               href="#simulador"
-              className="hover:text-cyan-400 transition-colors whitespace-nowrap"
+              className="hover:text-emerald-400 transition-colors whitespace-nowrap"
             >
               Simulador
             </a>
             <a
+              href="#soporte-humano"
+              className="hover:text-emerald-400 transition-colors whitespace-nowrap flex items-center gap-1.5"
+            >
+              <span>Soporte & Asesoría</span>
+              <span className="text-[10px] bg-blue-950 text-blue-300 border border-blue-500/30 px-1.5 py-0.2 rounded font-mono font-bold">1 a 1</span>
+            </a>
+            <a
               href="#precios"
-              className="hover:text-cyan-400 transition-colors whitespace-nowrap"
+              className="hover:text-emerald-400 transition-colors whitespace-nowrap"
             >
               Precios
             </a>
             <a
               href="#faq"
-              className="hover:text-cyan-400 transition-colors whitespace-nowrap text-slate-400 hover:text-slate-200"
+              className="hover:text-emerald-400 transition-colors whitespace-nowrap text-slate-400 hover:text-slate-200"
             >
               FAQ
             </a>
@@ -88,7 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
           <div className="hidden md:flex items-center gap-3">
             <a
               href="#edicion-ultra"
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/35 transition-all flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Descargar</span>

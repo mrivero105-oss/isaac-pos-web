@@ -38,9 +38,9 @@ const TESTIMONIALS: Testimonial[] = [
     category: "Farmacia y Cuidado Personal",
     icon: Pill,
     rating: 5,
-    highlight: "Importador IA de facturas PDF en 30 segundos",
+    highlight: "Importador automático de facturas PDF en 30 segundos",
     quote:
-      "Actualizar los precios de las droguerías nos consumía 4 horas semanales de tipeo manual propenso a errores. Ahora arrastramos el PDF de la factura y la Inteligencia Artificial de Isaac POS actualiza más de 800 costos y precios de venta al instante.",
+      "Actualizar los precios de las droguerías nos consumía 4 horas semanales de tipeo manual propenso a errores. Ahora arrastramos el PDF de la factura y el módulo inteligente de Isaac POS actualiza más de 800 costos y precios de venta al instante sin equivocaciones.",
     metrics: "Ahorro de 16 horas/mes en inventario",
   },
   {

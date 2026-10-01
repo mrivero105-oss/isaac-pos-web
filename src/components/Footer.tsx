@@ -18,17 +18,17 @@ export const Footer: React.FC = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-xl font-black tracking-tight text-white">
-                ISAAC <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">POS</span>
-                <span className="text-[10px] bg-cyan-950 text-cyan-300 font-mono font-bold px-2 py-0.5 rounded-full ml-2 border border-cyan-500/40">ULTRA v24.04</span>
+              <span className="text-xl font-extrabold tracking-tight text-white">
+                ISAAC <span className="text-emerald-400">POS</span>
+                <span className="text-[10px] bg-slate-900 text-slate-300 font-mono font-bold px-2 py-0.5 rounded-full ml-2 border border-slate-700">Versión 2026</span>
               </span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed max-w-sm mb-6">
-              El sistema de punto de venta más rápido, intuitivo y blindado para el comercio. Nuevo motor Ultra con aceleración GPU, visor de cliente secundario, tasa BCV en vivo y ventas continuas sin internet.
+              Software de gestión comercial y punto de venta para bodegas, minimarkets, farmacias y comercios en general. Facturación ágil a tasa oficial BCV, modo 100% offline y acompañamiento técnico en instalación.
             </p>
             <div className="flex items-center gap-3 text-slate-300 text-xs">
               <span className="flex items-center gap-1 text-emerald-400 font-mono">
-                <Lock className="w-3.5 h-3.5" /> Conexión Cifrada SSL 256-Bit • SQLite Nativo
+                <Lock className="w-3.5 h-3.5" /> Almacenamiento Local Cifrado • SQLite Nativo
               </span>
             </div>
           </div>
@@ -38,39 +38,38 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-bold text-sm mb-4">Plataforma</h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="#edicion-ultra" className="hover:text-cyan-400 transition-colors flex items-center gap-1.5 font-bold text-cyan-300">
-                  <span>Edición Ultra</span>
-                  <span className="text-[9px] bg-cyan-500/20 px-1 rounded text-cyan-300">NUEVO</span>
-                </a>
-              </li>
-              <li>
                 <a href="#edicion-ultra" className="hover:text-emerald-400 transition-colors">
-                  Descargas Oficiales (.exe / .apk)
+                  Descarga Oficial (.exe / .apk)
                 </a>
               </li>
               <li>
                 <a href="#sistema-real" className="hover:text-emerald-400 transition-colors">
-                  Módulos Reales del Sistema
+                  Módulos del Sistema
                 </a>
               </li>
               <li>
                 <a href="#simulador" className="hover:text-emerald-400 transition-colors">
-                  Simulador de Caja en Vivo
+                  Simulador de Caja Online
+                </a>
+              </li>
+              <li>
+                <a href="#soporte-humano" className="hover:text-emerald-400 transition-colors">
+                  Acompañamiento y Soporte
                 </a>
               </li>
               <li>
                 <a href="#hardware" className="hover:text-emerald-400 transition-colors">
-                  Hardware Soportado
+                  Hardware y Balanzas
                 </a>
               </li>
               <li>
                 <a href="#precios" className="hover:text-emerald-400 transition-colors">
-                  Planes y Precios
+                  Planes y Licencias
                 </a>
               </li>
               <li>
                 <a href="#testimonios" className="hover:text-emerald-400 transition-colors">
-                  Testimonios Reales
+                  Casos de Comercios
                 </a>
               </li>
               <li>
@@ -81,23 +80,26 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Col 4: Seguridad y Legal */}
+          {/* Col 4: Seguridad y Garantía */}
           <div>
-            <h4 className="text-white font-bold text-sm mb-4">Seguridad y Legal</h4>
+            <h4 className="text-white font-bold text-sm mb-4">Control & Garantía</h4>
             <ul className="space-y-2.5">
               <li>
                 <a href="#seguridad" className="hover:text-emerald-400 transition-colors">
-                  Arquitectura Zero-Trust
+                  Arqueo Ciego Anti-Faltantes
                 </a>
               </li>
               <li>
-                <span className="text-slate-300">Cumplimiento PCI-DSS SAQ A</span>
+                <span className="text-slate-300">Base de Datos Local SQLite</span>
               </li>
               <li>
-                <span className="text-slate-300">Política de Privacidad</span>
+                <span className="text-slate-300">Respaldos Diarios en Pendrive/Disco</span>
               </li>
               <li>
-                <span className="text-slate-300">Términos del Servicio</span>
+                <span className="text-slate-300">Soporte Remoto vía AnyDesk</span>
+              </li>
+              <li>
+                <span className="text-slate-300">Garantía de Satisfacción 30 Días</span>
               </li>
             </ul>
           </div>

@@ -7,6 +7,7 @@ import { UltraEditionShowcase } from "@/components/UltraEditionShowcase";
 import { RealSystemShowcase } from "@/components/RealSystemShowcase";
 import { InteractivePosDemo } from "@/components/InteractivePosDemo";
 import { HardwareSection } from "@/components/HardwareSection";
+import { HumanSupportSection } from "@/components/HumanSupportSection";
 import { SecurityTrust } from "@/components/SecurityTrust";
 import { Testimonials } from "@/components/Testimonials";
 import { RoiCalculator } from "@/components/RoiCalculator";
@@ -65,7 +66,10 @@ export default function Home() {
         {/* 4. Simulador Interactivo: Prueba en vivo en el navegador */}
         <InteractivePosDemo />
 
-        {/* 5. Hardware y Periféricos Compatibles */}
+        {/* 5. Acompañamiento Humano, Migración Asistida y Soporte Técnico */}
+        <HumanSupportSection />
+
+        {/* 6. Hardware y Periféricos Compatibles */}
         <HardwareSection />
 
         {/* 6. Seguridad, Blindaje de Caja y Modo 100% Offline */}

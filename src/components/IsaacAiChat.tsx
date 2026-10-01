@@ -39,23 +39,22 @@ export const IsaacAiChat: React.FC<IsaacAiChatProps> = ({
     {
       id: "welcome",
       sender: "ai",
-      text: `👋 ¡Hola! Soy **Isaac AI**, el consultor inteligente gratuito de **Isaac POS V24.04 Ultra**.
+      text: `👋 ¡Hola! Bienvenido al canal de asesoría técnica y comercial de **Isaac POS**.
 
-Puedo ayudarte con:
-* 🚀 **Nueva Edición Ultra**: Motor con aceleración por GPU, mínimo consumo de memoria y descargas directas.
-* 🖥️ **Visor de Cliente (2da Pantalla)**: Monitoreo en vivo para el comprador con fotos, tasa BCV y total dual.
-* 🏭 **Producción & Recetas BOM**: Costeo de fórmulas y rebaja automática de ingredientes.
-* ⚡ **Modo 100% Offline**: SQLite local y sync WiFi sin internet.
-* 💵 **Tasa BCV Oficial** y cobros bimonetarios automáticos.
-* 🛡️ **Arqueo Ciego** anti-robo de caja y control de inventario.
-* 💰 **Precios y Planes**: Desde $29/mes o $499 vitalicio sin mensualidades.
+Puedo orientarte con precisión sobre:
+* 🛒 **Compatibilidad para tu tipo de negocio**: Bodegas, minimarkets, farmacias, panaderías, ferreterías y tiendas.
+* 🖨️ **Tus equipos actuales**: Impresoras térmicas (58mm/80mm), balanzas de peso, lectores de código de barra y visores secundarios.
+* ⚡ **Operación 100% Offline**: Facturación continua sin depender de internet ni servidores externos.
+* 💵 **Tasa Oficial BCV**: Cobros bimonetarios automáticos en dólares y bolívares.
+* 🛡️ **Arqueo Ciego de Caja**: Control estricto y prevención de descuadres con tus cajeros.
+* 🤝 **Instalación y Migración**: Te ayudamos a cargar tu catálogo desde Excel y configuramos todo por AnyDesk.
 
-¿Qué te gustaría saber sobre la versión Ultra o tu negocio?`,
+¿Qué tipo de comercio tienes o qué duda te gustaría consultar?`,
       suggestions: [
-        "¿Qué novedades trae la Edición Ultra?",
-        "¿Cómo funciona el Visor de 2da pantalla?",
-        "¿Cómo funciona sin internet?",
-        "¿Cuánto cuesta la Licencia Vitalicia?",
+        "¿Es compatible con mi impresora térmica actual?",
+        "¿Cómo funciona cuando se cae el internet?",
+        "¿Me ayudan a cargar mis productos desde Excel?",
+        "¿Qué precio tiene la licencia sin mensualidades?",
       ],
       time: "Ahora",
     },
@@ -158,32 +157,30 @@ Puedo ayudarte con:
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center sm:items-end sm:justify-end p-2 sm:p-6 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-slate-950 border border-cyan-500/40 rounded-3xl w-full max-w-lg h-[92vh] sm:h-[620px] flex flex-col shadow-2xl overflow-hidden relative text-white">
+      <div className="bg-slate-950 border border-slate-700/80 rounded-3xl w-full max-w-lg h-[92vh] sm:h-[620px] flex flex-col shadow-2xl overflow-hidden relative text-white">
         
         {/* Cabecera del Asistente */}
-        <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950/60 p-4 border-b border-slate-800 flex items-center justify-between">
+        <div className="bg-slate-900/95 p-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-400 p-0.5 shadow-lg shadow-cyan-500/20 shrink-0">
-              <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden p-1">
-                <img
-                  src="/isaac-logo-ultra.png"
-                  alt="Isaac AI Ultra"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-slate-950"></span>
+            <div className="relative w-10 h-10 rounded-2xl bg-blue-600/20 border border-blue-500/40 p-1 flex items-center justify-center text-blue-400 shrink-0">
+              <img
+                src="/isaac-logo-ultra.png"
+                alt="Isaac POS"
+                className="w-full h-full object-contain"
+              />
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-slate-900"></span>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-extrabold text-sm tracking-tight text-white">
-                  Isaac AI
+                <h3 className="font-bold text-sm tracking-tight text-white">
+                  Asesor Técnico & Comercial
                 </h3>
-                <span className="text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full font-mono font-bold">
-                  100% GRATIS
+                <span className="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-mono font-bold">
+                  En línea
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 font-mono">
-                Consultor Técnico & Comercial POS
+              <p className="text-[11px] text-slate-400">
+                Isaac POS • Orientación para tu negocio
               </p>
             </div>
           </div>
