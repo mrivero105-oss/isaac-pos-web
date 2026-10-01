@@ -73,69 +73,69 @@ const TESTIMONIALS: Testimonial[] = [
 
 export const Testimonials: React.FC = () => {
   return (
-    <section id="testimonios" className="py-24 relative bg-slate-950/70 border-t border-slate-800/80">
+    <section id="testimonios" className="py-20 relative bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado Principal */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-4">
-            <Users className="w-4 h-4" />
-            <span>Casos de Éxito Comprobados</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4 shadow-xs">
+            <Users className="w-4 h-4 text-blue-600" />
+            <span>CASOS DE ÉXITO COMPROBADOS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
             Comercios que ya duplicaron su velocidad con Isaac POS
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
+          <p className="text-slate-600 text-base sm:text-lg">
             Descubre cómo dueños de bodegas, cadenas de minimarkets, farmacias y distribuidoras blindaron sus finanzas y operan con tranquilidad total.
           </p>
         </div>
 
         {/* Métricas Globales de Impacto */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center hover:border-emerald-500/40 transition-colors">
-            <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono mb-1">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center hover:border-blue-300 hover:bg-white hover:shadow-md transition-all">
+            <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 font-mono mb-1">
               +1,450
             </div>
-            <div className="text-xs sm:text-sm font-semibold text-white mb-1">
+            <div className="text-xs sm:text-sm font-bold text-slate-900 mb-1">
               Cajas y Terminales Activos
             </div>
-            <div className="text-[11px] text-slate-400">
-              Operando a diario en toda Venezuela
+            <div className="text-[11px] text-slate-500">
+              Operando a diario en todo el país
             </div>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center hover:border-cyan-500/40 transition-colors">
-            <div className="text-3xl sm:text-4xl font-black text-cyan-400 font-mono mb-1">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center hover:border-blue-300 hover:bg-white hover:shadow-md transition-all">
+            <div className="text-3xl sm:text-4xl font-extrabold text-emerald-600 font-mono mb-1">
               &lt; 2.5 seg
             </div>
-            <div className="text-xs sm:text-sm font-semibold text-white mb-1">
+            <div className="text-xs sm:text-sm font-bold text-slate-900 mb-1">
               Tiempo Promedio por Cobro
             </div>
-            <div className="text-[11px] text-slate-400">
-              Con teclado rápido y F2 express
+            <div className="text-[11px] text-slate-500">
+              Con teclado rápido y lector de barras
             </div>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500/40 transition-colors">
-            <div className="text-3xl sm:text-4xl font-black text-amber-400 font-mono mb-1">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center hover:border-blue-300 hover:bg-white hover:shadow-md transition-all">
+            <div className="text-3xl sm:text-4xl font-extrabold text-amber-600 font-mono mb-1">
               100%
             </div>
-            <div className="text-xs sm:text-sm font-semibold text-white mb-1">
+            <div className="text-xs sm:text-sm font-bold text-slate-900 mb-1">
               Disponibilidad Sin Internet
             </div>
-            <div className="text-[11px] text-slate-400">
-              Base de datos SQLite local resiliente
+            <div className="text-[11px] text-slate-500">
+              Base de datos SQLite local en tu equipo
             </div>
           </div>
 
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center hover:border-teal-500/40 transition-colors">
-            <div className="text-3xl sm:text-4xl font-black text-teal-400 font-mono mb-1">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center hover:border-blue-300 hover:bg-white hover:shadow-md transition-all">
+            <div className="text-3xl sm:text-4xl font-extrabold text-emerald-600 font-mono mb-1">
               0%
             </div>
-            <div className="text-xs sm:text-sm font-semibold text-white mb-1">
+            <div className="text-xs sm:text-sm font-bold text-slate-900 mb-1">
               Faltantes No Identificados
             </div>
-            <div className="text-[11px] text-slate-400">
+            <div className="text-[11px] text-slate-500">
               Gracias al Arqueo Ciego de Caja
             </div>
           </div>
@@ -148,7 +148,7 @@ export const Testimonials: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-3xl p-8 flex flex-col justify-between transition-all hover:bg-slate-900 group shadow-xl"
+                className="bg-slate-50/80 border border-slate-200 hover:border-blue-300 hover:bg-white rounded-3xl p-8 flex flex-col justify-between transition-all hover:shadow-lg group"
               >
                 <div>
                   {/* Calificación y Categoría */}
@@ -158,38 +158,38 @@ export const Testimonials: React.FC = () => {
                         <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
                       ))}
                     </div>
-                    <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" />
+                    <span className="text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                       <span>{t.metrics}</span>
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
                     "{t.highlight}"
                   </h3>
 
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6 italic">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">
                     "{t.quote}"
                   </p>
                 </div>
 
                 {/* Perfil del Cliente */}
-                <div className="pt-6 border-t border-slate-800 flex items-center justify-between">
+                <div className="pt-6 border-t border-slate-200 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400 shrink-0">
+                    <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0">
                       <IconComp className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="font-bold text-white text-sm">
+                      <div className="font-bold text-slate-900 text-sm">
                         {t.name}
                       </div>
-                      <div className="text-xs text-slate-400">
-                        {t.role} • <strong className="text-slate-300">{t.business}</strong>
+                      <div className="text-xs text-slate-500">
+                        {t.role} • <strong className="text-slate-700">{t.business}</strong>
                       </div>
                     </div>
                   </div>
                   <div className="text-right hidden sm:block">
-                    <span className="text-xs font-mono text-slate-400">
+                    <span className="text-xs font-mono font-semibold text-slate-500">
                       {t.city}, VE
                     </span>
                   </div>

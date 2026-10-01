@@ -380,20 +380,20 @@ export const RealSystemShowcase: React.FC = () => {
   const demoTotalBs = demoTotalUsd * bcvRate;
 
   return (
-    <section id="sistema-real" className="py-20 relative bg-slate-950 border-t border-slate-800/80">
+    <section id="sistema-real" className="py-20 relative bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-3 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             <span>INTERFAZ EJECUTIVA REAL • CERO MAQUETAS FICTICIAS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
             Conoce el Sistema Real por Dentro
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base">
-            Diseñado para operar con velocidad extrema. Explora los 4 pilares operativos de Isaac POS V24.04 Ultra.
+          <p className="text-slate-600 text-sm sm:text-base">
+            Diseñado para operar con velocidad extrema. Explora los 4 pilares operativos de Isaac POS.
           </p>
         </div>
 
@@ -406,10 +406,10 @@ export const RealSystemShowcase: React.FC = () => {
               <button
                 key={pillar.id}
                 onClick={() => handlePillarChange(pillar.id)}
-                className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl text-xs sm:text-sm font-extrabold transition-all border ${
+                className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 border-emerald-400 shadow-lg shadow-emerald-500/20 scale-105"
-                    : "bg-slate-900/90 text-slate-300 border-slate-800 hover:text-white hover:bg-slate-850"
+                    ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20 scale-102"
+                    : "bg-slate-100 text-slate-700 border-slate-200 hover:text-slate-900 hover:bg-slate-200"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -427,10 +427,10 @@ export const RealSystemShowcase: React.FC = () => {
               <button
                 key={sub.id}
                 onClick={() => setActiveSubModuleId(sub.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all border whitespace-nowrap ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border whitespace-nowrap cursor-pointer ${
                   isSubSelected
-                    ? "bg-slate-800 text-cyan-300 border-cyan-500/50 shadow-sm"
-                    : "bg-slate-950/70 text-slate-400 border-slate-800/80 hover:text-slate-200 hover:bg-slate-900"
+                    ? "bg-blue-50 text-blue-700 border-blue-300 shadow-xs font-bold"
+                    : "bg-white text-slate-600 border-slate-200 hover:text-slate-900 hover:bg-slate-50"
                 }`}
               >
                 {sub.name}
@@ -440,28 +440,28 @@ export const RealSystemShowcase: React.FC = () => {
         </div>
 
         {/* 3. Tarjeta Principal con Información y Captura Real */}
-        <div className="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl">
+        <div className="bg-slate-50/90 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Columna Izquierda: Información del Módulo (5 cols) */}
             <div className="lg:col-span-5 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-cyan-300 text-xs font-mono font-bold">
-                <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 border border-blue-200 text-blue-800 text-xs font-mono font-bold">
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
                 <span>{activeSubModule.badge}</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
                 {activeSubModule.title}
               </h3>
 
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 {activeSubModule.description}
               </p>
 
-              <div className="space-y-2.5 pt-4 border-t border-slate-800">
+              <div className="space-y-2.5 pt-4 border-t border-slate-200">
                 {activeSubModule.highlights.map((point, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -472,34 +472,34 @@ export const RealSystemShowcase: React.FC = () => {
             <div className="lg:col-span-7">
               {activeSubModule.isDisplayDemo ? (
                 /* SIMULADOR EN VIVO DEL VISOR DE CLIENTE (/#/display) */
-                <div className="bg-slate-950 rounded-2xl border-2 border-cyan-500/40 p-4 sm:p-6 shadow-2xl shadow-cyan-500/10">
-                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800 text-xs font-mono">
+                <div className="bg-white rounded-2xl border-2 border-blue-200 p-4 sm:p-6 shadow-xl">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 text-xs font-mono">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                      <span className="text-cyan-300 font-bold">MONITOR DE CLIENTE (/#/display)</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
+                      <span className="text-blue-800 font-bold">MONITOR DE CLIENTE (/#/display)</span>
                     </div>
-                    <span className="text-emerald-400 font-bold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
+                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                       1 USD = {bcvRate.toFixed(2)} Bs (BCV)
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 mb-4">
+                  <div className="flex items-center justify-between bg-slate-50 p-3.5 rounded-xl border border-slate-200 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-slate-800 border border-cyan-500/40 p-1 flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center shadow-xs">
                         <img
                           src="/isaac-logo-ultra.png"
-                          alt="Logo Ultra"
+                          alt="Logo"
                           className="w-full h-full object-contain"
                         />
                       </div>
                       <div>
-                        <div className="text-xs font-bold text-white">SUPERMERCADO DEMO</div>
-                        <div className="text-[11px] text-slate-400">Atendiendo a: <span className="text-cyan-300 font-semibold">Cliente Mostrador</span></div>
+                        <div className="text-xs font-bold text-slate-900">SUPERMERCADO DEMO</div>
+                        <div className="text-[11px] text-slate-500">Atendiendo a: <span className="text-blue-700 font-semibold">Cliente Mostrador</span></div>
                       </div>
                     </div>
                     <div className="text-right">
                       <span className="text-[10px] font-mono uppercase text-slate-400 block">Artículos</span>
-                      <span className="text-base font-mono font-black text-cyan-400">{demoCart.length} productos</span>
+                      <span className="text-base font-mono font-bold text-blue-700">{demoCart.length} productos</span>
                     </div>
                   </div>
 
@@ -507,18 +507,18 @@ export const RealSystemShowcase: React.FC = () => {
                     {demoCart.map((item, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center justify-between p-2 rounded-lg bg-slate-900/50 border border-slate-800/80 text-xs"
+                        className="flex items-center justify-between p-2 rounded-lg bg-slate-50/70 border border-slate-200 text-xs"
                       >
                         <div className="flex items-center gap-2">
-                          <span className="w-4 h-4 rounded bg-slate-800 text-slate-400 font-mono text-[9px] flex items-center justify-center">
+                          <span className="w-4 h-4 rounded bg-slate-200 text-slate-700 font-mono text-[9px] flex items-center justify-center font-bold">
                             {idx + 1}
                           </span>
-                          <span className="font-semibold text-slate-200">{item.name}</span>
-                          <span className="text-slate-400 text-[10px]">x{item.qty}</span>
+                          <span className="font-semibold text-slate-800">{item.name}</span>
+                          <span className="text-slate-500 text-[10px]">x{item.qty}</span>
                         </div>
                         <div className="text-right">
-                          <span className="font-mono font-bold text-white">${item.totalUsd.toFixed(2)}</span>
-                          <span className="text-[10px] font-mono text-slate-400 ml-2">
+                          <span className="font-mono font-bold text-slate-900">${item.totalUsd.toFixed(2)}</span>
+                          <span className="text-[10px] font-mono text-slate-500 ml-2">
                             (Bs {(item.totalUsd * bcvRate).toFixed(2)})
                           </span>
                         </div>
@@ -526,21 +526,21 @@ export const RealSystemShowcase: React.FC = () => {
                     ))}
                   </div>
 
-                  <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 p-4 rounded-xl border border-cyan-500/30">
-                    <div className="flex justify-between items-center text-xs text-slate-400 pb-2 border-b border-slate-800">
+                  <div className="bg-blue-50/80 p-4 rounded-xl border border-blue-200">
+                    <div className="flex justify-between items-center text-xs text-slate-600 pb-2 border-b border-blue-200/60">
                       <span>Subtotal: ${demoSubtotal.toFixed(2)}</span>
                       <span>IVA 16%: ${demoIva.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between items-end pt-3">
                       <div>
-                        <div className="text-[10px] font-mono uppercase text-slate-400">Total a Pagar (USD)</div>
-                        <div className="text-2xl sm:text-3xl font-black text-white font-mono">
+                        <div className="text-[10px] font-mono uppercase text-slate-500">Total a Pagar (USD)</div>
+                        <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
                           ${demoTotalUsd.toFixed(2)}
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[10px] font-mono uppercase text-emerald-400">Total en Bolívares</div>
-                        <div className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">
+                        <div className="text-[10px] font-mono uppercase text-emerald-700 font-bold">Total en Bolívares</div>
+                        <div className="text-xl sm:text-2xl font-black text-emerald-700 font-mono">
                           Bs {demoTotalBs.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </div>
                       </div>
@@ -549,15 +549,15 @@ export const RealSystemShowcase: React.FC = () => {
                 </div>
               ) : (
                 /* CAPTURA REAL DE PANTALLA DEL MÓDULO */
-                <div className="bg-slate-950 rounded-2xl border-2 border-slate-700/80 p-2 shadow-2xl overflow-hidden group relative">
-                  <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800 text-xs font-mono text-slate-400 mb-2">
+                <div className="bg-white rounded-2xl border border-slate-300 p-2 shadow-xl overflow-hidden group relative">
+                  <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 text-xs font-mono text-slate-600 mb-2 bg-slate-50 rounded-t-xl">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
-                      <span className="ml-2 text-slate-300 text-[11px]">Isaac POS V24.04 Ultra • {activeSubModule.name}</span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
+                      <span className="ml-2 text-slate-700 text-[11px] font-semibold">Isaac POS • {activeSubModule.name}</span>
                     </div>
-                    <span className="text-cyan-400 text-[10px] font-mono">● Modo Rápido</span>
+                    <span className="text-blue-700 text-[10px] font-mono font-bold">● Modo Rápido</span>
                   </div>
 
                   {activeSubModule.image && (
@@ -568,10 +568,10 @@ export const RealSystemShowcase: React.FC = () => {
                       <img
                         src={activeSubModule.image}
                         alt={activeSubModule.title}
-                        className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.01]"
+                        className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.008]"
                       />
-                      <div className="absolute bottom-3 right-3 bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
-                        <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 text-slate-800 text-xs font-semibold flex items-center gap-1.5 shadow-md">
+                        <Maximize2 className="w-3.5 h-3.5 text-blue-600" />
                         <span>Clic para ampliar</span>
                       </div>
                     </div>
@@ -588,13 +588,13 @@ export const RealSystemShowcase: React.FC = () => {
       {/* Modal de Zoom a Pantalla Completa */}
       {isZoomed && activeSubModule.image && (
         <div
-          className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-xl p-4 sm:p-8 flex flex-col items-center justify-center animate-fadeIn"
+          className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md p-4 sm:p-8 flex flex-col items-center justify-center animate-fadeIn"
           onClick={() => setIsZoomed(false)}
         >
-          <div className="relative max-w-6xl w-full max-h-[90vh] overflow-auto rounded-2xl border border-slate-700 shadow-2xl bg-slate-900 p-2">
-            <div className="flex justify-between items-center px-4 py-2 text-xs font-mono text-slate-400 border-b border-slate-800 mb-2">
-              <span className="text-white font-bold">{activeSubModule.title}</span>
-              <span className="text-emerald-400">Clic en cualquier parte para cerrar ✕</span>
+          <div className="relative max-w-6xl w-full max-h-[90vh] overflow-auto rounded-2xl border border-slate-300 shadow-2xl bg-white p-2">
+            <div className="flex justify-between items-center px-4 py-2 text-xs font-mono text-slate-700 border-b border-slate-200 mb-2 bg-slate-50">
+              <span className="text-slate-900 font-bold">{activeSubModule.title}</span>
+              <span className="text-blue-600 font-semibold cursor-pointer">Clic en cualquier parte para cerrar ✕</span>
             </div>
             <img
               src={activeSubModule.image}

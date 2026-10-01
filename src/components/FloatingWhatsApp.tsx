@@ -24,11 +24,11 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
     <div className={`flex flex-col items-end pointer-events-auto ${className || ""}`}>
       {/* Ventana de chat rápido desplegable */}
       {isOpen && (
-        <div className="mb-3 w-80 sm:w-96 bg-slate-950 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden animate-fadeIn flex flex-col">
+        <div className="mb-3 w-80 sm:w-96 bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden animate-fadeIn flex flex-col">
           {/* Header del Chat */}
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-700 p-4 text-white flex items-center justify-between">
+          <div className="bg-emerald-600 p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-white/20 bg-slate-900">
+              <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-white/20 bg-emerald-700/60">
                 <img
                   src="/isaac-logo-ultra.png"
                   alt="Isaac POS"
@@ -39,8 +39,8 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
                 <h4 className="font-extrabold text-sm flex items-center gap-1.5">
                   Atención Comercial WhatsApp
                 </h4>
-                <p className="text-[11px] text-emerald-100 font-mono">
-                  En línea • Soporte 24/7
+                <p className="text-[11px] text-emerald-100">
+                  En línea • Soporte directo
                 </p>
               </div>
             </div>
@@ -54,8 +54,8 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
           </div>
 
           {/* Cuerpo del Mensaje */}
-          <div className="p-4 bg-slate-900/95 text-xs text-slate-300 space-y-3">
-            <div className="bg-slate-800/80 p-3 rounded-2xl rounded-tl-none border border-slate-700/60 leading-relaxed text-slate-200">
+          <div className="p-4 bg-white text-xs text-slate-700 space-y-3">
+            <div className="bg-emerald-50 p-3 rounded-2xl rounded-tl-none border border-emerald-100 leading-relaxed text-slate-800">
               👋 ¡Hola! Te atendemos directamente desde nuestro equipo comercial de Isaac POS. ¿En qué podemos ayudarte?
             </div>
 
@@ -63,12 +63,12 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={3}
-              className="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 resize-none font-sans"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:bg-white resize-none font-sans"
             />
 
             <button
               onClick={handleSend}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
+              className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Abrir Chat de WhatsApp</span>
@@ -80,7 +80,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
       {/* Botón Circular Discreto y Elegante */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-slate-950 shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 active:scale-95 transition-all flex items-center justify-center group"
+        className="p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-600/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center group cursor-pointer"
         aria-label="Contactar por WhatsApp"
         title="Contactar por WhatsApp"
       >

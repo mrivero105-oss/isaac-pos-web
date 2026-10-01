@@ -20,7 +20,7 @@ const HARDWARE_ITEMS = [
   {
     icon: Printer,
     title: "Impresoras Térmicas (58mm / 80mm)",
-    desc: "Conexión directa vía Bluetooth, USB o cable de red. Imprime tickets y comandas al instante sin configuraciones complejas.",
+    desc: "Conexión directa vía Bluetooth, USB o cable de red. Imprime tickets y comprobantes al instante sin configuraciones difíciles.",
   },
   {
     icon: Barcode,
@@ -46,21 +46,19 @@ const HARDWARE_ITEMS = [
 
 export const HardwareSection: React.FC = () => {
   return (
-    <section id="hardware" className="py-24 relative">
+    <section id="hardware" className="py-20 relative bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
-          {/* Luz de fondo */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 lg:p-16 shadow-lg relative overflow-hidden">
+          
           <div className="max-w-3xl mb-12 relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-3">
-              <Cpu className="w-3.5 h-3.5" />
-              <span>Compatibilidad Universal</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-3 shadow-xs">
+              <Cpu className="w-3.5 h-3.5 text-blue-600" />
+              <span>COMPATIBILIDAD UNIVERSAL</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
               Usa el hardware que ya tienes, sin contratos forzosos
             </h2>
-            <p className="text-slate-300 text-base sm:text-lg">
+            <p className="text-slate-600 text-base sm:text-lg">
               No estás atado a equipos propietarios costosos. Isaac POS se conecta a los estándares abiertos de la industria.
             </p>
           </div>
@@ -71,22 +69,22 @@ export const HardwareSection: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="bg-slate-950/70 border border-slate-800/90 hover:border-emerald-500/40 rounded-2xl p-6 transition-all hover:bg-slate-950 flex flex-col justify-between group"
+                  className="bg-white border border-slate-200 hover:border-blue-300 rounded-2xl p-6 transition-all hover:shadow-md flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-700/50 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-105 transition-transform">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 mb-4 group-hover:scale-105 transition-transform">
                       <IconComp className="w-6 h-6" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">
+                    <p className="text-slate-600 text-sm leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs text-emerald-700 font-semibold">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Conectar y usar (Plug & Play)</span>
                   </div>
                 </div>
