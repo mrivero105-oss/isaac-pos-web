@@ -18,11 +18,13 @@ import { SecureCheckoutModal } from "@/components/SecureCheckoutModal";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { FloatingAiRobot } from "@/components/FloatingAiRobot";
 import { IsaacAiChat } from "@/components/IsaacAiChat";
+import { VideoDemoModal } from "@/components/VideoDemoModal";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>("pro_anual");
   const [aiChatOpen, setAiChatOpen] = useState(false);
+  const [videoDemoOpen, setVideoDemoOpen] = useState(false);
 
   const handleOpenModal = (plan: string = "pro_anual") => {
     setSelectedPlan(plan);
@@ -55,6 +57,7 @@ export default function Home() {
         <Hero
           onOpenModal={handleOpenModal}
           onOpenAiChat={handleOpenAiChat}
+          onOpenVideoDemo={() => setVideoDemoOpen(true)}
         />
 
         {/* 2. Edición Ultra: Modalidades de Instalación Oficial y Rendimiento */}
@@ -109,6 +112,13 @@ export default function Home() {
         isOpen={modalOpen}
         onClose={handleCloseModal}
         initialPlan={selectedPlan}
+      />
+
+      {/* Reproductor de Video Demostrativo Interactivo */}
+      <VideoDemoModal
+        isOpen={videoDemoOpen}
+        onClose={() => setVideoDemoOpen(false)}
+        onOpenCheckoutModal={handleOpenModal}
       />
     </div>
   );
