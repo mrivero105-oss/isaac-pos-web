@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               <li>
                 <a href="#edicion-ultra" className="hover:text-blue-400 transition-colors">
-                  Descarga Oficial (.exe / .apk)
+                  Modalidades de Instalación
                 </a>
               </li>
               <li>

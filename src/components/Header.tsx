@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
   onOpenModal: (plan?: string) => void;
@@ -87,13 +87,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
 
           {/* Acciones a la Derecha - Limpias y Claras */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href="#edicion-ultra"
+            <button
+              onClick={() => onOpenModal("demo_gratis")}
               className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 transition-all flex items-center gap-1.5 cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Descargar</span>
-            </a>
+              <span>Solicitar Demo</span>
+            </button>
           </div>
 
           {/* Botón de Menú Móvil */}
@@ -159,13 +158,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
             </a>
 
             <div className="pt-4 border-t border-slate-200 flex flex-col gap-3">
-              <a
-                href="#edicion-ultra"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 rounded-xl bg-blue-600 text-white font-bold text-center shadow-md shadow-blue-600/20"
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenModal("demo_gratis");
+                }}
+                className="w-full py-3 rounded-xl bg-blue-600 text-white font-bold text-center shadow-md shadow-blue-600/20 cursor-pointer"
               >
-                Descargar Instalador
-              </a>
+                Solicitar Demostración Guiada
+              </button>
             </div>
           </div>
         </div>

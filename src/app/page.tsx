@@ -57,8 +57,8 @@ export default function Home() {
           onOpenAiChat={handleOpenAiChat}
         />
 
-        {/* 2. Edición Ultra: Salto tecnológico y Centro de Descargas Oficiales */}
-        <UltraEditionShowcase />
+        {/* 2. Edición Ultra: Modalidades de Instalación Oficial y Rendimiento */}
+        <UltraEditionShowcase onOpenModal={handleOpenModal} />
 
         {/* 3. Sistema Real: La Suite Completa Organizada en 4 Pilares de Trabajo */}
         <RealSystemShowcase />
