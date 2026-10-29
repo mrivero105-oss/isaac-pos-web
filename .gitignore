@@ -18,6 +18,7 @@
 .DS_Store
 *.pem
 /scripts/
+public/real-system/_*
 
 # Debug
 npm-debug.log*

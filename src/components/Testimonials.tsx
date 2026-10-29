@@ -18,9 +18,9 @@ interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Carlos Sigfrido",
+    name: "Carlos Mendoza",
     role: "Propietario Fundador",
-    business: "Bodega & Minimarket Sigfrido",
+    business: "Minimarket & Víveres El Trébol",
     city: "Caracas",
     category: "Minimarket y Víveres",
     icon: Store,

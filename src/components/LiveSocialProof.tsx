@@ -15,7 +15,7 @@ interface SocialProofEvent {
 const EVENTS: SocialProofEvent[] = [
   {
     id: 1,
-    merchant: "Bodega Sigfrido",
+    merchant: "Minimarket El Trébol",
     city: "Caracas",
     action: "activó el Plan Profesional (3 Cajas)",
     timeAgo: "Hace 4 min",
