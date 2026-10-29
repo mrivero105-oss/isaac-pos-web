@@ -259,7 +259,7 @@ export const Hero: React.FC<HeroProps> = ({
                     }}
                   >
                     <img
-                      src="/real-system/ui_terminal_ventas_real.png"
+                      src="/real-system/v24_pos_terminal.png"
                       alt="Isaac POS - Terminal de Ventas y Mostrador Real"
                       className="w-full h-auto object-cover select-none"
                     />
@@ -391,7 +391,7 @@ export const Hero: React.FC<HeroProps> = ({
                     onClick={() => setIsZoomed(true)}
                   >
                     <img
-                      src="/real-system/ui_arqueo_caja.png"
+                      src="/real-system/v24_control_caja_arqueo.png"
                       alt="Isaac POS - Arqueo Ciego de Caja Anti-Fraude"
                       className="w-full h-auto object-cover select-none"
                     />
