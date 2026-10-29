@@ -4,7 +4,7 @@
 
 :root {
   --background: #f8fafc;
-  --foreground: #0f172a;
+  --foreground: #090d16;
   --card-bg: #ffffff;
   --card-border: #e2e8f0;
 }
@@ -12,23 +12,27 @@
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-image: 
-    radial-gradient(at 50% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 65%);
+    radial-gradient(at 50% 0%, rgba(37, 99, 235, 0.04) 0px, transparent 65%),
+    linear-gradient(to bottom, #ffffff 0%, #f8fafc 400px, #f8fafc 100%);
   background-attachment: fixed;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 4px;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
@@ -36,13 +40,62 @@ body {
 
 /* Smooth selection */
 ::selection {
-  background-color: rgba(37, 99, 235, 0.2);
+  background-color: rgba(37, 99, 235, 0.15);
   color: #1e3a8a;
 }
 
-/* Crisp enterprise cards */
-.card-light {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+/* Industrial & Fintech Design Tokens */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Crisp hardware bezel with realistic depth */
+.hardware-bezel {
+  border-radius: 1.25rem;
+  background: #0f172a;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 20px 40px -15px rgba(15, 23, 42, 0.25);
+}
+
+/* Subtle edge highlight for cards */
+.edge-highlight {
+  position: relative;
+}
+.edge-highlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Thermal receipt authentic perforated zigzag edge */
+.receipt-edge {
+  background-image: radial-gradient(circle at 10px -5px, transparent 12px, #ffffff 13px);
+  background-size: 20px 20px;
+  background-repeat: repeat-x;
+}
+
+/* Refined dot grid for engineering backdrops */
+.engineering-grid {
+  background-size: 32px 32px;
+  background-image: 
+    radial-gradient(circle, rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+}
+
+/* Pulsing LED status */
+@keyframes breathing {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.92); }
+}
+
+.status-breathing {
+  animation: breathing 2.5s ease-in-out infinite;
 }

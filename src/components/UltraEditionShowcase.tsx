@@ -1,14 +1,19 @@
 "use client";
 
 import React from "react";
+import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
 import {
   Monitor,
   HardDrive,
   Zap,
   CheckCircle2,
-  ArrowDownToLine,
   Smartphone,
   Gauge,
+  Cpu,
+  ShieldCheck,
+  ArrowRight,
+  Database,
+  Layers,
 } from "lucide-react";
 
 interface UltraEditionShowcaseProps {
@@ -17,238 +22,236 @@ interface UltraEditionShowcaseProps {
 
 export const UltraEditionShowcase: React.FC<UltraEditionShowcaseProps> = ({ onOpenModal }) => {
   return (
-    <section id="edicion-ultra" className="py-20 relative bg-slate-50 border-t border-slate-200 overflow-hidden">
+    <section id="edicion-ultra" className="py-24 relative bg-slate-900 text-white overflow-hidden border-t border-slate-800">
+      {/* Fondo Cinético en Blanco Luminoso sobre Fondo Azul/Oscuro */}
+      <InteractiveEngineeringBackground variant="dark" isFixed={false} />
+
+      {/* Resplandor cobalto focal */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-600/15 blur-[140px] pointer-events-none rounded-full" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Encabezado Principal */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4 shadow-xs">
-            <Monitor className="w-3.5 h-3.5 text-blue-600" />
-            <span>ARQUITECTURA EFICIENTE • INSTALACIÓN LOCAL Y LIGERA</span>
+        {/* Cabecera Técnica de Sección */}
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono font-semibold mb-4">
+            <Cpu className="w-3.5 h-3.5" />
+            <span>INGENIERÍA DE SOFTWARE DE MOSTRADOR</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Diseñado para rendir en cualquier computadora de mostrador
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-5 leading-tight">
+            Rendimiento extremo sin exigir computadoras caras.
           </h2>
 
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            No necesitas renovar tus equipos ni invertir en servidores costosos. Isaac POS está optimizado para iniciar en 3 segundos y mantener tu mostrador fluido durante todo el día.
+          <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
+            Los sistemas basados exclusivamente en la nube se congelan cuando el internet falla o la red se satura. Isaac POS corre con un motor local nativo que arranca en 3 segundos y consume menos de 150 MB de RAM.
           </p>
         </div>
 
-        {/* 4 Métricas Clave de Rendimiento */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
-                <HardDrive className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                Instalación Local
+        {/* Layout Asimétrico de Alto Nivel: Benchmark Técnico vs Modalidades */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-stretch">
+          
+          {/* Columna Izquierda (5 Cols): Anatomía del Motor Local */}
+          <div className="lg:col-span-5 rounded-3xl bg-slate-950/80 border border-slate-800 p-7 sm:p-9 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
+              <Database className="w-32 h-32 text-blue-500" />
+            </div>
+
+            <div>
+              <span className="text-[11px] font-mono font-bold text-blue-400 uppercase tracking-widest block mb-2">
+                Arquitectura de Datos
               </span>
-            </div>
-            <div className="text-xs font-medium text-slate-500 mb-1">Encendido de Caja</div>
-            <div className="text-xl font-bold text-slate-900 mb-2">
-              Listo en 3 Segundos
-            </div>
-            <p className="text-slate-600 text-xs leading-relaxed">
-              No satura el disco duro de tu computadora. Se instala de forma limpia y liviana sin dependencias pesadas.
-            </p>
-          </div>
+              <h3 className="text-2xl font-extrabold text-white mb-4">
+                Motor SQLite Cifrado: Cero Caídas, Cero Esperas
+              </h3>
+              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-8">
+                A diferencia de programas antiguos que obligan a instalar servidores pesados de SQL que ralentizan Windows, Isaac POS utiliza una base de datos local embebida optimizada para comercio retail de alto volumen.
+              </p>
 
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600">
-                <Gauge className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
-                Bajo Consumo
-              </span>
-            </div>
-            <div className="text-xs font-medium text-slate-500 mb-1">Uso de Memoria RAM</div>
-            <div className="text-xl font-bold text-slate-900 mb-2">
-              Fluidez Constante
-            </div>
-            <p className="text-slate-600 text-xs leading-relaxed">
-              Consume el mínimo de recursos del sistema (&lt; 150 MB). Tu computadora de caja se mantiene rápida sin trabarse.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600">
-                <Zap className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-mono font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-                Horas Pico
-              </span>
-            </div>
-            <div className="text-xs font-medium text-slate-500 mb-1">Atención por Cliente</div>
-            <div className="text-xl font-bold text-slate-900 mb-2">
-              Cobro en &lt; 2 Segundos
-            </div>
-            <p className="text-slate-600 text-xs leading-relaxed">
-              Búsqueda táctil o por lector de código de barras sin demoras ni pantallas congeladas.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-300 hover:shadow-md transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
-                <Monitor className="w-5 h-5" />
-              </div>
-              <span className="text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                Transparencia
-              </span>
-            </div>
-            <div className="text-xs font-medium text-slate-500 mb-1">Visor Secundario</div>
-            <div className="text-xl font-bold text-slate-900 mb-2">
-              Pantalla del Cliente
-            </div>
-            <p className="text-slate-600 text-xs leading-relaxed">
-              Segundo monitor para que el comprador verifique sus artículos y total en bolívares en tiempo real.
-            </p>
-          </div>
-        </div>
-
-        {/* Modalidades de Instalación Asistida */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-lg">
-          <div className="max-w-2xl mx-auto text-center mb-8">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
-              Modalidades de Instalación Oficial
-            </h3>
-            <p className="text-slate-600 text-xs sm:text-sm">
-              Nuestro equipo técnico instala y configura el sistema directamente en tus equipos con acompañamiento 1 a 1.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {/* Tarjeta Windows */}
-            <div className="bg-slate-50/80 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:border-blue-300 hover:bg-white hover:shadow-md transition-all">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-700">
-                      <Monitor className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-slate-900">Edición para Computadora</h4>
-                      <span className="text-xs text-slate-500">Windows 7, 8, 10 y 11</span>
-                    </div>
+              {/* Métricas Técnicas en Fila */}
+              <div className="space-y-4 pt-6 border-t border-slate-800/80">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span className="text-xs font-medium text-slate-300">Tiempo de arranque en frío</span>
                   </div>
-                  <span className="text-xs font-mono font-bold text-blue-700 bg-blue-100 px-2.5 py-0.5 rounded-full border border-blue-200">
-                    Mostrador PC
+                  <span className="font-mono text-xs font-bold text-emerald-400 tabular-nums">&lt; 3 segundos</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2 h-2 rounded-full bg-blue-400" />
+                    <span className="text-xs font-medium text-slate-300">Consumo de Memoria RAM</span>
+                  </div>
+                  <span className="font-mono text-xs font-bold text-blue-400 tabular-nums">&lt; 150 MB</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2 h-2 rounded-full bg-amber-400" />
+                    <span className="text-xs font-medium text-slate-300">Latencia en búsqueda de productos</span>
+                  </div>
+                  <span className="font-mono text-xs font-bold text-amber-400 tabular-nums">Instantánea (&lt; 12ms)</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2 h-2 rounded-full bg-purple-400" />
+                    <span className="text-xs font-medium text-slate-300">Tolerancia a cortes de internet</span>
+                  </div>
+                  <span className="font-mono text-xs font-bold text-purple-400">100% Inmune</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+              <span>● Respaldos en un clic (Pendrive / Nube)</span>
+              <span>Protección contra corrupción</span>
+            </div>
+          </div>
+
+          {/* Columna Derecha (7 Cols): Las 2 Plataformas Oficiales */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            {/* Modalidad 1: Windows Mostrador */}
+            <div className="rounded-3xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 p-7 flex flex-col justify-between transition-all group">
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-105 transition-transform">
+                    <Monitor className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">
+                    WINDOWS 7, 8, 10, 11
                   </span>
                 </div>
 
-                <div className="space-y-2.5 mb-6 text-xs text-slate-600">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Instalación guiada y configuración completa por AnyDesk</span>
+                <h4 className="text-xl font-bold text-white mb-2">Edición Mostrador PC</h4>
+                <p className="text-slate-400 text-xs leading-relaxed mb-6">
+                  Para computadoras fijas de caja principal, laptops o equipos todo-en-uno (All-In-One).
+                </p>
+
+                <div className="space-y-2.5 text-xs text-slate-300">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Conexión de impresoras térmicas USB/Red (58 y 80mm)</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Funciona 100% sin internet, guardando todas tus ventas de forma local</span>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Integración con balanzas electrónicas y lectores de barras</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Configuración de tus impresoras térmicas (58mm/80mm), balanzas y lectores</span>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Apertura automática de gaveta portamonedas por RJ11</span>
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div className="mt-8 pt-5 border-t border-slate-800/80">
                 <button
                   type="button"
                   onClick={() => onOpenModal ? onOpenModal("demo_gratis") : window.open("https://wa.me/584248302226", "_blank")}
-                  className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 transition-all cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
                 >
                   <span>Solicitar Instalación para PC</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
-                <span className="block text-center text-[10px] text-slate-500 font-mono mt-2">
-                  Configuración remota garantizada • Sin riesgo técnico
-                </span>
               </div>
             </div>
 
-            {/* Tarjeta Android */}
-            <div className="bg-slate-50/80 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:border-emerald-300 hover:bg-white hover:shadow-md transition-all">
+            {/* Modalidad 2: Android Móvil */}
+            <div className="rounded-3xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 p-7 flex flex-col justify-between transition-all group">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700">
-                      <Smartphone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-slate-900">Edición para Celular o Tablet</h4>
-                      <span className="text-xs text-slate-500">Android 7.0 o superior</span>
-                    </div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-600/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                    <Smartphone className="w-6 h-6" />
                   </div>
-                  <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                    Móvil / Red
+                  <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                    ANDROID 7.0 O SUPERIOR
                   </span>
                 </div>
 
-                <div className="space-y-2.5 mb-6 text-xs text-slate-600">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Ideal para cobrar en pasillos, almacén o entregas a domicilio</span>
+                <h4 className="text-xl font-bold text-white mb-2">Edición Móvil & Tablet</h4>
+                <p className="text-slate-400 text-xs leading-relaxed mb-6">
+                  Para cobrar en pasillos, tomar pedidos en almacén o terminales inteligentes (SUNMI, PAX).
+                </p>
+
+                <div className="space-y-2.5 text-xs text-slate-300">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Sincronización en tiempo real por WiFi local con tu caja PC</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Sincronización en tiempo real por red WiFi local con la caja principal</span>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Conexión directa con impresoras portátiles Bluetooth</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Conexión directa con impresoras portátiles Bluetooth de ticket</span>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>Uso de la cámara del móvil como lector de códigos de barras</span>
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div className="mt-8 pt-5 border-t border-slate-800/80">
                 <button
                   type="button"
                   onClick={() => onOpenModal ? onOpenModal("demo_gratis") : window.open("https://wa.me/584248302226", "_blank")}
-                  className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer border border-slate-700"
                 >
-                  <span>Consultar Activación Móvil</span>
+                  <span>Consultar Terminal Android</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
-                <span className="block text-center text-[10px] text-slate-500 font-mono mt-2">
-                  Atención comercial y técnica directa
-                </span>
               </div>
             </div>
+
           </div>
 
-          {/* Guía de Instalación en 3 Pasos */}
-          <div className="mt-8 pt-6 border-t border-slate-200 max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-mono font-bold text-xs flex items-center justify-center mx-auto mb-1.5 border border-blue-200">
-                  1
-                </span>
-                <div className="text-xs font-bold text-slate-900 mb-0.5">Diagnóstico Inicial</div>
-                <div className="text-[11px] text-slate-500">Evaluamos el rubro de tu negocio y los equipos que ya tienes.</div>
-              </div>
+        </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 font-mono font-bold text-xs flex items-center justify-center mx-auto mb-1.5 border border-indigo-200">
-                  2
-                </span>
-                <div className="text-xs font-bold text-slate-900 mb-0.5">Instalación Asistida</div>
-                <div className="text-[11px] text-slate-500">Nos conectamos por AnyDesk, instalamos el sistema y subimos tu catálogo Excel.</div>
-              </div>
+        {/* Protocolo de Puesta en Marcha 1 a 1 */}
+        <div className="rounded-3xl bg-slate-950 border border-slate-800 p-8 sm:p-10 relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-800 pb-8 mb-8">
+            <div>
+              <span className="text-[11px] font-mono font-bold text-emerald-400 uppercase tracking-widest block mb-1">
+                Servicio Incluido
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
+                Instalación Guiada y Migración de Inventario por AnyDesk
+              </h3>
+            </div>
+            <a
+              href="https://wa.me/584248302226?text=Hola%2C%20quisiera%20saber%20c%C3%B3mo%20es%20el%20proceso%20de%20instalaci%C3%B3n%20asistida%20de%20Isaac%20POS."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 shrink-0 transition-colors"
+            >
+              <span>Hablar con un Instalador</span>
+            </a>
+          </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 font-mono font-bold text-xs flex items-center justify-center mx-auto mb-1.5 border border-emerald-200">
-                  3
-                </span>
-                <div className="text-xs font-bold text-slate-900 mb-0.5">Capacitación y Venta</div>
-                <div className="text-[11px] text-slate-500">Aprendes a cobrar en 10 minutos con soporte técnico y garantía directa.</div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <span className="font-mono text-xs font-bold text-blue-400 block mb-1">01 / DIAGNÓSTICO</span>
+              <h5 className="font-bold text-white text-sm mb-1">Verificación de Equipos</h5>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Revisamos tu impresora térmica, lector de barras y computadora para garantizar compatibilidad total antes de empezar.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <span className="font-mono text-xs font-bold text-blue-400 block mb-1">02 / MIGRACIÓN EXCEL</span>
+              <h5 className="font-bold text-white text-sm mb-1">Carga Asistida de Catálogo</h5>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Convertimos y subimos tu lista de productos con costos, precios en dólares y código de barras. No tienes que tipear nada desde cero.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <span className="font-mono text-xs font-bold text-blue-400 block mb-1">03 / CAPACITACIÓN</span>
+              <h5 className="font-bold text-white text-sm mb-1">Cajero Listo en 20 Minutos</h5>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Entrenamos a tu personal para cobrar en dólares y bolívares a tasa oficial BCV, hacer arqueo ciego y cerrar caja sin dudas.
+              </p>
             </div>
           </div>
-
         </div>
 
       </div>

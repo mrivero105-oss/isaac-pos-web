@@ -189,78 +189,6 @@ const PILLARS: PillarCategory[] = [
     ],
   },
   {
-    id: "finanzas",
-    name: "Finanzas & SENIAT",
-    icon: Landmark,
-    badge: "GESTIÓN FISCAL Y CONTABLE",
-    subModules: [
-      {
-        id: "fiscal",
-        name: "Libros Fiscales SENIAT",
-        badge: "Libros Oficiales",
-        icon: FileSpreadsheet,
-        title: "Libros de Compras y Ventas, IVA 16% e IGTF 3%",
-        description:
-          "Genera automáticamente los libros fiscales oficiales exigidos por la ley venezolana. Cálculo automático de base imponible, alícuota general de IVA, ventas exentas, retenciones e IGTF en divisas.",
-        image: "/real-system/ui_gestion_fiscal_seniat.png",
-        highlights: [
-          "Libro de Ventas con IVA 16%, base imponible e IGTF 3% en divisas",
-          "Libro de Compras con comprobantes de retención",
-          "Emisión de Notas de Crédito y Débito correlativas",
-          "Exportación directa a Excel/CSV lista para el contador",
-        ],
-      },
-      {
-        id: "bancos",
-        name: "Bancos & Conciliación",
-        badge: "Tesorería Bimonetaria",
-        icon: Landmark,
-        title: "Cuentas Bancarias Bimonetarias y Conciliación de Pago Móvil",
-        description:
-          "Control total de saldos en bolívares (Banesco, Mercantil, BDV) y divisas (Zelle, cuentas internacionales, Binance USDT y gavetas de efectivo). Cruza lotes de Pago Móvil y puntos de venta para evitar pérdidas.",
-        image: "/real-system/ui_bancos_tesoreria.png",
-        highlights: [
-          "Saldos bimonetarios en tiempo real por cada cuenta y banco",
-          "Conciliación de lotes de Pago Móvil y transacciones POS",
-          "Auditoría de egresos operativos y transferencias entre cuentas",
-          "Arqueo de bóveda y custodia de divisas en efectivo",
-        ],
-      },
-      {
-        id: "fiados",
-        name: "Clientes & Cuentas por Cobrar",
-        badge: "Radar de Cobranza",
-        icon: Users,
-        title: "Directorio de Clientes, Límites de Crédito y Cobranzas",
-        description:
-          "Protege tu flujo de caja sin perder clientes. Asigna límites de crédito individualizados, consulta saldos adeudados en dólares, envía estados de cuenta por WhatsApp y registra abonos mixtos.",
-        image: "/real-system/ui_cuentas_por_cobrar.png",
-        highlights: [
-          "Directorio de clientes con Cédula / RIF, teléfono y dirección",
-          "Límites de crédito personalizados para evitar sobreendeudamiento",
-          "Radar de Cobranza inteligente para seguimiento de cuentas vencidas",
-          "Historial cronológico de abonos en dólares y bolívares",
-        ],
-      },
-      {
-        id: "inteligencia",
-        name: "Reportes Gerenciales & Ganancia",
-        badge: "Control Financiero",
-        icon: TrendingUp,
-        title: "Análisis de Rentabilidad y Ganancia Neta en Tiempo Real",
-        description:
-          "Toma decisiones con datos exactos: ingresos totales, ganancia neta, margen por categoría de productos, horas de mayor venta y proyecciones comerciales para tu negocio.",
-        image: "/real-system/ui_inteligencia_pl.png",
-        highlights: [
-          "Cálculo automático de ganancia neta y margen por producto",
-          "Reportes de ventas por día, semana, mes y turno de caja",
-          "Horas pico de mayor afluencia de clientes para optimizar turnos",
-          "Resumen visual para dueños y gerentes de negocio",
-        ],
-      },
-    ],
-  },
-  {
     id: "seguridad",
     name: "Seguridad & Automatización",
     icon: ShieldCheck,
@@ -384,21 +312,20 @@ export const RealSystemShowcase: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-3 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>INTERFAZ EJECUTIVA REAL • CERO MAQUETAS FICTICIAS</span>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
+            <span>SUITE OPERATIVA DE COMERCIO</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
-            Conoce el Sistema Real por Dentro
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+            Explora la suite completa módulo por módulo.
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base">
-            Diseñado para operar con velocidad extrema. Explora los 4 pilares operativos de Isaac POS.
+          <p className="text-slate-600 text-base sm:text-lg">
+            Desde el cobro rápido en mostrador y el visor de cliente hasta inventario multialmacén, cuentas por cobrar indexadas y arqueo ciego.
           </p>
         </div>
 
         {/* 1. Selector Maestro de los 4 Pilares (Pestañas Principales) */}
-        <div className="flex flex-wrap justify-center gap-3 mb-6">
+        <div className="flex flex-wrap justify-center gap-2.5 mb-6">
           {PILLARS.map((pillar) => {
             const Icon = pillar.icon;
             const isSelected = activePillarId === pillar.id;
@@ -408,8 +335,8 @@ export const RealSystemShowcase: React.FC = () => {
                 onClick={() => handlePillarChange(pillar.id)}
                 className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20 scale-102"
-                    : "bg-slate-100 text-slate-700 border-slate-200 hover:text-slate-900 hover:bg-slate-200"
+                    ? "bg-slate-950 text-white border-slate-950 shadow-md"
+                    : "bg-white text-slate-700 border-slate-200 hover:text-slate-950 hover:bg-slate-100"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />

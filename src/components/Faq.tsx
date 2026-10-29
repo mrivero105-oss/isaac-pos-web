@@ -41,15 +41,15 @@ export const Faq: React.FC = () => {
     <section id="faq" className="py-20 relative bg-white border-t border-slate-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-3 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
             <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
-            <span>RESPUESTAS CLARAS Y TRANSPARENTES</span>
+            <span>PREGUNTAS FRECUENTES Y DUDAS OPERATIVAS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Preguntas Frecuentes
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+            Todo lo que necesitas saber antes de instalar.
           </h2>
-          <p className="text-slate-600 text-base">
-            Todo lo que necesitas saber antes de implementar Isaac POS en tu comercio.
+          <p className="text-slate-600 text-base sm:text-lg">
+            Respuestas directas sobre compatibilidad, modo offline, licencias y métodos de pago.
           </p>
         </div>
 

@@ -1,6 +1,17 @@
 import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://isaacpos.com"),
@@ -23,7 +34,6 @@ export const metadata: Metadata = {
     "seguridad bancaria",
     "corte de caja",
     "arqueo ciego",
-    "SENIAT libros fiscales",
   ],
   authors: [{ name: "Isaac POS Engineering Team" }],
   icons: {
@@ -71,19 +81,19 @@ const jsonLd = {
       offers: [
         {
           "@type": "Offer",
-          price: "29",
+          price: "12",
           priceCurrency: "USD",
           name: "Plan Emprendedor Mensual",
         },
         {
           "@type": "Offer",
-          price: "59",
+          price: "24",
           priceCurrency: "USD",
           name: "Plan Profesional Mensual",
         },
         {
           "@type": "Offer",
-          price: "499",
+          price: "199",
           priceCurrency: "USD",
           name: "Licencia Vitalicia Perpetua",
         },
@@ -125,7 +135,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600/20 selection:text-blue-950">
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600/15 selection:text-blue-900`}>
         {children}
         <Analytics />
       </body>

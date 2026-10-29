@@ -70,14 +70,14 @@ const ISAAC_KNOWLEDGE = [
     ],
   },
   {
-    triggers: ["seniat", "fiscal", "factura", "iva", "igtf", "libro", "impuesto", "retencion", "ley"],
-    title: "Gestión Fiscal y Cumplimiento SENIAT",
-    reply: `**Módulo Fiscal Completo Adaptado a la Normativa SENIAT:** 📑⚖️
+    triggers: ["factura", "ticket", "recibo", "comprobante", "nota", "entrega"],
+    title: "Emisión de Tickets y Comprobantes de Venta",
+    reply: `**Emisión Ágil de Tickets y Comprobantes:** 🧾⚡
 
-* **Libros Oficiales:** Generación automática de **Libro de Ventas y Libro de Compras** con base imponible, alícuota, IVA 16% y ventas exentas.
-* **Cálculo de IGTF (3%):** Identificación y cálculo automático del Impuesto a las Grandes Transacciones Financieras en cobros en divisas.
-* **Notas de Crédito y Débito:** Emisión correlativa para devoluciones y correcciones contables.
-* **Exportación Contable:** Exporta directamente a formatos Excel/CSV para que tu contador declare en minutos sin inconsistencias.`,
+* **Tickets Térmicos:** Impresión instantánea en formato 58mm y 80mm con desglose bimonetario en dólares ($) y bolívares (Bs) a tasa oficial BCV.
+* **Apertura de Gaveta:** Disparo automático por pulso eléctrico RJ11 al momento de confirmar cobros en efectivo.
+* **Control Correlativo:** Registro consecutivo inalterable de cada operación para auditoría de caja y arqueo ciego.
+* **Envío a WhatsApp:** Opción de enviar el comprobante de venta digital directamente al celular del comprador.`,
     suggestions: [
       "¿Genera tickets térmicos válidos?",
       "Ver precios y planes",

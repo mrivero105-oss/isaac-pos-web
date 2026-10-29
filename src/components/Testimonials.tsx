@@ -78,15 +78,15 @@ export const Testimonials: React.FC = () => {
         
         {/* Encabezado Principal */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold mb-4 shadow-xs">
-            <Users className="w-4 h-4 text-blue-600" />
-            <span>CASOS DE ÉXITO COMPROBADOS</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
+            <Users className="w-3.5 h-3.5 text-blue-600" />
+            <span>CASOS REALES EN COMERCIOS DE ALTO TRÁFICO</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Comercios que ya duplicaron su velocidad con Isaac POS
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+            Comercios que blindaron su caja y duplicaron su velocidad.
           </h2>
           <p className="text-slate-600 text-base sm:text-lg">
-            Descubre cómo dueños de bodegas, cadenas de minimarkets, farmacias y distribuidoras blindaron sus finanzas y operan con tranquilidad total.
+            Descubre cómo dueños de bodegas, cadenas de minimarkets, farmacias y panaderías operan sin depender de internet y con arqueo ciego diario.
           </p>
         </div>
 

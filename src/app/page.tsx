@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
 import { UltraEditionShowcase } from "@/components/UltraEditionShowcase";
 import { RealSystemShowcase } from "@/components/RealSystemShowcase";
 import { InteractivePosDemo } from "@/components/InteractivePosDemo";
@@ -44,7 +45,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex-1 flex flex-col relative">
+    <div className="flex-1 flex flex-col relative min-h-screen">
+      {/* Fondo Cinético de Ingeniería de Precisión */}
+      <InteractiveEngineeringBackground />
+
       {/* Barra de Navegación Fija */}
       <Header
         onOpenModal={handleOpenModal}

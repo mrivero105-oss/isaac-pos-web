@@ -22,11 +22,11 @@ interface SecureCheckoutModalProps {
 }
 
 const PLAN_DATA: Record<string, { name: string; priceUsd: number; cycle: string }> = {
-  basico_mensual: { name: "Plan Emprendedor (Mensual)", priceUsd: 29, cycle: "USD / mes" },
-  basico_anual: { name: "Plan Emprendedor (Anual - 2 Meses Gratis)", priceUsd: 290, cycle: "USD / año" },
-  pro_mensual: { name: "Plan Profesional (Mensual)", priceUsd: 59, cycle: "USD / mes" },
-  pro_anual: { name: "Plan Profesional (Anual - Recomendado)", priceUsd: 590, cycle: "USD / año" },
-  vitalicia: { name: "Licencia Vitalicia (Pago Único Perpetuo)", priceUsd: 499, cycle: "USD único" },
+  basico_mensual: { name: "Plan Emprendedor (Mensual)", priceUsd: 12, cycle: "USD / mes" },
+  basico_anual: { name: "Plan Emprendedor (Anual - 2 Meses Gratis)", priceUsd: 99, cycle: "USD / año" },
+  pro_mensual: { name: "Plan Profesional (Mensual)", priceUsd: 24, cycle: "USD / mes" },
+  pro_anual: { name: "Plan Profesional (Anual - Recomendado)", priceUsd: 190, cycle: "USD / año" },
+  vitalicia: { name: "Licencia Vitalicia (1 Admin + 1 Caja)", priceUsd: 199, cycle: "USD único" },
 };
 
 export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
@@ -287,11 +287,11 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
                       onChange={(e) => setSelectedPlan(e.target.value)}
                       className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-semibold"
                     >
-                      <option value="basico_mensual">Plan Emprendedor Mensual ($29 USD/mes)</option>
-                      <option value="basico_anual">Plan Emprendedor Anual ($290 USD/año - 2 meses gratis)</option>
-                      <option value="pro_mensual">Plan Profesional Mensual ($59 USD/mes)</option>
-                      <option value="pro_anual">Plan Profesional Anual ($590 USD/año - Más elegido)</option>
-                      <option value="vitalicia">Licencia Vitalicia Pago Único ($499 USD - Sin mensualidades)</option>
+                      <option value="basico_mensual">Plan Emprendedor Mensual ($12 USD/mes)</option>
+                      <option value="basico_anual">Plan Emprendedor Anual ($99 USD/año - Ahorra 2 meses)</option>
+                      <option value="pro_mensual">Plan Profesional Mensual ($24 USD/mes)</option>
+                      <option value="pro_anual">Plan Profesional Anual ($190 USD/año - Más elegido)</option>
+                      <option value="vitalicia">Licencia Vitalicia Pago Único ($199 USD - 1 Admin + 1 Caja | +$49 caja extra)</option>
                     </select>
                   </div>
 
