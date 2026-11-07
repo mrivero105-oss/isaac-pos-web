@@ -43,14 +43,22 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
-  const [bcvRate] = useState(857.89);
+  const [bcvRate, setBcvRate] = useState(857.89);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Reiniciar estado cada vez que se abre el modal
+  // Reiniciar estado y sincronizar tasa BCV oficial cada vez que se abre el modal
   useEffect(() => {
     if (isOpen) {
       setCurrentTime(0);
       setIsPlaying(true);
+      fetch("/api/bcv")
+        .then((res) => res.json())
+        .then((json) => {
+          if (json?.data?.rate && typeof json.data.rate === "number") {
+            setBcvRate(json.data.rate);
+          }
+        })
+        .catch(() => {});
     } else {
       setIsPlaying(false);
       setCurrentTime(0);

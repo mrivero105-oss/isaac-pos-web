@@ -14,7 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://isaacpos.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://isaacventas.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Isaac POS V24.04 Ultra - El Punto de Venta más Rápido, Compacto y Seguro",
   description:
     "Nuevo motor Ultra con aceleración GPU, visor de cliente para segunda pantalla, cobros duales USD/Bs a tasa BCV en 2 segundos, modo 100% offline, producción y arqueo ciego.",
@@ -48,18 +51,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Isaac POS V24.04 Ultra - El Punto de Venta más Rápido, Compacto y Seguro",
     description:
-      "Vende sin interrupciones incluso sin internet. Nuevo motor Ultra, Visor de Cliente 2da pantalla, Tasa BCV en vivo, Producción y máxima seguridad.",
+      "Vende sin interrupciones incluso sin internet. Nuevo motor Ultra, Visor de Cliente 2da pantalla con QR Pago Móvil, Tasa BCV en vivo y Arqueo Ciego.",
+    url: "https://isaacventas.com",
     type: "website",
     locale: "es_VE",
     siteName: "Isaac POS",
     images: [
       {
-        url: "/real-system/ui_terminal_ventas_dark.png",
-        width: 1200,
-        height: 630,
-        alt: "Isaac POS Terminal de Ventas Multimoneda",
+        url: "/real-system/v24_pos_terminal.png",
+        width: 1024,
+        height: 551,
+        alt: "Isaac POS V24.04 Ultra - Terminal de Ventas Bimonetario",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Isaac POS V24.04 Ultra - Punto de Venta Bimonetario 100% Offline",
+    description:
+      "Cobra en menos de 2 segundos a tasa oficial BCV, visor 2da pantalla con QR de Pago Móvil y arqueo ciego anti-faltantes.",
+    images: ["/real-system/v24_pos_terminal.png"],
   },
 };
 
@@ -111,8 +122,8 @@ const jsonLd = {
     {
       "@type": "Organization",
       name: "Isaac POS",
-      url: "https://isaacpos.com",
-      logo: "https://isaacpos.com/isaac-icon-3d.png",
+      url: "https://isaacventas.com",
+      logo: "https://isaacventas.com/isaac-icon-3d.png",
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",

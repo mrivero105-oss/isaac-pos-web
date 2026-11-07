@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ShoppingCart,
   Search,
@@ -182,11 +182,26 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
   onOpenCheckoutModal,
   isCompactHero = false,
 }) => {
-  const [bcvRate] = useState<number>(920.0);
+  const [bcvRate, setBcvRate] = useState<number>(857.89);
   const [selectedCategory, setSelectedCategory] = useState<string>("TODAS");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currencyMode, setCurrencyMode] = useState<"BS" | "USD">("BS");
   const [activeTheme, setActiveTheme] = useState<"OSCURO" | "CLARO" | "OLED">("OSCURO");
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/bcv")
+      .then((res) => res.json())
+      .then((json) => {
+        if (isMounted && json?.data?.rate && typeof json.data.rate === "number") {
+          setBcvRate(json.data.rate);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Iniciar con un par de productos cargados para simular vida real
   const [cart, setCart] = useState<CartItem[]>([

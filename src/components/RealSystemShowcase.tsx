@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   ShoppingCart,
   Receipt,
@@ -494,9 +495,11 @@ export const RealSystemShowcase: React.FC = () => {
                       className="relative rounded-xl overflow-hidden cursor-zoom-in bg-slate-900"
                       onClick={() => setIsZoomed(true)}
                     >
-                      <img
+                      <Image
                         src={activeSubModule.image}
                         alt={activeSubModule.title}
+                        width={1024}
+                        height={551}
                         className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.008]"
                       />
                       <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 text-slate-800 text-xs font-semibold flex items-center gap-1.5 shadow-md">
@@ -525,9 +528,11 @@ export const RealSystemShowcase: React.FC = () => {
               <span className="text-slate-900 font-bold">{activeSubModule.title}</span>
               <span className="text-blue-600 font-semibold cursor-pointer">Clic en cualquier parte para cerrar ✕</span>
             </div>
-            <img
+            <Image
               src={activeSubModule.image}
               alt={activeSubModule.title}
+              width={1024}
+              height={551}
               className="w-full h-auto rounded-xl"
             />
           </div>

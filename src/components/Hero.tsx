@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import {
   WifiOff,
   ArrowRight,
@@ -258,9 +259,12 @@ export const Hero: React.FC<HeroProps> = ({
                       else setIsZoomed(true);
                     }}
                   >
-                    <img
+                    <Image
                       src="/real-system/v24_pos_terminal.png"
                       alt="Isaac POS - Terminal de Ventas y Mostrador Real"
+                      width={1024}
+                      height={551}
+                      priority
                       className="w-full h-auto object-cover select-none"
                     />
 
@@ -272,7 +276,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                     <div className="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-white text-xs font-mono flex items-center gap-2 shadow-lg">
                       <DollarSign className="w-3.5 h-3.5 text-blue-400" />
-                      <span>Cálculo Bimonetario: USD & Bs a Tasa BCV</span>
+                      <span>Cálculo Bimonetario: USD & Bs a Tasa BCV ({rateValue.toFixed(2)} Bs)</span>
                     </div>
 
                     {/* Overlay al pasar el cursor */}
@@ -293,93 +297,32 @@ export const Hero: React.FC<HeroProps> = ({
                   </div>
                 )}
 
-                {/* 2. Vista: Visor de Cliente (2da Pantalla en Vivo) */}
+                {/* 2. Vista: Visor de Cliente (2da Pantalla Real con QR Pago Móvil) */}
                 {activeView === "customer_display" && (
-                  <div className="w-full p-4 sm:p-8 bg-slate-900 text-white flex flex-col justify-center max-w-4xl mx-auto">
-                    <div className="bg-slate-950 border border-slate-800 rounded-2xl p-5 sm:p-7 shadow-2xl">
-                      {/* Cabecera del Visor */}
-                      <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs font-mono">
-                            POS
-                          </div>
-                          <div>
-                            <div className="text-xs text-slate-400">PANTALLA ORIENTADA AL CLIENTE</div>
-                            <div className="text-base font-extrabold text-white">Supermercado & Víveres La Esperanza</div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-[11px] text-slate-400 font-mono">Tasa Oficial BCV</div>
-                          <div className="text-sm font-bold text-emerald-400 font-mono tabular-nums">
-                            Bs. {rateValue.toFixed(2)}
-                          </div>
-                        </div>
-                      </div>
+                  <div
+                    className="w-full relative cursor-pointer group"
+                    onClick={() => setIsZoomed(true)}
+                  >
+                    <Image
+                      src="/real-system/v24_visor_cliente_qr.png"
+                      alt="Isaac POS - Visor de Cliente en 2da Pantalla con QR Pago Móvil"
+                      width={1024}
+                      height={533}
+                      className="w-full h-auto object-cover select-none"
+                    />
 
-                      {/* Artículos siendo escaneados en vivo */}
-                      <div className="space-y-3 mb-6">
-                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                          <div className="flex items-center gap-3">
-                            <img
-                              src="/real-products/harina_pan.png"
-                              alt="Harina PAN"
-                              className="w-10 h-10 object-contain rounded-lg bg-white/5 p-1"
-                              onError={(e) => {
-                                // Fallback silencioso si no carga imagen específica
-                                (e.target as HTMLElement).style.display = "none";
-                              }}
-                            />
-                            <div>
-                              <div className="text-sm font-bold text-white">HARINA PAN BLANCA 1KG</div>
-                              <div className="text-xs text-slate-400">2 unidades × $1.35 USD</div>
-                            </div>
-                          </div>
-                          <div className="text-right font-mono">
-                            <div className="text-sm font-bold text-white">$2.70 USD</div>
-                            <div className="text-xs text-slate-400 tabular-nums">
-                              Bs. {(2.7 * rateValue).toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/90 border border-slate-800">
-                          <div className="flex items-center gap-3">
-                            <img
-                              src="/real-products/aceite_vatel_1l.png"
-                              alt="Aceite Vatel"
-                              className="w-10 h-10 object-contain rounded-lg bg-white/5 p-1"
-                            />
-                            <div>
-                              <div className="text-sm font-bold text-white">ACEITE VEGETAL VATEL 1L</div>
-                              <div className="text-xs text-slate-400">1 unidad × $2.95 USD</div>
-                            </div>
-                          </div>
-                          <div className="text-right font-mono">
-                            <div className="text-sm font-bold text-white">$2.95 USD</div>
-                            <div className="text-xs text-slate-400 tabular-nums">
-                              Bs. {(2.95 * rateValue).toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
+                    <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-700/80 text-white text-xs max-w-sm shadow-xl">
+                      <div className="flex items-center gap-1.5 text-emerald-400 font-bold mb-1 font-mono">
+                        <Monitor className="w-3.5 h-3.5" />
+                        <span>VISOR 2DA PANTALLA + QR PAGO MÓVIL</span>
                       </div>
+                      <p className="text-[11px] text-slate-300 leading-snug">
+                        El cliente audita sus productos en tiempo real y escanea el <strong>código QR de Pago Móvil</strong> con el monto exacto en Bolívares a tasa BCV ({rateValue.toFixed(2)} Bs).
+                      </p>
+                    </div>
 
-                      {/* Total Bimonetario de Alto Impacto */}
-                      <div className="p-4 rounded-xl bg-gradient-to-r from-blue-950/80 to-slate-900 border border-blue-800/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <div>
-                          <span className="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider block">
-                            TOTAL A PAGAR (DUAL)
-                          </span>
-                          <span className="text-[11px] text-slate-400">
-                            Cero discusiones en caja: el comprador audita su cuenta en tiempo real.
-                          </span>
-                        </div>
-                        <div className="text-right font-mono">
-                          <div className="text-2xl sm:text-3xl font-black text-white">$5.65 USD</div>
-                          <div className="text-base sm:text-lg font-bold text-emerald-400 tabular-nums">
-                            Bs. {(5.65 * rateValue).toFixed(2)}
-                          </div>
-                        </div>
-                      </div>
+                    <div className="absolute bottom-4 right-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-white text-xs font-mono">
+                      Haz clic para ampliar captura real
                     </div>
                   </div>
                 )}
@@ -390,9 +333,11 @@ export const Hero: React.FC<HeroProps> = ({
                     className="w-full relative cursor-pointer group"
                     onClick={() => setIsZoomed(true)}
                   >
-                    <img
+                    <Image
                       src="/real-system/v24_control_caja_arqueo.png"
                       alt="Isaac POS - Arqueo Ciego de Caja Anti-Fraude"
+                      width={1024}
+                      height={585}
                       className="w-full h-auto object-cover select-none"
                     />
 
@@ -459,13 +404,17 @@ export const Hero: React.FC<HeroProps> = ({
               </button>
             </div>
             <div className="p-2 sm:p-4 bg-slate-950 max-h-[85vh] overflow-auto">
-              <img
+              <Image
                 src={
                   activeView === "arqueo"
-                    ? "/real-system/ui_arqueo_caja.png"
-                    : "/real-system/ui_terminal_ventas_real.png"
+                    ? "/real-system/v24_control_caja_arqueo.png"
+                    : activeView === "customer_display"
+                    ? "/real-system/v24_visor_cliente_qr.png"
+                    : "/real-system/v24_pos_terminal.png"
                 }
                 alt="Isaac POS Captura Real"
+                width={1024}
+                height={551}
                 className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>

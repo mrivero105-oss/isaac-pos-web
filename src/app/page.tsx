@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
@@ -15,11 +16,21 @@ import { RoiCalculator } from "@/components/RoiCalculator";
 import { Pricing } from "@/components/Pricing";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
-import { SecureCheckoutModal } from "@/components/SecureCheckoutModal";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { FloatingAiRobot } from "@/components/FloatingAiRobot";
-import { IsaacAiChat } from "@/components/IsaacAiChat";
-import { VideoDemoModal } from "@/components/VideoDemoModal";
+
+const SecureCheckoutModal = dynamic(
+  () => import("@/components/SecureCheckoutModal").then((m) => m.SecureCheckoutModal),
+  { ssr: false }
+);
+const IsaacAiChat = dynamic(
+  () => import("@/components/IsaacAiChat").then((m) => m.IsaacAiChat),
+  { ssr: false }
+);
+const VideoDemoModal = dynamic(
+  () => import("@/components/VideoDemoModal").then((m) => m.VideoDemoModal),
+  { ssr: false }
+);
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
