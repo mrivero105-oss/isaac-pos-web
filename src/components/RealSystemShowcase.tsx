@@ -71,7 +71,7 @@ const PILLARS: PillarCategory[] = [
       },
       {
         id: "display",
-        name: "Visor de Cliente (2da Pantalla)",
+        name: "Visor Cliente (QR Pago Móvil)",
         badge: "QR Dinámico en Vivo",
         icon: Monitor,
         title: "Visor Secundario con QR de Pago Móvil para el Comprador",
@@ -83,6 +83,22 @@ const PILLARS: PillarCategory[] = [
           "Visualización bimonetaria transparente en USD y Bs a tasa BCV",
           "Reduce colas y elimina errores al transcribir números de teléfono o cédula",
           "Pantalla personalizable con el logo y bienvenida de tu comercio",
+        ],
+      },
+      {
+        id: "display_idle",
+        name: "Visor Cliente (Modo Bienvenida)",
+        badge: "Identidad Comercial",
+        icon: Monitor,
+        title: "Pantalla de Bienvenida del Cliente con Tasa BCV y Métodos de Pago",
+        description:
+          "Cuando la caja está disponible esperando al próximo cliente, el segundo monitor proyecta el emblema de tu negocio, la tasa oficial BCV vigente del día y los métodos de pago aceptados.",
+        image: "/real-system/v24_visor_cliente_idle.png",
+        highlights: [
+          "Exhibición permanente de la Tasa Oficial BCV para transparencia total",
+          "Personalización con el nombre, logo y mensaje de tu comercio",
+          "Indicador en vivo de métodos de pago (Pago Móvil, Punto, Divisas)",
+          "Conmutación automática al carrito de compras apenas se escanea el primer artículo",
         ],
       },
       {
@@ -285,31 +301,6 @@ export const RealSystemShowcase: React.FC = () => {
     }
   };
 
-  // Datos para el simulador de 2da pantalla con Tasa BCV Oficial en Vivo
-  const [bcvRate, setBcvRate] = useState<number>(857.89);
-
-  useEffect(() => {
-    fetch("/api/bcv")
-      .then((res) => res.json())
-      .then((json) => {
-        if (json?.data?.rate && typeof json.data.rate === "number") {
-          setBcvRate(json.data.rate);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  const demoCart = [
-    { name: "Harina PAN 1kg", qty: 2, totalUsd: 2.5 },
-    { name: "Café Fama de América 250g", qty: 1, totalUsd: 2.8 },
-    { name: "Queso Llanero Blanco 1kg", qty: 0.85, totalUsd: 4.68 },
-    { name: "Refresco Coca Cola 2L", qty: 1, totalUsd: 2.4 },
-  ];
-  const demoSubtotal = demoCart.reduce((acc, i) => acc + i.totalUsd, 0);
-  const demoIva = demoSubtotal * 0.16;
-  const demoTotalUsd = demoSubtotal + demoIva;
-  const demoTotalBs = demoTotalUsd * bcvRate;
-
   return (
     <section id="sistema-real" className="py-20 relative bg-white border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -398,118 +389,38 @@ export const RealSystemShowcase: React.FC = () => {
               </div>
             </div>
 
-            {/* Columna Derecha: Captura Real o Visor de Cliente (7 cols) */}
+            {/* Columna Derecha: Captura Real del Módulo (7 cols) */}
             <div className="lg:col-span-7">
-              {activeSubModule.isDisplayDemo ? (
-                /* SIMULADOR EN VIVO DEL VISOR DE CLIENTE (/#/display) */
-                <div className="bg-white rounded-2xl border-2 border-blue-200 p-4 sm:p-6 shadow-xl">
-                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 text-xs font-mono">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
-                      <span className="text-blue-800 font-bold">MONITOR DE CLIENTE (/#/display)</span>
-                    </div>
-                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      1 USD = {bcvRate.toFixed(2)} Bs (BCV)
-                    </span>
+              <div className="bg-white rounded-2xl border border-slate-300 p-2 shadow-xl overflow-hidden group relative">
+                <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 text-xs font-mono text-slate-600 mb-2 bg-slate-50 rounded-t-xl">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
+                    <span className="ml-2 text-slate-700 text-[11px] font-semibold">Isaac POS • {activeSubModule.name}</span>
                   </div>
-
-                  <div className="flex items-center justify-between bg-slate-50 p-3.5 rounded-xl border border-slate-200 mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center shadow-xs">
-                        <img
-                          src="/isaac-logo-ultra.png"
-                          alt="Logo"
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-slate-900">SUPERMERCADO DEMO</div>
-                        <div className="text-[11px] text-slate-500">Atendiendo a: <span className="text-blue-700 font-semibold">Cliente Mostrador</span></div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-[10px] font-mono uppercase text-slate-400 block">Artículos</span>
-                      <span className="text-base font-mono font-bold text-blue-700">{demoCart.length} productos</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5 mb-4 max-h-40 overflow-y-auto pr-1">
-                    {demoCart.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between p-2 rounded-lg bg-slate-50/70 border border-slate-200 text-xs"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="w-4 h-4 rounded bg-slate-200 text-slate-700 font-mono text-[9px] flex items-center justify-center font-bold">
-                            {idx + 1}
-                          </span>
-                          <span className="font-semibold text-slate-800">{item.name}</span>
-                          <span className="text-slate-500 text-[10px]">x{item.qty}</span>
-                        </div>
-                        <div className="text-right">
-                          <span className="font-mono font-bold text-slate-900">${item.totalUsd.toFixed(2)}</span>
-                          <span className="text-[10px] font-mono text-slate-500 ml-2">
-                            (Bs {(item.totalUsd * bcvRate).toFixed(2)})
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="bg-blue-50/80 p-4 rounded-xl border border-blue-200">
-                    <div className="flex justify-between items-center text-xs text-slate-600 pb-2 border-b border-blue-200/60">
-                      <span>Subtotal: ${demoSubtotal.toFixed(2)}</span>
-                      <span>IVA 16%: ${demoIva.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between items-end pt-3">
-                      <div>
-                        <div className="text-[10px] font-mono uppercase text-slate-500">Total a Pagar (USD)</div>
-                        <div className="text-2xl sm:text-3xl font-black text-slate-900 font-mono">
-                          ${demoTotalUsd.toFixed(2)}
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-[10px] font-mono uppercase text-emerald-700 font-bold">Total en Bolívares</div>
-                        <div className="text-xl sm:text-2xl font-black text-emerald-700 font-mono">
-                          Bs {demoTotalBs.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <span className="text-blue-700 text-[10px] font-mono font-bold">● Modo Rápido</span>
                 </div>
-              ) : (
-                /* CAPTURA REAL DE PANTALLA DEL MÓDULO */
-                <div className="bg-white rounded-2xl border border-slate-300 p-2 shadow-xl overflow-hidden group relative">
-                  <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 text-xs font-mono text-slate-600 mb-2 bg-slate-50 rounded-t-xl">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
-                      <span className="ml-2 text-slate-700 text-[11px] font-semibold">Isaac POS • {activeSubModule.name}</span>
-                    </div>
-                    <span className="text-blue-700 text-[10px] font-mono font-bold">● Modo Rápido</span>
-                  </div>
 
-                  {activeSubModule.image && (
-                    <div
-                      className="relative rounded-xl overflow-hidden cursor-zoom-in bg-slate-900"
-                      onClick={() => setIsZoomed(true)}
-                    >
-                      <Image
-                        src={activeSubModule.image}
-                        alt={activeSubModule.title}
-                        width={1024}
-                        height={551}
-                        className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.008]"
-                      />
-                      <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 text-slate-800 text-xs font-semibold flex items-center gap-1.5 shadow-md">
-                        <Maximize2 className="w-3.5 h-3.5 text-blue-600" />
-                        <span>Clic para ampliar</span>
-                      </div>
+                {activeSubModule.image && (
+                  <div
+                    className="relative rounded-xl overflow-hidden cursor-zoom-in bg-slate-900"
+                    onClick={() => setIsZoomed(true)}
+                  >
+                    <Image
+                      src={activeSubModule.image}
+                      alt={activeSubModule.title}
+                      width={1024}
+                      height={551}
+                      className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.008]"
+                    />
+                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 text-slate-800 text-xs font-semibold flex items-center gap-1.5 shadow-md">
+                      <Maximize2 className="w-3.5 h-3.5 text-blue-600" />
+                      <span>Clic para ampliar</span>
                     </div>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
             </div>
 
           </div>

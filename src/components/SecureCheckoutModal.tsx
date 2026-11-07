@@ -63,6 +63,20 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [successData, setSuccessData] = useState<any | null>(null);
 
+  // Sincronizar pestaña y plan seleccionado cada vez que se abre el modal desde cualquier botón de la web
+  useEffect(() => {
+    if (!isOpen) return;
+    setErrorMsg(null);
+    setSuccessData(null);
+    if (initialPlan === "demo_gratis") {
+      setActiveTab("demo");
+      setSelectedPlan("pro_anual");
+    } else {
+      setActiveTab("checkout");
+      setSelectedPlan(PLAN_DATA[initialPlan] ? initialPlan : "pro_anual");
+    }
+  }, [isOpen, initialPlan]);
+
   // Obtener la tasa oficial del BCV en vivo de forma automática cada vez que se abre el modal
   useEffect(() => {
     if (!isOpen) return;
