@@ -5,7 +5,11 @@ import { IsaacPosRealTerminal } from "@/components/IsaacPosRealTerminal";
 import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
 import { Terminal, Zap, DollarSign, WifiOff } from "lucide-react";
 
-export const InteractivePosDemo: React.FC = () => {
+interface InteractivePosDemoProps {
+  onOpenModal?: (plan?: string) => void;
+}
+
+export const InteractivePosDemo: React.FC<InteractivePosDemoProps> = ({ onOpenModal }) => {
   return (
     <section id="simulador" className="py-24 relative bg-slate-900 text-white border-t border-slate-800 overflow-hidden">
       {/* Fondo Cinético en Blanco Luminoso */}
@@ -17,21 +21,21 @@ export const InteractivePosDemo: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-semibold mb-3">
             <Terminal className="w-3.5 h-3.5 text-blue-400" />
-            <span>TERMINAL EN TIEMPO REAL • DATOS DE PRUEBA</span>
+            <span>TERMINAL EN TIEMPO REAL • DOBLE PANTALLA INTERACTIVA</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
-            Simula un cobro en vivo desde tu navegador.
+            Simula un cobro y mira la 2da pantalla del cliente en vivo.
           </h2>
 
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Esta es la interfaz de mostrador auténtica de <strong className="text-white">Isaac POS</strong>. Haz clic en cualquier artículo para agregarlo a la cuenta, simula cantidades y observa la conversión dual USD/Bs al milisegundo.
+            Haz clic en cualquier artículo para agregarlo al carrito y luego pulsa <strong className="text-emerald-400">&quot;2da Pantalla: Visor Cliente + QR&quot;</strong> arriba o <strong className="text-emerald-400">&quot;Cobrar (F2)&quot;</strong> para ver cómo el monitor secundario genera el QR de Pago Móvil con tus productos.
           </p>
         </div>
 
         {/* Simulador Interactivo Completo */}
         <div className="relative max-w-6xl mx-auto shadow-2xl rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-800">
-          <IsaacPosRealTerminal isCompactHero={false} />
+          <IsaacPosRealTerminal isCompactHero={false} onOpenCheckoutModal={onOpenModal} />
         </div>
 
         {/* 3 Métricas Técnicas al pie del simulador */}

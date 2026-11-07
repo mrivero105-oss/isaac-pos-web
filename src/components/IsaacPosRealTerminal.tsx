@@ -27,6 +27,7 @@ import {
   Sparkles,
   Lock,
   ArrowRight,
+  Monitor,
 } from "lucide-react";
 
 interface Product {
@@ -187,6 +188,7 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currencyMode, setCurrencyMode] = useState<"BS" | "USD">("BS");
   const [activeTheme, setActiveTheme] = useState<"OSCURO" | "CLARO" | "OLED">("OSCURO");
+  const [screenMode, setScreenMode] = useState<"cashier" | "customer_display">("cashier");
 
   useEffect(() => {
     let isMounted = true;
@@ -269,8 +271,8 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
   return (
     <div className="w-full bg-[#070a11] text-slate-100 rounded-2xl border-2 border-slate-700/80 shadow-2xl overflow-hidden font-sans select-none">
       
-      {/* 1. BARRA DE VENTANA NATIVA DE WINDOWS (Isaac POS V24.04) */}
-      <div className="bg-[#0b0f19] px-3 py-1.5 border-b border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+      {/* 1. BARRA DE VENTANA NATIVA DE WINDOWS + CONMUTADOR DE MONITOR 1 / MONITOR 2 */}
+      <div className="bg-[#0b0f19] px-3 py-2 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 font-mono">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded overflow-hidden">
             <img
@@ -279,9 +281,40 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
               className="w-full h-full object-contain"
             />
           </div>
-          <span className="text-slate-300 font-semibold text-[11px]">Isaac POS V24.04</span>
+          <span className="text-slate-300 font-semibold text-[11px]">
+            Isaac POS V24.04 • {screenMode === "cashier" ? "Monitor 1 (Terminal Cajero)" : "Monitor 2 (Visor Cliente /#/display)"}
+          </span>
         </div>
-        <div className="flex items-center gap-3 text-slate-500">
+
+        {/* Conmutador En Vivo: 1ra Pantalla vs 2da Pantalla */}
+        <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
+          <button
+            type="button"
+            onClick={() => setScreenMode("cashier")}
+            className={`px-3 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              screenMode === "cashier"
+                ? "bg-blue-600 text-white shadow-sm"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            <ShoppingCart className="w-3 h-3" />
+            <span>1ra Pantalla: Cajero POS</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setScreenMode("customer_display")}
+            className={`px-3 py-1 rounded-lg text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              screenMode === "customer_display"
+                ? "bg-emerald-500 text-slate-950 shadow-sm"
+                : "text-emerald-400 hover:text-emerald-300"
+            }`}
+          >
+            <Monitor className="w-3 h-3" />
+            <span>2da Pantalla: Visor Cliente + QR ({cart.reduce((s, i) => s + i.quantity, 0)})</span>
+          </button>
+        </div>
+
+        <div className="hidden sm:flex items-center gap-3 text-slate-500">
           <span className="hover:text-white cursor-pointer">_</span>
           <span className="hover:text-white cursor-pointer">□</span>
           <span className="hover:text-rose-400 cursor-pointer">✕</span>
@@ -388,7 +421,8 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
 
       </div>
 
-      {/* 3. CONTENEDOR PRINCIPAL: SIDEBAR + CATÁLOGO + COMANDA */}
+      {/* 3. CONTENEDOR PRINCIPAL: SIDEBAR + CATÁLOGO + COMANDA O 2DA PANTALLA */}
+      {screenMode === "cashier" ? (
       <div className="flex flex-col lg:flex-row min-h-[580px]">
         
         {/* PANEL IZQUIERDO: Barra Lateral de Módulos Operativos */}
@@ -785,13 +819,11 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
             </div>
 
             <button
-              onClick={() => {
-                if (onOpenCheckoutModal) onOpenCheckoutModal("demo_gratis");
-              }}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/35 transition-all flex items-center justify-center gap-2 group"
+              onClick={() => setScreenMode("customer_display")}
+              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/35 transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
-              <CreditCard className="w-4 h-4" />
-              <span>Pagar ahora F2</span>
+              <QrCode className="w-4 h-4" />
+              <span>Cobrar / Ver QR en 2da Pantalla (F2)</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -799,6 +831,196 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
         </div>
 
       </div>
+      ) : (
+        /* VISTA EN VIVO DEL MONITOR SECUNDARIO DEL CLIENTE (/#/display V24.04) */
+        <div className="bg-[#dce8f5] text-slate-900 min-h-[580px] flex flex-col justify-between p-4 sm:p-6">
+          {/* Cabecera Superior del Visor de Cliente */}
+          <div>
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-300/80">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-sm flex items-center justify-center shadow-sm">
+                  IP
+                </div>
+                <div>
+                  <div className="font-black text-sm sm:text-base text-slate-950 tracking-tight">
+                    MINIMARKET DEMO
+                  </div>
+                  <div className="text-xs text-slate-600">
+                    Caja 1 • Le atiende con gusto: <span className="font-semibold text-slate-800">CAJERO 1</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+                <span className="px-3 py-1 rounded-full bg-emerald-100/90 border border-emerald-300 text-emerald-900 font-bold">
+                  Tasa BCV: Bs {bcvRate.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs/$
+                </span>
+                <span className="px-3 py-1 rounded-full bg-emerald-100/90 border border-emerald-300 text-emerald-800 font-bold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Sincronizado en Vivo</span>
+                </span>
+              </div>
+            </div>
+
+            {/* Cuerpo Dividido del Visor: Artículos en Caja (Izquierda) + Total y QR Pago Móvil (Derecha) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+              {/* Columna Izquierda (7 cols): Artículos Escaneados */}
+              <div className="lg:col-span-7 bg-[#e7f0fa] border border-white/80 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between text-[11px] font-mono font-bold text-slate-500 uppercase pb-3 mb-3 border-b border-slate-300/70">
+                    <span>ARTÍCULOS EN CAJA ({cart.reduce((s, i) => s + i.quantity, 0)})</span>
+                    <span>SUBTOTAL</span>
+                  </div>
+
+                  {cart.length === 0 ? (
+                    <div className="py-16 text-center text-slate-500">
+                      <p className="font-bold text-slate-700 text-sm mb-1">
+                        ¡Bienvenido a Minimarket Demo!
+                      </p>
+                      <p className="text-xs text-slate-500 mb-4">
+                        Regresa a la 1ra Pantalla (Cajero POS) y haz clic en cualquier producto para ver cómo aparece aquí en tiempo real.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setScreenMode("cashier")}
+                        className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs cursor-pointer"
+                      >
+                        ← Ir a seleccionar productos
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
+                      {cart.map((item) => {
+                        const lineUsd = item.product.priceUsd * item.quantity;
+                        const lineBs = lineUsd * bcvRate;
+                        return (
+                          <div
+                            key={item.product.id}
+                            className="bg-[#dce8f6] border border-blue-200/70 rounded-xl p-3 flex items-center justify-between"
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="w-8 h-8 rounded-lg bg-blue-100 border border-blue-200 text-slate-900 font-mono font-black text-xs flex items-center justify-center">
+                                {item.quantity}x
+                              </span>
+                              <div>
+                                <div className="font-bold text-slate-900 text-xs sm:text-sm">
+                                  {item.product.name}
+                                </div>
+                                <div className="text-[11px] font-mono text-slate-500">
+                                  ${item.product.priceUsd.toFixed(2)} c/u
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-right font-mono">
+                              <div className="font-black text-slate-950 text-sm">
+                                ${lineUsd.toFixed(2)}
+                              </div>
+                              <div className="text-[11px] text-slate-600 font-semibold">
+                                Bs {lineBs.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-300/70 flex flex-wrap items-center justify-between gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setScreenMode("cashier")}
+                    className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-bold text-xs flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                  >
+                    <span>← Volver a Pantalla Cajero (Agregar más productos)</span>
+                  </button>
+                  {onOpenCheckoutModal && (
+                    <button
+                      type="button"
+                      onClick={() => onOpenCheckoutModal("pro_anual")}
+                      className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm cursor-pointer"
+                    >
+                      <span>Quiero este sistema en mi negocio →</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Columna Derecha (5 cols): Total a Pagar + Tarjeta QR Pago Móvil */}
+              <div className="lg:col-span-5 flex flex-col gap-4">
+                {/* Tarjeta Total a Pagar */}
+                <div className="bg-[#e7f0fa] border border-white/80 rounded-2xl p-5 shadow-sm">
+                  <div className="text-[11px] font-mono uppercase font-bold text-slate-500 mb-1">
+                    TOTAL A PAGAR
+                  </div>
+                  <div className="text-3xl sm:text-4xl font-black text-slate-950 font-mono leading-none">
+                    ${totalUsd.toFixed(2)}
+                  </div>
+                  <div className="text-xl sm:text-2xl font-black text-slate-800 font-mono mt-1">
+                    Bs {totalBs.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </div>
+                  <div className="mt-3 pt-2.5 border-t border-slate-300/70 flex items-center justify-between text-[11px] font-mono text-slate-600">
+                    <span>Tasa Oficial BCV:</span>
+                    <span className="font-bold text-slate-900">
+                      Bs {bcvRate.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs/$
+                    </span>
+                  </div>
+                </div>
+
+                {/* Tarjeta QR Pago Móvil Dinámico */}
+                <div className="bg-[#e7f0fa] border border-white/80 rounded-2xl p-5 shadow-sm flex-1 flex flex-col justify-between">
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-100 border border-blue-200 flex items-center justify-center text-slate-800">
+                      <QrCode className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-slate-900 uppercase">
+                        PAGO MÓVIL DINÁMICO
+                      </div>
+                      <div className="text-[11px] text-slate-600">
+                        Escanea desde tu app bancaria sin digitar datos
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mx-auto my-2 p-3 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                    <QrCode className="w-24 h-24 text-slate-950" />
+                  </div>
+
+                  <div className="space-y-1.5 text-xs mt-2">
+                    <div className="flex justify-between px-3 py-1.5 rounded-lg bg-[#dce8f6] border border-blue-200/60">
+                      <span className="text-slate-600">Banco:</span>
+                      <span className="font-bold text-slate-900">Banco de Venezuela (BDV)</span>
+                    </div>
+                    <div className="flex justify-between px-3 py-1.5 rounded-lg bg-[#dce8f6] border border-blue-200/60">
+                      <span className="text-slate-600">C.I / RIF:</span>
+                      <span className="font-mono font-bold text-slate-900">V-00.000.000</span>
+                    </div>
+                    <div className="flex justify-between px-3 py-1.5 rounded-lg bg-[#dce8f6] border border-blue-200/60">
+                      <span className="text-slate-600">Teléfono:</span>
+                      <span className="font-mono font-bold text-slate-900">0414 0000000</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 p-2.5 rounded-xl bg-[#d3e2f4] border border-blue-300/70 text-center">
+                    <div className="text-[10px] font-mono uppercase text-slate-600 font-bold">
+                      MONTO EXACTO A TRANSFERIR
+                    </div>
+                    <div className="text-base font-mono font-black text-slate-950">
+                      Bs {totalBs.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-5 pt-3 border-t border-slate-300/80 flex items-center justify-between text-[11px] text-slate-600">
+            <span>❤️ ¡Gracias por apoyar el comercio local y preferirnos!</span>
+            <span className="font-semibold">Minimarket Demo • Calidad, Rapidez y Confianza</span>
+          </div>
+        </div>
+      )}
 
     </div>
   );

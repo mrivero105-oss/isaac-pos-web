@@ -531,6 +531,71 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
 
         </div>
 
+        {/* Comparador Financiero a 3 Años: Por qué la Licencia Vitalicia de $199 vence a los sistemas de renta eterna */}
+        <div className="max-w-5xl mx-auto mb-14 rounded-3xl bg-slate-950 text-white border border-slate-800 p-6 sm:p-8 shadow-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div className="lg:col-span-5">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
+                MATEMÁTICA FINANCIERA A 3 AÑOS
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white leading-tight mb-2">
+                ¿Por qué el 70% de los dueños eligen la Licencia Vitalicia de $199?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Mientras otros sistemas te atan a rentas eternas de $30 a $45 mensuales y bloquean tu caja si te atrasas un día, con la Licencia Vitalicia pagas una sola vez y eres dueño perpetuo de tu software.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Otros Sistemas de Renta */}
+              <div className="p-4 rounded-2xl bg-slate-900/90 border border-rose-500/30 flex flex-col justify-between">
+                <div>
+                  <span className="text-[10px] font-mono font-bold text-rose-400 uppercase block mb-1">
+                    OTROS SISTEMAS POS ($30/MES)
+                  </span>
+                  <div className="text-2xl sm:text-3xl font-black text-rose-400 font-mono tabular-nums">
+                    $1,080+ USD
+                  </div>
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    Gastados en 36 meses de alquiler continuo sin ser dueño de nada.
+                  </p>
+                </div>
+                <div className="mt-3 pt-2.5 border-t border-slate-800 text-[11px] text-rose-300 font-mono">
+                  ✕ Si dejas de pagar, pierdes el acceso
+                </div>
+              </div>
+
+              {/* Isaac POS Vitalicia */}
+              <div className="p-4 rounded-2xl bg-emerald-950/40 border-2 border-emerald-500/60 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">
+                      ISAAC POS VITALICIA
+                    </span>
+                    <span className="text-[10px] font-mono font-black bg-emerald-500 text-slate-950 px-2 py-0.5 rounded-full">
+                      AHORRAS +$880
+                    </span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-black text-white font-mono tabular-nums">
+                    $199 USD
+                  </div>
+                  <p className="text-[11px] text-slate-300 mt-1">
+                    Un único pago de por vida (1 Admin + 1 Caja). $0 en mensualidades futuras.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onOpenModal("vitalicia")}
+                  className="mt-3 py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Adquirir Vitalicia por $199</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Botón para Desplegar la Matriz Comparativa Detallada */}
         <div className="text-center mb-16">
           <button

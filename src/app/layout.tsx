@@ -130,6 +130,43 @@ const jsonLd = {
         availableLanguage: ["Spanish"],
       },
     },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "¿Qué sucede si se corta el internet o la señal en mi local?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Isaac POS cuenta con una arquitectura 100% offline sobre SQLite local. Puedes seguir registrando ventas, cobrando en bolívares o divisas a tasa BCV e imprimiendo tickets térmicos sin depender de internet.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Qué precio tiene Isaac POS y cómo funciona la Licencia Vitalicia?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Ofrecemos el Plan Emprendedor desde $12 USD/mes ($99/año), el Plan Profesional por $24 USD/mes ($190/año, hasta 3 cajas), y la Licencia Vitalicia por un pago único de $199 USD (incluye 1 Admin + 1 Caja de por vida sin mensualidades, con opción de agregar cajas extra por $49 USD pago único).",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Cómo funciona el Visor de Cliente en 2da pantalla con QR de Pago Móvil?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Al conectar un segundo monitor o tablet orientado al comprador, Isaac POS muestra cada producto escaneado en dólares y bolívares a tasa oficial BCV y genera automáticamente un código QR de Pago Móvil con el monto exacto en Bolívares para escanear desde cualquier app bancaria.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Cómo evita Isaac POS el robo hormiga o faltantes de caja?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Implementa Arqueo Ciego Certificado: al cerrar turno, el cajero debe declarar el conteo físico de billetes en dólares y bolívares sin que el sistema le muestre el monto esperado. Cualquier diferencia queda auditada al instante en el Corte Z.",
+          },
+        },
+      ],
+    },
   ],
 };
 

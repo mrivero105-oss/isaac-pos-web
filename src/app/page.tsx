@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
 import { UltraEditionShowcase } from "@/components/UltraEditionShowcase";
 import { RealSystemShowcase } from "@/components/RealSystemShowcase";
+import { IndustrySolutions } from "@/components/IndustrySolutions";
 import { InteractivePosDemo } from "@/components/InteractivePosDemo";
 import { HardwareSection } from "@/components/HardwareSection";
 import { HumanSupportSection } from "@/components/HumanSupportSection";
@@ -82,10 +83,13 @@ export default function Home() {
         {/* 2. Sistema Real: Los 13 Módulos V24.04 organizados en 3 Pilares */}
         <RealSystemShowcase />
 
-        {/* 3. Simulador Interactivo: Prueba de cobro en vivo en el navegador */}
-        <InteractivePosDemo />
+        {/* 3. Soluciones por Rubro Comercial (Minimarket, Farmacia, Carnicería, Ferretería, Cadenas) */}
+        <IndustrySolutions onOpenModal={handleOpenModal} />
 
-        {/* 4. Planes y Licencias: Oferta transparente ($12/mes, $24/mes y $199 Vitalicia) */}
+        {/* 4. Simulador Interactivo: Prueba de cobro en vivo + 2da pantalla en el navegador */}
+        <InteractivePosDemo onOpenModal={handleOpenModal} />
+
+        {/* 5. Planes y Licencias: Oferta transparente ($12/mes, $24/mes y $199 Vitalicia) */}
         <Pricing onOpenModal={handleOpenModal} />
 
         {/* 5. Seguridad, Blindaje de Caja y Arqueo Ciego Anti-Faltantes */}

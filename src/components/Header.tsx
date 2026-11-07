@@ -76,6 +76,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
               Módulos
             </a>
             <a
+              href="#rubros"
+              className="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all whitespace-nowrap"
+            >
+              Rubros
+            </a>
+            <a
               href="#simulador"
               className="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all flex items-center gap-1.5 whitespace-nowrap"
             >
