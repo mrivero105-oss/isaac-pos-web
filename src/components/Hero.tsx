@@ -105,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Play className="w-3 h-3 fill-emerald-400 text-emerald-400 ml-0.5" />
                 </div>
-                <span>Ver Video Demostrativo (32s)</span>
+                <span>Ver Video Demostrativo (40s)</span>
               </button>
             )}
 
@@ -243,7 +243,7 @@ export const Hero: React.FC<HeroProps> = ({
                       className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold cursor-pointer transition-colors"
                     >
                       <Play className="w-3 h-3 fill-emerald-400" />
-                      <span>Video 32s</span>
+                      <span>Video 40s</span>
                     </button>
                   )}
 
@@ -323,7 +323,7 @@ export const Hero: React.FC<HeroProps> = ({
                           <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white">
                             <Play className="w-4 h-4 fill-white ml-0.5" />
                           </div>
-                          <span>Haz clic para ver demostración en video (32 segundos)</span>
+                          <span>Haz clic para ver demostración en video (40 segundos)</span>
                         </div>
                       ) : (
                         <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl text-slate-950 font-bold text-xs shadow-xl">
