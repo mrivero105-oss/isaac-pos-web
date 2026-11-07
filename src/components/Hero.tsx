@@ -87,12 +87,12 @@ export const Hero: React.FC<HeroProps> = ({
           </p>
 
           {/* Bloque de Acciones: Jerarquía de Dos Pasos Claros */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-14">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-5">
             <a
-              href="#simulador"
+              href="#sistema-real"
               className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm sm:text-base shadow-[0_4px_16px_rgba(37,99,235,0.3)] hover:shadow-[0_6px_22px_rgba(37,99,235,0.4)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
-              <span>Probar Simulador de Caja en Vivo</span>
+              <span>Explorar los 13 Módulos Reales</span>
               <ArrowRight className="w-4 h-4 text-blue-200 group-hover:translate-x-0.5 transition-transform" />
             </a>
 
@@ -115,6 +115,18 @@ export const Hero: React.FC<HeroProps> = ({
             >
               <span>Agendar Instalación Asistida</span>
             </button>
+          </div>
+
+          {/* Ancla Rápida de Transparencia de Precios */}
+          <div className="mb-12 flex items-center justify-center">
+            <a
+              href="#precios"
+              className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50/90 hover:bg-emerald-100/80 border border-emerald-200 text-xs text-slate-700 transition-colors group"
+            >
+              <span className="font-bold text-emerald-800 font-mono">SIN COMISIONES POR VENTA:</span>
+              <span>Planes desde <strong className="text-slate-950">$12/mes</strong> o <strong className="text-slate-950">Licencia Vitalicia por $199</strong> (Pago único)</span>
+              <span className="text-emerald-700 font-bold group-hover:translate-x-0.5 transition-transform">Ver precios →</span>
+            </a>
           </div>
 
           {/* Fila de Especificaciones y Certezas Operativas */}
@@ -250,7 +262,7 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Contenido Visual Dinámico según la Pestaña Seleccionada */}
               <div className="relative min-h-[360px] sm:min-h-[460px] lg:min-h-[540px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 
-                {/* 1. Vista: Terminal POS Real */}
+                {/* 1. Vista: Terminal POS Real + Visor 2da Pantalla Flotante en Simultáneo */}
                 {activeView === "pos" && (
                   <div
                     className="w-full relative cursor-pointer group"
@@ -271,16 +283,41 @@ export const Hero: React.FC<HeroProps> = ({
                     {/* Hotspots explicativos interactivos sobre el software */}
                     <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-white text-xs font-mono flex items-center gap-2 shadow-lg">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span>Catálogo Táctil + Lector de Barras</span>
+                      <span>1ra Pantalla (Cajero): Catálogo Táctil + Barras</span>
                     </div>
 
-                    <div className="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-white text-xs font-mono flex items-center gap-2 shadow-lg">
+                    <div className="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-white text-xs font-mono hidden sm:flex items-center gap-2 shadow-lg">
                       <DollarSign className="w-3.5 h-3.5 text-blue-400" />
                       <span>Cálculo Bimonetario: USD & Bs a Tasa BCV ({rateValue.toFixed(2)} Bs)</span>
                     </div>
 
+                    {/* Segunda Pantalla Flotante en Relieve (Visor de Cliente con QR Pago Móvil) */}
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveView("customer_display");
+                      }}
+                      title="Haz clic para ver el Visor de Cliente en tamaño completo"
+                      className="hidden md:block absolute bottom-4 right-4 w-[310px] lg:w-[360px] rounded-2xl bg-slate-950 border-2 border-emerald-400/80 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] hover:border-emerald-300 z-20"
+                    >
+                      <div className="bg-slate-900 px-3 py-1.5 border-b border-slate-800 flex items-center justify-between text-[10px] font-mono">
+                        <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                          <span>2DA PANTALLA CLIENTE • QR PAGO MÓVIL</span>
+                        </div>
+                        <span className="text-slate-400 hover:text-white underline">Ampliar ↗</span>
+                      </div>
+                      <Image
+                        src="/real-system/v24_visor_cliente_qr.png"
+                        alt="Visor de Cliente en 2da Pantalla con QR de Pago Móvil"
+                        width={512}
+                        height={266}
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+
                     {/* Overlay al pasar el cursor */}
-                    <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-slate-950/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 pointer-events-none">
                       {onOpenVideoDemo ? (
                         <div className="bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl text-slate-950 font-bold text-sm shadow-2xl flex items-center gap-3">
                           <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white">

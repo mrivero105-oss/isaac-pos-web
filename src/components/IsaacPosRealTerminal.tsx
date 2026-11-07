@@ -313,26 +313,26 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
           </div>
         </div>
 
-        {/* Tasa BCV y Estado de Red */}
+        {/* Tasa BCV y Estado de Red (Estilo V24.04) */}
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="bg-slate-900/90 border border-slate-700/80 px-3 py-1 rounded-full text-emerald-400 font-mono font-black text-xs flex items-center gap-1.5 shadow-sm">
-            <span>$ 1 USD =</span>
-            <span className="text-white">{bcvRate.toFixed(2)} Bs</span>
+          <div className="bg-slate-900/90 border border-slate-700/80 px-3 py-1 rounded-full text-slate-300 font-mono font-bold text-xs flex items-center gap-1.5 shadow-sm">
+            <span className="text-slate-400">$ 1$ =</span>
+            <span className="text-white font-black">{bcvRate.toFixed(2)} Bs</span>
           </div>
 
           <div className="bg-slate-900/90 border border-emerald-500/40 px-2.5 py-1 rounded-full text-emerald-400 font-mono font-bold text-[11px] flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>EN LÍNEA</span>
+            <span>En línea</span>
           </div>
 
-          <div className="hidden xl:flex items-center gap-1.5 bg-slate-900/80 border border-amber-500/30 px-2.5 py-1 rounded-full text-amber-300 font-mono text-[10px]">
-            <QrCode className="w-3 h-3 text-amber-400" />
-            <span>ESCANEAR QR • VINCULADO</span>
+          <div className="hidden xl:flex items-center gap-1.5 bg-slate-900/80 border border-slate-700 px-2.5 py-1 rounded-full text-slate-300 font-mono text-[10px]">
+            <QrCode className="w-3 h-3 text-slate-400" />
+            <span>Vincular WA</span>
           </div>
 
           <div className="hidden lg:flex items-center gap-1.5 bg-slate-900/80 border border-slate-700 px-2.5 py-1 rounded-full text-slate-300 text-xs">
             <Store className="w-3 h-3 text-cyan-400" />
-            <span>SUCURSAL: <strong className="text-white">Central Demo</strong></span>
+            <span className="text-white font-semibold">Sede Central</span>
             <ChevronDown className="w-3 h-3 text-slate-400" />
           </div>
         </div>
@@ -376,12 +376,12 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
           </div>
 
           <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-600 to-emerald-500 text-slate-950 font-black flex items-center justify-center text-[10px]">
-              IP
+            <div className="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 text-white font-bold flex items-center justify-center text-[10px]">
+              A
             </div>
             <div className="hidden sm:block text-left leading-none">
-              <div className="text-[11px] font-bold text-white">Isaac POS</div>
-              <div className="text-[9px] text-emerald-400 font-mono">ADMINISTRADOR</div>
+              <div className="text-[11px] font-bold text-white">ADMIN DEMO</div>
+              <div className="text-[9px] text-slate-400 font-mono">Superadmin</div>
             </div>
           </div>
         </div>

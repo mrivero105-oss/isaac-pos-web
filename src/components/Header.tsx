@@ -83,10 +83,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 status-breathing shrink-0" />
             </a>
             <a
-              href="#edicion-ultra"
+              href="#precios"
+              className="px-3 py-1.5 rounded-full text-xs font-bold text-blue-700 bg-blue-50/70 hover:bg-blue-100/80 transition-all whitespace-nowrap"
+            >
+              Precios
+            </a>
+            <a
+              href="#seguridad"
               className="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all whitespace-nowrap"
             >
-              Rendimiento
+              Arqueo Ciego
             </a>
             <a
               href="#hardware"
@@ -99,12 +105,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
               className="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all whitespace-nowrap"
             >
               Soporte
-            </a>
-            <a
-              href="#precios"
-              className="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all whitespace-nowrap"
-            >
-              Precios
             </a>
           </nav>
 
@@ -185,11 +185,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
                 </span>
               </a>
               <a
-                href="#edicion-ultra"
+                href="#precios"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-1.5 px-3 rounded-lg bg-blue-50/70 text-blue-700 font-bold hover:bg-blue-100 transition-colors flex items-center justify-between"
+              >
+                <span>Planes y Precios</span>
+                <span className="text-[10px] font-mono text-blue-700">Desde $12/mes</span>
+              </a>
+              <a
+                href="#seguridad"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-1.5 px-3 rounded-lg hover:bg-slate-100 transition-colors"
               >
-                Rendimiento & Motor Local
+                Arqueo Ciego & Seguridad
               </a>
               <a
                 href="#hardware"
@@ -204,13 +212,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
                 className="py-1.5 px-3 rounded-lg hover:bg-slate-100 transition-colors"
               >
                 Soporte & AnyDesk
-              </a>
-              <a
-                href="#precios"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1.5 px-3 rounded-lg hover:bg-slate-100 transition-colors"
-              >
-                Planes y Precios
               </a>
 
               <div className="pt-3 border-t border-slate-200 flex flex-col gap-2 mt-1">

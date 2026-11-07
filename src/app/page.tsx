@@ -70,43 +70,43 @@ export default function Home() {
         onOpenAiChat={handleOpenAiChat}
       />
 
-      {/* Flujo Principal Organizado */}
+      {/* Flujo Principal Optimizado para Conversión */}
       <main className="flex-1">
-        {/* 1. Hero: Propuesta de valor, nuevo motor y terminal en vivo */}
+        {/* 1. Hero: Propuesta de valor, doble pantalla (POS + Visor QR) y acceso directo */}
         <Hero
           onOpenModal={handleOpenModal}
           onOpenAiChat={handleOpenAiChat}
           onOpenVideoDemo={() => setVideoDemoOpen(true)}
         />
 
-        {/* 2. Edición Ultra: Modalidades de Instalación Oficial y Rendimiento */}
-        <UltraEditionShowcase onOpenModal={handleOpenModal} />
-
-        {/* 3. Sistema Real: La Suite Completa Organizada en 4 Pilares de Trabajo */}
+        {/* 2. Sistema Real: Los 13 Módulos V24.04 organizados en 3 Pilares */}
         <RealSystemShowcase />
 
-        {/* 4. Simulador Interactivo: Prueba en vivo en el navegador */}
+        {/* 3. Simulador Interactivo: Prueba de cobro en vivo en el navegador */}
         <InteractivePosDemo />
 
-        {/* 5. Acompañamiento Humano, Migración Asistida y Soporte Técnico */}
-        <HumanSupportSection />
-
-        {/* 6. Hardware y Periféricos Compatibles */}
-        <HardwareSection />
-
-        {/* 6. Seguridad, Blindaje de Caja y Modo 100% Offline */}
-        <SecurityTrust />
-
-        {/* 7. Casos de Éxito de Comercios Reales */}
-        <Testimonials />
-
-        {/* 8. Calculadora de Retorno de Inversión */}
-        <RoiCalculator onOpenModal={handleOpenModal} />
-
-        {/* 9. Planes y Precios Transparentes con Pago Móvil, Zelle y Cripto */}
+        {/* 4. Planes y Licencias: Oferta transparente ($12/mes, $24/mes y $199 Vitalicia) */}
         <Pricing onOpenModal={handleOpenModal} />
 
-        {/* 10. Preguntas Frecuentes */}
+        {/* 5. Seguridad, Blindaje de Caja y Arqueo Ciego Anti-Faltantes */}
+        <SecurityTrust />
+
+        {/* 6. Edición Ultra: Motor Local SQLite, Windows/Android e Instalación AnyDesk */}
+        <UltraEditionShowcase onOpenModal={handleOpenModal} />
+
+        {/* 7. Hardware y Periféricos Compatibles */}
+        <HardwareSection />
+
+        {/* 8. Acompañamiento Humano, Migración desde Excel y Soporte */}
+        <HumanSupportSection />
+
+        {/* 9. Casos de Éxito de Comercios Reales */}
+        <Testimonials />
+
+        {/* 10. Calculadora de Retorno de Inversión */}
+        <RoiCalculator onOpenModal={handleOpenModal} />
+
+        {/* 11. Preguntas Frecuentes */}
         <Faq />
       </main>
 
