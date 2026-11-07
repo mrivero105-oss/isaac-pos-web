@@ -31,6 +31,10 @@ const VideoDemoModal = dynamic(
   () => import("@/components/VideoDemoModal").then((m) => m.VideoDemoModal),
   { ssr: false }
 );
+const LiveSocialProof = dynamic(
+  () => import("@/components/LiveSocialProof").then((m) => m.LiveSocialProof),
+  { ssr: false }
+);
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -108,6 +112,9 @@ export default function Home() {
 
       {/* Pie de Página */}
       <Footer />
+
+      {/* Notificaciones de Actividad de Comercios en Tiempo Real */}
+      <LiveSocialProof />
 
       {/* Botones Flotantes: Mini Robot Isaac POS + WhatsApp Oficial */}
       <div className="fixed bottom-5 sm:bottom-6 right-4 sm:right-6 z-40 flex items-end gap-2.5 sm:gap-3 pointer-events-none">

@@ -141,7 +141,9 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
                 </div>
                 <div className="font-bold text-sm tracking-tight text-slate-950">ISAAC POS ULTRA</div>
                 <div className="text-[10px] text-slate-500">AUDITORÍA DE IMPACTO OPERATIVO</div>
-                <div className="text-[10px] text-slate-400">FECHA: {new Date().toLocaleDateString("es-VE")}</div>
+                <div className="text-[10px] text-slate-400" suppressHydrationWarning>
+                  FECHA: {new Date().toLocaleDateString("es-VE", { timeZone: "America/Caracas" })}
+                </div>
               </div>
 
               {/* Cuerpo del Ticket con Desglose */}

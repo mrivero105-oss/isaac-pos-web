@@ -3,11 +3,11 @@ import { CheckoutIntentSchema } from "@/lib/validations";
 import { checkRateLimit } from "@/lib/rateLimit";
 
 const PLAN_PRICES = {
-  basico_mensual: { name: "Isaac POS Básico (Mensual)", amount: 29, currency: "USD" },
-  basico_anual: { name: "Isaac POS Básico (Anual - 2 Meses Gratis)", amount: 290, currency: "USD" },
-  pro_mensual: { name: "Isaac POS Pro (Mensual)", amount: 59, currency: "USD" },
-  pro_anual: { name: "Isaac POS Pro (Anual - 2 Meses Gratis)", amount: 590, currency: "USD" },
-  vitalicia: { name: "Isaac POS Licencia Vitalicia (Pago Único)", amount: 499, currency: "USD" },
+  basico_mensual: { name: "Plan Emprendedor (Mensual)", amount: 12, currency: "USD" },
+  basico_anual: { name: "Plan Emprendedor (Anual - 2 Meses Gratis)", amount: 99, currency: "USD" },
+  pro_mensual: { name: "Plan Profesional (Mensual)", amount: 24, currency: "USD" },
+  pro_anual: { name: "Plan Profesional (Anual - Recomendado)", amount: 190, currency: "USD" },
+  vitalicia: { name: "Licencia Vitalicia (1 Admin + 1 Caja)", amount: 199, currency: "USD" },
 };
 
 // Datos bancarios oficiales configurados para recepción de pagos
@@ -80,8 +80,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "El plan seleccionado no existe." }, { status: 404 });
     }
 
-    // Tasa BCV de referencia oficial
-    const bcvRate = 857.89;
+    // Obtener Tasa BCV oficial en vivo con respaldo seguro
+    let bcvRate = 857.89;
+    try {
+      const bcvRes = await fetch("https://ve.dolarapi.com/v1/dolares/oficial", {
+        cache: "no-store",
+      });
+      if (bcvRes.ok) {
+        const bcvData = await bcvRes.json();
+        if (bcvData?.promedio && typeof bcvData.promedio === "number" && bcvData.promedio > 0) {
+          bcvRate = Number(bcvData.promedio.toFixed(2));
+        }
+      }
+    } catch {
+      // Preservar tasa de respaldo si falla la red externa
+    }
     const amountBs = selectedPlan.amount * bcvRate;
     const orderId = `ORD-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 5).toUpperCase()}`;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ShoppingCart,
   Search,
@@ -22,7 +22,18 @@ import {
 } from "lucide-react";
 
 export default function TerminalPreviewPage() {
-  const bcvRate = 920.0;
+  const [bcvRate, setBcvRate] = useState(857.89);
+
+  useEffect(() => {
+    fetch("/api/bcv")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json?.data?.rate && typeof json.data.rate === "number") {
+          setBcvRate(json.data.rate);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const products = [
     {

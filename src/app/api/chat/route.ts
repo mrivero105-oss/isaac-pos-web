@@ -19,22 +19,22 @@ const ISAAC_KNOWLEDGE = [
   {
     triggers: ["precio", "costo", "planes", "licencia", "vitalicia", "cuanto vale", "mensual", "anual", "promocion", "comprar"],
     title: "Planes y Precios Transparentes",
-    reply: `**Planes de Isaac POS (Sin comisiones por venta ni costos ocultos):** 💼💰
+    reply: `**Planes de Isaac POS V24.04 Ultra (Sin comisiones por venta ni costos ocultos):** 💼💰
 
 1. **Plan Emprendedor (1 Caja):**
-   * **$29 USD / mes** o **$290 USD / año** (Incluye 2 meses GRATIS).
-   * Tickets y ventas ilimitadas, modo 100% offline, impresión térmica ESC/POS y corte de caja X y Z.
+   * **$12 USD / mes** o **$99 USD / año** (Ahorras 2 meses).
+   * Tickets y ventas ilimitadas, cobro dual USD/Bs a tasa BCV en vivo, modo 100% offline, impresión térmica ESC/POS y corte de caja X y Z.
 
-2. **Plan Profesional (Hasta 3 Cajas) - MÁS ELEGIDO:**
-   * **$59 USD / mes** o **$590 USD / año** (Incluye 2 meses GRATIS).
-   * **Arqueo Ciego Anti-Robo**, inventario multialmacén con kardex, auditoría de cancelaciones con clave, reportes financieros y soporte prioritario 24/7.
+2. **Plan Profesional (Hasta 3 Cajas en Red) - MÁS ELEGIDO:**
+   * **$24 USD / mes** o **$190 USD / año** (Ahorras 2 meses).
+   * **Arqueo Ciego Anti-Robo**, **Visor de Cliente en 2da Pantalla con QR Pago Móvil**, inventario multialmacén con kardex, sugerencias predictivas de reposición, auditoría inmutable y soporte prioritario por AnyDesk.
 
-3. **Licencia Vitalicia (Pago Único Perpetuo):**
-   * **$499 USD una sola vez** (De por vida, sin mensualidades jamás).
-   * Base de datos bajo tu control absoluto, 1 terminal todo incluido, actualizaciones continuas e instalación guiada 1 a 1.`,
+3. **Licencia Vitalicia Perpetua (Pago Único):**
+   * **$199 USD una sola vez** (De por vida, sin mensualidades jamás).
+   * Incluye 1 Usuario Administrador + 1 Terminal de Caja activa (+$49 USD pago único por cada caja extra), base de datos local bajo tu control absoluto, migración de inventario desde Excel e instalación remota 1 a 1.`,
     suggestions: [
       "¿Cómo comprar con Pago Móvil o Zelle?",
-      "¿Qué incluye la Licencia Vitalicia?",
+      "¿Qué incluye la Licencia Vitalicia ($199)?",
       "Solicitar demostración guiada",
     ],
   },
@@ -125,8 +125,8 @@ const ISAAC_KNOWLEDGE = [
 
 Al generar tu orden en la web, recibes tu número de orden y puedes confirmarla de inmediato por WhatsApp con nuestro equipo.`,
     suggestions: [
-      "Comprar Licencia Vitalicia ($499)",
-      "Comprar Plan Profesional ($59/mes)",
+      "Comprar Licencia Vitalicia ($199)",
+      "Comprar Plan Profesional ($24/mes)",
       "Hablar con un asesor por WhatsApp",
     ],
   },
@@ -216,19 +216,18 @@ const DEFAULT_REPLY = {
   reply: `¡Hola! Soy **Isaac AI**, el consultor técnico y comercial oficial de **Isaac POS V24.04 Ultra**. 🤖✨
 
 Puedo responderte con total precisión sobre:
-* 🚀 **Nueva Edición Ultra:** Aceleración por GPU, 70% menos RAM y descargas directas.
-* 🖥️ **Visor de Cliente (2da Pantalla \`/#/display\`):** Monitoreo en vivo para el comprador con fotos, tasa BCV y total dual.
-* 🏭 **Producción & Recetas BOM:** Fórmulas de panes, pizzas y platos con deducción automática de materia prima.
-* ⚡ **Operatividad 100% Offline:** Sincronización WiFi local entre tablets y PC sin internet.
-* 💵 **Multimoneda USD/Bs:** Tasa oficial BCV automática y cobros mixtos.
-* 🛡️ **Arqueo Ciego Anti-Robo:** Blindaje de caja y auditoría de turnos.
-* 💰 **Planes y Licencia Vitalicia:** Desde $29/mes o $499 vitalicio sin mensualidades.
+* 🚀 **Edición V24.04 Ultra:** Arranque en 3 segundos, <150 MB de RAM y base de datos SQLite local cifrada.
+* 🖥️ **Visor de Cliente (2da Pantalla):** Muestra al comprador su cuenta en vivo y genera el **código QR de Pago Móvil** con el monto exacto en Bs.
+* 📦 **Inventario, Farmacia y Reposición:** Kardex valorizado, control de vencimientos/psicotrópicos, sugerencias predictivas de compra y pedidos a proveedores por WhatsApp.
+* ⚡ **Operatividad 100% Offline:** Cobra sin interrupciones aunque falle el internet.
+* 🛡️ **Arqueo Ciego & Auditoría Inmutable:** Conteo físico de billetes a ciegas y registro forense de cada evento.
+* 💰 **Planes Accesibles:** Desde **$12/mes**, Plan Profesional (**$24/mes**) o **Licencia Vitalicia por $199 USD** (pago único sin mensualidades).
 
 ¿Sobre qué punto te gustaría conocer más detalles?`,
   suggestions: [
-    "¿Qué novedades trae la Edición Ultra?",
-    "¿Cómo funciona el Visor de Cliente?",
-    "¿Cuánto cuesta la Licencia Vitalicia?",
+    "¿Cómo funciona el Visor con QR de Pago Móvil?",
+    "¿Qué incluye la Licencia Vitalicia de $199?",
+    "¿Cómo evita robos el Arqueo Ciego?",
     "¿Cómo funciona sin internet?",
   ],
 };
@@ -273,7 +272,7 @@ Características clave:
 - Arqueo Ciego anti-robo de caja.
 - Módulo fiscal SENIAT (Libros de ventas/compras, IVA 16%, IGTF 3%).
 - Importador de facturas PDF con IA.
-- Precios: Plan Básico ($29/m o $290/a), Plan Profesional ($59/m o $590/a), Licencia Vitalicia ($499 pago único).
+- Precios oficiales: Plan Emprendedor ($12/mes o $99/año para 1 caja), Plan Profesional ($24/mes o $190/año hasta 3 cajas), Licencia Vitalicia Perpetua ($199 pago único para 1 Admin + 1 Caja, y +$49 pago único por caja adicional).
 - Hardware: Tablets Android 7.0+, impresoras térmicas ESC/POS (58mm/80mm), lectores de barras, gavetas RJ11.
 - Métodos de pago para comprar: Pago Móvil BCV, Zelle, Binance Pay USDT, Tarjetas.
 - Canal de atención: Contacto directo por WhatsApp oficial desde los botones de la web.
@@ -345,7 +344,7 @@ Pregunta del usuario: "${userMessage}"`,
 Para brindarte la mejor respuesta sobre tu negocio:
 * ¿Quieres saber cómo **operar sin internet** y conectar varias tablets por WiFi?
 * ¿Te gustaría conocer la **compatibilidad con tus impresoras térmicas** o lectores?
-* ¿Deseas comparar el **Plan Profesional ($59/mes)** vs la **Licencia Vitalicia ($499 pago único)**?
+* ¿Deseas comparar el **Plan Profesional ($24/mes)** vs la **Licencia Vitalicia ($199 pago único)**?
 
 O si lo prefieres, puedo conectarte de inmediato con un asesor humano en WhatsApp.`,
       suggestions: [

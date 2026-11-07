@@ -17,7 +17,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 1,
     merchant: "Minimarket El Trébol",
     city: "Caracas",
-    action: "activó el Plan Profesional (3 Cajas)",
+    action: "activó el Plan Profesional (3 Cajas en Red)",
     timeAgo: "Hace 4 min",
     type: "purchase",
   },
@@ -25,7 +25,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 2,
     merchant: "Supermercado Gran Avenida",
     city: "Valencia",
-    action: "completó 320 cobros rápidos F2 sin internet",
+    action: "habilitó el Visor 2da Pantalla con QR Pago Móvil",
     timeAgo: "Hace 11 min",
     type: "usage",
   },
@@ -33,7 +33,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 3,
     merchant: "Distribuidora El Progreso",
     city: "Barquisimeto",
-    action: "actualizó 480 costos con el Importador IA",
+    action: "actualizó 480 costos con el Importador OCR de Facturas",
     timeAgo: "Hace 19 min",
     type: "usage",
   },
@@ -41,7 +41,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 4,
     merchant: "Farmacia San José",
     city: "Maracaibo",
-    action: "cerró caja con Arqueo Ciego: 0% discrepancia",
+    action: "cerró turno con Arqueo Ciego: 0% discrepancia",
     timeAgo: "Hace 27 min",
     type: "audit",
   },
@@ -49,7 +49,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 5,
     merchant: "Minimarket Los Samanes",
     city: "Maracay",
-    action: "adquirió la Licencia Vitalicia Isaac POS",
+    action: "adquirió la Licencia Vitalicia Perpetua ($199)",
     timeAgo: "Hace 38 min",
     type: "purchase",
   },
@@ -57,7 +57,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 6,
     merchant: "Inversiones La Perla",
     city: "Puerto La Cruz",
-    action: "sincronizó 4 tablets por WiFi Local",
+    action: "generó orden de reposición automática por WhatsApp",
     timeAgo: "Hace 46 min",
     type: "usage",
   },
@@ -98,7 +98,7 @@ export const LiveSocialProof: React.FC = () => {
   return (
     <aside
       aria-label="Actividad en vivo de comercios"
-      className="fixed bottom-6 left-6 z-40 max-w-sm bg-slate-900/95 border border-slate-700/80 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md animate-fadeIn flex items-start gap-3 text-white"
+      className="hidden sm:flex fixed bottom-6 left-6 z-40 max-w-sm bg-slate-900/95 border border-slate-700/80 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md animate-fadeIn items-start gap-3 text-white"
     >
       <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0 text-emerald-400 mt-0.5">
         {currentEvent.type === "purchase" ? (
