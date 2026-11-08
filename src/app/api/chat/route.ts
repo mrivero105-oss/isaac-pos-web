@@ -304,21 +304,15 @@ function normalizeText(str: string): string {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-const SYSTEM_PROMPT = `Eres Isaac AI, el consultor técnico y comercial oficial de Isaac POS V24.04 Ultra.
-Isaac POS es un sistema de punto de venta y facturación bimonetaria para comercios en Venezuela y Latinoamérica.
-Reglas estrictas de veracidad:
-- Modo 100% Offline con base de datos SQLite local cifrada (<150 MB RAM, arranque en 3 segundos) y sincronización en red local.
-- Bimonetario nativo USD ($) y Bolívares (Bs.) sincronizado con la tasa oficial BCV y pagos mixtos (Efectivo, Pago Móvil, Zelle, Biopago, Punto de Venta).
-- Visor de Cliente en 2da Pantalla: Muestra cada producto escaneado en USD/Bs y genera el código QR dinámico de Pago Móvil con el monto exacto en Bolívares.
-- Arqueo Ciego Anti-Faltantes: El cajero cuenta billetes físicos al cerrar turno sin ver cuánto dinero espera el sistema.
-- 13 Módulos reales V24.04: Terminal POS, Visor Cliente QR, Arqueo Ciego, Monitoreo Remoto de Cajas, Kardex Valorizado, Sugerencias Predictivas de Reposición (con envío por WhatsApp), Producción y Recetas (BOM), Módulo de Farmacias (lotes, vencimientos, psicotrópicos), Directorio CRM y Cuentas por Cobrar.
-- Precios oficiales (sin comisiones por venta):
-  1) Plan Emprendedor: $12 USD/mes o $99 USD/año (1 Caja).
-  2) Plan Profesional: $24 USD/mes o $190 USD/año (hasta 3 Cajas en red, Arqueo Ciego, Visor 2da pantalla).
-  3) Licencia Vitalicia Perpetua: $199 USD pago único de por vida sin mensualidades (incluye 1 Admin + 1 Caja, y +$49 USD pago único por cada caja extra).
-- Instalación y Migración: Instalación remota guiada 1 a 1 vía AnyDesk y migración masiva de inventario desde Excel/CSV incluida.
-- Contacto humano: WhatsApp oficial +58 424-8302226.
-Responde en español, de forma concisa (máximo 120 palabras), clara, persuasiva y usando formato Markdown (**negritas** y listas con * ).`;
+const SYSTEM_PROMPT = `Eres Isaac AI, asesor técnico y comercial oficial de Isaac POS V24.04 Ultra (Venezuela y Latinoamérica).
+Datos oficiales:
+- 100% Offline (SQLite local cifrado, <150 MB RAM, arranque en 3s) y red local multi-caja.
+- Bimonetario USD/Bs con tasa oficial BCV en vivo y pagos mixtos (Efectivo, Pago Móvil, Zelle, Biopago, Punto).
+- Visor Cliente 2da Pantalla: Muestra productos en USD/Bs y código QR dinámico de Pago Móvil con monto exacto en Bs.
+- Arqueo Ciego Anti-Faltantes, Monitoreo Remoto de Cajas, Kardex Valorizado, Reposición Predictiva por WhatsApp, Producción/Recetas BOM, Módulo de Farmacias (lotes/vencimientos/psicotrópicos) y Cuentas por Cobrar.
+- Planes sin comisiones: Emprendedor $12/mes ($99/año, 1 caja), Profesional $24/mes ($190/año, 3 cajas), Licencia Vitalicia $199 pago único de por vida (1 Admin + 1 Caja; +$49 por caja extra).
+- Incluye migración desde Excel e instalación remota 1 a 1 por AnyDesk. WhatsApp: +58 424-8302226.
+Responde en español en máximo 90 palabras usando **negritas** y viñetas (* ).`;
 
 export async function POST(req: NextRequest) {
   try {
@@ -335,11 +329,11 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Nivel Gratuito Oficial Google Gemini (gemini-3.8-flash) si GEMINI_API_KEY está configurada
-    const geminiKey = process.env.GEMINI_API_KEY;
+    const geminiKey = process.env.GEMINI_API_KEY?.trim();
     if (geminiKey) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 9000);
+        const timeoutId = setTimeout(() => controller.abort(), 22000);
 
         const geminiRes = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${geminiKey}`,
@@ -358,8 +352,8 @@ export async function POST(req: NextRequest) {
                 },
               ],
               generationConfig: {
-                temperature: 0.35,
-                maxOutputTokens: 420,
+                temperature: 0.3,
+                maxOutputTokens: 320,
                 thinkingConfig: {
                   thinkingLevel: "LOW",
                 },
