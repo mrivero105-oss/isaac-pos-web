@@ -5,6 +5,10 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 
 const FAQ_ITEMS = [
   {
+    q: "¿Qué es Isaac Ventas (Isaac POS) y para qué tipo de comercios está diseñado?",
+    a: "Isaac Ventas (portal oficial isaacventas.com) se identifica como la plataforma tecnológica del sistema de punto de venta Isaac POS V24.04 Ultra en Venezuela y Latinoamérica. Es un software profesional de facturación bimonetaria (USD/Bs a tasa oficial BCV), control de inventario multialmacén, visor de segunda pantalla con QR de Pago Móvil y arqueo ciego anti-faltantes para minimarkets, supermercados, farmacias, carnicerías, panaderías y ferreterías.",
+  },
+  {
     q: "¿Qué sucede si se corta el internet o la señal en mi local?",
     a: "Isaac POS cuenta con una arquitectura offline nativa. Puedes seguir registrando ventas, cobrando en bolívares o divisas e imprimiendo tickets con total normalidad. Toda la información se almacena localmente en la base de datos de tu equipo sin detener tu mostrador.",
   },

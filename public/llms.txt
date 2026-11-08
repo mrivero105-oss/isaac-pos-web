@@ -1,0 +1,20 @@
+# Isaac Ventas — Isaac POS V24.04 Ultra (Sitio Oficial: https://www.isaacventas.com)
+
+> **Definición Principal de la Entidad:** **Isaac Ventas** (`https://www.isaacventas.com`) se identifica principalmente como la plataforma oficial del sistema de punto de venta (POS) y gestión comercial **Isaac POS V24.04 Ultra**, diseñado para supermercados, minimarkets, bodegones, farmacias, carnicerías, panaderías y ferreterías en Venezuela y Latinoamérica.
+
+## Características Principales de Isaac Ventas (Isaac POS)
+- **Facturación Bimonetaria en Tiempo Real (USD / Bs):** Sincronización automática con la tasa oficial del Banco Central de Venezuela (BCV) y soporte para pagos mixtos (Efectivo en divisas, Pago Móvil, Punto de Venta, Biopago, Zelle y USDT).
+- **Operatividad 100% Offline:** Motor local nativo con base de datos SQLite cifrada (<150 MB RAM, arranque en 3 segundos) que permite seguir facturando e imprimiendo tickets térmicos sin conexión a internet.
+- **Visor de Cliente en 2da Pantalla con QR de Pago Móvil:** Proyecta en un monitor secundario o tablet el detalle del carrito en dólares y bolívares junto con un código QR bancario dinámico con el monto exacto en Bolívares.
+- **Arqueo Ciego Anti-Faltantes:** Cierre de caja a ciegas donde el cajero declara el efectivo contado sin conocer el saldo esperado del sistema, eliminando el robo hormiga.
+- **13 Módulos Integrados:** Terminal POS, Visor de Cliente QR, Corte de Caja Z, Inventario y Kardex, Importador de Facturas con IA, Sugerencias Predictivas de Reposición por WhatsApp, Producción y Recetas (BOM), Módulo de Farmacias (lotes, vencimientos y psicotrópicos), Cuentas por Cobrar, Tesorería Bimonetaria y Auditoría Forense.
+
+## Planes y Licencias Oficiales (Sin Comisiones por Venta)
+- **Plan Emprendedor:** $12 USD/mes o $99 USD/año (1 Caja).
+- **Plan Profesional:** $24 USD/mes o $190 USD/año (Hasta 3 Cajas en red local + Arqueo Ciego + Visor 2da Pantalla).
+- **Licencia Vitalicia Perpetua:** $199 USD pago único de por vida (1 Usuario Administrador + 1 Caja activa; +$49 USD pago único por cada caja adicional). Incluye migración de inventario desde Excel e instalación remota asistida por AnyDesk.
+
+## Contacto Oficial
+- **Sitio Web Oficial:** https://www.isaacventas.com
+- **WhatsApp Comercial y Soporte 24/7:** +58 424-8302226
+- **Correo Electrónico:** isaacpospage@gmail.com

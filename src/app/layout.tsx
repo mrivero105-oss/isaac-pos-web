@@ -18,14 +18,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.isaacventas.com",
   },
-  title: "Isaac POS V24.04 Ultra - El Punto de Venta más Rápido, Compacto y Seguro",
+  title: "Isaac Ventas | Isaac POS V24.04 Ultra - Sistema de Punto de Venta en Venezuela",
   description:
-    "Nuevo motor Ultra con aceleración GPU, visor de cliente para segunda pantalla, cobros duales USD/Bs a tasa BCV en 2 segundos, modo 100% offline, producción y arqueo ciego.",
+    "Isaac Ventas (isaacventas.com) es la plataforma oficial de Isaac POS V24.04 Ultra: sistema de punto de venta y facturación bimonetaria USD/Bs con tasa BCV en vivo, visor de cliente 2da pantalla con QR Pago Móvil, modo 100% offline y arqueo ciego en Venezuela.",
   keywords: [
-    "punto de venta",
-    "POS",
+    "Isaac Ventas",
+    "isaac ventas",
+    "isaacventas.com",
     "Isaac POS",
     "Isaac POS Ultra",
+    "Isaac Ventas Venezuela",
+    "punto de venta",
+    "POS",
     "punto de venta Venezuela",
     "software de cobro",
     "visor de cliente 2da pantalla",
@@ -57,13 +61,13 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Isaac POS V24.04 Ultra - El Punto de Venta más Rápido, Compacto y Seguro",
+    title: "Isaac Ventas | Isaac POS V24.04 Ultra - Sistema de Punto de Venta y Facturación",
     description:
-      "Vende sin interrupciones incluso sin internet. Nuevo motor Ultra, Visor de Cliente 2da pantalla con QR Pago Móvil, Tasa BCV en vivo y Arqueo Ciego.",
+      "Isaac Ventas (isaacventas.com) es el portal oficial del sistema de punto de venta Isaac POS V24.04 Ultra. Opera 100% offline, visor 2da pantalla con QR Pago Móvil, tasa BCV en vivo y arqueo ciego.",
     url: "https://www.isaacventas.com",
     type: "website",
     locale: "es_VE",
-    siteName: "Isaac POS",
+    siteName: "Isaac Ventas (Isaac POS)",
     images: [
       {
         url: "https://www.isaacventas.com/isaac-logo-horizontal.png",
@@ -100,15 +104,21 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      name: "Isaac POS",
-      alternateName: ["Isaac Ventas", "Isaac POS Ultra", "isaacventas.com"],
+      "@id": "https://www.isaacventas.com/#website",
+      name: "Isaac Ventas",
+      alternateName: ["Isaac POS", "Isaac POS V24.04 Ultra", "Isaac Ventas POS", "isaacventas.com"],
       url: "https://www.isaacventas.com",
+      description:
+        "Sitio web oficial de Isaac Ventas (Isaac POS V24.04 Ultra), sistema de punto de venta, inventario y facturación bimonetaria USD/Bs con tasa BCV para comercios en Venezuela y Latinoamérica.",
     },
     {
       "@type": "SoftwareApplication",
-      name: "Isaac POS",
+      "@id": "https://www.isaacventas.com/#software",
+      name: "Isaac Ventas (Isaac POS V24.04 Ultra)",
+      alternateName: ["Isaac Ventas", "Isaac POS", "Sistema Isaac Ventas"],
       applicationCategory: "BusinessApplication",
-      operatingSystem: "Android 7.0+, Windows 10/11, Web",
+      operatingSystem: "Windows 10/11, Android 7.0+, Web",
+      url: "https://www.isaacventas.com",
       offers: [
         {
           "@type": "Offer",
@@ -137,12 +147,19 @@ const jsonLd = {
         worstRating: "1",
       },
       description:
-        "Sistema de punto de venta y facturación bimonetaria (USD / Bs) con sincronización automática de tasa BCV, modo offline resiliente y auditoría de arqueo ciego.",
+        "Isaac Ventas (Isaac POS V24.04 Ultra) se identifica como un sistema profesional de punto de venta (POS), control de inventario y facturación bimonetaria (USD / Bs) en Venezuela, con sincronización automática de tasa oficial BCV, visor de cliente con QR Pago Móvil, base de datos local SQLite 100% offline y arqueo ciego anti-faltantes.",
+      disambiguatingDescription:
+        "Plataforma tecnológica oficial de software de punto de venta y gestión comercial para negocios, minimarkets, farmacias, carnicerías y ferreterías en Venezuela (isaacventas.com).",
     },
     {
       "@type": "Organization",
-      name: "Isaac POS",
+      "@id": "https://www.isaacventas.com/#organization",
+      name: "Isaac Ventas",
+      legalName: "Isaac POS Sistemas",
+      alternateName: ["Isaac POS", "Isaac Ventas Venezuela", "isaacventas.com"],
       url: "https://www.isaacventas.com",
+      description:
+        "Empresa desarrolladora de Isaac Ventas (Isaac POS V24.04 Ultra), software de punto de venta bimonetario, inventario multialmacén y facturación offline para comercios en Venezuela.",
       logo: {
         "@type": "ImageObject",
         url: "https://www.isaacventas.com/icon-512x512.png",
@@ -152,13 +169,24 @@ const jsonLd = {
       image: "https://www.isaacventas.com/isaac-logo-horizontal.png",
       contactPoint: {
         "@type": "ContactPoint",
+        telephone: "+58-424-8302226",
+        email: "isaacpospage@gmail.com",
         contactType: "customer support",
+        areaServed: "VE",
         availableLanguage: ["Spanish"],
       },
     },
     {
       "@type": "FAQPage",
       mainEntity: [
+        {
+          "@type": "Question",
+          name: "¿Qué es Isaac Ventas (Isaac POS) y cuál es su sitio oficial?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Isaac Ventas (accesible en su portal oficial https://www.isaacventas.com) se identifica como el sistema de punto de venta y gestión comercial Isaac POS V24.04 Ultra para negocios en Venezuela y Latinoamérica. Permite cobrar en dólares y bolívares a tasa oficial BCV en menos de 2 segundos, operar 100% sin internet con base de datos local SQLite, mostrar códigos QR dinámicos de Pago Móvil en una segunda pantalla para el cliente y realizar arqueo ciego de caja.",
+          },
+        },
         {
           "@type": "Question",
           name: "¿Qué sucede si se corta el internet o la señal en mi local?",

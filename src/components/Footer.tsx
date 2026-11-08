@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed max-w-sm mb-6">
-              Software de gestión comercial y punto de venta para bodegas, minimarkets, farmacias y comercios en general. Facturación ágil a tasa oficial BCV, modo 100% offline y acompañamiento técnico en instalación.
+              <strong className="text-white">Isaac Ventas (isaacventas.com)</strong> es el portal oficial de <strong className="text-white">Isaac POS V24.04 Ultra</strong>: software de gestión comercial y punto de venta para bodegas, minimarkets, farmacias y comercios en Venezuela. Facturación ágil a tasa oficial BCV, modo 100% offline y acompañamiento técnico en instalación.
             </p>
             <div className="flex items-center gap-3 text-slate-300 text-xs">
               <span className="flex items-center gap-1 text-emerald-400 font-mono">
@@ -142,7 +142,7 @@ export const Footer: React.FC = () => {
         {/* Certificaciones y Copyright */}
         <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div suppressHydrationWarning>
-            © {new Date().getFullYear()} Isaac POS. Todos los derechos reservados.
+            © {new Date().getFullYear()} Isaac Ventas • Isaac POS V24.04 Ultra (isaacventas.com). Todos los derechos reservados.
           </div>
           <div className="flex items-center gap-4 text-slate-400">
             <span>Soporte Remoto AnyDesk</span>
