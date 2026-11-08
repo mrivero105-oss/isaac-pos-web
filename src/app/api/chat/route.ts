@@ -220,6 +220,49 @@ Un salto tecnológico mayúsculo frente a los puntos de venta tradicionales:
       "Hablar por WhatsApp",
     ],
   },
+  {
+    triggers: ["farmacia", "drogueria", "medicamento", "medicina", "vencimiento", "lote", "psicotropico", "receta medica", "principio activo"],
+    title: "Módulo Especializado para Farmacias y Droguerías",
+    reply: `**Isaac POS V24.04 cuenta con un Módulo Especializado de Farmacia:** 💊🏥
+
+* **Control de Lotes y Vencimientos:** Semáforo automático que alerta 30, 60 y 90 días antes de que caduque un medicamento.
+* **Búsqueda por Principio Activo:** Encuentra al instante equivalentes genéricos cuando un cliente busca una marca agotada.
+* **Libro de Psicotrópicos y Récipes:** Registro auditable de medicamentos controlados con datos del paciente y médico.
+* **Sugerencias de Reposición:** Calcula qué medicamentos rotan más rápido y envía el pedido a droguerías por WhatsApp.`,
+    suggestions: [
+      "¿Me ayudan a cargar mis productos desde Excel?",
+      "Ver precios y planes",
+      "Solicitar demostración guiada",
+    ],
+  },
+  {
+    triggers: ["carniceria", "charcuteria", "fruteria", "pescaderia", "kilo", "gramo", "peso", "pesaje"],
+    title: "Solución para Carnicerías, Charcuterías y Fruterías",
+    reply: `**Pesaje Fraccionado y Control de Mermas para Carnicerías y Charcuterías:** 🥩⚖️
+
+* **Cálculo Exacto por Peso:** Cobra al instante por gramos o kilos (ej. \`0.385 kg\` de queso o corte de res) con conversión automática en USD y Bolívares a tasa BCV.
+* **Desposte y Recetas (BOM):** Registra medias reses o piezas enteras y controla el rendimiento por cortes y mermas.
+* **Visor 2da Pantalla con QR:** El cliente ve en vivo el peso, precio por kilo y el QR de Pago Móvil con el monto exacto en Bs.`,
+    suggestions: [
+      "¿Qué balanzas e impresoras soporta?",
+      "Ver precios y planes",
+      "Agendar demostración en vivo",
+    ],
+  },
+  {
+    triggers: ["minimarket", "bodega", "abasto", "supermercado", "licoreria", "ferreteria", "repuesto", "tienda", "negocio", "comercio"],
+    title: "Adaptación a Minimarkets, Bodegas, Ferreterías y Comercios",
+    reply: `**Isaac POS V24.04 se adapta al flujo real de tu comercio:** 🏪🛒
+
+* **Minimarkets, Bodegas y Licorerías:** Escaneo en menos de 2 segundos, venta por unidad o bulto/caja, cobros mixtos (Efectivo + Pago Móvil + Punto) y arqueo ciego de cajeros.
+* **Ferreterías y Casas de Repuestos:** Búsqueda instantánea entre más de 50,000 referencias por código OEM, marca o medida, y actualización masiva de listas de precios desde Excel.
+* **Cadenas y Multisucursales:** Monitoreo remoto de cajas en vivo y traslados de mercancía entre tiendas.`,
+    suggestions: [
+      "¿Cómo funciona sin internet?",
+      "¿Qué incluye la Licencia Vitalicia ($199)?",
+      "Agendar instalación asistida",
+    ],
+  },
 ];
 
 // Respuesta por defecto con resumen inteligente
@@ -243,10 +286,34 @@ Puedo responderte con total precisión sobre:
   ],
 };
 
+function normalizeText(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+const SYSTEM_PROMPT = `Eres Isaac AI, el consultor técnico y comercial oficial de Isaac POS V24.04 Ultra.
+Isaac POS es un sistema de punto de venta y facturación bimonetaria para comercios en Venezuela y Latinoamérica.
+Reglas estrictas de veracidad:
+- Modo 100% Offline con base de datos SQLite local cifrada (<150 MB RAM, arranque en 3 segundos) y sincronización en red local.
+- Bimonetario nativo USD ($) y Bolívares (Bs.) sincronizado con la tasa oficial BCV y pagos mixtos (Efectivo, Pago Móvil, Zelle, Biopago, Punto de Venta).
+- Visor de Cliente en 2da Pantalla: Muestra cada producto escaneado en USD/Bs y genera el código QR dinámico de Pago Móvil con el monto exacto en Bolívares.
+- Arqueo Ciego Anti-Faltantes: El cajero cuenta billetes físicos al cerrar turno sin ver cuánto dinero espera el sistema.
+- 13 Módulos reales V24.04: Terminal POS, Visor Cliente QR, Arqueo Ciego, Monitoreo Remoto de Cajas, Kardex Valorizado, Sugerencias Predictivas de Reposición (con envío por WhatsApp), Producción y Recetas (BOM), Módulo de Farmacias (lotes, vencimientos, psicotrópicos), Directorio CRM y Cuentas por Cobrar.
+- Precios oficiales (sin comisiones por venta):
+  1) Plan Emprendedor: $12 USD/mes o $99 USD/año (1 Caja).
+  2) Plan Profesional: $24 USD/mes o $190 USD/año (hasta 3 Cajas en red, Arqueo Ciego, Visor 2da pantalla).
+  3) Licencia Vitalicia Perpetua: $199 USD pago único de por vida sin mensualidades (incluye 1 Admin + 1 Caja, y +$49 USD pago único por cada caja extra).
+- Instalación y Migración: Instalación remota guiada 1 a 1 vía AnyDesk y migración masiva de inventario desde Excel/CSV incluida.
+- Contacto humano: WhatsApp oficial +58 424-8302226.
+Responde en español, de forma concisa (máximo 120 palabras), clara, persuasiva y usando formato Markdown (**negritas** y listas con * ).`;
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const userMessage: string = (body.message || "").trim().toLowerCase();
+    const rawMessage: string = (body.message || "").trim();
+    const userMessage = normalizeText(rawMessage);
 
     if (!userMessage) {
       return NextResponse.json({
@@ -256,44 +323,33 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 1. Si existe GEMINI_API_KEY en variables de entorno, intentar consulta con Gemini Flash Free
+    // 1. Nivel Gratuito Oficial Google Gemini (gemini-2.5-flash / gemini-2.0-flash) si GEMINI_API_KEY está configurada
     const geminiKey = process.env.GEMINI_API_KEY;
     if (geminiKey) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
 
         const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             signal: controller.signal,
             body: JSON.stringify({
+              systemInstruction: {
+                parts: [{ text: SYSTEM_PROMPT }],
+              },
               contents: [
                 {
                   role: "user",
-                  parts: [
-                    {
-                      text: `Eres Isaac AI, el consultor comercial y técnico oficial de Isaac POS (versión v24.04).
-Isaac POS es un sistema de punto de venta blindado para comercios en Venezuela y Latinoamérica.
-Características clave:
-- Modo 100% Offline con SQLite local y sync WiFi local P2P entre tablets Android y PC central.
-- Bimonetario nativo USD / Bs con tasa oficial BCV automática.
-- Arqueo Ciego anti-robo de caja.
-- Módulo fiscal SENIAT (Libros de ventas/compras, IVA 16%, IGTF 3%).
-- Importador de facturas PDF con IA.
-- Precios oficiales: Plan Emprendedor ($12/mes o $99/año para 1 caja), Plan Profesional ($24/mes o $190/año hasta 3 cajas), Licencia Vitalicia Perpetua ($199 pago único para 1 Admin + 1 Caja, y +$49 pago único por caja adicional).
-- Hardware: Tablets Android 7.0+, impresoras térmicas ESC/POS (58mm/80mm), lectores de barras, gavetas RJ11.
-- Métodos de pago para comprar: Pago Móvil BCV, Zelle, Binance Pay USDT, Tarjetas.
-- Canal de atención: Contacto directo por WhatsApp oficial desde los botones de la web.
-
-Responde de forma concisa, profesional, persuasiva y amigable en formato markdown.
-Pregunta del usuario: "${userMessage}"`,
-                    },
-                  ],
+                  parts: [{ text: rawMessage }],
                 },
               ],
+              generationConfig: {
+                temperature: 0.35,
+                maxOutputTokens: 380,
+              },
             }),
           }
         );
@@ -308,41 +364,89 @@ Pregunta del usuario: "${userMessage}"`,
               success: true,
               reply: aiText,
               suggestions: [
-                "¿Cómo funciona la Licencia Vitalicia?",
-                "¿Qué impresoras recomiendan?",
+                "¿Qué incluye la Licencia Vitalicia ($199)?",
+                "¿Me ayudan a cargar mis productos desde Excel?",
                 "Hablar con un asesor por WhatsApp",
               ],
-              source: "gemini_free_tier",
+              source: "gemini_2_5_flash_free",
             });
           }
         }
       } catch {
-        // Fallback silencioso al motor local en caso de error de red o timeout
+        // Fallback silencioso si hay timeout o límite de cuota
       }
     }
 
-    // 2. Motor de inferencia semántica local (100% Gratuito y de latencia cero)
-    let bestMatch = null;
-    let maxMatches = 0;
+    // 2. Nivel Gratuito Oficial Groq (Llama 3.3 70B) si GROQ_API_KEY está configurada
+    const groqKey = process.env.GROQ_API_KEY;
+    if (groqKey) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-    for (const item of ISAAC_KNOWLEDGE) {
+        const groqRes = await fetch(
+          "https://api.groq.com/openai/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${groqKey}`,
+            },
+            signal: controller.signal,
+            body: JSON.stringify({
+              model: "llama-3.3-70b-versatile",
+              temperature: 0.35,
+              max_tokens: 380,
+              messages: [
+                { role: "system", content: SYSTEM_PROMPT },
+                { role: "user", content: rawMessage },
+              ],
+            }),
+          }
+        );
+        clearTimeout(timeoutId);
+
+        if (groqRes.ok) {
+          const groqData = await groqRes.json();
+          const aiText = groqData?.choices?.[0]?.message?.content;
+          if (aiText) {
+            return NextResponse.json({
+              success: true,
+              reply: aiText,
+              suggestions: [
+                "¿Qué incluye la Licencia Vitalicia ($199)?",
+                "¿Me ayudan a cargar mis productos desde Excel?",
+                "Hablar con un asesor por WhatsApp",
+              ],
+              source: "groq_llama3_free",
+            });
+          }
+        }
+      } catch {
+        // Fallback silencioso al motor semántico local
+      }
+    }
+
+    // 3. Motor de inferencia semántica local (100% Gratuito, sin llaves y latencia 0ms)
+    const scoredItems = ISAAC_KNOWLEDGE.map((item) => {
       let matches = 0;
       for (const trigger of item.triggers) {
-        if (userMessage.includes(trigger)) {
-          matches++;
+        const normTrigger = normalizeText(trigger);
+        if (userMessage.includes(normTrigger)) {
+          matches += normTrigger.includes(" ") ? 2 : 1;
         }
       }
-      if (matches > maxMatches) {
-        maxMatches = matches;
-        bestMatch = item;
-      }
-    }
+      return { item, matches };
+    })
+      .filter((entry) => entry.matches > 0)
+      .sort((a, b) => b.matches - a.matches);
 
-    if (bestMatch && maxMatches > 0) {
+    if (scoredItems.length > 0) {
+      const primary = scoredItems[0].item;
       return NextResponse.json({
         success: true,
-        reply: bestMatch.reply,
-        suggestions: bestMatch.suggestions,
+        reply: primary.reply,
+        suggestions: primary.suggestions,
         source: "local_expert_engine",
       });
     }
