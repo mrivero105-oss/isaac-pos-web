@@ -1,15 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import dns from "node:dns";
-import net from "node:net";
-
-try {
-  dns.setDefaultResultOrder("ipv4first");
-  if (typeof net.setDefaultAutoSelectFamily === "function") {
-    net.setDefaultAutoSelectFamily(false);
-  }
-} catch {
-  // Ignorar en entornos edge donde node:net no aplique
-}
 
 // Base de conocimiento experta 100% gratuita de Isaac POS
 const ISAAC_KNOWLEDGE = [
