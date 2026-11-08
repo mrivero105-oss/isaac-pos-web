@@ -40,35 +40,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
   return (
     <div className="fixed top-2.5 sm:top-4 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none transition-all duration-300">
       <header
-        className={`max-w-6xl mx-auto rounded-2xl sm:rounded-full pointer-events-auto transition-all duration-300 ${
+        className={`max-w-5xl mx-auto rounded-2xl sm:rounded-full pointer-events-auto transition-all duration-300 ${
           isScrolled
             ? "bg-white/92 backdrop-blur-2xl border border-slate-200/90 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.7)_inset]"
             : "bg-white/80 backdrop-blur-xl border border-slate-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.06),0_0_0_1px_rgba(255,255,255,0.5)_inset]"
         }`}
       >
-        <div className="flex items-center justify-between h-14 sm:h-16 px-3.5 sm:px-6">
+        <div className="flex items-center justify-between h-14 sm:h-15 px-3.5 sm:px-5">
           
-          {/* 1. Lado Izquierdo: Marca & Emblema (Sin saltos de línea molestos) */}
-          <a href="#" className="flex items-center gap-2.5 shrink-0 group py-1">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 p-1 flex items-center justify-center group-hover:scale-105 transition-transform shadow-xs">
-              <img
-                src="/isaac-logo-ultra.png"
-                alt="Isaac POS"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm sm:text-base font-black tracking-tight text-slate-950 whitespace-nowrap">
-                ISAAC<span className="text-blue-600 ml-0.5">POS</span>
-              </span>
-              <span className="text-[10px] font-mono font-bold tracking-wider uppercase bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full border border-slate-200/80 hidden xs:inline whitespace-nowrap">
-                ULTRA
-              </span>
-            </div>
-          </a>
-
-          {/* 2. Centro: Navegación Cápsula (Enlaces limpios en 1 sola línea) */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* 1. Navegación Cápsula Limpia (Sin segundo logo duplicado) */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
+            <a
+              href="#"
+              className="px-3 py-1.5 rounded-full text-xs font-bold text-slate-900 hover:bg-slate-100/80 transition-all whitespace-nowrap"
+            >
+              Inicio
+            </a>
             <a
               href="#sistema-real"
               className="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100/80 transition-all whitespace-nowrap"
@@ -113,6 +100,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
               Soporte
             </a>
           </nav>
+
+          {/* En pantallas móviles/tablets (<lg): Indicador de navegación */}
+          <a
+            href="#"
+            className="lg:hidden flex items-center gap-2 text-xs font-bold text-slate-800 px-2 py-1"
+          >
+            <span className="w-2 h-2 rounded-full bg-blue-600" />
+            <span>Menú Principal</span>
+          </a>
 
           {/* 3. Lado Derecho: Ticker BCV + Botón Primario */}
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">

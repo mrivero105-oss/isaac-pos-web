@@ -1,4 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import dns from "node:dns";
+import net from "node:net";
+
+try {
+  dns.setDefaultResultOrder("ipv4first");
+  if (typeof net.setDefaultAutoSelectFamily === "function") {
+    net.setDefaultAutoSelectFamily(false);
+  }
+} catch {
+  // Ignorar en entornos edge donde node:net no aplique
+}
 
 // Base de conocimiento experta 100% gratuita de Isaac POS
 const ISAAC_KNOWLEDGE = [
@@ -323,15 +334,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 1. Nivel Gratuito Oficial Google Gemini (gemini-2.5-flash / gemini-2.0-flash) si GEMINI_API_KEY está configurada
+    // 1. Nivel Gratuito Oficial Google Gemini (gemini-3.8-flash) si GEMINI_API_KEY está configurada
     const geminiKey = process.env.GEMINI_API_KEY;
     if (geminiKey) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const timeoutId = setTimeout(() => controller.abort(), 9000);
 
         const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${geminiKey}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -348,7 +359,10 @@ export async function POST(req: NextRequest) {
               ],
               generationConfig: {
                 temperature: 0.35,
-                maxOutputTokens: 380,
+                maxOutputTokens: 420,
+                thinkingConfig: {
+                  thinkingLevel: "LOW",
+                },
               },
             }),
           }
@@ -357,8 +371,11 @@ export async function POST(req: NextRequest) {
 
         if (geminiRes.ok) {
           const geminiData = await geminiRes.json();
+          const parts: Array<{ text?: string; thought?: boolean }> =
+            geminiData?.candidates?.[0]?.content?.parts || [];
           const aiText =
-            geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
+            parts.find((p) => p.text && !p.thought)?.text ||
+            parts[parts.length - 1]?.text;
           if (aiText) {
             return NextResponse.json({
               success: true,
@@ -368,7 +385,7 @@ export async function POST(req: NextRequest) {
                 "¿Me ayudan a cargar mis productos desde Excel?",
                 "Hablar con un asesor por WhatsApp",
               ],
-              source: "gemini_2_5_flash_free",
+              source: "gemini_3_8_flash_free",
             });
           }
         }
