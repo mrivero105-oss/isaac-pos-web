@@ -24,7 +24,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
     <div className={`flex flex-col items-end pointer-events-auto ${className || ""}`}>
       {/* Ventana de chat rápido desplegable */}
       {isOpen && (
-        <div className="mb-3 w-80 sm:w-96 bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden animate-fadeIn flex flex-col">
+        <div className="mb-3 w-80 sm:w-96 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden animate-fadeIn flex flex-col">
           {/* Header del Chat */}
           <div className="bg-emerald-600 p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -54,8 +54,8 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
           </div>
 
           {/* Cuerpo del Mensaje */}
-          <div className="p-4 bg-white text-xs text-slate-700 space-y-3">
-            <div className="bg-emerald-50 p-3 rounded-2xl rounded-tl-none border border-emerald-100 leading-relaxed text-slate-800">
+          <div className="p-4 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-200 space-y-3">
+            <div className="bg-emerald-50 dark:bg-emerald-950/50 p-3 rounded-2xl rounded-tl-none border border-emerald-100 dark:border-emerald-800/80 leading-relaxed text-slate-800 dark:text-slate-100">
               👋 ¡Hola! Te atendemos directamente desde nuestro equipo comercial de Isaac POS. ¿En qué podemos ayudarte?
             </div>
 
@@ -63,7 +63,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={3}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:bg-white resize-none font-sans"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:bg-white dark:focus:bg-slate-950 resize-none font-sans"
             />
 
             <button

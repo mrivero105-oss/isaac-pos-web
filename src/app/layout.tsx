@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://isaacventas.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.isaacventas.com"),
   alternates: {
-    canonical: "/",
+    canonical: "https://www.isaacventas.com",
   },
   title: "Isaac POS V24.04 Ultra - El Punto de Venta más Rápido, Compacto y Seguro",
   description:
@@ -41,15 +41,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Isaac POS Engineering Team" }],
   icons: {
     icon: [
-      { url: "/favicon.ico?v=2026", sizes: "any" },
-      { url: "/icon-48x48.png?v=2026", sizes: "48x48", type: "image/png" },
-      { url: "/icon-96x96.png?v=2026", sizes: "96x96", type: "image/png" },
-      { url: "/icon-192x192.png?v=2026", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512x512.png?v=2026", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: ["/favicon.ico?v=2026"],
+    shortcut: ["/icon-192x192.png"],
     apple: [
-      { url: "/apple-touch-icon.png?v=2026", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
   robots: {
@@ -60,13 +60,19 @@ export const metadata: Metadata = {
     title: "Isaac POS V24.04 Ultra - El Punto de Venta más Rápido, Compacto y Seguro",
     description:
       "Vende sin interrupciones incluso sin internet. Nuevo motor Ultra, Visor de Cliente 2da pantalla con QR Pago Móvil, Tasa BCV en vivo y Arqueo Ciego.",
-    url: "https://isaacventas.com",
+    url: "https://www.isaacventas.com",
     type: "website",
     locale: "es_VE",
     siteName: "Isaac POS",
     images: [
       {
-        url: "/real-system/v24_pos_terminal.png",
+        url: "https://www.isaacventas.com/isaac-logo-horizontal.png",
+        width: 796,
+        height: 259,
+        alt: "Logo Oficial Isaac POS",
+      },
+      {
+        url: "https://www.isaacventas.com/real-system/v24_pos_terminal.png",
         width: 1024,
         height: 551,
         alt: "Isaac POS V24.04 Ultra - Terminal de Ventas Bimonetario",
@@ -78,7 +84,7 @@ export const metadata: Metadata = {
     title: "Isaac POS V24.04 Ultra - Punto de Venta Bimonetario 100% Offline",
     description:
       "Cobra en menos de 2 segundos a tasa oficial BCV, visor 2da pantalla con QR de Pago Móvil y arqueo ciego anti-faltantes.",
-    images: ["/real-system/v24_pos_terminal.png"],
+    images: ["https://www.isaacventas.com/isaac-logo-horizontal.png"],
   },
 };
 
@@ -196,14 +202,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("isaac_theme");if(t==="dark"){document.documentElement.classList.add("dark");}else{document.documentElement.classList.remove("dark");}}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600/15 selection:text-blue-900`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-[#060911] text-slate-900 dark:text-slate-100 selection:bg-blue-600/15 dark:selection:bg-sky-500/25 selection:text-blue-900 dark:selection:text-sky-100 transition-colors duration-200`}>
         {children}
         <Analytics />
       </body>

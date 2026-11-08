@@ -50,10 +50,17 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({
-      success: true,
-      data: cachedRate,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data: cachedRate,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+        },
+      }
+    );
   } catch (error) {
     return NextResponse.json(
       {

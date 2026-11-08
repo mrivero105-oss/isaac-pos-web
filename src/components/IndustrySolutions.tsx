@@ -136,18 +136,18 @@ export const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ onOpenModa
     INDUSTRIES.find((item) => item.id === selectedId) || INDUSTRIES[0];
 
   return (
-    <section id="rubros" className="py-20 relative bg-slate-50 border-t border-slate-200">
+    <section id="rubros" className="py-20 relative bg-blue-50/35 dark:bg-slate-900/70 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Cabecera */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
-            <Store className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
+            <Store className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>ADAPTADO A LA OPERATIVA DE TU GREMIO</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
             ¿Qué tipo de comercio tienes?
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
             Selecciona tu rubro comercial para ver cómo Isaac POS V24.04 resuelve los cuellos de botella específicos de tu mostrador e inventario.
           </p>
         </div>
@@ -164,8 +164,8 @@ export const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ onOpenModa
                 onClick={() => setSelectedId(ind.id)}
                 className={`flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-600/20"
-                    : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:text-slate-950"
+                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-600 shadow-[0_8px_20px_-4px_rgba(37,99,235,0.4)]"
+                    : "bg-white/90 dark:bg-slate-950 text-slate-700 dark:text-slate-300 border-blue-200/70 dark:border-slate-800 hover:border-blue-300 dark:hover:border-slate-700 hover:text-blue-700 dark:hover:text-white shadow-2xs"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -176,20 +176,20 @@ export const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ onOpenModa
         </div>
 
         {/* Tarjeta del Rubro Activo */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg">
+        <div className="bg-white/95 dark:bg-slate-950 backdrop-blur-md border border-blue-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_-12px_rgba(37,99,235,0.12)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Columna Izquierda (5 cols): Beneficios por Rubro */}
             <div className="lg:col-span-5 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono font-bold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-mono font-bold">
                 <span>{activeIndustry.badge}</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-950 leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white leading-tight">
                 {activeIndustry.headline}
               </h3>
 
-              <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs text-slate-700 leading-relaxed">
-                <strong className="text-slate-950 font-bold block mb-0.5">
+              <div className="p-3.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/50 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <strong className="text-slate-950 dark:text-amber-300 font-bold block mb-0.5">
                   Problema que elimina de raíz:
                 </strong>
                 {activeIndustry.painPointSolved}
@@ -199,20 +199,20 @@ export const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ onOpenModa
                 {activeIndustry.features.map((feat, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700"
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-slate-400 font-bold block">
+                  <span className="text-[10px] font-mono uppercase text-slate-400 dark:text-slate-500 font-bold block">
                     MODALIDAD RECOMENDADA
                   </span>
-                  <span className="text-xs font-extrabold text-slate-900">
+                  <span className="text-xs font-extrabold text-slate-900 dark:text-white">
                     {activeIndustry.recommendedPlanLabel}
                   </span>
                 </div>
@@ -220,7 +220,7 @@ export const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ onOpenModa
                 <button
                   type="button"
                   onClick={() => onOpenModal(activeIndustry.recommendedPlanKey)}
-                  className="px-5 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer shrink-0"
+                  className="px-5 py-3 rounded-xl bg-slate-950 dark:bg-blue-600 hover:bg-slate-900 dark:hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer shrink-0"
                 >
                   <span>Configurar para mi {activeIndustry.shortLabel.split(" ")[0]}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

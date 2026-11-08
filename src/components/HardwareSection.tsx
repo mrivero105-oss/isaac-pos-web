@@ -76,30 +76,30 @@ const HARDWARE_DEVICES: HardwareDevice[] = [
 
 export const HardwareSection: React.FC = () => {
   return (
-    <section id="hardware" className="py-24 relative bg-slate-50 border-t border-slate-200">
+    <section id="hardware" className="py-24 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera de Hardware */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
-              <Cable className="w-3.5 h-3.5 text-blue-600" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-mono font-semibold mb-3">
+              <Cable className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>COMPATIBILIDAD CON HARDWARE ESTÁNDAR</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-3">
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
               Usa los equipos que ya tienes, sin contratos forzosos.
             </h2>
-            <p className="text-slate-600 text-base sm:text-lg">
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
               No estás atado a comprar hardware propietario con sobreprecio. Isaac POS se conecta directamente a los protocolos y periféricos universales del comercio.
             </p>
           </div>
 
-          <div className="shrink-0 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-mono text-slate-700 max-w-xs">
-            <div className="flex items-center gap-2 text-emerald-600 font-bold mb-1">
+          <div className="shrink-0 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-xs font-mono text-slate-700 dark:text-slate-300 max-w-xs">
+            <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-1">
               <CheckCircle2 className="w-4 h-4" />
               <span>Conexión Plug & Play</span>
             </div>
-            <p className="text-slate-500 text-[11px] leading-snug">
+            <p className="text-slate-500 dark:text-slate-400 text-[11px] leading-snug">
               Nuestro equipo técnico configura tus impresoras y balanzas por AnyDesk sin costo adicional.
             </p>
           </div>
@@ -112,40 +112,40 @@ export const HardwareSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-white border border-slate-200/90 hover:border-slate-400 rounded-3xl p-7 transition-all hover:shadow-[0_10px_30px_rgba(15,23,42,0.06)] flex flex-col justify-between group"
+                className="bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 rounded-3xl p-7 transition-all hover:shadow-[0_10px_30px_rgba(15,23,42,0.06)] flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-start justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-900 group-hover:scale-105 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all">
+                    <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-900 dark:text-slate-100 group-hover:scale-105 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/80 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-200 dark:group-hover:border-blue-800 transition-all">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200/80">
+                    <span className="text-[10px] font-mono font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md border border-slate-200/80 dark:border-slate-700">
                       {dev.category}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-950 mb-1">
+                  <h3 className="text-lg font-bold text-slate-950 dark:text-white mb-1">
                     {dev.name}
                   </h3>
 
-                  <span className="font-mono text-[11px] text-blue-600 font-semibold block mb-3">
+                  <span className="font-mono text-[11px] text-blue-600 dark:text-blue-400 font-semibold block mb-3">
                     {dev.protocol}
                   </span>
 
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+                  <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
                     {dev.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100">
-                  <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <span className="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-2">
                     Modelos y marcas compatibles:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {dev.compatibility.map((c, cIdx) => (
                       <span
                         key={cIdx}
-                        className="text-[11px] font-medium bg-slate-50 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200/70"
+                        className="text-[11px] font-medium bg-slate-50 dark:bg-slate-950/80 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-md border border-slate-200/70 dark:border-slate-800"
                       >
                         {c}
                       </span>

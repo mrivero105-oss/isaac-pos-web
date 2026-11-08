@@ -38,17 +38,17 @@ export const Faq: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 relative bg-white border-t border-slate-200">
+    <section id="faq" className="py-20 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
+            <HelpCircle className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>PREGUNTAS FRECUENTES Y DUDAS OPERATIVAS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
             Todo lo que necesitas saber antes de instalar.
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
             Respuestas directas sobre compatibilidad, modo offline, licencias y métodos de pago.
           </p>
         </div>
@@ -59,21 +59,21 @@ export const Faq: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden transition-colors hover:border-slate-300"
+                className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden transition-colors hover:border-slate-300 dark:hover:border-slate-700"
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-base sm:text-lg focus:outline-none cursor-pointer"
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-slate-100 text-base sm:text-lg focus:outline-none cursor-pointer"
                 >
                   <span>{item.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-blue-600 shrink-0 transition-transform duration-200 ${
+                    className={`w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 transition-transform duration-200 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-200/80 pt-4">
+                  <div className="px-6 pb-6 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-200/80 dark:border-slate-800 pt-4">
                     {item.a}
                   </div>
                 )}

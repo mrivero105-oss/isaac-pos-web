@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -42,6 +42,39 @@ export default function Home() {
   const [selectedPlan, setSelectedPlan] = useState<string>("pro_anual");
   const [aiChatOpen, setAiChatOpen] = useState(false);
   const [videoDemoOpen, setVideoDemoOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("isaac_theme");
+      if (saved === "dark") {
+        setTheme("dark");
+        document.documentElement.classList.add("dark");
+      } else {
+        setTheme("light");
+        document.documentElement.classList.remove("dark");
+      }
+    } catch {
+      // Fallback seguro a modo claro
+    }
+  }, []);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      try {
+        localStorage.setItem("isaac_theme", next);
+      } catch {
+        // Ignorar si almacenamiento está restringido
+      }
+      if (next === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      return next;
+    });
+  };
 
   const handleOpenModal = (plan: string = "pro_anual") => {
     setSelectedPlan(plan);
@@ -63,12 +96,14 @@ export default function Home() {
   return (
     <div className="flex-1 flex flex-col relative min-h-screen">
       {/* Fondo Cinético de Ingeniería de Precisión */}
-      <InteractiveEngineeringBackground />
+      <InteractiveEngineeringBackground variant={theme} />
 
       {/* Barra de Navegación Fija */}
       <Header
         onOpenModal={handleOpenModal}
         onOpenAiChat={handleOpenAiChat}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
 
       {/* Flujo Principal Optimizado para Conversión */}

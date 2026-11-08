@@ -40,7 +40,7 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
     let height = 0;
 
     // Parámetros del retículo
-    const SPACING = isDark ? 48 : 54;
+    const SPACING = 48;
     let cols = 0;
     let rows = 0;
 
@@ -91,7 +91,7 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
       nodes = [];
       pulses = [];
 
-      const baseAlpha = isDark ? 0.22 : 0.12;
+      const baseAlpha = isDark ? 0.22 : 0.24;
 
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
@@ -119,7 +119,7 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
       y: -2000,
       targetX: -2000,
       targetY: -2000,
-      radius: isDark ? 190 : 170,
+      radius: 190,
     };
 
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
@@ -151,7 +151,7 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
 
     // Generador de pulsos de transacciones
     const spawnPulse = () => {
-      if (nodes.length === 0 || pulses.length > (isDark ? 14 : 10)) return;
+      if (nodes.length === 0 || pulses.length > 14) return;
       const randomCol = Math.floor(Math.random() * (cols - 1));
       const randomRow = Math.floor(Math.random() * (rows - 1));
       const isHorizontal = Math.random() > 0.5;
@@ -168,12 +168,12 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
             ? "#ffffff" // Blanco puro
             : "#38bdf8" // Cian cielo brillante
           : Math.random() > 0.35
-          ? "#2563eb"
-          : "#059669",
+          ? "#2563eb" // Azul cobalto brillante
+          : "#0891b2", // Cian zafiro
       });
     };
 
-    let pulseInterval = setInterval(spawnPulse, isDark ? 450 : 600);
+    let pulseInterval = setInterval(spawnPulse, 450);
 
     let time = 0;
 
@@ -201,8 +201,8 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
           mouseGlow.addColorStop(0.4, "rgba(56, 189, 248, 0.04)");
           mouseGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
         } else {
-          mouseGlow.addColorStop(0, "rgba(37, 99, 235, 0.07)");
-          mouseGlow.addColorStop(0.5, "rgba(59, 130, 246, 0.025)");
+          mouseGlow.addColorStop(0, "rgba(37, 99, 235, 0.12)");
+          mouseGlow.addColorStop(0.5, "rgba(6, 182, 212, 0.05)");
           mouseGlow.addColorStop(1, "rgba(255, 255, 255, 0)");
         }
         ctx.fillStyle = mouseGlow;
@@ -228,7 +228,7 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
           const power = 1 - dist / mouse.radius;
           forceX = -dx * power * 0.3;
           forceY = -dy * power * 0.3;
-          targetAlpha = isDark ? 0.25 + power * 0.65 : 0.12 + power * 0.55;
+          targetAlpha = isDark ? 0.25 + power * 0.65 : 0.24 + power * 0.6;
         }
 
         const targetX = n.x0 + waveX + forceX;
@@ -239,8 +239,8 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
         n.alpha += (targetAlpha - n.alpha) * 0.1;
       }
 
-      // 2. Dibujo de las líneas de la topología (EN BLANCO PARA MODO DARK)
-      ctx.lineWidth = isDark ? 0.95 : 0.85;
+      // 2. Dibujo de las líneas de la topología
+      ctx.lineWidth = 0.95;
 
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
@@ -252,12 +252,11 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
           if (c < cols - 1) {
             const rightNode = nodes[currentIdx + 1];
             if (rightNode) {
-              const edgeAlpha = Math.max(currentNode.alpha, rightNode.alpha) * (isDark ? 0.8 : 0.65);
+              const edgeAlpha = Math.max(currentNode.alpha, rightNode.alpha) * 0.78;
               if (isDark) {
-                // BLANCO PURO con alpha dinámico
                 ctx.strokeStyle = `rgba(255, 255, 255, ${edgeAlpha})`;
               } else {
-                ctx.strokeStyle = `rgba(148, 163, 184, ${edgeAlpha})`;
+                ctx.strokeStyle = `rgba(59, 130, 246, ${edgeAlpha * 0.75})`;
               }
               ctx.beginPath();
               ctx.moveTo(currentNode.x, currentNode.y);
@@ -270,12 +269,11 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
           if (r < rows - 1) {
             const bottomNode = nodes[(r + 1) * cols + c];
             if (bottomNode) {
-              const edgeAlpha = Math.max(currentNode.alpha, bottomNode.alpha) * (isDark ? 0.8 : 0.65);
+              const edgeAlpha = Math.max(currentNode.alpha, bottomNode.alpha) * 0.78;
               if (isDark) {
-                // BLANCO PURO con alpha dinámico
                 ctx.strokeStyle = `rgba(255, 255, 255, ${edgeAlpha})`;
               } else {
-                ctx.strokeStyle = `rgba(148, 163, 184, ${edgeAlpha})`;
+                ctx.strokeStyle = `rgba(59, 130, 246, ${edgeAlpha * 0.75})`;
               }
               ctx.beginPath();
               ctx.moveTo(currentNode.x, currentNode.y);
@@ -306,28 +304,27 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
           const curY = fromNode.y + (toNode.y - fromNode.y) * pulse.progress;
 
           ctx.beginPath();
-          ctx.arc(curX, curY, isDark ? 2.5 : 2.2, 0, Math.PI * 2);
+          ctx.arc(curX, curY, 2.5, 0, Math.PI * 2);
           ctx.fillStyle = pulse.color;
           ctx.shadowColor = pulse.color;
-          ctx.shadowBlur = isDark ? 10 : 8;
+          ctx.shadowBlur = 10;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
       }
 
-      // 4. Dibujo de vértices / nodos (EN BLANCO PARA MODO DARK)
+      // 4. Dibujo de vértices / nodos
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         if (n.alpha <= 0.05) continue;
 
         ctx.beginPath();
-        const isHovered = n.alpha > (isDark ? 0.35 : 0.25);
-        const radius = isHovered ? 2.3 : 1.35;
+        const isHovered = n.alpha > 0.32;
+        const radius = isHovered ? 2.4 : 1.45;
         ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
 
         if (isDark) {
           if (isHovered) {
-            // Nodo blanco brillante resplandeciente
             ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(n.alpha * 1.5, 1)})`;
             ctx.shadowColor = "rgba(255, 255, 255, 0.9)";
             ctx.shadowBlur = 6;
@@ -339,11 +336,15 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
           }
         } else {
           if (isHovered) {
-            ctx.fillStyle = `rgba(37, 99, 235, ${n.alpha * 1.4})`;
+            ctx.fillStyle = `rgba(37, 99, 235, ${Math.min(n.alpha * 1.6, 1)})`;
+            ctx.shadowColor = "rgba(37, 99, 235, 0.6)";
+            ctx.shadowBlur = 6;
+            ctx.fill();
+            ctx.shadowBlur = 0;
           } else {
-            ctx.fillStyle = `rgba(100, 116, 139, ${n.alpha})`;
+            ctx.fillStyle = `rgba(59, 130, 246, ${n.alpha * 0.95})`;
+            ctx.fill();
           }
-          ctx.fill();
         }
       }
 
@@ -355,7 +356,7 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
         cancelAnimationFrame(animationFrameId);
         clearInterval(pulseInterval);
       } else {
-        pulseInterval = setInterval(spawnPulse, isDark ? 450 : 600);
+        pulseInterval = setInterval(spawnPulse, 450);
         animationFrameId = requestAnimationFrame(render);
       }
     };
@@ -386,9 +387,6 @@ export const InteractiveEngineeringBackground: React.FC<InteractiveEngineeringBa
         ref={canvasRef}
         className="absolute inset-0 block w-full h-full"
       />
-      {variant === "light" && (
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/60 pointer-events-none" />
-      )}
       {variant === "dark" && (
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/40 pointer-events-none" />
       )}

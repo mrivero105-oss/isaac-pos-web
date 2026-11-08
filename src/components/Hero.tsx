@@ -54,64 +54,71 @@ export const Hero: React.FC<HeroProps> = ({
   const rateValue = bcvRate || 857.89;
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-transparent via-white/50 to-slate-100/30">
-      {/* Halo de luz arquitectónica superior */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[320px] bg-gradient-to-b from-blue-500/10 via-blue-600/5 to-transparent blur-[120px] pointer-events-none rounded-full" />
+    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-blue-50/40 via-transparent to-indigo-50/30 dark:from-transparent dark:via-slate-950/60 dark:to-slate-900/40 transition-colors duration-200">
+      {/* Halos de luz arquitectónica superior (Aurora Zafiro y Cian en Modo Claro) */}
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[920px] h-[380px] bg-gradient-to-r from-blue-600/20 via-cyan-400/15 to-indigo-600/15 dark:from-blue-500/20 dark:via-cyan-500/10 dark:to-indigo-500/15 blur-[110px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           
-          {/* Logo Oficial Principal a Gran Escala (Único logo en portada) */}
+          {/* Logo Oficial Principal a Gran Escala (Adapta versión clara/oscura automáticamente) */}
           <div className="flex justify-center mb-6 sm:mb-8">
             <img
               src="/isaac-logo-horizontal.png"
               alt="Isaac POS • Sistema de Facturación y Ventas"
               width={796}
               height={259}
-              className="w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_10px_25px_rgba(37,99,235,0.08)] select-none"
+              className="dark:hidden w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_14px_30px_rgba(37,99,235,0.16)] select-none"
+            />
+            <img
+              src="/isaac-logo-horizontal-dark.png"
+              alt="Isaac POS • Sistema de Facturación y Ventas"
+              width={796}
+              height={259}
+              className="hidden dark:block w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_10px_28px_rgba(56,189,248,0.18)] select-none"
             />
           </div>
 
           {/* Eyebrow de producto financiero / POS */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300/80 text-slate-800 text-xs font-semibold mb-6 shadow-xs backdrop-blur-md">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200/90 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold mb-6 shadow-[0_4px_16px_-2px_rgba(37,99,235,0.12)] backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-500 status-breathing shrink-0" />
-            <span className="font-mono text-slate-900 text-[11px] tracking-wider uppercase font-bold">
+            <span className="font-mono text-blue-950 dark:text-white text-[11px] tracking-wider uppercase font-bold">
               ARQUITECTURA DE MOSTRADOR 100% OFFLINE
             </span>
-            <span className="text-slate-300 hidden sm:inline">•</span>
-            <span className="text-slate-600 text-xs hidden sm:inline">
+            <span className="text-blue-300 dark:text-slate-600 hidden sm:inline">•</span>
+            <span className="text-blue-700 dark:text-slate-300 text-xs font-bold hidden sm:inline">
               Tasa Oficial BCV en Vivo
             </span>
           </div>
 
           {/* Título Principal Editorial & Contundente */}
-          <h1 className="text-4xl sm:text-6xl lg:text-[4.25rem] font-black tracking-[-0.035em] text-slate-950 leading-[1.08] mb-6">
+          <h1 className="text-4xl sm:text-6xl lg:text-[4.25rem] font-black tracking-[-0.035em] text-slate-950 dark:text-white leading-[1.08] mb-6">
             El punto de venta diseñado para{" "}
-            <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
               no detenerse jamás.
             </span>
           </h1>
 
           {/* Subtítulo enfocado en la realidad operativa del comercio */}
-          <p className="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-            Cobra en menos de 2 segundos a <strong className="text-slate-900 font-semibold">tasa oficial BCV</strong>, blinda tus turnos con <strong className="text-slate-900 font-semibold">arqueo ciego anti-faltantes</strong> y factura <strong className="text-slate-900 font-semibold">sin depender de internet</strong>. Con instalación remota guiada 1 a 1.
+          <p className="text-base sm:text-xl text-slate-700 dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+            Cobra en menos de 2 segundos a <strong className="text-slate-950 dark:text-white font-bold">tasa oficial BCV</strong>, blinda tus turnos con <strong className="text-slate-950 dark:text-white font-bold">arqueo ciego anti-faltantes</strong> y factura <strong className="text-slate-950 dark:text-white font-bold">sin depender de internet</strong>. Con instalación remota guiada 1 a 1.
           </p>
 
           {/* Bloque de Acciones: Jerarquía de Dos Pasos Claros */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-5">
             <a
               href="#sistema-real"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm sm:text-base shadow-[0_4px_16px_rgba(37,99,235,0.3)] hover:shadow-[0_6px_22px_rgba(37,99,235,0.4)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm sm:text-base shadow-[0_8px_24px_-4px_rgba(37,99,235,0.45)] hover:shadow-[0_12px_28px_-4px_rgba(37,99,235,0.55)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <span>Explorar los 13 Módulos Reales</span>
-              <ArrowRight className="w-4 h-4 text-blue-200 group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-blue-100 group-hover:translate-x-0.5 transition-transform" />
             </a>
 
             {onOpenVideoDemo && (
               <button
                 type="button"
                 onClick={onOpenVideoDemo}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm sm:text-base shadow-md shadow-slate-950/15 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5 cursor-pointer border border-slate-800 group"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-950 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-sm sm:text-base shadow-[0_8px_20px_-4px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5 cursor-pointer border border-slate-800 dark:border-slate-700 group"
               >
                 <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Play className="w-3 h-3 fill-emerald-400 text-emerald-400 ml-0.5" />
@@ -122,7 +129,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             <button
               onClick={() => onOpenModal("demo_gratis")}
-              className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold text-sm sm:text-base shadow-xs hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white/95 dark:bg-slate-900 hover:bg-blue-50/60 dark:hover:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-950 dark:text-slate-100 font-bold text-sm sm:text-base shadow-[0_4px_14px_rgba(37,99,235,0.08)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Agendar Instalación Asistida</span>
             </button>
@@ -132,46 +139,54 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="mb-12 flex items-center justify-center">
             <a
               href="#precios"
-              className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50/90 hover:bg-emerald-100/80 border border-emerald-200 text-xs text-slate-700 transition-colors group"
+              className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50/95 dark:bg-emerald-950/60 hover:bg-emerald-100/90 dark:hover:bg-emerald-900/60 border border-emerald-300/90 dark:border-emerald-800/80 text-xs text-slate-800 dark:text-slate-200 shadow-xs transition-colors group"
             >
-              <span className="font-bold text-emerald-800 font-mono">SIN COMISIONES POR VENTA:</span>
-              <span>Planes desde <strong className="text-slate-950">$12/mes</strong> o <strong className="text-slate-950">Licencia Vitalicia por $199</strong> (Pago único)</span>
-              <span className="text-emerald-700 font-bold group-hover:translate-x-0.5 transition-transform">Ver precios →</span>
+              <span className="font-bold text-emerald-800 dark:text-emerald-300 font-mono">SIN COMISIONES POR VENTA:</span>
+              <span>Planes desde <strong className="text-slate-950 dark:text-white">$12/mes</strong> o <strong className="text-slate-950 dark:text-white">Licencia Vitalicia por $199</strong> (Pago único)</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold group-hover:translate-x-0.5 transition-transform">Ver precios →</span>
             </a>
           </div>
 
           {/* Fila de Especificaciones y Certezas Operativas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto pt-6 border-t border-slate-200/80 mb-12 text-left">
-            <div className="p-3 rounded-xl bg-white/70 border border-slate-200/90 shadow-2xs">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-4xl mx-auto pt-6 border-t border-blue-200/60 dark:border-slate-800/80 mb-12 text-left">
+            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-emerald-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(16,185,129,0.14)] hover:-translate-y-0.5 transition-transform">
               <div className="flex items-center gap-2 mb-1">
-                <WifiOff className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="text-slate-950 text-xs font-bold font-mono">100% OFFLINE</span>
+                <div className="p-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
+                  <WifiOff className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">100% OFFLINE</span>
               </div>
-              <p className="text-slate-500 text-[11px] leading-tight">SQLite local; cobra sin internet ni servidores.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">SQLite local; cobra sin internet ni servidores.</p>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/70 border border-slate-200/90 shadow-2xs">
+            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-blue-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(37,99,235,0.14)] hover:-translate-y-0.5 transition-transform">
               <div className="flex items-center gap-2 mb-1">
-                <DollarSign className="w-3.5 h-3.5 text-blue-600" />
-                <span className="text-slate-950 text-xs font-bold font-mono">TASA OFICIAL BCV</span>
+                <div className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
+                  <DollarSign className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">TASA OFICIAL BCV</span>
               </div>
-              <p className="text-slate-500 text-[11px] leading-tight">Conversión dual en tiempo real para USD y Bs.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Conversión dual en tiempo real para USD y Bs.</p>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/70 border border-slate-200/90 shadow-2xs">
+            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-amber-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(245,158,11,0.14)] hover:-translate-y-0.5 transition-transform">
               <div className="flex items-center gap-2 mb-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
-                <span className="text-slate-950 text-xs font-bold font-mono">ARQUEO CIEGO</span>
+                <div className="p-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">ARQUEO CIEGO</span>
               </div>
-              <p className="text-slate-500 text-[11px] leading-tight">Declaración física de billetes sin saldo a la vista.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Declaración física de billetes sin saldo a la vista.</p>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/70 border border-slate-200/90 shadow-2xs">
+            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-indigo-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(79,70,229,0.14)] hover:-translate-y-0.5 transition-transform">
               <div className="flex items-center gap-2 mb-1">
-                <Headphones className="w-3.5 h-3.5 text-indigo-600" />
-                <span className="text-slate-950 text-xs font-bold font-mono">SOPORTE HUMANO</span>
+                <div className="p-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                  <Headphones className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">SOPORTE HUMANO</span>
               </div>
-              <p className="text-slate-500 text-[11px] leading-tight">Conexión AnyDesk y acompañamiento directo.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Conexión AnyDesk y acompañamiento directo.</p>
             </div>
           </div>
 
@@ -179,8 +194,11 @@ export const Hero: React.FC<HeroProps> = ({
           {/* PRODUCT STAGE INTERACTIVO: Terminal, Visor y Arqueo Ciego      */}
           {/* ============================================================== */}
           <div className="relative max-w-6xl mx-auto text-left mt-4">
+            {/* Resplandor Perimetral Zafiro/Cian detrás del Monitor Hardware */}
+            <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-blue-600/25 via-cyan-500/20 to-indigo-600/25 rounded-[2rem] blur-2xl pointer-events-none opacity-90 dark:opacity-50" />
+
             {/* Contenedor Hardware de Alta Definición */}
-            <div className="relative rounded-2xl sm:rounded-3xl bg-slate-950 border border-slate-800 shadow-[0_24px_60px_-15px_rgba(15,23,42,0.35)] overflow-hidden">
+            <div className="relative rounded-2xl sm:rounded-3xl bg-slate-950 border-2 border-blue-500/30 dark:border-slate-800 shadow-[0_30px_70px_-15px_rgba(37,99,235,0.28),0_15px_35px_-10px_rgba(15,23,42,0.3)] overflow-hidden">
               
               {/* Barra de Control de Hardware & Pestañas del Sistema */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800 gap-3">

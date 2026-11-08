@@ -228,30 +228,30 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
   ];
 
   return (
-    <section id="precios" className="py-24 relative bg-slate-50 border-t border-slate-200">
+    <section id="precios" className="py-24 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera Principal */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
-            <Coins className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
+            <Coins className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>INVERSIÓN CLARA · SIN COMISIONES OCULTAS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
             Planes transparentes para cada etapa de tu comercio.
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg mb-8 leading-relaxed">
-            Elige suscripción mensual o anual para soporte continuo, o adquiere la <strong className="text-slate-950 font-semibold">Licencia Vitalicia Perpetua</strong> en un único pago para ser dueño absoluto de tu sistema sin pagar rentas mensuales jamás.
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
+            Elige suscripción mensual o anual para soporte continuo, o adquiere la <strong className="text-slate-950 dark:text-white font-semibold">Licencia Vitalicia Perpetua</strong> en un único pago para ser dueño absoluto de tu sistema sin pagar rentas mensuales jamás.
           </p>
 
           {/* Selector de Ciclo de Facturación */}
-          <div className="inline-flex items-center bg-slate-200/90 p-1.5 rounded-2xl border border-slate-300 shadow-inner">
+          <div className="inline-flex items-center bg-blue-100/70 dark:bg-slate-900 p-1.5 rounded-2xl border border-blue-200 dark:border-slate-800 shadow-inner">
             <button
               onClick={() => setBillingCycle("monthly")}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                 billingCycle === "monthly"
-                  ? "bg-white text-slate-950 shadow-sm"
-                  : "text-slate-600 hover:text-slate-950"
+                  ? "bg-white dark:bg-slate-800 text-blue-950 dark:text-white shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
               }`}
             >
               Facturación Mensual
@@ -260,8 +260,8 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
               onClick={() => setBillingCycle("yearly")}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
                 billingCycle === "yearly"
-                  ? "bg-slate-950 text-white shadow-sm"
-                  : "text-slate-600 hover:text-slate-950"
+                  ? "bg-slate-950 dark:bg-blue-600 text-white shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
               }`}
             >
               <span>Facturación Anual</span>
@@ -271,7 +271,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
             </button>
           </div>
 
-          <div className="mt-3 text-xs text-slate-500 font-medium">
+          <div className="mt-3 text-xs text-slate-500 dark:text-slate-400 font-medium">
             Facturado en USD o en Bolívares (Bs.) a la tasa oficial del BCV del día.
           </div>
         </div>
@@ -280,80 +280,80 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
           
           {/* Plan 1: Emprendedor */}
-          <div className="bg-white border border-slate-200 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-300 shadow-xs hover:shadow-md transition-all relative">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-md transition-all relative">
             <div>
               <div className="flex justify-between items-start mb-4 gap-2">
                 <div>
-                  <h3 className="text-xl font-black text-slate-950 whitespace-nowrap">Plan Emprendedor</h3>
-                  <p className="text-xs text-slate-500 mt-1">1 Caja Individual</p>
+                  <h3 className="text-xl font-black text-slate-950 dark:text-white whitespace-nowrap">Plan Emprendedor</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">1 Caja Individual</p>
                 </div>
-                <span className="text-[10px] font-mono text-slate-700 bg-slate-100 border border-slate-200 px-2 py-1 rounded-md font-bold shrink-0">
+                <span className="text-[10px] font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-1 rounded-md font-bold shrink-0">
                   1 TERMINAL
                 </span>
               </div>
 
-              <p className="text-xs text-slate-600 mb-6 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
                 Ideal para bodegas, panaderías, tiendas de ropa o kioscos atendidos por su dueño que requieren rapidez en caja y cobro bimonetario sin complicaciones.
               </p>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 mb-6">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 mb-6">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-slate-950 font-mono tabular-nums">
+                  <span className="text-4xl font-black text-slate-950 dark:text-white font-mono tabular-nums">
                     ${billingCycle === "yearly" ? "9.90" : "12"}
                   </span>
-                  <span className="text-slate-500 text-xs font-mono">USD / mes</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-xs font-mono">USD / mes</span>
                 </div>
-                <div className="text-[11px] text-slate-500 mt-1">
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                   {billingCycle === "yearly" ? "Facturado anualmente ($99 USD/año) · Ahorras $45" : "Sin compromiso de permanencia a largo plazo"}
                 </div>
               </div>
 
               {/* Lo que incluye */}
-              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 mb-2">
+              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
                   ¿Qué incluye exactamente?
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span><strong>1 Terminal activa</strong> en Computadora (Windows) o Android.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span><strong>Ventas y tickets ilimitados</strong> sin cobro de comisiones.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span><strong>Cobro dual simultáneo</strong> (USD y Bs a tasa BCV en vivo).</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span><strong>Modo 100% Offline</strong>: vende sin internet sin congelamientos.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>Impresión térmica ESC/POS de 58mm y 80mm vía USB.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>Corte de caja estándar (Reporte X y Z del turno).</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>Catálogo ilimitado con lector de código de barras.</span>
                 </div>
                 
                 {/* Lo que no incluye con honestidad */}
-                <div className="pt-3 border-t border-slate-100 space-y-2 text-slate-400 text-xs">
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-slate-400 dark:text-slate-500 text-xs">
                   <div className="flex items-center gap-2">
-                    <XIcon className="w-3.5 h-3.5 text-slate-300 shrink-0" />
+                    <XIcon className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
                     <span>Sin Arqueo Ciego Certificado</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <XIcon className="w-3.5 h-3.5 text-slate-300 shrink-0" />
+                    <XIcon className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
                     <span>Sin Visor de Cliente en 2da pantalla</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <XIcon className="w-3.5 h-3.5 text-slate-300 shrink-0" />
+                    <XIcon className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
                     <span>1 solo almacén (sin kardex multidepósito)</span>
                   </div>
                 </div>
@@ -362,7 +362,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
 
             <button
               onClick={() => onOpenModal(billingCycle === "yearly" ? "basico_anual" : "basico_mensual")}
-              className="mt-8 w-full py-3.5 rounded-xl border-2 border-slate-300 hover:border-slate-950 hover:bg-slate-950 hover:text-white text-slate-900 font-bold text-xs sm:text-sm transition-all text-center cursor-pointer"
+              className="mt-8 w-full py-3.5 rounded-xl border-2 border-slate-300 dark:border-slate-700 hover:border-slate-950 dark:hover:border-blue-500 hover:bg-slate-950 dark:hover:bg-blue-600 hover:text-white text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition-all text-center cursor-pointer"
             >
               Comenzar con Emprendedor
             </button>
@@ -443,79 +443,79 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
           </div>
 
           {/* Plan 3: Licencia Vitalicia (Pago Único Perpetuo) */}
-          <div className="bg-white border border-slate-200 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-300 shadow-xs hover:shadow-md transition-all relative">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-md transition-all relative">
             <div>
               <div className="flex justify-between items-start mb-4 gap-2">
                 <div>
-                  <h3 className="text-xl font-black text-slate-950 whitespace-nowrap">Licencia Vitalicia</h3>
-                  <p className="text-xs text-emerald-700 font-semibold mt-1">1 Admin + 1 Caja Incluida</p>
+                  <h3 className="text-xl font-black text-slate-950 dark:text-white whitespace-nowrap">Licencia Vitalicia</h3>
+                  <p className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-1">1 Admin + 1 Caja Incluida</p>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-1 rounded-md shrink-0">
+                <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-700 px-2 py-1 rounded-md shrink-0">
                   PAGO ÚNICO
                 </span>
               </div>
 
-              <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
                 Adquiere el sistema de forma definitiva sin suscripciones mensuales. Incluye de base 1 usuario Administrador para control gerencial y 1 Terminal de Caja activa para mostrador.
               </p>
 
-              <div className="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-200/60 mb-5">
+              <div className="p-4 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/60 mb-5">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-slate-950 font-mono tabular-nums">
+                  <span className="text-4xl font-black text-slate-950 dark:text-white font-mono tabular-nums">
                     $199
                   </span>
-                  <span className="text-slate-600 text-xs font-mono">USD (Pago Único)</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs font-mono">USD (Pago Único)</span>
                 </div>
-                <div className="text-[11px] text-emerald-800 mt-1 font-semibold">
+                <div className="text-[11px] text-emerald-800 dark:text-emerald-300 mt-1 font-semibold">
                   Sin mensualidades ni anualidades forzadas de por vida
                 </div>
               </div>
 
               {/* Aclaratoria de Cajas y Usuarios Adicionales */}
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 mb-6">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-900 mb-1">
+              <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200/80 dark:border-slate-800 mb-6">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white mb-1">
                   <span>Alcance incluido de base:</span>
-                  <span className="text-emerald-700 font-mono font-black">1 Admin + 1 Caja</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-mono font-black">1 Admin + 1 Caja</span>
                 </div>
-                <div className="text-[11px] text-slate-500 leading-tight">
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
                   1 Administrador (reportes, costos e inventario) + 1 Cajero operativo.
                 </div>
                 
-                <div className="mt-2.5 pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
-                  <span className="text-slate-700 font-medium">¿Caja / usuario adicional?</span>
-                  <span className="font-mono font-bold text-slate-950 bg-white px-2 py-0.5 rounded border border-slate-300">
-                    +$49 USD <span className="text-[10px] text-slate-500 font-normal">pago único</span>
+                <div className="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">¿Caja / usuario adicional?</span>
+                  <span className="font-mono font-bold text-slate-950 dark:text-white bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-slate-300 dark:border-slate-700">
+                    +$49 USD <span className="text-[10px] text-slate-500 dark:text-slate-400 font-normal">pago único</span>
                   </span>
                 </div>
               </div>
 
               {/* Lo que incluye */}
-              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-800 mb-2">
+              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 mb-2">
                   Propiedad perpetua garantizada:
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950">1 Admin + 1 Caja de cobro activa</strong> de por vida.</span>
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-slate-950 dark:text-white">1 Admin + 1 Caja de cobro activa</strong> de por vida.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950">Cajas adicionales en red local</strong>: solo +$49 USD por caja (pago único perpetuo).</span>
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-slate-950 dark:text-white">Cajas adicionales en red local</strong>: solo +$49 USD por caja (pago único perpetuo).</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950">Todas las funciones activadas</strong>: Arqueo Ciego, 2da pantalla de cliente y Kardex.</span>
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-slate-950 dark:text-white">Todas las funciones activadas</strong>: Arqueo Ciego, 2da pantalla de cliente y Kardex.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950">Base de datos local SQLite 100% propia</strong>: tus datos en tu disco duro, sin depender de la nube.</span>
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-slate-950 dark:text-white">Base de datos local SQLite 100% propia</strong>: tus datos en tu disco duro, sin depender de la nube.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950">Instalación y configuración 1 a 1 por AnyDesk</strong> + migración de catálogo desde Excel.</span>
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-slate-950 dark:text-white">Instalación y configuración 1 a 1 por AnyDesk</strong> + migración de catálogo desde Excel.</span>
                 </div>
                 <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>Actualizaciones de seguridad y estabilidad perpetuas con licencia transferible.</span>
                 </div>
               </div>
@@ -523,7 +523,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
 
             <button
               onClick={() => onOpenModal("vitalicia")}
-              className="mt-8 w-full py-3.5 rounded-xl bg-slate-950 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm shadow-md transition-all text-center cursor-pointer"
+              className="mt-8 w-full py-3.5 rounded-xl bg-slate-950 dark:bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all text-center cursor-pointer"
             >
               Comprar Licencia Vitalicia
             </button>
@@ -600,9 +600,9 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
         <div className="text-center mb-16">
           <button
             onClick={() => setShowMatrix(!showMatrix)}
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:text-slate-950 text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
           >
-            <Layers className="w-4 h-4 text-blue-600" />
+            <Layers className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>{showMatrix ? "Ocultar comparativa detallada de características" : "Ver comparativa detallada de características (todos los puntos)"}</span>
             {showMatrix ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
@@ -610,7 +610,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
 
         {/* Tabla / Matriz Comparativa Detallada Desplegable */}
         {showMatrix && (
-          <div className="mb-20 rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-sm transition-all">
+          <div className="mb-20 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm transition-all">
             <div className="p-6 sm:p-8 bg-slate-950 text-white border-b border-slate-800">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
@@ -634,65 +634,65 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-[11px] sm:text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
+                  <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 text-[11px] sm:text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     <th className="py-4 px-6 w-2/5">Característica / Módulo</th>
-                    <th className="py-4 px-6 w-1/5 text-center text-slate-900">Emprendedor</th>
-                    <th className="py-4 px-6 w-1/5 text-center text-blue-600 bg-blue-50/50">Profesional</th>
-                    <th className="py-4 px-6 w-1/5 text-center text-emerald-800">Vitalicia</th>
+                    <th className="py-4 px-6 w-1/5 text-center text-slate-900 dark:text-white">Emprendedor</th>
+                    <th className="py-4 px-6 w-1/5 text-center text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/40">Profesional</th>
+                    <th className="py-4 px-6 w-1/5 text-center text-emerald-800 dark:text-emerald-400">Vitalicia</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs sm:text-sm">
                   {comparisonCategories.map((category, catIndex) => (
                     <React.Fragment key={catIndex}>
                       {/* Cabecera de Categoría */}
-                      <tr className="bg-slate-100/70 border-t border-slate-200">
-                        <td colSpan={4} className="py-3 px-6 font-bold text-xs text-slate-900 uppercase font-mono tracking-wider">
+                      <tr className="bg-slate-100/70 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800">
+                        <td colSpan={4} className="py-3 px-6 font-bold text-xs text-slate-900 dark:text-white uppercase font-mono tracking-wider">
                           {category.name}
                         </td>
                       </tr>
                       {/* Filas de características */}
                       {category.features.map((feat, fIndex) => (
-                        <tr key={fIndex} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="py-3.5 px-6 font-medium text-slate-800">
+                        <tr key={fIndex} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                          <td className="py-3.5 px-6 font-medium text-slate-800 dark:text-slate-200">
                             {feat.name}
                           </td>
                           
                           {/* Emprendedor */}
-                          <td className="py-3.5 px-6 text-center text-slate-600">
+                          <td className="py-3.5 px-6 text-center text-slate-600 dark:text-slate-400">
                             {typeof feat.emprendedor === "boolean" ? (
                               feat.emprendedor ? (
-                                <Check className="w-4 h-4 text-emerald-600 mx-auto" />
+                                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mx-auto" />
                               ) : (
-                                <XIcon className="w-4 h-4 text-slate-300 mx-auto" />
+                                <XIcon className="w-4 h-4 text-slate-300 dark:text-slate-600 mx-auto" />
                               )
                             ) : (
-                              <span className="font-semibold text-slate-700">{feat.emprendedor}</span>
+                              <span className="font-semibold text-slate-700 dark:text-slate-300">{feat.emprendedor}</span>
                             )}
                           </td>
 
                           {/* Profesional */}
-                          <td className="py-3.5 px-6 text-center text-slate-900 bg-blue-50/20 font-semibold">
+                          <td className="py-3.5 px-6 text-center text-slate-900 dark:text-white bg-blue-50/20 dark:bg-blue-950/20 font-semibold">
                             {typeof feat.profesional === "boolean" ? (
                               feat.profesional ? (
-                                <Check className="w-4 h-4 text-blue-600 mx-auto" />
+                                <Check className="w-4 h-4 text-blue-600 dark:text-blue-400 mx-auto" />
                               ) : (
-                                <XIcon className="w-4 h-4 text-slate-300 mx-auto" />
+                                <XIcon className="w-4 h-4 text-slate-300 dark:text-slate-600 mx-auto" />
                               )
                             ) : (
-                              <span className="text-blue-700 font-bold">{feat.profesional}</span>
+                              <span className="text-blue-700 dark:text-blue-300 font-bold">{feat.profesional}</span>
                             )}
                           </td>
 
                           {/* Vitalicia */}
-                          <td className="py-3.5 px-6 text-center text-slate-900 font-semibold">
+                          <td className="py-3.5 px-6 text-center text-slate-900 dark:text-white font-semibold">
                             {typeof feat.vitalicia === "boolean" ? (
                               feat.vitalicia ? (
-                                <Check className="w-4 h-4 text-emerald-600 mx-auto" />
+                                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mx-auto" />
                               ) : (
-                                <XIcon className="w-4 h-4 text-slate-300 mx-auto" />
+                                <XIcon className="w-4 h-4 text-slate-300 dark:text-slate-600 mx-auto" />
                               )
                             ) : (
-                              <span className="text-emerald-800 font-bold">{feat.vitalicia}</span>
+                              <span className="text-emerald-800 dark:text-emerald-400 font-bold">{feat.vitalicia}</span>
                             )}
                           </td>
                         </tr>
@@ -703,13 +703,13 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
               </table>
             </div>
 
-            <div className="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-xs text-slate-500 text-center sm:text-left">
+            <div className="p-6 bg-slate-50 dark:bg-slate-950/70 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
                 ¿Necesitas una configuración especial para más de 3 cajas o múltiples sucursales?
               </div>
               <button
                 onClick={() => onOpenModal("demo_gratis")}
-                className="px-5 py-2.5 rounded-xl bg-slate-950 text-white text-xs font-bold hover:bg-slate-900 transition-all cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-slate-950 dark:bg-blue-600 text-white text-xs font-bold hover:bg-slate-900 dark:hover:bg-blue-500 transition-all cursor-pointer"
               >
                 Solicitar Asesoría para Sucursales ➔
               </button>
@@ -721,77 +721,77 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
         <div className="max-w-5xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
           
           {/* Tarjeta 1: Garantía Blindada de 30 Días (7 columnas) */}
-          <div className="md:col-span-7 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xs flex flex-col justify-between">
+          <div className="md:col-span-7 bg-white dark:bg-slate-900 rounded-3xl p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-emerald-700 tracking-wider">
+                  <span className="text-[10px] font-mono uppercase font-bold text-emerald-700 dark:text-emerald-400 tracking-wider">
                     COMPROMISO SIN RIESGO
                   </span>
-                  <h4 className="text-lg font-black text-slate-950 leading-tight">
+                  <h4 className="text-lg font-black text-slate-950 dark:text-white leading-tight">
                     Garantía de Satisfacción Total de 30 Días
                   </h4>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-5">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5">
                 Instálalo en tu negocio y ponlo a prueba con tus cajeros en horas pico. Si durante los primeros 30 días Isaac POS no agiliza tus cobros o no se adapta a tu operativa, te reembolsamos el 100% de tu dinero de inmediato.
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 text-[11px] font-medium text-slate-700">
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] font-medium text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>Cero riesgo</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>Reembolso directo</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>Sin letra chica</span>
               </div>
             </div>
           </div>
 
           {/* Tarjeta 2: Métodos de Pago y Facturación Multimoneda (5 columnas) */}
-          <div className="md:col-span-5 bg-white rounded-3xl p-7 border border-slate-200/90 shadow-xs flex flex-col justify-between">
+          <div className="md:col-span-5 bg-white dark:bg-slate-900 rounded-3xl p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <CreditCard className="w-4 h-4 text-blue-600" />
-                <span className="text-[10px] font-mono uppercase font-bold text-slate-500 tracking-wider">
+                <CreditCard className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <span className="text-[10px] font-mono uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider">
                   FORMAS DE PAGO ACEPTADAS
                 </span>
               </div>
 
-              <h4 className="text-base font-black text-slate-950 mb-1">
+              <h4 className="text-base font-black text-slate-950 dark:text-white mb-1">
                 Facturación en Divisas y Bolívares
               </h4>
-              <p className="text-xs text-slate-500 mb-4">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
                 Cobro transparente a la tasa oficial del Banco Central de Venezuela (BCV).
               </p>
 
               <div className="space-y-2.5">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-900">Pago Móvil & Bancos Nacionales</span>
-                  <span className="font-mono text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">TASA BCV</span>
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 text-xs">
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">Pago Móvil & Bancos Nacionales</span>
+                  <span className="font-mono text-[10px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded border border-blue-100 dark:border-blue-800">TASA BCV</span>
                 </div>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-900">Zelle</span>
-                  <span className="font-mono text-[10px] text-slate-500">Cuentas EE.UU.</span>
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 text-xs">
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">Zelle</span>
+                  <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">Cuentas EE.UU.</span>
                 </div>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                  <span className="font-semibold text-slate-900">Binance Pay (USDT)</span>
-                  <span className="font-mono text-[10px] text-emerald-700 font-bold">QR Instantáneo</span>
+                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 text-xs">
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">Binance Pay (USDT)</span>
+                  <span className="font-mono text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">QR Instantáneo</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-100 text-[10px] text-slate-400 text-center font-mono">
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 text-center font-mono">
               Activación inmediata tras confirmación del pago
             </div>
           </div>
@@ -801,11 +801,11 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
         {/* Preguntas Frecuentes sobre Precios y Licencias */}
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-mono font-bold mb-2">
-              <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono font-bold mb-2">
+              <HelpCircle className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>DUDAS FRECUENTES DE COMERCIANTES</span>
             </div>
-            <h3 className="text-2xl font-black text-slate-950">
+            <h3 className="text-2xl font-black text-slate-950 dark:text-white">
               Preguntas clave sobre precios y licenciamiento
             </h3>
           </div>
@@ -816,19 +816,19 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl bg-white border border-slate-200 overflow-hidden transition-all"
+                  className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden transition-all"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 text-xs sm:text-sm hover:text-blue-600 transition-colors cursor-pointer"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-slate-100 text-xs sm:text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
                   >
                     <span>{faq.question}</span>
                     <span className="text-slate-400 shrink-0">
-                      {isOpen ? <ChevronUp className="w-4 h-4 text-blue-600" /> : <ChevronDown className="w-4 h-4" />}
+                      {isOpen ? <ChevronUp className="w-4 h-4 text-blue-600 dark:text-blue-400" /> : <ChevronDown className="w-4 h-4" />}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800">
                       {faq.answer}
                     </div>
                   )}

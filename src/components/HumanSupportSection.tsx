@@ -5,21 +5,21 @@ import { Headphones, FileSpreadsheet, MonitorCheck, Users, MessageCircle, Clock,
 
 export const HumanSupportSection: React.FC = () => {
   return (
-    <section id="soporte-humano" className="py-24 relative bg-white border-t border-slate-200">
+    <section id="soporte-humano" className="py-24 relative bg-blue-50/35 dark:bg-slate-900/60 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
-            <Headphones className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
+            <Headphones className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>ACOMPAÑAMIENTO EN SITIO Y POR ANYDESK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
             Un equipo humano real detrás de cada mostrador.
           </h2>
 
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
             Cambiar o instalar un software genera dudas operativas. En Isaac POS no te entregamos un instalador huérfano: nos conectamos contigo, cargamos tu inventario y dejamos tu mostrador facturando.
           </p>
         </div>
@@ -28,88 +28,88 @@ export const HumanSupportSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
           
           {/* Paso 1 */}
-          <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:bg-white hover:border-slate-400 hover:shadow-md transition-all">
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between hover:bg-white dark:hover:bg-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 hover:shadow-md transition-all">
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 mb-5">
+              <div className="w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-5">
                 <FileSpreadsheet className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-mono font-bold text-blue-600 uppercase tracking-wider block mb-1">
+              <span className="text-[10px] font-mono font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
                 01 • INVENTARIO
               </span>
-              <h3 className="text-base font-bold text-slate-950 mb-2">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white mb-2">
                 Migración Asistida de Excel
               </h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                 Si tienes tus artículos en Excel, facturas de proveedores o en otro sistema, convertimos y cargamos tu catálogo completo para que no pierdas días tipeando.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-slate-200/70 text-[11px] font-mono text-emerald-700 flex items-center gap-1.5">
+            <div className="mt-5 pt-3 border-t border-slate-200/70 dark:border-slate-800 text-[11px] font-mono text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
               <Check className="w-3.5 h-3.5" />
               <span>Carga masiva sin costo</span>
             </div>
           </div>
 
           {/* Paso 2 */}
-          <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:bg-white hover:border-slate-400 hover:shadow-md transition-all">
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between hover:bg-white dark:hover:bg-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 hover:shadow-md transition-all">
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mb-5">
+              <div className="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-5">
                 <MonitorCheck className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-mono font-bold text-emerald-600 uppercase tracking-wider block mb-1">
+              <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
                 02 • CALIBRACIÓN
               </span>
-              <h3 className="text-base font-bold text-slate-950 mb-2">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white mb-2">
                 Conexión Remota AnyDesk
               </h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                 Nos conectamos a tu computadora para calibrar tu impresora térmica (58 o 80mm), balanza digital, lector de código de barras y apertura de gaveta.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-slate-200/70 text-[11px] font-mono text-emerald-700 flex items-center gap-1.5">
+            <div className="mt-5 pt-3 border-t border-slate-200/70 dark:border-slate-800 text-[11px] font-mono text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
               <Check className="w-3.5 h-3.5" />
               <span>Calibración de puertos COM/USB</span>
             </div>
           </div>
 
           {/* Paso 3 */}
-          <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:bg-white hover:border-slate-400 hover:shadow-md transition-all">
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between hover:bg-white dark:hover:bg-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 hover:shadow-md transition-all">
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 mb-5">
+              <div className="w-11 h-11 rounded-2xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-5">
                 <Users className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-mono font-bold text-indigo-600 uppercase tracking-wider block mb-1">
+              <span className="text-[10px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block mb-1">
                 03 • FORMACIÓN
               </span>
-              <h3 className="text-base font-bold text-slate-950 mb-2">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white mb-2">
                 Capacitación en 20 Minutos
               </h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                 Entrenamos a tus cajeros. El sistema es tan intuitivo que cualquier persona aprende a cobrar en dólares y bolívares el mismo día de la instalación.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-slate-200/70 text-[11px] font-mono text-emerald-700 flex items-center gap-1.5">
+            <div className="mt-5 pt-3 border-t border-slate-200/70 dark:border-slate-800 text-[11px] font-mono text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
               <Check className="w-3.5 h-3.5" />
               <span>Manuales rápidos en video</span>
             </div>
           </div>
 
           {/* Paso 4 */}
-          <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-7 flex flex-col justify-between hover:bg-white hover:border-slate-400 hover:shadow-md transition-all">
+          <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between hover:bg-white dark:hover:bg-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 hover:shadow-md transition-all">
             <div>
-              <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 mb-5">
+              <div className="w-11 h-11 rounded-2xl bg-amber-50 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-5">
                 <Clock className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-mono font-bold text-amber-600 uppercase tracking-wider block mb-1">
+              <span className="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider block mb-1">
                 04 • CONTINUIDAD
               </span>
-              <h3 className="text-base font-bold text-slate-950 mb-2">
+              <h3 className="text-base font-bold text-slate-950 dark:text-white mb-2">
                 Soporte en Horas Pico
               </h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                 Atención directa de Lunes a Sábado de 8:00 AM a 8:00 PM por WhatsApp y teléfono. Sin burocracia de tickets lentos cuando tienes una fila esperando en caja.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-slate-200/70 text-[11px] font-mono text-emerald-700 flex items-center gap-1.5">
+            <div className="mt-5 pt-3 border-t border-slate-200/70 dark:border-slate-800 text-[11px] font-mono text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
               <Check className="w-3.5 h-3.5" />
               <span>Respuesta media &lt; 5 minutos</span>
             </div>

@@ -98,37 +98,37 @@ export const LiveSocialProof: React.FC = () => {
   return (
     <aside
       aria-label="Actividad en vivo de comercios"
-      className="hidden sm:flex fixed bottom-6 left-6 z-40 max-w-sm bg-slate-900/95 border border-slate-700/80 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md animate-fadeIn items-start gap-3 text-white"
+      className="hidden sm:flex fixed bottom-6 left-6 z-40 max-w-sm bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-700/80 p-3.5 rounded-2xl shadow-2xl backdrop-blur-md animate-fadeIn items-start gap-3 text-slate-900 dark:text-white transition-colors duration-300"
     >
-      <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0 text-emerald-400 mt-0.5">
+      <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 border border-emerald-200 dark:border-emerald-500/40 flex items-center justify-center shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5">
         {currentEvent.type === "purchase" ? (
           <ShoppingBag className="w-4 h-4" />
         ) : currentEvent.type === "audit" ? (
-          <ShieldCheck className="w-4 h-4 text-cyan-400" />
+          <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
         ) : (
-          <TrendingUp className="w-4 h-4 text-amber-400" />
+          <TrendingUp className="w-4 h-4 text-amber-600 dark:text-amber-400" />
         )}
       </div>
 
       <div className="flex-1 min-w-0 pr-2">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-white truncate">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-white truncate">
           <span className="truncate">{currentEvent.merchant}</span>
-          <span className="text-[10px] text-slate-400 font-normal">({currentEvent.city})</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-normal">({currentEvent.city})</span>
         </div>
-        <p className="text-[11px] text-slate-300 leading-tight mt-0.5">
+        <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-tight mt-0.5">
           {currentEvent.action}
         </p>
-        <div className="flex items-center gap-2 mt-1.5 text-[10px] font-mono text-emerald-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div className="flex items-center gap-2 mt-1.5 text-[10px] font-mono text-emerald-600 dark:text-emerald-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
           <span>{currentEvent.timeAgo}</span>
-          <span className="text-slate-500">•</span>
-          <span className="text-slate-400">Verificado</span>
+          <span className="text-slate-400 dark:text-slate-500">•</span>
+          <span className="text-slate-500 dark:text-slate-400">Verificado</span>
         </div>
       </div>
 
       <button
         onClick={() => setIsDismissed(true)}
-        className="text-slate-400 hover:text-white p-1 rounded-md transition-colors"
+        className="text-slate-400 hover:text-slate-700 dark:hover:text-white p-1 rounded-md transition-colors"
         aria-label="Cerrar notificación"
       >
         <X className="w-3.5 h-3.5" />

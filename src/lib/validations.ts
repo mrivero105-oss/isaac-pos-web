@@ -26,11 +26,21 @@ export const LeadFormSchema = z.object({
   branchesCount: z.string().optional().default("1"),
   planInterested: z.string().optional().default("pro_anual"),
   message: z.string().trim().max(500, "Mensaje muy largo").optional(),
-  // Campo Honeypot para neutralizar bots automatizados
-  website_url_hp: z.string().max(0, "Acceso no autorizado").optional(),
+  // Campo Honeypot para neutralizar bots automatizados silenciosamente en el endpoint
+  website_url_hp: z.string().max(200).optional(),
 });
 
 export type LeadFormData = z.infer<typeof LeadFormSchema>;
+
+// Esquema de validación para consultas al asistente Isaac AI
+export const ChatMessageSchema = z.object({
+  message: z
+    .string()
+    .trim()
+    .max(600, "La consulta excede el límite máximo de 600 caracteres.")
+    .optional()
+    .default(""),
+});
 
 // Esquema de validación para intención de compra o acuerdo directo
 export const CheckoutIntentSchema = z.object({

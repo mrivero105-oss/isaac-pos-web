@@ -10,6 +10,19 @@ const RECIPIENT_EMAILS = process.env.NOTIFICATION_EMAILS
       "isaacpospage@gmail.com",
     ];
 
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function sanitizeHeaderText(str: string): string {
+  return str.replace(/[\r\n]+/g, " ").trim();
+}
+
 export async function POST(req: NextRequest) {
   try {
     // 1. Obtención de IP para Rate Limiting
@@ -51,13 +64,24 @@ export async function POST(req: NextRequest) {
     const timestamp = new Date().toLocaleString("es-VE", { timeZone: "America/Caracas" });
     const cleanPhone = phone.replace(/[^0-9]/g, "");
 
+    const safeFullName = escapeHtml(fullName);
+    const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone);
+    const safeBusinessName = escapeHtml(businessName);
+    const safeBusinessType = escapeHtml(businessType);
+    const safeBranchesCount = escapeHtml(branchesCount);
+    const safePlanInterested = escapeHtml(planInterested);
+    const safeMessage = message ? escapeHtml(message) : "";
+
     // 5. Envío de Correo Electrónico (Gmail SMTP vía GMAIL_PASS o Resend API vía RESEND_API_KEY)
     const gmailPass = process.env.GMAIL_PASS; // Contraseña de aplicación de 16 letras de Google
     const gmailUser = process.env.GMAIL_USER || "isaacpospage@gmail.com";
     const resendApiKey = process.env.RESEND_API_KEY;
     let emailSent = false;
 
-    const emailSubject = `🔔 Solicitud de Demostración: ${fullName} - ${businessName} (Isaac POS)`;
+    const emailSubject = sanitizeHeaderText(
+      `🔔 Solicitud de Demostración: ${fullName} - ${businessName} (Isaac POS)`
+    );
 
     const emailHtml = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0b1329; border: 1px solid #1e293b; border-radius: 16px; overflow: hidden; color: #f8fafc;">
@@ -75,38 +99,38 @@ export async function POST(req: NextRequest) {
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8; width: 140px;"><strong>Cliente:</strong></td>
-                <td style="padding: 8px 0; color: #ffffff; font-weight: 700;">${fullName}</td>
+                <td style="padding: 8px 0; color: #ffffff; font-weight: 700;">${safeFullName}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Correo:</strong></td>
-                <td style="padding: 8px 0; color: #38bdf8;"><a href="mailto:${email}" style="color: #38bdf8; text-decoration: none;">${email}</a></td>
+                <td style="padding: 8px 0; color: #38bdf8;"><a href="mailto:${safeEmail}" style="color: #38bdf8; text-decoration: none;">${safeEmail}</a></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Teléfono / WhatsApp:</strong></td>
                 <td style="padding: 8px 0; color: #34d399; font-weight: 700;">
-                  <a href="https://wa.me/${cleanPhone}" style="color: #34d399; text-decoration: none;">${phone} (Clic para chatear)</a>
+                  <a href="https://wa.me/${cleanPhone}" style="color: #34d399; text-decoration: none;">${safePhone} (Clic para chatear)</a>
                 </td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Comercio:</strong></td>
-                <td style="padding: 8px 0; color: #ffffff; font-weight: 700;">${businessName}</td>
+                <td style="padding: 8px 0; color: #ffffff; font-weight: 700;">${safeBusinessName}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Rubro:</strong></td>
-                <td style="padding: 8px 0; color: #cbd5e1; text-transform: capitalize;">${businessType}</td>
+                <td style="padding: 8px 0; color: #cbd5e1; text-transform: capitalize;">${safeBusinessType}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Cajas / Terminales:</strong></td>
-                <td style="padding: 8px 0; color: #cbd5e1;">${branchesCount}</td>
+                <td style="padding: 8px 0; color: #cbd5e1;">${safeBranchesCount}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Plan de Interés:</strong></td>
-                <td style="padding: 8px 0; color: #fbbf24; font-weight: 700;">${planInterested}</td>
+                <td style="padding: 8px 0; color: #fbbf24; font-weight: 700;">${safePlanInterested}</td>
               </tr>
-              ${message ? `
+              ${safeMessage ? `
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8; vertical-align: top;"><strong>Mensaje:</strong></td>
-                <td style="padding: 8px 0; color: #cbd5e1;">${message}</td>
+                <td style="padding: 8px 0; color: #cbd5e1;">${safeMessage}</td>
               </tr>` : ""}
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Fecha y Hora:</strong></td>

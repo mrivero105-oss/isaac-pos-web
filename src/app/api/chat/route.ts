@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rateLimit";
+import { ChatMessageSchema } from "@/lib/validations";
 
 // Base de conocimiento experta 100% gratuita de Isaac POS
 const ISAAC_KNOWLEDGE = [
@@ -334,8 +336,41 @@ export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   try {
+    const forwardedFor = req.headers.get("x-forwarded-for");
+    const clientIp = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
+
+    // Protección anti-abuso / Denial-of-Wallet (máx. 20 consultas por minuto por IP)
+    const rateCheck = checkRateLimit(`chat_${clientIp}`, 20, 60 * 1000);
+    if (!rateCheck.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          reply: "Has enviado muchas consultas seguidas. Por favor espera unos segundos o escríbenos directo por [WhatsApp Oficial](https://wa.me/584248302226).",
+          suggestions: ["Hablar con un asesor por WhatsApp"],
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": Math.ceil((rateCheck.reset - Date.now()) / 1000).toString(),
+          },
+        }
+      );
+    }
+
     const body = await req.json();
-    const rawMessage: string = (body.message || "").trim();
+    const parsed = ChatMessageSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          reply: parsed.error.issues[0]?.message || "Consulta demasiado extensa.",
+          suggestions: DEFAULT_REPLY.suggestions,
+        },
+        { status: 400 }
+      );
+    }
+
+    const rawMessage: string = parsed.data.message;
     const userMessage = normalizeText(rawMessage);
 
     if (!userMessage) {
@@ -379,10 +414,13 @@ export async function POST(req: NextRequest) {
         const timeoutId = setTimeout(() => controller.abort(), 14000);
 
         const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${geminiKey}`,
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "x-goog-api-key": geminiKey,
+            },
             signal: controller.signal,
             body: JSON.stringify({
               systemInstruction: {

@@ -1,14 +1,16 @@
 import type { NextConfig } from "next";
 import path from "path";
 
-// Content Security Policy
+const isDev = process.env.NODE_ENV === "development";
+
+// Content Security Policy endurecida (sin 'unsafe-eval' en producción)
 const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com https://js.stripe.com;
+    script-src 'self' ${isDev ? "'unsafe-eval'" : ""} 'unsafe-inline' https://challenges.cloudflare.com https://js.stripe.com https://va.vercel-scripts.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data: https://images.unsplash.com;
     font-src 'self' https://fonts.gstatic.com;
-    connect-src 'self' https://api.stripe.com;
+    connect-src 'self' https://api.stripe.com https://vitals.vercel-insights.com https://va.vercel-scripts.com;
     frame-src 'self' https://challenges.cloudflare.com https://js.stripe.com;
     frame-ancestors 'none';
     form-action 'self';

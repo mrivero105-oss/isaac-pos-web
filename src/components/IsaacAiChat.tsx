@@ -39,7 +39,7 @@ function renderInlineMarkdown(line: string, isUser: boolean): React.ReactNode[] 
       return (
         <strong
           key={idx}
-          className={isUser ? "font-bold text-white" : "font-bold text-slate-950"}
+          className={isUser ? "font-bold text-white" : "font-bold text-slate-950 dark:text-white"}
         >
           {part.slice(2, -2)}
         </strong>
@@ -49,7 +49,7 @@ function renderInlineMarkdown(line: string, isUser: boolean): React.ReactNode[] 
       return (
         <code
           key={idx}
-          className="px-1.5 py-0.5 rounded bg-slate-200/80 font-mono text-[11px] text-blue-700 font-semibold"
+          className="px-1.5 py-0.5 rounded bg-slate-200/80 dark:bg-slate-800 font-mono text-[11px] text-blue-700 dark:text-blue-300 font-semibold"
         >
           {part.slice(1, -1)}
         </code>
@@ -57,13 +57,22 @@ function renderInlineMarkdown(line: string, isUser: boolean): React.ReactNode[] 
     }
     const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (linkMatch) {
+      const rawUrl = linkMatch[2].trim();
+      const isSafeUrl =
+        rawUrl.startsWith("https://") ||
+        rawUrl.startsWith("http://") ||
+        rawUrl.startsWith("mailto:") ||
+        rawUrl.startsWith("/");
+      if (!isSafeUrl) {
+        return <React.Fragment key={idx}>{linkMatch[1]}</React.Fragment>;
+      }
       return (
         <a
           key={idx}
-          href={linkMatch[2]}
+          href={rawUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-800 font-bold underline underline-offset-2"
+          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-bold underline underline-offset-2"
         >
           {linkMatch[1]}
         </a>
@@ -227,30 +236,30 @@ Puedo orientarte con precisión sobre:
   )}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center sm:items-end sm:justify-end p-2 sm:p-6 bg-slate-950/60 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg h-[92vh] sm:h-[620px] flex flex-col shadow-2xl overflow-hidden relative text-slate-900">
+    <div className="fixed inset-0 z-50 flex items-center justify-center sm:items-end sm:justify-end p-2 sm:p-6 bg-slate-950/60 dark:bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg h-[92vh] sm:h-[620px] flex flex-col shadow-2xl overflow-hidden relative text-slate-900 dark:text-white transition-colors duration-300">
         
         {/* Cabecera del Asistente */}
-        <div className="bg-slate-50 p-4 border-b border-slate-200 flex items-center justify-between">
+        <div className="bg-slate-50 dark:bg-slate-950 p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-2xl bg-white border border-blue-200 p-0.5 flex items-center justify-center text-blue-600 shrink-0 shadow-2xs">
+            <div className="relative w-10 h-10 rounded-2xl bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-500/30 p-0.5 flex items-center justify-center text-blue-600 shrink-0 shadow-2xs">
               <img
                 src="/icon-192x192.png?v=2026"
                 alt="Isaac POS"
                 className="w-full h-full object-contain"
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white"></span>
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-900"></span>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-sm tracking-tight text-slate-900">
+                <h3 className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">
                   Asesor Técnico & Comercial
                 </h3>
-                <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-bold">
+                <span className="text-[10px] bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 px-2 py-0.5 rounded-full font-bold">
                   En línea
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Isaac POS • Orientación para tu negocio
               </p>
             </div>
@@ -259,14 +268,14 @@ Puedo orientarte con precisión sobre:
           <div className="flex items-center gap-1">
             <button
               onClick={handleClearChat}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors"
               title="Reiniciar conversación"
             >
               <Trash2 className="w-4 h-4" />
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition-colors"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors"
               title="Cerrar chat"
             >
               <X className="w-5 h-5" />
@@ -275,7 +284,7 @@ Puedo orientarte con precisión sobre:
         </div>
 
         {/* Banner de Puente a WhatsApp */}
-        <div className="bg-emerald-50 border-b border-emerald-100 px-4 py-2 flex items-center justify-between text-xs text-emerald-800">
+        <div className="bg-emerald-50 dark:bg-emerald-950/40 border-b border-emerald-100 dark:border-emerald-900/50 px-4 py-2 flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-300">
           <span className="truncate pr-2">¿Prefieres atención con un especialista humano?</span>
           <a
             href={whatsappUrl}
@@ -289,7 +298,7 @@ Puedo orientarte con precisión sobre:
         </div>
 
         {/* Lista de Mensajes con Scroll */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin text-xs sm:text-sm bg-white">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin text-xs sm:text-sm bg-white dark:bg-slate-900">
           {messages.map((msg) => (
             <div
               key={msg.id}
@@ -301,7 +310,7 @@ Puedo orientarte con precisión sobre:
                 className={`max-w-[88%] rounded-2xl p-3.5 leading-relaxed ${
                   msg.sender === "user"
                     ? "bg-blue-600 text-white rounded-br-none shadow-sm"
-                    : "bg-slate-100 border border-slate-200 text-slate-800 rounded-tl-none shadow-sm"
+                    : "bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-tl-none shadow-sm"
                 }`}
               >
                 {/* Formateo limpio de Markdown (negritas, viñetas y enlaces) */}
@@ -311,7 +320,7 @@ Puedo orientarte con precisión sobre:
                   className={`text-[10px] mt-2 ${
                     msg.sender === "user"
                       ? "text-blue-100 text-right"
-                      : "text-slate-400 text-left"
+                      : "text-slate-400 dark:text-slate-500 text-left"
                   }`}
                 >
                   {msg.time}
@@ -345,10 +354,10 @@ Puedo orientarte con precisión sobre:
                           handleSend(sug);
                         }
                       }}
-                      className="px-2.5 py-1 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-400 text-[11px] text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1 group text-left shadow-sm"
+                      className="px-2.5 py-1 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 text-[11px] text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all flex items-center gap-1 group text-left shadow-sm"
                     >
                       <span>{sug}</span>
-                      <ArrowRight className="w-3 h-3 text-blue-600 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                      <ArrowRight className="w-3 h-3 text-blue-600 dark:text-blue-400 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                     </button>
                   ))}
                 </div>
@@ -357,7 +366,7 @@ Puedo orientarte con precisión sobre:
           ))}
 
           {isLoading && (
-            <div className="flex items-center gap-2 text-xs text-blue-600 bg-slate-100 p-3 rounded-2xl rounded-tl-none max-w-[70%] border border-slate-200">
+            <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 bg-slate-100 dark:bg-slate-800 p-3 rounded-2xl rounded-tl-none max-w-[70%] border border-slate-200 dark:border-slate-700">
               <Loader2 className="w-4 h-4 animate-spin shrink-0" />
               <span>Analizando y preparando respuesta...</span>
             </div>
@@ -367,7 +376,7 @@ Puedo orientarte con precisión sobre:
         </div>
 
         {/* Input y Botón de Envío */}
-        <div className="p-3 bg-slate-50 border-t border-slate-200">
+        <div className="p-3 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -381,7 +390,7 @@ Puedo orientarte con precisión sobre:
               onChange={(e) => setInput(e.target.value)}
               placeholder="Pregúntale a nuestro asesor (ej. ¿Qué balanzas soporta?)..."
               disabled={isLoading}
-              className="flex-1 bg-white border border-slate-300 rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 transition-colors shadow-sm"
+              className="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-600 transition-colors shadow-sm"
             />
             <button
               type="submit"
@@ -392,9 +401,9 @@ Puedo orientarte con precisión sobre:
               <Send className="w-4 h-4" />
             </button>
           </form>
-          <div className="flex items-center justify-between text-[10px] text-slate-500 px-1 mt-2">
+          <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 px-1 mt-2">
             <span>Asistencia Oficial Isaac POS</span>
-            <span className="text-emerald-600 font-semibold">Gratis • Sin límite de consultas</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Gratis • Sin límite de consultas</span>
           </div>
         </div>
       </div>

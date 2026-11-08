@@ -80,12 +80,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "El plan seleccionado no existe." }, { status: 404 });
     }
 
-    // Obtener Tasa BCV oficial en vivo con respaldo seguro
+    // Obtener Tasa BCV oficial en vivo con timeout estricto de 3.5s y respaldo seguro
     let bcvRate = 857.89;
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3500);
       const bcvRes = await fetch("https://ve.dolarapi.com/v1/dolares/oficial", {
+        signal: controller.signal,
         cache: "no-store",
       });
+      clearTimeout(timeoutId);
       if (bcvRes.ok) {
         const bcvData = await bcvRes.json();
         if (bcvData?.promedio && typeof bcvData.promedio === "number" && bcvData.promedio > 0) {

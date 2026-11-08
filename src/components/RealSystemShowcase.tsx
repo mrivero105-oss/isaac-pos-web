@@ -285,6 +285,14 @@ export const RealSystemShowcase: React.FC = () => {
   const [activePillarId, setActivePillarId] = useState<string>("ventas");
   const [activeSubModuleId, setActiveSubModuleId] = useState<string>("pos");
   const [isZoomed, setIsZoomed] = useState<boolean>(false);
+  const [activeHotspotIdx, setActiveHotspotIdx] = useState<number | null>(0);
+
+  const HOTSPOT_COORDS = [
+    { top: "18%", left: "32%" },
+    { top: "48%", left: "54%" },
+    { top: "38%", left: "82%" },
+    { top: "74%", left: "26%" },
+  ];
 
   const activePillar =
     PILLARS.find((p) => p.id === activePillarId) || PILLARS[0];
@@ -295,6 +303,7 @@ export const RealSystemShowcase: React.FC = () => {
 
   const handlePillarChange = (pillarId: string) => {
     setActivePillarId(pillarId);
+    setActiveHotspotIdx(0);
     const pillar = PILLARS.find((p) => p.id === pillarId);
     if (pillar && pillar.subModules.length > 0) {
       setActiveSubModuleId(pillar.subModules[0].id);
@@ -302,18 +311,18 @@ export const RealSystemShowcase: React.FC = () => {
   };
 
   return (
-    <section id="sistema-real" className="py-20 relative bg-white border-t border-slate-200">
+    <section id="sistema-real" className="py-20 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300 text-slate-800 text-xs font-mono font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
             <span>SUITE OPERATIVA DE COMERCIO</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
             Explora la suite completa módulo por módulo.
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
             Desde el cobro rápido en mostrador y el visor de cliente hasta inventario multialmacén, cuentas por cobrar indexadas y arqueo ciego.
           </p>
         </div>
@@ -329,8 +338,8 @@ export const RealSystemShowcase: React.FC = () => {
                 onClick={() => handlePillarChange(pillar.id)}
                 className={`flex items-center gap-2.5 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
                   isSelected
-                    ? "bg-slate-950 text-white border-slate-950 shadow-md"
-                    : "bg-white text-slate-700 border-slate-200 hover:text-slate-950 hover:bg-slate-100"
+                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-blue-600 dark:border-blue-500 shadow-[0_8px_20px_-4px_rgba(37,99,235,0.4)]"
+                    : "bg-white/90 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-blue-200/70 dark:border-slate-800 hover:text-blue-700 dark:hover:text-white hover:bg-blue-50/60 dark:hover:bg-slate-800 shadow-2xs"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -350,8 +359,8 @@ export const RealSystemShowcase: React.FC = () => {
                 onClick={() => setActiveSubModuleId(sub.id)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border whitespace-nowrap cursor-pointer ${
                   isSubSelected
-                    ? "bg-blue-50 text-blue-700 border-blue-300 shadow-xs font-bold"
-                    : "bg-white text-slate-600 border-slate-200 hover:text-slate-900 hover:bg-slate-50"
+                    ? "bg-blue-100/90 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border-blue-300 dark:border-blue-700 shadow-xs font-bold"
+                    : "bg-white/85 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200/90 dark:border-slate-800 hover:text-blue-700 dark:hover:text-white hover:bg-blue-50/50 dark:hover:bg-slate-800"
                 }`}
               >
                 {sub.name}
@@ -361,45 +370,65 @@ export const RealSystemShowcase: React.FC = () => {
         </div>
 
         {/* 3. Tarjeta Principal con Información y Captura Real */}
-        <div className="bg-slate-50/90 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-lg">
+        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-blue-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_-12px_rgba(37,99,235,0.12)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Columna Izquierda: Información del Módulo (5 cols) */}
             <div className="lg:col-span-5 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 border border-blue-200 text-blue-800 text-xs font-mono font-bold">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300 text-xs font-mono font-bold">
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                 <span>{activeSubModule.badge}</span>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
                 {activeSubModule.title}
               </h3>
 
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                 {activeSubModule.description}
               </p>
 
-              <div className="space-y-2.5 pt-4 border-t border-slate-200">
-                {activeSubModule.highlights.map((point, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{point}</span>
-                  </div>
-                ))}
+              <div className="space-y-2 pt-4 border-t border-slate-200 dark:border-slate-800">
+                {activeSubModule.highlights.map((point, idx) => {
+                  const isSpotActive = activeHotspotIdx === idx;
+                  return (
+                    <div
+                      key={idx}
+                      onMouseEnter={() => setActiveHotspotIdx(idx)}
+                      onClick={() => setActiveHotspotIdx(idx)}
+                      className={`flex items-start gap-2.5 p-2 rounded-xl text-xs sm:text-sm cursor-pointer transition-all border ${
+                        isSpotActive
+                          ? "bg-blue-50/90 dark:bg-blue-950/60 border-blue-300 dark:border-blue-700 text-slate-950 dark:text-white font-semibold shadow-2xs"
+                          : "border-transparent text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                      }`}
+                    >
+                      <span
+                        className={`w-5 h-5 rounded-full font-mono text-[11px] font-black flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                          isSpotActive
+                            ? "bg-blue-600 text-white shadow-sm"
+                            : "bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400"
+                        }`}
+                      >
+                        {idx + 1}
+                      </span>
+                      <span>{point}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Columna Derecha: Captura Real del Módulo (7 cols) */}
+            {/* Columna Derecha: Captura Real del Módulo con Hotspots Interactivos (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="bg-white rounded-2xl border border-slate-300 p-2 shadow-xl overflow-hidden group relative">
-                <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 text-xs font-mono text-slate-600 mb-2 bg-slate-50 rounded-t-xl">
+              <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-300 dark:border-slate-800 p-2 shadow-xl overflow-hidden group relative">
+                <div className="flex items-center justify-between px-3 py-2 border-b border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400 mb-2 bg-slate-50 dark:bg-slate-900 rounded-t-xl">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
-                    <span className="ml-2 text-slate-700 text-[11px] font-semibold">Isaac POS • {activeSubModule.name}</span>
+                    <span className="ml-2 text-slate-700 dark:text-slate-200 text-[11px] font-semibold">Isaac POS • {activeSubModule.name}</span>
                   </div>
-                  <span className="text-blue-700 text-[10px] font-mono font-bold">● Modo Rápido</span>
+                  <span className="text-blue-700 dark:text-blue-400 text-[10px] font-mono font-bold">● Pasa el cursor sobre los puntos (1-4)</span>
                 </div>
 
                 {activeSubModule.image && (
@@ -414,8 +443,58 @@ export const RealSystemShowcase: React.FC = () => {
                       height={551}
                       className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.008]"
                     />
-                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 text-slate-800 text-xs font-semibold flex items-center gap-1.5 shadow-md">
-                      <Maximize2 className="w-3.5 h-3.5 text-blue-600" />
+
+                    {/* Puntos Interactivos (Hotspots) sobre la captura */}
+                    {activeSubModule.highlights.slice(0, 4).map((point, idx) => {
+                      const coords = HOTSPOT_COORDS[idx] || HOTSPOT_COORDS[0];
+                      const isSpotActive = activeHotspotIdx === idx;
+                      return (
+                        <div
+                          key={idx}
+                          style={{ top: coords.top, left: coords.left }}
+                          className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
+                          onMouseEnter={() => setActiveHotspotIdx(idx)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveHotspotIdx(idx);
+                          }}
+                        >
+                          <span className="relative flex h-7 w-7 cursor-pointer items-center justify-center">
+                            <span
+                              className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                                isSpotActive ? "bg-blue-400" : "bg-emerald-400"
+                              }`}
+                            />
+                            <span
+                              className={`relative inline-flex rounded-full h-6 w-6 font-mono text-xs font-black items-center justify-center border-2 border-white shadow-lg transition-transform ${
+                                isSpotActive
+                                  ? "bg-blue-600 text-white scale-110"
+                                  : "bg-emerald-500 text-slate-950 hover:scale-110"
+                              }`}
+                            >
+                              {idx + 1}
+                            </span>
+                          </span>
+                        </div>
+                      );
+                    })}
+
+                    {/* Tarjeta Flotante del Hotspot Activo */}
+                    {activeHotspotIdx !== null && activeSubModule.highlights[activeHotspotIdx] && (
+                      <div
+                        className="absolute bottom-3 left-3 right-40 hidden sm:flex items-center gap-2.5 bg-slate-950/90 backdrop-blur-md border border-blue-500/40 text-white px-3.5 py-2 rounded-xl text-xs shadow-xl pointer-events-none"
+                      >
+                        <span className="w-5 h-5 rounded-full bg-blue-600 text-white font-mono text-[11px] font-black flex items-center justify-center shrink-0">
+                          {activeHotspotIdx + 1}
+                        </span>
+                        <span className="truncate font-medium">
+                          {activeSubModule.highlights[activeHotspotIdx]}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="absolute bottom-3 right-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-xs font-semibold flex items-center gap-1.5 shadow-md">
+                      <Maximize2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                       <span>Clic para ampliar</span>
                     </div>
                   </div>
@@ -434,10 +513,10 @@ export const RealSystemShowcase: React.FC = () => {
           className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md p-4 sm:p-8 flex flex-col items-center justify-center animate-fadeIn"
           onClick={() => setIsZoomed(false)}
         >
-          <div className="relative max-w-6xl w-full max-h-[90vh] overflow-auto rounded-2xl border border-slate-300 shadow-2xl bg-white p-2">
-            <div className="flex justify-between items-center px-4 py-2 text-xs font-mono text-slate-700 border-b border-slate-200 mb-2 bg-slate-50">
-              <span className="text-slate-900 font-bold">{activeSubModule.title}</span>
-              <span className="text-blue-600 font-semibold cursor-pointer">Clic en cualquier parte para cerrar ✕</span>
+          <div className="relative max-w-6xl w-full max-h-[90vh] overflow-auto rounded-2xl border border-slate-300 dark:border-slate-700 shadow-2xl bg-white dark:bg-slate-900 p-2">
+            <div className="flex justify-between items-center px-4 py-2 text-xs font-mono text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800 mb-2 bg-slate-50 dark:bg-slate-950">
+              <span className="text-slate-900 dark:text-white font-bold">{activeSubModule.title}</span>
+              <span className="text-blue-600 dark:text-blue-400 font-semibold cursor-pointer">Clic en cualquier parte para cerrar ✕</span>
             </div>
             <Image
               src={activeSubModule.image}
