@@ -123,7 +123,7 @@ const jsonLd = {
       "@type": "Organization",
       name: "Isaac POS",
       url: "https://isaacventas.com",
-      logo: "https://isaacventas.com/isaac-icon-3d.png",
+      logo: "https://isaacventas.com/isaac-logo-horizontal.png",
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",

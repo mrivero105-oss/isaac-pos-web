@@ -10,17 +10,16 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Col 1 & 2: Marca y Misión Real */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg border border-slate-700 shrink-0 bg-slate-900 p-0.5">
-                <img
-                  src="/isaac-logo-ultra.png"
-                  alt="Isaac POS"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <span className="text-xl font-extrabold tracking-tight text-white">
-                ISAAC <span className="text-blue-500">POS</span>
-                <span className="text-[10px] bg-slate-900 text-slate-300 font-mono font-bold px-2 py-0.5 rounded-full ml-2 border border-slate-700">Versión 2026</span>
+            <div className="flex flex-wrap items-center gap-3 mb-5">
+              <img
+                src="/isaac-logo-horizontal-dark.png"
+                alt="Isaac POS • Sistema de Facturación y Ventas"
+                width={796}
+                height={259}
+                className="h-12 sm:h-14 w-auto object-contain"
+              />
+              <span className="text-[10px] bg-slate-900 text-slate-300 font-mono font-bold px-2.5 py-1 rounded-full border border-slate-700">
+                V24.04 • 2026
               </span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed max-w-sm mb-6">

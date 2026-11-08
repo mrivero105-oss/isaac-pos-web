@@ -48,23 +48,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
       >
         <div className="flex items-center justify-between h-14 sm:h-16 px-3.5 sm:px-6">
           
-          {/* 1. Lado Izquierdo: Marca & Emblema (Sin saltos de línea molestos) */}
-          <a href="#" className="flex items-center gap-2.5 shrink-0 group py-1">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 p-1 flex items-center justify-center group-hover:scale-105 transition-transform shadow-xs">
-              <img
-                src="/isaac-logo-ultra.png"
-                alt="Isaac POS"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm sm:text-base font-black tracking-tight text-slate-950 whitespace-nowrap">
-                ISAAC<span className="text-blue-600 ml-0.5">POS</span>
-              </span>
-              <span className="text-[10px] font-mono font-bold tracking-wider uppercase bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full border border-slate-200/80 hidden xs:inline whitespace-nowrap">
-                ULTRA
-              </span>
-            </div>
+          {/* 1. Lado Izquierdo: Marca & Logo Oficial Horizontal Transparente */}
+          <a href="#" className="flex items-center shrink-0 group py-1" aria-label="Isaac POS - Sistema de Facturación y Ventas">
+            <img
+              src="/isaac-logo-horizontal.png"
+              alt="Isaac POS • Sistema de Facturación y Ventas"
+              width={796}
+              height={259}
+              className="h-9 sm:h-11 w-auto object-contain group-hover:scale-[1.02] transition-transform"
+            />
           </a>
 
           {/* 2. Centro: Navegación Cápsula (Enlaces limpios en 1 sola línea) */}
@@ -179,6 +171,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
                 className="py-1.5 px-3 rounded-lg hover:bg-slate-100 transition-colors"
               >
                 Módulos del Sistema
+              </a>
+              <a
+                href="#rubros"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-1.5 px-3 rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                Soluciones por Rubro Comercial
               </a>
               <a
                 href="#simulador"
