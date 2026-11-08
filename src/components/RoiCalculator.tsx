@@ -19,6 +19,12 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
 
   const monthlyRevenue = totalMonthlySales * avgTicketPrice;
   const recoveredMoneyPerMonth = Math.round(monthlyRevenue * 0.018); // ~1.8% de margen recuperado en mermas y descuadres
+  const lifetimeInvestment = 199 + Math.max(0, terminalsCount - 1) * 49;
+  const paybackDays = Math.max(
+    2,
+    Math.min(30, Math.round((lifetimeInvestment / Math.max(1, recoveredMoneyPerMonth)) * 30))
+  );
+  const recommendedPlanKey = terminalsCount === 1 ? "vitalicia" : "pro_anual";
 
   return (
     <section className="py-24 relative bg-slate-100/70 border-t border-slate-200">
@@ -183,6 +189,15 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
                   </div>
                   <span className="text-sm font-bold text-emerald-600 tabular-nums">+${recoveredMoneyPerMonth.toLocaleString()} USD</span>
                 </div>
+
+                <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex justify-between items-center mt-1">
+                  <span className="text-[11px] font-bold text-emerald-900">
+                    RETORNO LICENCIA (${lifetimeInvestment}):
+                  </span>
+                  <span className="text-xs font-black text-emerald-700">
+                    Se paga sola en ~{paybackDays} días
+                  </span>
+                </div>
               </div>
 
               {/* Pie del Ticket con Total */}
@@ -197,10 +212,14 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
               <div className="mt-5 pt-3 border-t border-slate-200">
                 <button
                   type="button"
-                  onClick={() => onOpenModal("pro_anual")}
+                  onClick={() => onOpenModal(recommendedPlanKey)}
                   className="w-full py-3 rounded-xl bg-slate-950 hover:bg-slate-900 text-white font-bold text-xs tracking-tight transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <span>Activar en mi Comercio</span>
+                  <span>
+                    {terminalsCount === 1
+                      ? "Activar Licencia Vitalicia ($199)"
+                      : `Activar para mis ${terminalsCount} Cajas`}
+                  </span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

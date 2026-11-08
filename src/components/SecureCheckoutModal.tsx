@@ -41,6 +41,7 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
   const [selectedPlan, setSelectedPlan] = useState<string>(
     initialPlan === "demo_gratis" ? "pro_anual" : initialPlan
   );
+  const [extraBoxes, setExtraBoxes] = useState<number>(0);
 
   // Tasa BCV Oficial con actualización automática en tiempo real
   const [bcvRate, setBcvRate] = useState<number>(857.89);
@@ -68,6 +69,7 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
     if (!isOpen) return;
     setErrorMsg(null);
     setSuccessData(null);
+    setExtraBoxes(0);
     if (initialPlan === "demo_gratis") {
       setActiveTab("demo");
       setSelectedPlan("pro_anual");
@@ -110,13 +112,21 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
   if (!isOpen) return null;
 
   const currentPlanInfo = PLAN_DATA[selectedPlan] || PLAN_DATA["pro_anual"];
-  const totalBs = currentPlanInfo.priceUsd * bcvRate;
+  const isLifetime = selectedPlan === "vitalicia";
+  const finalPriceUsd = isLifetime
+    ? currentPlanInfo.priceUsd + extraBoxes * 49
+    : currentPlanInfo.priceUsd;
+  const totalBs = finalPriceUsd * bcvRate;
+  const effectivePlanTitle =
+    isLifetime && extraBoxes > 0
+      ? `Licencia Vitalicia (1 Admin + ${1 + extraBoxes} Cajas Activas)`
+      : currentPlanInfo.name;
 
   // Mensaje formateado para coordinar la adquisición de la licencia con un asesor comercial
   const whatsappMessage =
     `¡Hola! Deseo coordinar la adquisición de la licencia de Isaac POS para mi negocio:\n\n` +
-    `📦 *Plan Seleccionado:* ${currentPlanInfo.name}\n` +
-    `💵 *Inversión:* $${currentPlanInfo.priceUsd} USD (${currentPlanInfo.cycle})\n` +
+    `📦 *Plan Seleccionado:* ${effectivePlanTitle}\n` +
+    `💵 *Inversión:* $${finalPriceUsd} USD (${currentPlanInfo.cycle})\n` +
     `🇻🇪 *Referencia en Bolívares:* Bs. ${totalBs.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (Tasa Oficial BCV: ${bcvRate.toLocaleString("es-VE", { minimumFractionDigits: 2 })})\n\n` +
     `Agradezco me brinden la información para concretar el método de pago y proceder con la activación oficial.`;
 
@@ -309,12 +319,48 @@ export const SecureCheckoutModal: React.FC<SecureCheckoutModalProps> = ({
                     </select>
                   </div>
 
+                  {/* Selector Interactivo de Cajas Adicionales para Licencia Vitalicia */}
+                  {isLifetime && (
+                    <div className="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200 flex items-center justify-between gap-3">
+                      <div>
+                        <div className="text-xs font-extrabold text-slate-900">
+                          Cajas Adicionales (+$49 USD pago único c/u)
+                        </div>
+                        <div className="text-[11px] text-slate-600">
+                          Total incluido: <strong>1 Admin + {1 + extraBoxes} {1 + extraBoxes === 1 ? "Caja" : "Cajas"}</strong> de por vida
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setExtraBoxes((prev) => Math.max(0, prev - 1))}
+                          disabled={extraBoxes === 0}
+                          className="w-8 h-8 rounded-lg bg-white border border-slate-300 text-slate-900 font-black text-sm hover:bg-slate-100 disabled:opacity-40 cursor-pointer"
+                          aria-label="Restar caja adicional"
+                        >
+                          -
+                        </button>
+                        <span className="w-6 text-center font-mono font-black text-sm text-slate-950">
+                          +{extraBoxes}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setExtraBoxes((prev) => Math.min(8, prev + 1))}
+                          className="w-8 h-8 rounded-lg bg-slate-950 text-white font-black text-sm hover:bg-slate-800 cursor-pointer"
+                          aria-label="Sumar caja adicional"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Resumen de Monto con Tasa BCV Actualizada Automáticamente */}
                   <div className="p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
-                      <span className="text-xs text-slate-500 font-medium">Monto del Plan</span>
+                      <span className="text-xs text-slate-500 font-medium">Monto Total de Inversión</span>
                       <div className="text-2xl font-black text-slate-900 font-mono mt-0.5">
-                        ${currentPlanInfo.priceUsd} USD
+                        ${finalPriceUsd} USD
                         <span className="text-xs text-slate-500 font-sans font-normal ml-1.5">
                           ({currentPlanInfo.cycle})
                         </span>

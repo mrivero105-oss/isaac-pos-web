@@ -10,12 +10,14 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [pastHeroLogo, setPastHeroLogo] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [bcvRate, setBcvRate] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      setPastHeroLogo(window.scrollY > 280);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -48,13 +50,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenAiChat }) => 
       >
         <div className="flex items-center justify-between h-14 sm:h-15 px-3.5 sm:px-5">
           
-          {/* 1. Navegación Cápsula Limpia (Sin segundo logo duplicado) */}
+          {/* 1. Navegación Cápsula Limpia (Muestra retorno rápido solo cuando el logo del Hero ya salió de pantalla) */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
             <a
               href="#"
-              className="px-3 py-1.5 rounded-full text-xs font-bold text-slate-900 hover:bg-slate-100/80 transition-all whitespace-nowrap"
+              className={`px-3 py-1.5 rounded-full text-xs font-extrabold transition-all whitespace-nowrap ${
+                pastHeroLogo
+                  ? "bg-slate-950 text-white shadow-xs"
+                  : "text-slate-900 hover:bg-slate-100/80"
+              }`}
             >
-              Inicio
+              {pastHeroLogo ? "ISAAC POS ↑" : "Inicio"}
             </a>
             <a
               href="#sistema-real"

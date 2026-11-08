@@ -38,10 +38,10 @@ const TESTIMONIALS: Testimonial[] = [
     category: "Farmacia y Cuidado Personal",
     icon: Pill,
     rating: 5,
-    highlight: "Importador automático de facturas PDF en 30 segundos",
+    highlight: "Control de lotes, vencimientos y reposición por WhatsApp",
     quote:
-      "Actualizar los precios de las droguerías nos consumía 4 horas semanales de tipeo manual propenso a errores. Ahora arrastramos el PDF de la factura y el módulo inteligente de Isaac POS actualiza más de 800 costos y precios de venta al instante sin equivocaciones.",
-    metrics: "Ahorro de 16 horas/mes en inventario",
+      "El módulo especializado de Farmacia en V24.04 nos avisa con 60 días de anticipación qué lotes están próximos a vencer y nos permite buscar por principio activo al instante. Además, el motor de sugerencias calcula qué medicamentos pedir y envía la orden al proveedor por WhatsApp.",
+    metrics: "0 pérdidas por medicamentos vencidos",
   },
   {
     name: "Roberto Méndez",
@@ -51,9 +51,9 @@ const TESTIMONIALS: Testimonial[] = [
     category: "Mayorista y Distribución",
     icon: Building2,
     rating: 5,
-    highlight: "Arqueo Ciego anti-robo y control estricto de créditos",
+    highlight: "Arqueo Ciego anti-robo y monitoreo remoto de cajas",
     quote:
-      "El cajero declara físicamente cada billete sin ver el monto esperado del sistema. La transparencia es absoluta. Además, el radar de cobranzas nos permite llevar los fiados indexados en dólares con historial de abonos sin perder un solo centavo.",
+      "El cajero declara físicamente cada billete sin ver el monto esperado del sistema. La transparencia es absoluta. Además, el panel de monitoreo remoto nos permite supervisar las 3 cajas abiertas en tiempo real y llevar las cuentas por cobrar indexadas en dólares.",
     metrics: "100% efectividad en cuadratura de caja",
   },
   {
@@ -64,10 +64,10 @@ const TESTIMONIALS: Testimonial[] = [
     category: "Panadería y Alimentos",
     icon: UtensilsCrossed,
     rating: 5,
-    highlight: "Tickets digitales a WhatsApp y cero gasto en papel",
+    highlight: "Visor 2da Pantalla con QR Pago Móvil y Recetas BOM",
     quote:
-      "El envío directo del ticket a WhatsApp nos ahorró más del 65% en rollos de papel térmico. A los clientes les encanta recibir su comprobante detallado con la tasa BCV del día directamente en su celular.",
-    metrics: "-65% gasto en consumibles térmicos",
+      "Conectar el segundo monitor de cara al cliente cambió todo en el mostrador: el comprador ve cada producto en dólares y bolívares y escanea el QR de Pago Móvil con el monto exacto en Bs. sin dictar datos ni retrasar la fila. Y el módulo de Recetas descuenta cada gramo de harina automáticamente.",
+    metrics: "-70% tiempo en cobros por Pago Móvil",
   },
 ];
 

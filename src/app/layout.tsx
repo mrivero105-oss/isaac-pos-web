@@ -40,9 +40,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Isaac POS Engineering Team" }],
   icons: {
-    icon: "/isaac-logo-ultra.png",
-    shortcut: "/isaac-logo-ultra.png",
-    apple: "/isaac-icon-3d.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   robots: {
     index: true,
@@ -85,6 +93,12 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      name: "Isaac POS",
+      alternateName: ["Isaac Ventas", "Isaac POS Ultra", "isaacventas.com"],
+      url: "https://www.isaacventas.com",
+    },
+    {
       "@type": "SoftwareApplication",
       name: "Isaac POS",
       applicationCategory: "BusinessApplication",
@@ -122,8 +136,14 @@ const jsonLd = {
     {
       "@type": "Organization",
       name: "Isaac POS",
-      url: "https://isaacventas.com",
-      logo: "https://isaacventas.com/isaac-logo-horizontal.png",
+      url: "https://www.isaacventas.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.isaacventas.com/icon-512x512.png",
+        width: 512,
+        height: 512,
+      },
+      image: "https://www.isaacventas.com/isaac-logo-horizontal.png",
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",

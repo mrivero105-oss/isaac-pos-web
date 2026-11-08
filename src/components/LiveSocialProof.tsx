@@ -33,7 +33,7 @@ const EVENTS: SocialProofEvent[] = [
     id: 3,
     merchant: "Distribuidora El Progreso",
     city: "Barquisimeto",
-    action: "actualizó 480 costos con el Importador OCR de Facturas",
+    action: "completó migración de 1,200 productos desde Excel vía AnyDesk",
     timeAgo: "Hace 19 min",
     type: "usage",
   },
