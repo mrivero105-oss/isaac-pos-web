@@ -61,6 +61,17 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           
+          {/* Logo Oficial Principal a Gran Escala */}
+          <div className="flex justify-center mb-6 sm:mb-7">
+            <img
+              src="/isaac-logo-horizontal.png"
+              alt="Isaac POS • Sistema de Facturación y Ventas"
+              width={796}
+              height={259}
+              className="w-[280px] sm:w-[380px] md:w-[430px] h-auto object-contain drop-shadow-[0_10px_25px_rgba(37,99,235,0.08)] select-none"
+            />
+          </div>
+
           {/* Eyebrow de producto financiero / POS */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/5 border border-slate-300/80 text-slate-800 text-xs font-semibold mb-6 shadow-xs backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-500 status-breathing shrink-0" />
