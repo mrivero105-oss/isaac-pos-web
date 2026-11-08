@@ -233,9 +233,9 @@ Puedo orientarte con precisión sobre:
         {/* Cabecera del Asistente */}
         <div className="bg-slate-50 p-4 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-2xl bg-blue-50 border border-blue-200 p-1 flex items-center justify-center text-blue-600 shrink-0">
+            <div className="relative w-10 h-10 rounded-2xl bg-white border border-blue-200 p-0.5 flex items-center justify-center text-blue-600 shrink-0 shadow-2xs">
               <img
-                src="/isaac-logo-ultra.png"
+                src="/icon-192x192.png?v=2026"
                 alt="Isaac POS"
                 className="w-full h-full object-contain"
               />
