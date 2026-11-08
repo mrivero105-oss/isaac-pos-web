@@ -314,6 +314,8 @@ Datos oficiales:
 - Incluye migración desde Excel e instalación remota 1 a 1 por AnyDesk. WhatsApp: +58 424-8302226.
 Responde en español en máximo 90 palabras usando **negritas** y viñetas (* ).`;
 
+export const maxDuration = 30;
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -328,12 +330,37 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 1. Nivel Gratuito Oficial Google Gemini (gemini-3.8-flash) si GEMINI_API_KEY está configurada
+    // Evaluar coincidencias en la base de conocimiento verificada (0ms latencia)
+    const scoredItems = ISAAC_KNOWLEDGE.map((item) => {
+      let matches = 0;
+      for (const trigger of item.triggers) {
+        const normTrigger = normalizeText(trigger);
+        if (userMessage.includes(normTrigger)) {
+          matches += normTrigger.includes(" ") ? 2 : 1;
+        }
+      }
+      return { item, matches };
+    })
+      .filter((entry) => entry.matches > 0)
+      .sort((a, b) => b.matches - a.matches);
+
+    // 1. Si es una consulta directa de un módulo o botón rápido (latencia instantánea <50ms)
+    if (scoredItems.length === 1 || (scoredItems.length > 1 && rawMessage.length < 65)) {
+      const primary = scoredItems[0].item;
+      return NextResponse.json({
+        success: true,
+        reply: primary.reply,
+        suggestions: primary.suggestions,
+        source: "local_expert_engine",
+      });
+    }
+
+    // 2. Para consultas abiertas, complejas o multi-tema: Google Gemini 3.8 Flash Gratuito
     const geminiKey = process.env.GEMINI_API_KEY?.trim();
     if (geminiKey) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 22000);
+        const timeoutId = setTimeout(() => controller.abort(), 14000);
 
         const geminiRes = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${geminiKey}`,
@@ -388,7 +415,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 2. Nivel Gratuito Oficial Groq (Llama 3.3 70B) si GROQ_API_KEY está configurada
+    // 3. Nivel Gratuito Oficial Groq (Llama 3.3 70B) si GROQ_API_KEY está configurada
     const groqKey = process.env.GROQ_API_KEY;
     if (groqKey) {
       try {
@@ -438,20 +465,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Motor de inferencia semántica local (100% Gratuito, sin llaves y latencia 0ms)
-    const scoredItems = ISAAC_KNOWLEDGE.map((item) => {
-      let matches = 0;
-      for (const trigger of item.triggers) {
-        const normTrigger = normalizeText(trigger);
-        if (userMessage.includes(normTrigger)) {
-          matches += normTrigger.includes(" ") ? 2 : 1;
-        }
-      }
-      return { item, matches };
-    })
-      .filter((entry) => entry.matches > 0)
-      .sort((a, b) => b.matches - a.matches);
-
+    // 4. Si había coincidencias en el motor experto local y Gemini no respondió a tiempo
     if (scoredItems.length > 0) {
       const primary = scoredItems[0].item;
       return NextResponse.json({
