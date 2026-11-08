@@ -263,6 +263,32 @@ Un salto tecnológico mayúsculo frente a los puntos de venta tradicionales:
       "Agendar instalación asistida",
     ],
   },
+  {
+    triggers: ["aprender", "empleado", "capacitacion", "facil", "usar", "entrenamiento", "dificil", "curso"],
+    title: "Curva de Aprendizaje de 15 Minutos y Capacitación",
+    reply: `**Tus cajeros y empleados aprenden a usar Isaac POS en menos de 15 minutos:** ⚡👩‍💻
+
+* **Interfaz Intuitiva de Mostrador:** Botones claros con fotos de productos, atajos de teclado (\`F1\`–\`F12\`) y conversión BCV automática para que el cajero no tenga que sacar cuentas con calculadora.
+* **Capacitación 1 a 1 Incluida:** Durante la instalación remota por AnyDesk, entrenamos en vivo a tu personal en cobros mixtos, uso del Visor QR y cierre de turno con arqueo ciego.`,
+    suggestions: [
+      "Probar el simulador de cobro",
+      "¿Me ayudan a cargar mis productos desde Excel?",
+      "Agendar demostración guiada",
+    ],
+  },
+  {
+    triggers: ["seniat", "igtf", "iva", "impuesto", "fiscal", "exento", "alicuota"],
+    title: "Manejo de IVA 16%, Productos Exentos e IGTF 3%",
+    reply: `**Cálculo Automático de Impuestos (IVA 16%, Exentos e IGTF 3%):** 🧾⚖️
+
+* **Configuración por Producto:** Define qué artículos son Exentos (canasta básica/medicinas) y cuáles gravan IVA general (16%) o reducido.
+* **IGTF 3% Automático:** Calcula el recargo del 3% sobre pagos en divisas en efectivo cuando aplique, desglosándolo con exactitud en el ticket y en el Visor de Cliente.`,
+    suggestions: [
+      "¿Qué impresoras térmicas son compatibles?",
+      "Ver precios y planes",
+      "Hablar con un asesor por WhatsApp",
+    ],
+  },
 ];
 
 // Respuesta por defecto con resumen inteligente
@@ -293,7 +319,8 @@ function normalizeText(str: string): string {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-const SYSTEM_PROMPT = `Eres Isaac AI, asesor técnico y comercial oficial de Isaac POS V24.04 Ultra (Venezuela y Latinoamérica).
+const SYSTEM_PROMPT = `Eres Isaac AI, asesor técnico y comercial exclusivo de Isaac POS V24.04 Ultra (Venezuela y Latinoamérica).
+REGLA INQUEBRANTABLE DE ALCANCE: SOLO respondes consultas relacionadas con el sistema Isaac POS, facturación, inventario, precios, hardware de punto de venta, soporte o gestión comercial. Si el usuario pregunta cualquier tema ajeno (tareas, código general, historia, deportes, recetas caseras, política, chistes, etc.), rechaza cortésmente en 1 línea indicando que eres el asistente exclusivo de Isaac POS e invítalo a consultar sobre el sistema.
 Datos oficiales:
 - 100% Offline (SQLite local cifrado, <150 MB RAM, arranque en 3s) y red local multi-caja.
 - Bimonetario USD/Bs con tasa oficial BCV en vivo y pagos mixtos (Efectivo, Pago Móvil, Zelle, Biopago, Punto).
