@@ -146,37 +146,48 @@ Al generar tu orden en la web, recibes tu número de orden y puedes confirmarla 
     ],
   },
   {
-    triggers: ["ultra", "v24.04", "novedades", "actualizacion", "version", "nuevo", "instalador", "descargar", "descarga", "setup", "apk", "webview2"],
-    title: "Novedades de la Nueva Edición Ultra V24.04",
-    reply: `**¡Te presentamos la Nueva Edición Isaac POS V24.04 Ultra!** 🚀⚡
+    triggers: ["excel", "cargar", "migrar", "migracion", "catalogo", "inventario", "productos", "instalar", "instalacion", "anydesk", "remoto"],
+    title: "Migración desde Excel e Instalación Remota Asistida",
+    reply: `**¡Sí! Te ayudamos a cargar tu catálogo desde Excel y dejamos todo listo por AnyDesk:** 🤝📊
 
-Un salto tecnológico mayúsculo frente a las versiones tradicionales:
-
-* 📦 **Instalador Ultra Liviano:** Optimizado al máximo. Se descarga en pocos segundos y se instala al instante sin configuraciones complejas.
-* 🧠 **Motor con Aceleración GPU:** Consume **70% menos memoria RAM**. Fluidez constante de **60 FPS** en pantallas táctiles y touch-screens.
-* 🖥️ **Visor de Cliente (2da Pantalla en \`/#/display\`):** Conecta un monitor o tablet secundario de cara al comprador para que vea los artículos escaneados, precios unitarios, subtotal, IVA, tasa BCV y total dual en tiempo real.
-* 🏭 **Producción & Recetas BOM (Bill of Materials):** Control de recetas con deducción automática de materias primas e ingredientes (ideal para panaderías, pizzerías y fábricas).
-* 🏦 **Bancos & Tesorería Conciliada:** Cuadre de cuentas en Bolívares y Dólares, conciliación de lotes de Pago Móvil y transferencias.
-* 🛡️ **Modo Blindado:** Bloqueo de atajos y accesos no autorizados para garantizar que los cajeros solo operen el sistema.
-* 📥 **Descargas Oficiales Disponibles:** Puedes descargar el instalador directo para Windows (.exe) y Android (.apk) en la sección **Edición Ultra** de esta web.`,
+* **Migración Masiva desde Excel / CSV:** Si ya tienes tu lista de productos, códigos de barras, costos y precios en Excel o de otro sistema anterior, la importamos en minutos sin que tengas que tipear uno por uno.
+* **Instalación Remota 1 a 1 (AnyDesk):** Nuestro equipo técnico se conecta a tu PC o laptop, instala la versión **V24.04 Ultra**, configura tu impresora térmica, lector de barras, balanza y 2da pantalla de cliente.
+* **Capacitación Incluida:** Entrenamos a tus cajeros y encargados en vivo para que dominen la facturación bimonetaria y el arqueo ciego desde el primer día.`,
     suggestions: [
-      "¿Cómo funciona el Visor de Cliente?",
-      "¿Cómo se calculan las recetas en Producción BOM?",
-      "Descargar instalador para Windows o Android",
+      "Agendar instalación asistida",
+      "¿Qué incluye la Licencia Vitalicia ($199)?",
+      "Hablar con un asesor por WhatsApp",
     ],
   },
   {
-    triggers: ["visor", "display", "segunda pantalla", "pantalla cliente", "monitor cliente", "2da pantalla"],
-    title: "Visor de Cliente Secundario en Tiempo Real (/#/display)",
-    reply: `**Visor de Cliente para Segunda Pantalla:** 🖥️👀
+    triggers: ["ultra", "v24.04", "novedades", "actualizacion", "version", "nuevo"],
+    title: "Novedades de la Nueva Edición Ultra V24.04",
+    reply: `**¡Te presentamos la Nueva Edición Isaac POS V24.04 Ultra!** 🚀⚡
 
-* **Transparencia total:** Conecta un monitor secundario HDMI/USB o una tablet orientada al cliente abriendo la ruta \`/#/display\`.
-* **Sincronización instantánea:** A medida que el cajero escanea cada código de barras, el comprador ve la foto del producto, cantidad, precio unitario y total.
-* **Cálculo bimonetario claro:** Refleja el desglose de IVA 16%, IGTF y el total bimonetario en USD ($) y Bolívares (Bs) a tasa oficial BCV.
-* **Reduce reclamos en caja:** El cliente verifica sus productos antes de pagar, acelerando la fila y eliminando discusiones por precios.`,
+Un salto tecnológico mayúsculo frente a los puntos de venta tradicionales:
+
+* ⚡ **Arranque en 3 Segundos (<150 MB RAM):** Motor nativo ultraligero con base de datos SQLite local cifrada que vuela incluso en PCs de mostrador de bajos recursos.
+* 🖥️ **Visor de Cliente (2da Pantalla + QR Pago Móvil):** Conecta un monitor secundario o tablet orientada al comprador para mostrar cada artículo escaneado en USD/Bs y generar el **código QR de Pago Móvil** con el monto exacto en Bolívares.
+* 🏭 **Producción & Recetas BOM (Bill of Materials):** Control de recetas con descuento automático de materias primas e ingredientes.
+* 💊 **Farmacias, Lotes y Reposición Predictiva:** Control de fechas de vencimiento, psicotrópicos, kardex valorizado y alertas automáticas de compra con envío a proveedores por WhatsApp.
+* 🛡️ **Arqueo Ciego & Monitoreo Remoto:** Cierre de turno a ciegas anti-faltantes y supervisión de múltiples cajas en tiempo real.`,
+    suggestions: [
+      "¿Cómo funciona el Visor de Cliente con QR?",
+      "¿Me ayudan a cargar mis productos desde Excel?",
+      "Ver precios y planes",
+    ],
+  },
+  {
+    triggers: ["visor", "display", "segunda pantalla", "pantalla cliente", "monitor cliente", "2da pantalla", "qr"],
+    title: "Visor de Cliente Secundario con QR de Pago Móvil",
+    reply: `**Visor de Cliente en 2da Pantalla + QR de Pago Móvil Automático:** 🖥️📲
+
+* **Transparencia en el mostrador:** Conecta un segundo monitor HDMI/VGA o una tablet de cara al comprador.
+* **Sincronización en vivo:** Mientras el cajero escanea cada producto, el cliente ve su descripción, cantidad, precio en dólares ($) y conversión en bolívares (Bs.) a tasa oficial BCV.
+* **QR de Pago Móvil Dinámico:** Al seleccionar Pago Móvil, la 2da pantalla proyecta un **código QR bancario** con tu RIF/Cédula, teléfono, banco y el **monto exacto en Bolívares** para que el cliente pague en segundos sin errores de tipeo.`,
     suggestions: [
       "¿Requiere un monitor especial?",
-      "¿Qué otras novedades tiene la versión Ultra?",
+      "Probar el Visor en el simulador",
       "Ver precios y planes",
     ],
   },

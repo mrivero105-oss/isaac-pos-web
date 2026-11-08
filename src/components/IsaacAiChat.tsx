@@ -30,6 +30,77 @@ interface IsaacAiChatProps {
   onOpenCheckoutModal?: (plan?: string) => void;
 }
 
+// Renderizador seguro de Markdown ligero (negritas **...**, código `...`, enlaces [texto](url) y viñetas * )
+function renderInlineMarkdown(line: string, isUser: boolean): React.ReactNode[] {
+  const tokenRegex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
+  const parts = line.split(tokenRegex);
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+      return (
+        <strong
+          key={idx}
+          className={isUser ? "font-bold text-white" : "font-bold text-slate-950"}
+        >
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+      return (
+        <code
+          key={idx}
+          className="px-1.5 py-0.5 rounded bg-slate-200/80 font-mono text-[11px] text-blue-700 font-semibold"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={idx}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800 font-bold underline underline-offset-2"
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return <React.Fragment key={idx}>{part}</React.Fragment>;
+  });
+}
+
+function renderFormattedMessage(text: string, isUser: boolean): React.ReactNode {
+  const lines = text.split("\n");
+  return (
+    <div className="space-y-1.5">
+      {lines.map((rawLine, i) => {
+        const line = rawLine.trim();
+        if (!line) {
+          return <div key={i} className="h-1" />;
+        }
+        if (line.startsWith("* ") || line.startsWith("- ")) {
+          const content = line.slice(2).trim();
+          return (
+            <div key={i} className="flex items-start gap-2 pl-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
+              <span className="flex-1">{renderInlineMarkdown(content, isUser)}</span>
+            </div>
+          );
+        }
+        return (
+          <p key={i} className="leading-relaxed">
+            {renderInlineMarkdown(line, isUser)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export const IsaacAiChat: React.FC<IsaacAiChatProps> = ({
   isOpen,
   onClose,
@@ -233,10 +304,8 @@ Puedo orientarte con precisión sobre:
                     : "bg-slate-100 border border-slate-200 text-slate-800 rounded-tl-none shadow-sm"
                 }`}
               >
-                {/* Formateo simple de párrafos y listas */}
-                <div className="whitespace-pre-line space-y-1.5">
-                  {msg.text}
-                </div>
+                {/* Formateo limpio de Markdown (negritas, viñetas y enlaces) */}
+                {renderFormattedMessage(msg.text, msg.sender === "user")}
 
                 <div
                   className={`text-[10px] mt-2 ${
@@ -256,12 +325,22 @@ Puedo orientarte con precisión sobre:
                     <button
                       key={idx}
                       onClick={() => {
-                        if (sug.toLowerCase().includes("whatsapp")) {
+                        const s = sug.toLowerCase();
+                        const isActionBtn =
+                          s.startsWith("comprar") ||
+                          s.startsWith("agendar") ||
+                          s.startsWith("solicitar");
+                        if (s.includes("whatsapp") || s.includes("asesor")) {
                           window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-                        } else if (sug.toLowerCase().includes("vitalicia") && onOpenCheckoutModal) {
+                        } else if (isActionBtn && s.includes("vitalicia") && onOpenCheckoutModal) {
+                          onClose();
                           onOpenCheckoutModal("vitalicia");
-                        } else if (sug.toLowerCase().includes("profesional") && onOpenCheckoutModal) {
+                        } else if (isActionBtn && s.includes("profesional") && onOpenCheckoutModal) {
+                          onClose();
                           onOpenCheckoutModal("pro_anual");
+                        } else if (isActionBtn && (s.includes("demo") || s.includes("instalaci")) && onOpenCheckoutModal) {
+                          onClose();
+                          onOpenCheckoutModal("demo_gratis");
                         } else {
                           handleSend(sug);
                         }
