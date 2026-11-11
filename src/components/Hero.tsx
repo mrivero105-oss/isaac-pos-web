@@ -63,26 +63,32 @@ export const Hero: React.FC<HeroProps> = ({
           
           {/* Logo Oficial Principal a Gran Escala (Adapta versión clara/oscura automáticamente) */}
           <div className="flex justify-center mb-6 sm:mb-8">
-            <img
-              src="/isaac-logo-horizontal.png"
-              alt="Isaac POS • Sistema de Facturación y Ventas"
-              width={796}
-              height={259}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="dark:hidden w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_14px_30px_rgba(37,99,235,0.16)] select-none"
-            />
-            <img
-              src="/isaac-logo-horizontal-dark.png"
-              alt="Isaac POS • Sistema de Facturación y Ventas"
-              width={796}
-              height={259}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="hidden dark:block w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_10px_28px_rgba(56,189,248,0.18)] select-none"
-            />
+            <picture className="dark:hidden">
+              <source srcSet="/isaac-logo-horizontal.webp" type="image/webp" />
+              <img
+                src="/isaac-logo-horizontal.png"
+                alt="Isaac POS • Sistema de Facturación y Ventas"
+                width={796}
+                height={259}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_14px_30px_rgba(37,99,235,0.16)] select-none"
+              />
+            </picture>
+            <picture className="hidden dark:block">
+              <source srcSet="/isaac-logo-horizontal-dark.webp" type="image/webp" />
+              <img
+                src="/isaac-logo-horizontal-dark.png"
+                alt="Isaac POS • Sistema de Facturación y Ventas"
+                width={796}
+                height={259}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_10px_28px_rgba(56,189,248,0.18)] select-none"
+              />
+            </picture>
           </div>
 
           {/* Eyebrow de producto financiero / POS */}

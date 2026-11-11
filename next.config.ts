@@ -35,11 +35,11 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(favicon.ico|icon-48x48.png|icon-96x96.png|icon-192x192.png|icon-512x512.png|apple-touch-icon.png)",
+        source: "/:all*(svg|jpg|jpeg|png|webp|ico|woff2)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=604800, stale-while-revalidate=86400",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
