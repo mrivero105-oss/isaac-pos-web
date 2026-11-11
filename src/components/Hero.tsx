@@ -68,6 +68,9 @@ export const Hero: React.FC<HeroProps> = ({
               alt="Isaac POS • Sistema de Facturación y Ventas"
               width={796}
               height={259}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="dark:hidden w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_14px_30px_rgba(37,99,235,0.16)] select-none"
             />
             <img
@@ -75,6 +78,9 @@ export const Hero: React.FC<HeroProps> = ({
               alt="Isaac POS • Sistema de Facturación y Ventas"
               width={796}
               height={259}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="hidden dark:block w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_10px_28px_rgba(56,189,248,0.18)] select-none"
             />
           </div>
