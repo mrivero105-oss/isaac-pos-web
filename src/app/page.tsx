@@ -19,6 +19,7 @@ import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { FloatingAiRobot } from "@/components/FloatingAiRobot";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 const SecureCheckoutModal = dynamic(
   () => import("@/components/SecureCheckoutModal").then((m) => m.SecureCheckoutModal),
@@ -77,6 +78,7 @@ export default function Home() {
   };
 
   const handleOpenModal = (plan: string = "pro_anual") => {
+    trackGoogleAdsEvent("open_checkout_modal", { plan });
     setSelectedPlan(plan);
     setModalOpen(true);
   };
@@ -86,6 +88,7 @@ export default function Home() {
   };
 
   const handleOpenAiChat = () => {
+    trackGoogleAdsEvent("open_ai_chat");
     setAiChatOpen(true);
   };
 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Headphones, FileSpreadsheet, MonitorCheck, Users, MessageCircle, Clock, ShieldCheck, Check } from "lucide-react";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 export const HumanSupportSection: React.FC = () => {
   return (
@@ -144,6 +145,7 @@ export const HumanSupportSection: React.FC = () => {
               href="https://wa.me/584248302226?text=Hola%2C%20quisiera%20asesor%C3%ADa%20personalizada%20sobre%20Isaac%20POS%20y%20agendar%20una%20demostraci%C3%B3n."
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackGoogleAdsEvent("click_whatsapp", { location: "human_support" })}
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-slate-950" />

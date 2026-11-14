@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { X, Send } from "lucide-react";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 interface FloatingWhatsAppProps {
   onOpenAiChat?: () => void;
@@ -15,6 +17,10 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
   );
 
   const handleSend = () => {
+    trackGoogleAdsEvent("click_whatsapp", {
+      location: "floating_widget",
+      message_length: message.length,
+    });
     const url = `https://wa.me/584248302226?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setIsOpen(false);
@@ -29,9 +35,11 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
           <div className="bg-emerald-600 p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-white/20 bg-emerald-700/60">
-                <img
+                <Image
                   src="/isaac-logo-ultra.png"
                   alt="Isaac POS"
+                  width={36}
+                  height={36}
                   className="w-full h-full object-contain p-0.5"
                 />
               </div>

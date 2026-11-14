@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import {
   ShoppingCart,
   Search,
@@ -20,20 +21,10 @@ import {
   Lock,
   ArrowRight,
 } from "lucide-react";
+import { useBcvRate } from "@/lib/useBcvRate";
 
 export default function TerminalPreviewPage() {
-  const [bcvRate, setBcvRate] = useState(857.89);
-
-  useEffect(() => {
-    fetch("/api/bcv")
-      .then((res) => res.json())
-      .then((json) => {
-        if (json?.data?.rate && typeof json.data.rate === "number") {
-          setBcvRate(json.data.rate);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const { rate: bcvRate } = useBcvRate();
 
   const products = [
     {
@@ -147,9 +138,11 @@ export default function TerminalPreviewPage() {
       <div className="bg-[#0b0f19] px-3 py-1.5 border-b border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded overflow-hidden">
-            <img
+            <Image
               src="/isaac-logo-ultra.png"
               alt="Isaac POS Icon"
+              width={16}
+              height={16}
               className="w-full h-full object-contain"
             />
           </div>
@@ -168,9 +161,11 @@ export default function TerminalPreviewPage() {
         {/* Marca Oficial Izquierda */}
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-slate-900 border border-cyan-500/40 p-1 flex items-center justify-center shadow-inner">
-            <img
+            <Image
               src="/isaac-logo-ultra.png"
               alt="Isaac POS"
+              width={36}
+              height={36}
               className="w-full h-full object-contain"
             />
           </div>
@@ -411,9 +406,11 @@ export default function TerminalPreviewPage() {
                       </div>
 
                       <div className="w-full h-24 rounded-lg bg-white p-2 mb-2 flex items-center justify-center overflow-hidden">
-                        <img
+                        <Image
                           src={p.image}
                           alt={p.name}
+                          width={160}
+                          height={96}
                           className="w-full h-full object-contain"
                         />
                       </div>

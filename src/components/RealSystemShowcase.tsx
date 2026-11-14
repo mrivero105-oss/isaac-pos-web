@@ -356,7 +356,10 @@ export const RealSystemShowcase: React.FC = () => {
             return (
               <button
                 key={sub.id}
-                onClick={() => setActiveSubModuleId(sub.id)}
+                onClick={() => {
+                  setActiveSubModuleId(sub.id);
+                  setActiveHotspotIdx(0);
+                }}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border whitespace-nowrap cursor-pointer ${
                   isSubSelected
                     ? "bg-blue-100/90 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border-blue-300 dark:border-blue-700 shadow-xs font-bold"

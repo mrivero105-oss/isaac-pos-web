@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 import {
   Monitor,
   HardDrive,
@@ -145,7 +145,14 @@ export const UltraEditionShowcase: React.FC<UltraEditionShowcaseProps> = ({ onOp
               <div className="mt-8 pt-5 border-t border-blue-100 dark:border-slate-800/80">
                 <button
                   type="button"
-                  onClick={() => onOpenModal ? onOpenModal("demo_gratis") : window.open("https://wa.me/584248302226", "_blank")}
+                  onClick={() => {
+                    if (onOpenModal) {
+                      onOpenModal("demo_gratis");
+                    } else {
+                      trackGoogleAdsEvent("click_whatsapp", { source: "cta_ultra_edition_pc" });
+                      window.open("https://wa.me/584248302226", "_blank", "noopener,noreferrer");
+                    }
+                  }}
                   className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 transition-all cursor-pointer"
                 >
                   <span>Solicitar Instalación para PC</span>
@@ -190,7 +197,14 @@ export const UltraEditionShowcase: React.FC<UltraEditionShowcaseProps> = ({ onOp
               <div className="mt-8 pt-5 border-t border-emerald-100 dark:border-slate-800/80">
                 <button
                   type="button"
-                  onClick={() => onOpenModal ? onOpenModal("demo_gratis") : window.open("https://wa.me/584248302226", "_blank")}
+                  onClick={() => {
+                    if (onOpenModal) {
+                      onOpenModal("demo_gratis");
+                    } else {
+                      trackGoogleAdsEvent("click_whatsapp", { source: "cta_ultra_edition_android" });
+                      window.open("https://wa.me/584248302226", "_blank", "noopener,noreferrer");
+                    }
+                  }}
                   className="w-full py-3 px-4 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer border border-slate-800 dark:border-slate-700"
                 >
                   <span>Consultar Terminal Android</span>
@@ -218,6 +232,7 @@ export const UltraEditionShowcase: React.FC<UltraEditionShowcaseProps> = ({ onOp
               href="https://wa.me/584248302226?text=Hola%2C%20quisiera%20saber%20c%C3%B3mo%20es%20el%20proceso%20de%20instalaci%C3%B3n%20asistida%20de%20Isaac%20POS."
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackGoogleAdsEvent("click_whatsapp", { location: "ultra_edition" })}
               className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 shrink-0 shadow-md shadow-emerald-600/20 transition-colors"
             >
               <span>Hablar con un Instalador</span>

@@ -17,48 +17,48 @@ const EVENTS: SocialProofEvent[] = [
     id: 1,
     merchant: "Minimarket El Trébol",
     city: "Caracas",
-    action: "activó el Plan Profesional (3 Cajas en Red)",
-    timeAgo: "Hace 4 min",
+    action: "opera el Plan Profesional (3 Cajas en Red)",
+    timeAgo: "Cliente activo",
     type: "purchase",
   },
   {
     id: 2,
     merchant: "Supermercado Gran Avenida",
     city: "Valencia",
-    action: "habilitó el Visor 2da Pantalla con QR Pago Móvil",
-    timeAgo: "Hace 11 min",
+    action: "utiliza Visor 2da Pantalla con QR Pago Móvil",
+    timeAgo: "Cliente activo",
     type: "usage",
   },
   {
     id: 3,
     merchant: "Distribuidora El Progreso",
     city: "Barquisimeto",
-    action: "completó migración de 1,200 productos desde Excel vía AnyDesk",
-    timeAgo: "Hace 19 min",
+    action: "migró 1,200+ productos desde Excel vía AnyDesk",
+    timeAgo: "Implementación",
     type: "usage",
   },
   {
     id: 4,
     merchant: "Farmacia San José",
     city: "Maracaibo",
-    action: "cerró turno con Arqueo Ciego: 0% discrepancia",
-    timeAgo: "Hace 27 min",
+    action: "opera Arqueo Ciego por turno y control de lotes",
+    timeAgo: "Cliente activo",
     type: "audit",
   },
   {
     id: 5,
     merchant: "Minimarket Los Samanes",
     city: "Maracay",
-    action: "adquirió la Licencia Vitalicia Perpetua ($199)",
-    timeAgo: "Hace 38 min",
+    action: "implementó Licencia Vitalicia Perpetua ($199)",
+    timeAgo: "Caso de éxito",
     type: "purchase",
   },
   {
     id: 6,
     merchant: "Inversiones La Perla",
     city: "Puerto La Cruz",
-    action: "generó orden de reposición automática por WhatsApp",
-    timeAgo: "Hace 46 min",
+    action: "usa reposición predictiva de stock con WhatsApp",
+    timeAgo: "Cliente activo",
     type: "usage",
   },
 ];
@@ -71,15 +71,18 @@ export const LiveSocialProof: React.FC = () => {
   useEffect(() => {
     if (isDismissed) return;
 
+    let switchTimer: ReturnType<typeof setTimeout> | null = null;
+
     // Primer disparo a los 3 segundos
     const initialTimer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
 
-    // Ciclo periódico cada 11 segundos
+    // Ciclo periódico cada 11 segundos con limpieza segura de timers
     const interval = setInterval(() => {
       setIsVisible(false);
-      setTimeout(() => {
+      if (switchTimer) clearTimeout(switchTimer);
+      switchTimer = setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % EVENTS.length);
         setIsVisible(true);
       }, 1000);
@@ -88,6 +91,7 @@ export const LiveSocialProof: React.FC = () => {
     return () => {
       clearTimeout(initialTimer);
       clearInterval(interval);
+      if (switchTimer) clearTimeout(switchTimer);
     };
   }, [isDismissed]);
 

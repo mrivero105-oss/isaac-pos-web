@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { checkRateLimit } from "@/lib/rateLimit";
+import { checkRateLimitDistributed, getClientIp } from "@/lib/rateLimit";
 import { ChatMessageSchema } from "@/lib/validations";
 
 // Base de conocimiento experta 100% gratuita de Isaac POS
@@ -336,11 +336,10 @@ export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   try {
-    const forwardedFor = req.headers.get("x-forwarded-for");
-    const clientIp = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
+    const clientIp = getClientIp(req);
 
     // Protección anti-abuso / Denial-of-Wallet (máx. 20 consultas por minuto por IP)
-    const rateCheck = checkRateLimit(`chat_${clientIp}`, 20, 60 * 1000);
+    const rateCheck = await checkRateLimitDistributed(`chat_${clientIp}`, 20, 60 * 1000);
     if (!rateCheck.success) {
       return NextResponse.json(
         {
@@ -351,7 +350,7 @@ export async function POST(req: NextRequest) {
         {
           status: 429,
           headers: {
-            "Retry-After": Math.ceil((rateCheck.reset - Date.now()) / 1000).toString(),
+            "Retry-After": Math.max(1, Math.ceil((rateCheck.reset - Date.now()) / 1000)).toString(),
           },
         }
       );
@@ -371,6 +370,7 @@ export async function POST(req: NextRequest) {
     }
 
     const rawMessage: string = parsed.data.message;
+    const history = parsed.data.history || [];
     const userMessage = normalizeText(rawMessage);
 
     if (!userMessage) {
@@ -395,8 +395,13 @@ export async function POST(req: NextRequest) {
       .filter((entry) => entry.matches > 0)
       .sort((a, b) => b.matches - a.matches);
 
-    // 1. Si es una consulta directa de un módulo o botón rápido (latencia instantánea <50ms)
-    if (scoredItems.length === 1 || (scoredItems.length > 1 && rawMessage.length < 65)) {
+    const hasConversationHistory = history.length > 0;
+
+    // 1. Si es consulta inicial directa de un módulo o botón rápido (latencia instantánea <50ms)
+    if (
+      !hasConversationHistory &&
+      (scoredItems.length === 1 || (scoredItems.length > 1 && rawMessage.length < 65))
+    ) {
       const primary = scoredItems[0].item;
       return NextResponse.json({
         success: true,
@@ -406,15 +411,26 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 2. Para consultas abiertas, complejas o multi-tema: Google Gemini 3.8 Flash Gratuito
+    // 2. Para consultas abiertas, complejas o con historial previo: Google Gemini Flash
     const geminiKey = process.env.GEMINI_API_KEY?.trim();
     if (geminiKey) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 14000);
+        const timeoutId = setTimeout(() => controller.abort(), 7000);
+
+        const geminiContents = [
+          ...history.map((item) => ({
+            role: item.sender === "user" ? "user" : "model",
+            parts: [{ text: item.text }],
+          })),
+          {
+            role: "user",
+            parts: [{ text: rawMessage }],
+          },
+        ];
 
         const geminiRes = await fetch(
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
           {
             method: "POST",
             headers: {
@@ -426,18 +442,10 @@ export async function POST(req: NextRequest) {
               systemInstruction: {
                 parts: [{ text: SYSTEM_PROMPT }],
               },
-              contents: [
-                {
-                  role: "user",
-                  parts: [{ text: rawMessage }],
-                },
-              ],
+              contents: geminiContents,
               generationConfig: {
-                temperature: 0.3,
-                maxOutputTokens: 320,
-                thinkingConfig: {
-                  thinkingLevel: "LOW",
-                },
+                temperature: 0.35,
+                maxOutputTokens: 350,
               },
             }),
           }
@@ -458,23 +466,35 @@ export async function POST(req: NextRequest) {
               suggestions: [
                 "¿Qué incluye la Licencia Vitalicia ($199)?",
                 "¿Me ayudan a cargar mis productos desde Excel?",
-                "Hablar con un asesor por WhatsApp",
+                "Hablar por WhatsApp directo",
               ],
-              source: "gemini_3_8_flash_free",
+              source: "gemini_flash_live",
             });
           }
+        } else {
+          const errText = await geminiRes.text();
+          console.warn("[GEMINI HTTP NOTICE]", geminiRes.status, errText);
         }
-      } catch {
-        // Fallback silencioso si hay timeout o límite de cuota
+      } catch (geminiErr) {
+        console.warn("[GEMINI TIMEOUT/FETCH NOTICE]", geminiErr);
       }
     }
 
     // 3. Nivel Gratuito Oficial Groq (Llama 3.3 70B) si GROQ_API_KEY está configurada
-    const groqKey = process.env.GROQ_API_KEY;
+    const groqKey = process.env.GROQ_API_KEY?.trim();
     if (groqKey) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+        const groqMessages = [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...history.map((item) => ({
+            role: item.sender === "user" ? "user" : "assistant",
+            content: item.text,
+          })),
+          { role: "user", content: rawMessage },
+        ];
 
         const groqRes = await fetch(
           "https://api.groq.com/openai/v1/chat/completions",
@@ -489,10 +509,7 @@ export async function POST(req: NextRequest) {
               model: "llama-3.3-70b-versatile",
               temperature: 0.35,
               max_tokens: 380,
-              messages: [
-                { role: "system", content: SYSTEM_PROMPT },
-                { role: "user", content: rawMessage },
-              ],
+              messages: groqMessages,
             }),
           }
         );
@@ -508,7 +525,7 @@ export async function POST(req: NextRequest) {
               suggestions: [
                 "¿Qué incluye la Licencia Vitalicia ($199)?",
                 "¿Me ayudan a cargar mis productos desde Excel?",
-                "Hablar con un asesor por WhatsApp",
+                "Hablar por WhatsApp directo",
               ],
               source: "groq_llama3_free",
             });

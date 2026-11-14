@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import {
   ShoppingCart,
   Search,
@@ -24,11 +25,13 @@ import {
   FileText,
   DoorOpen,
   Volume2,
+  VolumeX,
   Sparkles,
   Lock,
   ArrowRight,
   Monitor,
 } from "lucide-react";
+import { useBcvRate } from "@/lib/useBcvRate";
 
 interface Product {
   id: string;
@@ -179,11 +182,27 @@ interface IsaacPosRealTerminalProps {
   isCompactHero?: boolean;
 }
 
+const DEMO_CUSTOMERS = [
+  { name: "CLIENTE OCASIONAL", doc: "Consumidor Final • F8" },
+  { name: "INV. SAN JOSÉ C.A.", doc: "RIF J-40192837-1 • F8" },
+  { name: "MARÍA RODRÍGUEZ", doc: "C.I. V-18.450.912 • F8" },
+] as const;
+
+const MANUAL_DEMO_PRODUCT: Product = {
+  id: "manual-vario",
+  name: "Artículo Varios (Ingreso Manual)",
+  category: "GENERAL",
+  priceUsd: 2.5,
+  stock: 99,
+  image: "/real-products/doradita.png",
+  tag: "MANUAL F3",
+};
+
 export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
   onOpenCheckoutModal,
   isCompactHero = false,
 }) => {
-  const [bcvRate, setBcvRate] = useState<number>(857.89);
+  const { rate: bcvRate } = useBcvRate();
   const [selectedCategory, setSelectedCategory] = useState<string>("TODAS");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currencyMode, setCurrencyMode] = useState<"BS" | "USD">("BS");
@@ -196,24 +215,31 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
   const [isOfflineSimulated, setIsOfflineSimulated] = useState<boolean>(false);
   const [savedTicketsCount, setSavedTicketsCount] = useState<number>(14);
   const [lastBackupTime, setLastBackupTime] = useState<string>("Sincronizado");
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [parkedCart, setParkedCart] = useState<CartItem[] | null>(null);
+  const [discountPercent, setDiscountPercent] = useState<number>(0);
+  const [customerIndex, setCustomerIndex] = useState<number>(0);
+  const [actionNotice, setActionNotice] = useState<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const noticeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const keyboardHandlersRef = useRef<{
+    onF3: () => void;
+    onF5: () => void;
+    onF6: () => void;
+    onF7: () => void;
+    onF8: () => void;
+    onF9: () => void;
+  } | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
-    fetch("/api/bcv")
-      .then((res) => res.json())
-      .then((json) => {
-        if (isMounted && json?.data?.rate && typeof json.data.rate === "number") {
-          setBcvRate(json.data.rate);
-        }
-      })
-      .catch(() => {});
     return () => {
-      isMounted = false;
+      if (noticeTimeoutRef.current) {
+        clearTimeout(noticeTimeoutRef.current);
+      }
     };
   }, []);
 
-  // Atajos de teclado reales de mostrador (F2 Cobrar, F4 Buscar, F5 Limpiar)
+  // Atajos de teclado reales de mostrador (F2 Cobrar, F3 Manual, F4 Buscar, F5 Pausar/Reanudar, F6 Sonido, F7 Incentivo, F8 Cliente, F9 Gaveta)
   useEffect(() => {
     if (isCompactHero) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -224,9 +250,24 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
       } else if (e.key === "F2") {
         e.preventDefault();
         setShowReceiptModal(true);
+      } else if (e.key === "F3") {
+        e.preventDefault();
+        keyboardHandlersRef.current?.onF3();
       } else if (e.key === "F5") {
         e.preventDefault();
-        setCart([]);
+        keyboardHandlersRef.current?.onF5();
+      } else if (e.key === "F6") {
+        e.preventDefault();
+        keyboardHandlersRef.current?.onF6();
+      } else if (e.key === "F7") {
+        e.preventDefault();
+        keyboardHandlersRef.current?.onF7();
+      } else if (e.key === "F8") {
+        e.preventDefault();
+        keyboardHandlersRef.current?.onF8();
+      } else if (e.key === "F9") {
+        e.preventDefault();
+        keyboardHandlersRef.current?.onF9();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -327,6 +368,88 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
 
   const clearCart = () => setCart([]);
 
+  const showNotice = (msg: string) => {
+    setActionNotice(msg);
+    if (noticeTimeoutRef.current) {
+      clearTimeout(noticeTimeoutRef.current);
+    }
+    noticeTimeoutRef.current = setTimeout(() => {
+      setActionNotice(null);
+    }, 2800);
+  };
+
+  const handleManualEntry = () => {
+    addToCart(MANUAL_DEMO_PRODUCT);
+    showNotice("Artículo manual ($2.50) agregado al carrito (F3)");
+  };
+
+  const handlePauseResume = () => {
+    if (cart.length > 0) {
+      setParkedCart(cart);
+      setCart([]);
+      showNotice("Ticket pausado en espera. Pulsa Pausas (F5) para reanudar.");
+    } else if (parkedCart && parkedCart.length > 0) {
+      setCart(parkedCart);
+      setParkedCart(null);
+      showNotice("Ticket pausado restaurado en caja.");
+    } else {
+      showNotice("No hay venta activa ni ticket en espera.");
+    }
+  };
+
+  const handleToggleSound = () => {
+    setSoundEnabled((prev) => {
+      const next = !prev;
+      showNotice(next ? "Audio de escáner y caja activado (F6)" : "Audio de caja silenciado (F6)");
+      return next;
+    });
+  };
+
+  const handleToggleDiscount = () => {
+    setDiscountPercent((prev) => {
+      const next = prev === 0 ? 5 : 0;
+      showNotice(next > 0 ? "Descuento incentivo del 5% aplicado (F7)" : "Descuento incentivo removido (F7)");
+      return next;
+    });
+  };
+
+  const handleCycleCustomer = () => {
+    const nextIdx = (customerIndex + 1) % DEMO_CUSTOMERS.length;
+    setCustomerIndex(nextIdx);
+    showNotice(`Cliente asignado: ${DEMO_CUSTOMERS[nextIdx].name} (F8)`);
+  };
+
+  const handleOpenDrawer = () => {
+    showNotice("Pulso RJ11 enviado: Gaveta portamonedas abierta (F9)");
+  };
+
+  const handleQuote = () => {
+    if (cart.length === 0) {
+      showNotice("Agrega productos para generar una cotización rápida.");
+      return;
+    }
+    showNotice(`Cotización #COT-2404 lista por $${totalUsd.toFixed(2)} USD`);
+  };
+
+  const handleReprint = () => {
+    if (cart.length > 0) {
+      setShowReceiptModal(true);
+    } else {
+      showNotice(`Último comprobante #00${savedTicketsCount} enviado a impresora térmica`);
+    }
+  };
+
+  const currentCustomer = DEMO_CUSTOMERS[customerIndex];
+
+  keyboardHandlersRef.current = {
+    onF3: handleManualEntry,
+    onF5: handlePauseResume,
+    onF6: handleToggleSound,
+    onF7: handleToggleDiscount,
+    onF8: handleCycleCustomer,
+    onF9: handleOpenDrawer,
+  };
+
   const filteredProducts = SAMPLE_PRODUCTS.filter((p) => {
     const matchesCat =
       selectedCategory === "TODAS" || p.category === selectedCategory;
@@ -336,10 +459,12 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
     return matchesCat && matchesSearch;
   });
 
-  const totalUsd = cart.reduce(
+  const subtotalUsd = cart.reduce(
     (sum, item) => sum + item.product.priceUsd * item.quantity,
     0
   );
+  const discountUsd = subtotalUsd * (discountPercent / 100);
+  const totalUsd = Math.max(0, subtotalUsd - discountUsd);
   const totalBs = totalUsd * bcvRate;
 
   const isLight = activeTheme === "CLARO";
@@ -400,9 +525,11 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
       <div className={`${titleBarBg} px-3 py-2 border-b flex flex-wrap items-center justify-between gap-2 text-xs font-mono transition-colors duration-200`}>
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 rounded overflow-hidden">
-            <img
+            <Image
               src="/isaac-logo-ultra.png"
               alt="Isaac POS Icon"
+              width={16}
+              height={16}
               className="w-full h-full object-contain"
             />
           </div>
@@ -456,9 +583,11 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
         {/* Marca Oficial Izquierda */}
         <div className="flex items-center gap-3">
           <div className={`w-8 h-8 rounded-xl ${isLight ? "bg-slate-100 border-blue-300" : "bg-slate-900 border-cyan-500/40"} border p-1 flex items-center justify-center shadow-inner`}>
-            <img
+            <Image
               src="/isaac-logo-ultra.png"
               alt="Isaac POS"
+              width={32}
+              height={32}
               className="w-full h-full object-contain"
             />
           </div>
@@ -804,9 +933,11 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
 
                       {/* Imagen con fondo blanco limpio como en supermercados */}
                       <div className={`w-full h-24 rounded-lg bg-white ${isLight ? "border border-slate-100" : ""} p-2 mb-2 flex items-center justify-center overflow-hidden`}>
-                        <img
+                        <Image
                           src={p.image}
                           alt={p.name}
+                          width={160}
+                          height={96}
                           className="w-full h-full object-contain group-hover:scale-105 transition-transform"
                         />
                       </div>
@@ -860,32 +991,66 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
               </div>
 
               <div className="flex items-center gap-2">
-                <Volume2 className={`w-3.5 h-3.5 ${textSecondary} cursor-pointer`} />
+                <button
+                  type="button"
+                  onClick={handleToggleSound}
+                  title={soundEnabled ? "Silenciar sonido (F6)" : "Activar sonido (F6)"}
+                  aria-label="Alternar sonido de caja"
+                  className={`${soundEnabled ? textSecondary : "text-rose-400"} hover:opacity-80 cursor-pointer`}
+                >
+                  {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+                </button>
                 <span className={`text-[10px] font-mono ${isLight ? "text-slate-600 bg-slate-100 border-slate-300" : "text-slate-400 bg-slate-900 border-slate-800"} px-1.5 py-0.5 rounded border`}>
                   F6
                 </span>
               </div>
             </div>
 
+            {actionNotice && (
+              <div className={`mb-2.5 px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-semibold border ${isLight ? "bg-blue-50 border-blue-200 text-blue-800" : "bg-cyan-500/10 border-cyan-500/30 text-cyan-300"}`}>
+                {actionNotice}
+              </div>
+            )}
+
             {/* 5 Botones Rápidos Superiores (Manual, Pausas, Cotizar, Historial, Gaveta) */}
             <div className="grid grid-cols-5 gap-1 mb-3 text-[9px] font-mono text-center">
-              <button className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}>
+              <button
+                type="button"
+                onClick={handleManualEntry}
+                className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}
+              >
                 <div className="text-[11px]">+</div>
                 <div>Manual F3</div>
               </button>
-              <button className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}>
-                <div className="text-[11px]">⏸</div>
-                <div>Pausas F5</div>
+              <button
+                type="button"
+                onClick={handlePauseResume}
+                className={`${surfaceBg} ${parkedCart ? "border-amber-500/50 text-amber-400" : isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}
+              >
+                <div className="text-[11px]">{parkedCart ? "▶" : "⏸"}</div>
+                <div>{parkedCart ? "Reanudar" : "Pausas F5"}</div>
               </button>
-              <button className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}>
+              <button
+                type="button"
+                onClick={handleQuote}
+                className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}
+              >
                 <div className="text-[11px]">📄</div>
                 <div>Cotizar S</div>
               </button>
-              <button className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}>
+              <button
+                type="button"
+                onClick={handleReprint}
+                className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}
+              >
                 <div className="text-[11px]">🖨️</div>
                 <div>Reimp.</div>
               </button>
-              <button className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}>
+              <button
+                type="button"
+                onClick={handleOpenDrawer}
+                className={`${surfaceBg} ${isLight ? "hover:bg-slate-100 text-slate-700" : "hover:bg-slate-800 text-slate-300"} border p-1 rounded cursor-pointer`}
+              >
                 <div className="text-[11px]">🚪</div>
                 <div>Gaveta F9</div>
               </button>
@@ -893,14 +1058,18 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
 
             {/* Selector de Cliente Ocasional */}
             <div className={`${isLight ? "bg-slate-50 border-slate-200" : surfaceBg} border rounded-xl p-2.5 mb-3 flex items-center justify-between text-xs`}>
-              <div className="flex items-center gap-2">
-                <User className={`w-4 h-4 ${textSecondary}`} />
-                <div>
-                  <div className={`font-bold ${textPrimary} text-[11px]`}>CLIENTE OCASIONAL</div>
-                  <div className={`text-[10px] ${textSecondary}`}>Consumidor Final • F8</div>
+              <div className="flex items-center gap-2 min-w-0">
+                <User className={`w-4 h-4 ${textSecondary} shrink-0`} />
+                <div className="min-w-0">
+                  <div className={`font-bold ${textPrimary} text-[11px] truncate`}>{currentCustomer.name}</div>
+                  <div className={`text-[10px] ${textSecondary} truncate`}>{currentCustomer.doc}</div>
                 </div>
               </div>
-              <button className={`text-[10px] font-mono font-bold ${isLight ? "bg-white hover:bg-slate-100 text-slate-700 border-slate-300" : "bg-slate-800 hover:bg-slate-700 text-slate-300 border-slate-700"} px-2 py-1 rounded border`}>
+              <button
+                type="button"
+                onClick={handleCycleCustomer}
+                className={`text-[10px] font-mono font-bold ${isLight ? "bg-white hover:bg-slate-100 text-slate-700 border-slate-300" : "bg-slate-800 hover:bg-slate-700 text-slate-300 border-slate-700"} px-2 py-1 rounded border cursor-pointer shrink-0`}
+              >
                 ELEGIR ▼
               </button>
             </div>
@@ -992,19 +1161,30 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
                 <span className={`${textSecondary} uppercase text-[10px]`}>REF. DIVISAS</span>
                 <span className={`text-base font-black ${isLight ? "text-emerald-600" : "text-emerald-400"}`}>${totalUsd.toFixed(2)}</span>
               </div>
+              {discountPercent > 0 && (
+                <div className="flex justify-between items-center text-[10px] font-mono pt-1 text-emerald-500 font-bold">
+                  <span>INCENTIVO ({discountPercent}%):</span>
+                  <span>-${discountUsd.toFixed(2)}</span>
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-2 gap-1.5 mb-2 text-xs font-bold">
               <button
-                onClick={clearCart}
+                type="button"
+                onClick={handlePauseResume}
                 className={`py-1.5 px-2 rounded-lg ${isLight ? "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700" : `${surfaceBg} hover:bg-slate-800 text-slate-300`} border text-[11px] flex items-center justify-center gap-1 cursor-pointer`}
               >
                 <Pause className="w-3 h-3" />
-                <span>PAUSAR (F5)</span>
+                <span>{parkedCart ? "REANUDAR (F5)" : "PAUSAR (F5)"}</span>
               </button>
-              <button className={`py-1.5 px-2 rounded-lg ${isLight ? "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700" : `${surfaceBg} hover:bg-slate-800 text-slate-300`} border text-[11px] flex items-center justify-center gap-1 cursor-pointer`}>
+              <button
+                type="button"
+                onClick={handleToggleDiscount}
+                className={`py-1.5 px-2 rounded-lg ${discountPercent > 0 ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400" : isLight ? "bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700" : `${surfaceBg} hover:bg-slate-800 text-slate-300`} border text-[11px] flex items-center justify-center gap-1 cursor-pointer`}
+              >
                 <Gift className="w-3 h-3" />
-                <span>INCENTIVO (F7)</span>
+                <span>{discountPercent > 0 ? "INCENTIVO -5%" : "INCENTIVO (F7)"}</span>
               </button>
             </div>
 
@@ -1191,15 +1371,15 @@ export const IsaacPosRealTerminal: React.FC<IsaacPosRealTerminalProps> = ({
                   <div className="space-y-1.5 text-xs mt-2">
                     <div className="flex justify-between px-3 py-1.5 rounded-lg bg-[#dce8f6] border border-blue-200/60">
                       <span className="text-slate-600">Banco:</span>
-                      <span className="font-bold text-slate-900">Banco de Venezuela (BDV)</span>
+                      <span className="font-bold text-slate-900">Banco Demo (0102)</span>
                     </div>
                     <div className="flex justify-between px-3 py-1.5 rounded-lg bg-[#dce8f6] border border-blue-200/60">
                       <span className="text-slate-600">C.I / RIF:</span>
-                      <span className="font-mono font-bold text-slate-900">V-00.000.000</span>
+                      <span className="font-mono font-bold text-slate-900">V-00.000.000 (Demo)</span>
                     </div>
                     <div className="flex justify-between px-3 py-1.5 rounded-lg bg-[#dce8f6] border border-blue-200/60">
                       <span className="text-slate-600">Teléfono:</span>
-                      <span className="font-mono font-bold text-slate-900">0414 0000000</span>
+                      <span className="font-mono font-bold text-slate-900">0414-0000000 (Demo)</span>
                     </div>
                   </div>
 

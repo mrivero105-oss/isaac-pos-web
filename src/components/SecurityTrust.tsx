@@ -56,7 +56,7 @@ export const SecurityTrust: React.FC = () => {
                   <XCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 dark:text-white block font-semibold">El cajero ve el total teórico del sistema:</strong>
-                    Sabe cuánto dinero "debería" haber en la gaveta antes de contar, lo que facilita el cuadre forzado o la retención de excedentes.
+                    Sabe cuánto dinero &quot;debería&quot; haber en la gaveta antes de contar, lo que facilita el cuadre forzado o la retención de excedentes.
                   </div>
                 </div>
 

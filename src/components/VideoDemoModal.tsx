@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useBcvRate } from "@/lib/useBcvRate";
 import {
   X,
   Play,
@@ -134,21 +135,13 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
-  const [bcvRate, setBcvRate] = useState(896.12);
+  const { rate: bcvRate } = useBcvRate();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setCurrentTime(0);
       setIsPlaying(true);
-      fetch("/api/bcv")
-        .then((res) => res.json())
-        .then((json) => {
-          if (json?.data?.rate && typeof json.data.rate === "number") {
-            setBcvRate(json.data.rate);
-          }
-        })
-        .catch(() => {});
     } else {
       setIsPlaying(false);
       setCurrentTime(0);
@@ -405,9 +398,11 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
             <div className="bg-[#0b101b] px-4 py-2 border-b border-slate-800/90 flex flex-wrap items-center justify-between gap-2 text-xs select-none">
               <div className="flex items-center gap-2.5">
                 <div className="w-7 h-7 rounded-lg bg-slate-900 border border-cyan-500/40 p-0.5 flex items-center justify-center">
-                  <img
+                  <Image
                     src="/isaac-logo-ultra.png"
                     alt="Isaac POS"
+                    width={28}
+                    height={28}
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -558,9 +553,11 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
                               )}
                             </div>
                             <div className="w-full h-16 bg-white rounded-lg p-1.5 mb-1.5 flex items-center justify-center">
-                              <img
+                              <Image
                                 src={prod.image}
                                 alt={prod.name}
+                                width={96}
+                                height={64}
                                 className="w-full h-full object-contain"
                               />
                             </div>
@@ -772,15 +769,15 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
                         <div className="space-y-1 text-[11px]">
                           <div className="bg-[#dce8f6] px-2.5 py-1 rounded border border-blue-200">
                             <span className="text-slate-500">Banco: </span>
-                            <strong className="text-slate-900">BDV (0102)</strong>
+                            <strong className="text-slate-900">Banco Demo (0102)</strong>
                           </div>
                           <div className="bg-[#dce8f6] px-2.5 py-1 rounded border border-blue-200 font-mono">
                             <span className="text-slate-500">RIF: </span>
-                            <strong className="text-slate-900">V-00.000.000</strong>
+                            <strong className="text-slate-900">V-00.000.000 (Demo)</strong>
                           </div>
                           <div className="bg-[#dce8f6] px-2.5 py-1 rounded border border-blue-200 font-mono">
                             <span className="text-slate-500">Tel: </span>
-                            <strong className="text-slate-900">0414 0000000</strong>
+                            <strong className="text-slate-900">0414-0000000 (Demo)</strong>
                           </div>
                         </div>
                       </div>

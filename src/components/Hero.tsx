@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { useBcvRate } from "@/lib/useBcvRate";
 import {
   WifiOff,
   ArrowRight,
@@ -33,25 +34,7 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const [activeView, setActiveView] = useState<StageView>("pos");
   const [isZoomed, setIsZoomed] = useState(false);
-  const [bcvRate, setBcvRate] = useState<number | null>(null);
-
-  // Obtener tasa BCV viva
-  useEffect(() => {
-    let isMounted = true;
-    fetch("/api/bcv")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data?.data?.rate) {
-          setBcvRate(data.data.rate);
-        }
-      })
-      .catch(() => {});
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const rateValue = bcvRate || 857.89;
+  const { rate: rateValue } = useBcvRate();
 
   return (
     <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-blue-50/40 via-transparent to-indigo-50/30 dark:from-transparent dark:via-slate-950/60 dark:to-slate-900/40 transition-colors duration-200">

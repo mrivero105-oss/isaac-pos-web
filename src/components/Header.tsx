@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight, Headphones, Sun, Moon } from "lucide-react";
+import { useBcvRate } from "@/lib/useBcvRate";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 interface HeaderProps {
   onOpenModal: (plan?: string) => void;
@@ -20,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [pastHeroLogo, setPastHeroLogo] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("inicio");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [bcvRate, setBcvRate] = useState<number | null>(null);
+  const { rate: bcvRate } = useBcvRate();
 
   useEffect(() => {
     const sectionIds = [
@@ -69,22 +71,6 @@ export const Header: React.FC<HeaderProps> = ({
         : "font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-700 dark:hover:text-white hover:bg-blue-50/80 dark:hover:bg-slate-800/80 border border-transparent"
     }`;
   };
-
-  // Tasa BCV oficial en tiempo real
-  useEffect(() => {
-    let isMounted = true;
-    fetch("/api/bcv")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data?.data?.rate) {
-          setBcvRate(data.data.rate);
-        }
-      })
-      .catch(() => {});
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   const isDark = theme === "dark";
 
@@ -204,6 +190,7 @@ export const Header: React.FC<HeaderProps> = ({
               href="https://wa.me/584248302226?text=Hola%2C%20quisiera%20asesor%C3%ADa%20y%20demostraci%C3%B3n%20sobre%20Isaac%20POS."
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackGoogleAdsEvent("click_whatsapp", { location: "header_desktop" })}
               className="hidden sm:flex items-center justify-center p-2 rounded-full text-slate-600 dark:text-slate-300 hover:text-blue-700 dark:hover:text-white hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors shrink-0"
               title="Hablar con un Asesor"
               aria-label="Hablar con un Asesor"
@@ -339,6 +326,10 @@ export const Header: React.FC<HeaderProps> = ({
                   href="https://wa.me/584248302226?text=Hola%2C%20quisiera%20asesor%C3%ADa%20sobre%20Isaac%20POS."
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    trackGoogleAdsEvent("click_whatsapp", { location: "header_mobile" });
+                  }}
                   className="w-full py-2 rounded-full border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs text-center hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center justify-center gap-1.5"
                 >
                   <Headphones className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />

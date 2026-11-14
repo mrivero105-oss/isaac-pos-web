@@ -1,65 +1,92 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { LeadFormSchema } from "@/lib/validations";
-import { checkRateLimit } from "@/lib/rateLimit";
+import { checkRateLimitDistributed, getClientIp } from "@/lib/rateLimit";
+import {
+  dispatchCommercialNotification,
+  escapeHtml,
+} from "@/lib/notifications";
 
-const RECIPIENT_EMAILS = process.env.NOTIFICATION_EMAILS
-  ? process.env.NOTIFICATION_EMAILS.split(",").map((e) => e.trim()).filter(Boolean)
-  : [
-      "mrivero105@gmail.com",
-      "isaacpospage@gmail.com",
-    ];
+async function verifyTurnstileToken(token: string, clientIp: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
+  if (!secret) return true;
+  if (!token) return false;
 
-function escapeHtml(unsafe: string): string {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function sanitizeHeaderText(str: string): string {
-  return str.replace(/[\r\n]+/g, " ").trim();
+  try {
+    const body = new URLSearchParams({
+      secret,
+      response: token,
+      ...(clientIp !== "unknown-client" ? { remoteip: clientIp } : {}),
+    });
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    });
+    if (!res.ok) return false;
+    const data = (await res.json()) as { success?: boolean };
+    return Boolean(data.success);
+  } catch (err) {
+    console.error("[TURNSTILE VERIFY ERROR]", err);
+    return false;
+  }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    // 1. Obtención de IP para Rate Limiting
-    const forwardedFor = req.headers.get("x-forwarded-for");
-    const clientIp = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
+    const clientIp = getClientIp(req);
 
-    // 2. Control de Tasa (Máximo 6 peticiones por minuto por IP)
-    const rateCheck = checkRateLimit(`contact_${clientIp}`, 6, 60 * 1000);
+    // Control de Tasa (Máximo 6 peticiones por minuto por IP)
+    const rateCheck = await checkRateLimitDistributed(`contact_${clientIp}`, 6, 60 * 1000);
     if (!rateCheck.success) {
       return NextResponse.json(
         {
-          error: "Demasiadas solicitudes. Por motivos de seguridad, espera un momento antes de reintentar.",
+          success: false,
+          error:
+            "Demasiadas solicitudes. Por motivos de seguridad, espera un momento antes de reintentar.",
         },
         {
           status: 429,
           headers: {
-            "Retry-After": Math.ceil((rateCheck.reset - Date.now()) / 1000).toString(),
+            "Retry-After": Math.max(1, Math.ceil((rateCheck.reset - Date.now()) / 1000)).toString(),
           },
         }
       );
     }
 
-    // 3. Parseo y Validación de Payload con Zod
     const body = await req.json();
     const parsed = LeadFormSchema.safeParse(body);
 
     if (!parsed.success) {
       const errorMsg = parsed.error.issues[0]?.message || "Datos no válidos.";
-      return NextResponse.json({ error: errorMsg }, { status: 400 });
+      return NextResponse.json({ success: false, error: errorMsg }, { status: 400 });
     }
 
-    // 4. Verificación Honeypot anti-bots
+    // Verificación Honeypot anti-bots
     if (parsed.data.website_url_hp && parsed.data.website_url_hp.length > 0) {
-      return NextResponse.json({ success: true, message: "Solicitud procesada con éxito." });
+      return NextResponse.json({ success: true, emailSent: false, message: "Solicitud procesada con éxito." });
     }
 
-    const { fullName, email, phone, businessName, businessType, branchesCount, planInterested, message } = parsed.data;
+    // Verificación Cloudflare Turnstile si TURNSTILE_SECRET_KEY está configurada
+    if (process.env.TURNSTILE_SECRET_KEY?.trim()) {
+      const turnstileOk = await verifyTurnstileToken(parsed.data.turnstileToken || "", clientIp);
+      if (!turnstileOk) {
+        return NextResponse.json(
+          { success: false, error: "Verificación anti-bot fallida. Recarga e intenta nuevamente." },
+          { status: 400 }
+        );
+      }
+    }
+
+    const {
+      fullName,
+      email,
+      phone,
+      businessName,
+      businessType,
+      branchesCount,
+      planInterested,
+      message,
+    } = parsed.data;
 
     const timestamp = new Date().toLocaleString("es-VE", { timeZone: "America/Caracas" });
     const cleanPhone = phone.replace(/[^0-9]/g, "");
@@ -73,15 +100,7 @@ export async function POST(req: NextRequest) {
     const safePlanInterested = escapeHtml(planInterested);
     const safeMessage = message ? escapeHtml(message) : "";
 
-    // 5. Envío de Correo Electrónico (Gmail SMTP vía GMAIL_PASS o Resend API vía RESEND_API_KEY)
-    const gmailPass = process.env.GMAIL_PASS; // Contraseña de aplicación de 16 letras de Google
-    const gmailUser = process.env.GMAIL_USER || "isaacpospage@gmail.com";
-    const resendApiKey = process.env.RESEND_API_KEY;
-    let emailSent = false;
-
-    const emailSubject = sanitizeHeaderText(
-      `🔔 Solicitud de Demostración: ${fullName} - ${businessName} (Isaac POS)`
-    );
+    const emailSubject = `Solicitud de Demostración: ${fullName} - ${businessName} (Isaac POS)`;
 
     const emailHtml = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0b1329; border: 1px solid #1e293b; border-radius: 16px; overflow: hidden; color: #f8fafc;">
@@ -89,12 +108,10 @@ export async function POST(req: NextRequest) {
           <h1 style="margin: 0; color: #020617; font-size: 24px; font-weight: 900; letter-spacing: -0.5px;">ISAAC POS ULTRA</h1>
           <p style="margin: 4px 0 0 0; color: #020617; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Nueva Solicitud de Demostración</p>
         </div>
-        
         <div style="padding: 28px 24px;">
           <p style="font-size: 16px; line-height: 1.5; color: #cbd5e1; margin-top: 0;">
-            ¡Hola! Tienes un nuevo cliente interesado registrado desde la página web oficial de <strong>Isaac POS Ultra</strong>:
+            Nuevo cliente interesado registrado desde la página web oficial de <strong>Isaac POS Ultra</strong>:
           </p>
-
           <div style="background-color: #020617; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin: 20px 0;">
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
               <tr>
@@ -108,7 +125,7 @@ export async function POST(req: NextRequest) {
               <tr>
                 <td style="padding: 8px 0; color: #94a3b8;"><strong>Teléfono / WhatsApp:</strong></td>
                 <td style="padding: 8px 0; color: #34d399; font-weight: 700;">
-                  <a href="https://wa.me/${cleanPhone}" style="color: #34d399; text-decoration: none;">${safePhone} (Clic para chatear)</a>
+                  <a href="https://wa.me/${cleanPhone}" style="color: #34d399; text-decoration: none;">${safePhone}</a>
                 </td>
               </tr>
               <tr>
@@ -138,23 +155,18 @@ export async function POST(req: NextRequest) {
               </tr>
             </table>
           </div>
-
           <div style="text-align: center; margin-top: 24px;">
-            <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(`¡Hola ${fullName}! Te escribo del equipo de Isaac POS en respuesta a tu solicitud para ${businessName}.`)}" 
+            <a href="https://wa.me/${cleanPhone}?text=${encodeURIComponent(`¡Hola ${fullName}! Te escribo del equipo de Isaac POS en respuesta a tu solicitud para ${businessName}.`)}"
                style="display: inline-block; background: linear-gradient(135deg, #10b981, #059669); color: #020617; padding: 14px 28px; border-radius: 12px; font-weight: 900; font-size: 15px; text-decoration: none;">
               Abrir Chat de WhatsApp con el Cliente
             </a>
           </div>
         </div>
-
-        <div style="background-color: #020617; border-top: 1px solid #1e293b; padding: 16px; text-align: center; font-size: 12px; color: #64748b;">
-          Notificación oficial automática del sistema central • Isaac POS Ultra
-        </div>
       </div>
     `;
 
-    const emailText = 
-      `🔔 NUEVA SOLICITUD DE DEMO - ISAAC POS ULTRA\n\n` +
+    const emailText =
+      `NUEVA SOLICITUD DE DEMO - ISAAC POS ULTRA\n\n` +
       `Cliente: ${fullName}\n` +
       `Correo: ${email}\n` +
       `Teléfono: ${phone}\n` +
@@ -164,103 +176,59 @@ export async function POST(req: NextRequest) {
       `Plan de Interés: ${planInterested}\n` +
       (message ? `Mensaje: ${message}\n` : "") +
       `Fecha: ${timestamp}\n\n` +
-      `Atender por WhatsApp: https://wa.me/${cleanPhone}`;
+      `WhatsApp: https://wa.me/${cleanPhone}`;
 
-    // 1. Envío por Gmail SMTP si GMAIL_PASS está configurado
-    if (gmailPass) {
-      try {
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: gmailUser,
-            pass: gmailPass.replace(/\s+/g, ""),
-          },
-        });
+    const dispatch = await dispatchCommercialNotification({
+      subject: emailSubject,
+      html: emailHtml,
+      text: emailText,
+      replyTo: email,
+      webhookPayload: {
+        event: "demo_lead",
+        fullName,
+        email,
+        phone,
+        businessName,
+        businessType,
+        branchesCount,
+        planInterested,
+        message: message || "",
+        timestamp,
+      },
+    });
 
-        // Enviar a cada destinatario por separado para entrega 100% directa en bandeja principal
-        for (const recipient of RECIPIENT_EMAILS) {
-          try {
-            await transporter.sendMail({
-              from: `"Isaac POS Ultra" <${gmailUser}>`,
-              to: recipient,
-              replyTo: email,
-              subject: emailSubject,
-              text: emailText,
-              html: emailHtml,
-            });
-            emailSent = true;
-            console.log(`[EMAIL OK - GMAIL SMTP] Notificación entregada a: ${recipient}`);
-          } catch (rErr) {
-            console.error(`[EMAIL ERROR - GMAIL SMTP to ${recipient}]`, rErr);
-          }
-        }
-      } catch (err) {
-        console.error(`[EMAIL ERROR - GMAIL SMTP]`, err);
-      }
-    }
-    // 2. Fallback con Resend API si RESEND_API_KEY está configurada
-    else if (resendApiKey) {
-      try {
-        // Enviar a cada destinatario por separado para que la restricción de pruebas de Resend
-        // no bloquee a la cuenta propietaria (mrivero105@gmail.com)
-        for (const recipient of RECIPIENT_EMAILS) {
-          try {
-            const resendRes = await fetch("https://api.resend.com/emails", {
-              method: "POST",
-              headers: {
-                "Authorization": `Bearer ${resendApiKey}`,
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                from: "Isaac POS Leads <onboarding@resend.dev>",
-                to: [recipient],
-                reply_to: email,
-                subject: emailSubject,
-                html: emailHtml,
-              }),
-            });
-
-            if (resendRes.ok) {
-              emailSent = true;
-              console.log(`[EMAIL OK - RESEND] Notificación enviada exitosamente a: ${recipient}`);
-            } else {
-              const errData = await resendRes.text();
-              console.warn(`[EMAIL NOTICE - RESEND] Respuesta para ${recipient}:`, errData);
-            }
-          } catch (itemErr) {
-            console.error(`[EMAIL ERROR RESEND INDIVIDUAL]`, itemErr);
-          }
-        }
-      } catch (err) {
-        console.error(`[EMAIL DISPATCH ERROR - RESEND]`, err);
-      }
-    } else {
-      console.warn(`[EMAIL WARNING] No se ha configurado GMAIL_PASS ni RESEND_API_KEY en las variables de entorno.`);
-    }
-
-    // Registro siempre en servidor
-    console.log(`[SECURE LEAD] Nueva solicitud registrada:`, {
-      fullName,
-      email,
-      phone,
+    console.log("[LEAD DISPATCH]", {
       businessName,
-      businessType,
-      branchesCount,
       planInterested,
       timestamp,
-      recipients: RECIPIENT_EMAILS,
-      emailSent,
+      recipients: dispatch.recipients,
+      emailSent: dispatch.emailSent,
+      webhookSent: dispatch.webhookSent,
     });
+
+    if (!dispatch.sent) {
+      return NextResponse.json(
+        {
+          success: false,
+          emailSent: false,
+          fallbackWhatsapp: true,
+          error:
+            "El envío automático por correo no está disponible en este momento. Usa el botón de WhatsApp abajo para enviar tu solicitud directa al equipo.",
+        },
+        { status: 503 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
-      emailSent,
-      message: "¡Gracias! Tu solicitud ha sido registrada de forma segura. Un asesor se comunicará contigo en menos de 15 minutos.",
+      emailSent: dispatch.emailSent,
+      message:
+        "¡Gracias! Tu solicitud ha sido enviada al equipo comercial. Un asesor se comunicará contigo en menos de 15 minutos.",
     });
   } catch (error) {
     console.error("[ERROR CONTACT API]", error);
     return NextResponse.json(
-      { error: "Ocurrió un error inesperado al procesar la solicitud." },
+      { success: false, error: "Ocurrió un error inesperado al procesar la solicitud." },
       { status: 500 }
     );
   }

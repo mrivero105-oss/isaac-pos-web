@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Smartphone,
   Monitor,
@@ -16,9 +17,11 @@ import {
   Eye,
   Maximize2,
 } from "lucide-react";
+import { useBcvRate } from "@/lib/useBcvRate";
 
 export const PromotionalShowcase: React.FC = () => {
   const [selectedPreview, setSelectedPreview] = useState<string>("pos");
+  const { rate: bcvRate } = useBcvRate();
 
   const promoCards = [
     {
@@ -110,9 +113,11 @@ export const PromotionalShowcase: React.FC = () => {
             <div className="lg:col-span-5 space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-slate-800 border border-cyan-500/30 overflow-hidden shrink-0 shadow-md">
-                  <img
+                  <Image
                     src="/isaac-icon-3d.png"
                     alt="Isaac POS Icon"
+                    width={48}
+                    height={48}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -184,7 +189,7 @@ export const PromotionalShowcase: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-emerald-400 text-[11px] font-bold">
-                      1 USD = 490,00 Bs.S (BCV)
+                      1 USD = {bcvRate.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs.S (BCV)
                     </span>
                     <span className="text-cyan-400 text-[10px] hidden sm:inline">
                       ● WiFi Sync OK
@@ -194,9 +199,11 @@ export const PromotionalShowcase: React.FC = () => {
 
                 {/* Imagen del Sistema Real */}
                 <div className="relative rounded-xl overflow-hidden bg-slate-900 shadow-inner">
-                  <img
+                  <Image
                     src={currentCard.image}
                     alt={currentCard.title}
+                    width={960}
+                    height={560}
                     className="w-full h-auto object-cover rounded-xl transition-transform duration-500 group-hover:scale-[1.01]"
                   />
                   <div className="absolute top-3 left-3 bg-slate-950/90 backdrop-blur-md px-3 py-1 rounded-md border border-cyan-500/40 text-[10px] font-mono text-cyan-300 font-bold">

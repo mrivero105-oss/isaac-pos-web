@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import {
   Sparkles,
   X,
@@ -15,6 +16,7 @@ import {
   ShieldCheck,
   CheckCircle2,
 } from "lucide-react";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 interface Message {
   id: string;
@@ -170,6 +172,14 @@ Puedo orientarte con precisión sobre:
       }),
     };
 
+    const historyPayload = messages
+      .filter((m) => m.id !== "welcome" && !m.id.startsWith("welcome_"))
+      .slice(-6)
+      .map((m) => ({
+        sender: m.sender,
+        text: m.text.slice(0, 800),
+      }));
+
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
@@ -178,16 +188,24 @@ Puedo orientarte con precisión sobre:
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: textToSend }),
+        body: JSON.stringify({
+          message: textToSend,
+          history: historyPayload,
+        }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
+      if (!res.ok && !data?.reply) {
+        throw new Error(`HTTP ${res.status}`);
+      }
 
       const aiReply: Message = {
         id: "ai_" + Date.now(),
         sender: "ai",
-        text: data.reply || "Disculpa, ocurrió un error temporal. ¿Deseas consultar por WhatsApp?",
-        suggestions: data.suggestions || [],
+        text:
+          data?.reply ||
+          "Disculpa, ocurrió un error temporal. ¿Deseas consultar por WhatsApp?",
+        suggestions: Array.isArray(data?.suggestions) ? data.suggestions : [],
         time: new Date().toLocaleTimeString("es-VE", {
           hour: "2-digit",
           minute: "2-digit",
@@ -243,9 +261,11 @@ Puedo orientarte con precisión sobre:
         <div className="bg-slate-50 dark:bg-slate-950 p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-2xl bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-500/30 p-0.5 flex items-center justify-center text-blue-600 shrink-0 shadow-2xs">
-              <img
-                src="/icon-192x192.png?v=2026"
+              <Image
+                src="/icon-192x192.png"
                 alt="Isaac POS"
+                width={40}
+                height={40}
                 className="w-full h-full object-contain"
               />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-900"></span>
@@ -290,6 +310,7 @@ Puedo orientarte con precisión sobre:
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackGoogleAdsEvent("click_whatsapp", { location: "ai_chat_header" })}
             className="text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded-lg shrink-0 flex items-center gap-1 transition-all"
           >
             <span>WhatsApp</span>
@@ -339,7 +360,10 @@ Puedo orientarte con precisión sobre:
                           s.startsWith("comprar") ||
                           s.startsWith("agendar") ||
                           s.startsWith("solicitar");
-                        if (s.includes("whatsapp") || s.includes("asesor")) {
+                        const isDirectWhatsappBtn =
+                          s.includes("whatsapp") || s.startsWith("hablar con un asesor");
+                        if (isDirectWhatsappBtn) {
+                          trackGoogleAdsEvent("click_whatsapp", { location: "ai_chat_suggestion" });
                           window.open(whatsappUrl, "_blank", "noopener,noreferrer");
                         } else if (isActionBtn && s.includes("vitalicia") && onOpenCheckoutModal) {
                           onClose();

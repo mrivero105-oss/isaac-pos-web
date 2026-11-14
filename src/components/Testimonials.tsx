@@ -9,7 +9,7 @@ interface Testimonial {
   business: string;
   city: string;
   category: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   rating: number;
   highlight: string;
   quote: string;
@@ -165,11 +165,11 @@ export const Testimonials: React.FC = () => {
                   </div>
 
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    "{t.highlight}"
+                    &ldquo;{t.highlight}&rdquo;
                   </h3>
 
                   <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 italic">
-                    "{t.quote}"
+                    &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
 

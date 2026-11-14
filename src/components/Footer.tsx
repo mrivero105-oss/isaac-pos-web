@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Lock, Phone } from "lucide-react";
+import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 export const Footer: React.FC = () => {
   return (
@@ -11,11 +13,11 @@ export const Footer: React.FC = () => {
           {/* Col 1 & 2: Marca y Misión Real */}
           <div className="lg:col-span-2">
             <div className="flex flex-col items-start gap-3 mb-5">
-              <img
+              <Image
                 src="/isaac-logo-horizontal-dark.png"
                 alt="Isaac POS • Sistema de Facturación y Ventas"
-                width={796}
-                height={259}
+                width={290}
+                height={94}
                 className="w-[240px] sm:w-[290px] h-auto object-contain"
               />
               <span className="text-[10px] bg-slate-900 text-slate-300 font-mono font-bold px-2.5 py-1 rounded-full border border-slate-700">
@@ -112,6 +114,7 @@ export const Footer: React.FC = () => {
                   href="https://wa.me/584248302226"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackGoogleAdsEvent("click_whatsapp", { location: "footer" })}
                   className="flex items-center gap-2 text-slate-300 hover:text-emerald-400 transition-colors group"
                 >
                   <svg className="w-4 h-4 text-emerald-400 shrink-0 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">

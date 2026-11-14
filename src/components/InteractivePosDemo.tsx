@@ -2,8 +2,7 @@
 
 import React from "react";
 import { IsaacPosRealTerminal } from "@/components/IsaacPosRealTerminal";
-import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
-import { Terminal, Zap, DollarSign, WifiOff } from "lucide-react";
+import { Terminal } from "lucide-react";
 
 interface InteractivePosDemoProps {
   onOpenModal?: (plan?: string) => void;

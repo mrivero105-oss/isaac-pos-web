@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAdsTag } from "@/components/GoogleAdsTag";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,10 +14,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+function getSafeMetadataBase(): URL {
+  const raw = (process.env.NEXT_PUBLIC_APP_URL || "https://www.isaacventas.com").trim();
+  try {
+    return new URL(raw);
+  } catch {
+    return new URL("https://www.isaacventas.com");
+  }
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.isaacventas.com"),
+  metadataBase: getSafeMetadataBase(),
   alternates: {
-    canonical: "https://www.isaacventas.com",
+    canonical: "/",
   },
   title: "Isaac Ventas | Isaac POS V24.04 Ultra - Sistema de Punto de Venta en Venezuela",
   description:
@@ -117,7 +127,7 @@ const jsonLd = {
       name: "Isaac Ventas (Isaac POS V24.04 Ultra)",
       alternateName: ["Isaac Ventas", "Isaac POS", "Sistema Isaac Ventas"],
       applicationCategory: "BusinessApplication",
-      operatingSystem: "Windows 10/11, Android 7.0+, Web",
+      operatingSystem: "Windows 7, 8, 10, 11, Android 7.0+, Web",
       url: "https://www.isaacventas.com",
       offers: [
         {
@@ -243,6 +253,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-[#060911] text-slate-900 dark:text-slate-100 selection:bg-blue-600/15 dark:selection:bg-sky-500/25 selection:text-blue-900 dark:selection:text-sky-100 transition-colors duration-200`}>
+        <GoogleAdsTag />
         {children}
         <Analytics />
       </body>
