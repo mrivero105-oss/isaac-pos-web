@@ -12,6 +12,7 @@ import { InteractivePosDemo } from "@/components/InteractivePosDemo";
 import { HardwareSection } from "@/components/HardwareSection";
 import { HumanSupportSection } from "@/components/HumanSupportSection";
 import { SecurityTrust } from "@/components/SecurityTrust";
+import { Testimonials } from "@/components/Testimonials";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { Pricing } from "@/components/Pricing";
 import { Faq } from "@/components/Faq";
@@ -137,10 +138,13 @@ export default function Home() {
         {/* 8. Acompañamiento Humano, Migración desde Excel y Soporte */}
         <HumanSupportSection />
 
-        {/* 9. Calculadora de Retorno de Inversión */}
+        {/* 9. Caja de Experiencias y Reseñas Verificadas de Clientes */}
+        <Testimonials />
+
+        {/* 10. Calculadora de Retorno de Inversión */}
         <RoiCalculator onOpenModal={handleOpenModal} />
 
-        {/* 10. Preguntas Frecuentes */}
+        {/* 11. Preguntas Frecuentes */}
         <Faq />
       </main>
 

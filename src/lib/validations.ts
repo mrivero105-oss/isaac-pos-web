@@ -116,3 +116,47 @@ export interface CheckoutOrderResponse {
   encryption: string;
   timestamp: string;
 }
+
+// Esquema de validación para reseñas reales de clientes sujetas a moderación
+export const CustomerReviewSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Ingresa tu nombre y apellido")
+    .max(80, "El nombre es demasiado largo"),
+  role: z
+    .string()
+    .trim()
+    .max(60, "El cargo es demasiado largo")
+    .optional()
+    .default("Propietario"),
+  business: z
+    .string()
+    .trim()
+    .min(2, "Ingresa el nombre de tu comercio")
+    .max(100, "El nombre del comercio es demasiado largo"),
+  city: z
+    .string()
+    .trim()
+    .min(2, "Ingresa tu ciudad")
+    .max(60, "La ciudad es demasiado larga"),
+  category: z
+    .string()
+    .trim()
+    .min(2, "Selecciona el rubro de tu negocio")
+    .max(60),
+  rating: z.number().int().min(1).max(5).default(5),
+  comment: z
+    .string()
+    .trim()
+    .min(15, "Cuéntanos un poco más sobre tu experiencia (mínimo 15 caracteres)")
+    .max(600, "El comentario no puede superar los 600 caracteres"),
+  contactInfo: z
+    .string()
+    .trim()
+    .min(5, "Ingresa tu WhatsApp o correo de licencia (solo para verificación interna)")
+    .max(120, "Dato de contacto demasiado largo"),
+  website_url_hp: z.string().max(200).optional(),
+});
+
+export type CustomerReviewData = z.infer<typeof CustomerReviewSchema>;
