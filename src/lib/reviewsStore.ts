@@ -23,6 +23,7 @@ export type PublicCustomerReview = Omit<StoredCustomerReview, "contactInfo">;
 
 const REDIS_KEY = "isaac_pos_customer_reviews_v1";
 const GIST_FILENAME = "isaac-pos-reviews.json";
+const DEFAULT_GIST_ID = "934239792edb494f916792a91e1617f8";
 
 function getLocalStorePath(): string {
   if (process.env.VERCEL) {
@@ -55,10 +56,8 @@ export function getActiveStorageBackend(): "upstash" | "gist" | "local" {
   ) {
     return "upstash";
   }
-  if (
-    process.env.REVIEWS_GIST_ID?.trim() &&
-    process.env.REVIEWS_GITHUB_TOKEN?.trim()
-  ) {
+  const gistId = process.env.REVIEWS_GIST_ID?.trim() || DEFAULT_GIST_ID;
+  if (gistId && process.env.REVIEWS_GITHUB_TOKEN?.trim()) {
     return "gist";
   }
   return "local";
@@ -108,17 +107,21 @@ async function writeToUpstash(reviews: StoredCustomerReview[]): Promise<boolean>
 }
 
 async function readFromGist(): Promise<StoredCustomerReview[] | null> {
-  const gistId = process.env.REVIEWS_GIST_ID?.trim();
+  const gistId = process.env.REVIEWS_GIST_ID?.trim() || DEFAULT_GIST_ID;
   const ghToken = process.env.REVIEWS_GITHUB_TOKEN?.trim();
-  if (!gistId || !ghToken) return null;
+  if (!gistId) return null;
 
   try {
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github+json",
+      "User-Agent": "Isaac-POS-Reviews-Store",
+    };
+    if (ghToken) {
+      headers.Authorization = `Bearer ${ghToken}`;
+    }
+
     const res = await fetch(`https://api.github.com/gists/${gistId}`, {
-      headers: {
-        Authorization: `Bearer ${ghToken}`,
-        Accept: "application/vnd.github+json",
-        "User-Agent": "Isaac-POS-Reviews-Store",
-      },
+      headers,
       cache: "no-store",
     });
     if (!res.ok) return null;
@@ -136,7 +139,7 @@ async function readFromGist(): Promise<StoredCustomerReview[] | null> {
 }
 
 async function writeToGist(reviews: StoredCustomerReview[]): Promise<boolean> {
-  const gistId = process.env.REVIEWS_GIST_ID?.trim();
+  const gistId = process.env.REVIEWS_GIST_ID?.trim() || DEFAULT_GIST_ID;
   const ghToken = process.env.REVIEWS_GITHUB_TOKEN?.trim();
   if (!gistId || !ghToken) return false;
 

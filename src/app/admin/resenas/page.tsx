@@ -50,7 +50,38 @@ export default function AdminReviewsPage() {
   const [newRating, setNewRating] = useState(5);
   const [newContactInfo, setNewContactInfo] = useState("");
   const [newComment, setNewComment] = useState("");
+  const [rawWhatsappPaste, setRawWhatsappPaste] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+
+  const handleParseWhatsappText = (text: string) => {
+    setRawWhatsappPaste(text);
+    const ratingMatch = text.match(/Calificaci[oó]n:\s*([1-5])\s*\/\s*5/i);
+    if (ratingMatch) setNewRating(Number(ratingMatch[1]));
+
+    const nameMatch = text.match(/Nombre:\s*([^\n(]+)(?:\(([^)]+)\))?/i);
+    if (nameMatch) {
+      setNewName(nameMatch[1].trim());
+      if (nameMatch[2]) setNewRole(nameMatch[2].trim());
+    }
+
+    const bizMatch = text.match(/Comercio:\s*([^\n(]+)(?:\(([^)\n-]+)(?:-\s*([^)]+))?\))?/i);
+    if (bizMatch) {
+      setNewBusiness(bizMatch[1].trim());
+      if (bizMatch[2]) setNewCity(bizMatch[2].trim());
+      if (bizMatch[3]) {
+        const matchedCat = BUSINESS_CATEGORIES.find(
+          (c) => c.toLowerCase() === bizMatch[3].trim().toLowerCase()
+        );
+        if (matchedCat) setNewCategory(matchedCat);
+      }
+    }
+
+    const contactMatch = text.match(/Contacto de licencia:\s*([^\n]+)/i);
+    if (contactMatch) setNewContactInfo(contactMatch[1].trim());
+
+    const expMatch = text.match(/Experiencia:\s*["“]?([\s\S]+?)["”]?\s*$/i);
+    if (expMatch) setNewComment(expMatch[1].replace(/^["“]|["”]$/g, "").trim());
+  };
 
   const fetchAdminReviews = useCallback(async (adminKey: string) => {
     setIsLoading(true);
@@ -203,6 +234,7 @@ export default function AdminReviewsPage() {
       setNewCity("");
       setNewContactInfo("");
       setNewComment("");
+      setRawWhatsappPaste("");
       setShowAddForm(false);
       setFilterStatus("approved");
       await fetchAdminReviews(password);
@@ -356,8 +388,22 @@ export default function AdminReviewsPage() {
             className="bg-slate-900 border border-blue-500/40 rounded-3xl p-6 space-y-4"
           >
             <h2 className="text-base font-black text-white">
-              Publicar reseña verificada manualmente
+              Publicar reseña verificada manualmente (o pegar mensaje de WhatsApp)
             </h2>
+
+            <div className="p-3.5 rounded-2xl bg-slate-950/90 border border-emerald-500/30 space-y-2">
+              <label className="block text-xs font-bold text-emerald-400">
+                Pegar aquí el mensaje completo que te llegó por WhatsApp (Autorrelleno automático):
+              </label>
+              <textarea
+                rows={3}
+                value={rawWhatsappPaste}
+                onChange={(e) => handleParseWhatsappText(e.target.value)}
+                placeholder="Pega aquí el texto de WhatsApp del cliente y los campos de abajo se llenarán solos..."
+                className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200 resize-none focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <input
                 type="text"
