@@ -12,7 +12,6 @@ import { InteractivePosDemo } from "@/components/InteractivePosDemo";
 import { HardwareSection } from "@/components/HardwareSection";
 import { HumanSupportSection } from "@/components/HumanSupportSection";
 import { SecurityTrust } from "@/components/SecurityTrust";
-import { Testimonials } from "@/components/Testimonials";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { Pricing } from "@/components/Pricing";
 import { Faq } from "@/components/Faq";
@@ -31,10 +30,6 @@ const IsaacAiChat = dynamic(
 );
 const VideoDemoModal = dynamic(
   () => import("@/components/VideoDemoModal").then((m) => m.VideoDemoModal),
-  { ssr: false }
-);
-const LiveSocialProof = dynamic(
-  () => import("@/components/LiveSocialProof").then((m) => m.LiveSocialProof),
   { ssr: false }
 );
 
@@ -142,21 +137,15 @@ export default function Home() {
         {/* 8. Acompañamiento Humano, Migración desde Excel y Soporte */}
         <HumanSupportSection />
 
-        {/* 9. Casos de Éxito de Comercios Reales */}
-        <Testimonials />
-
-        {/* 10. Calculadora de Retorno de Inversión */}
+        {/* 9. Calculadora de Retorno de Inversión */}
         <RoiCalculator onOpenModal={handleOpenModal} />
 
-        {/* 11. Preguntas Frecuentes */}
+        {/* 10. Preguntas Frecuentes */}
         <Faq />
       </main>
 
       {/* Pie de Página */}
       <Footer />
-
-      {/* Notificaciones de Actividad de Comercios en Tiempo Real */}
-      <LiveSocialProof />
 
       {/* Botones Flotantes: Mini Robot Isaac POS + WhatsApp Oficial */}
       <div className="fixed bottom-5 sm:bottom-6 right-4 sm:right-6 z-40 flex items-end gap-2.5 sm:gap-3 pointer-events-none">

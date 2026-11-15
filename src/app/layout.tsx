@@ -149,13 +149,6 @@ const jsonLd = {
           name: "Licencia Vitalicia Perpetua",
         },
       ],
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        ratingCount: "320",
-        bestRating: "5",
-        worstRating: "1",
-      },
       description:
         "Isaac Ventas (Isaac POS V24.04 Ultra) se identifica como un sistema profesional de punto de venta (POS), control de inventario y facturación bimonetaria (USD / Bs) en Venezuela, con sincronización automática de tasa oficial BCV, visor de cliente con QR Pago Móvil, base de datos local SQLite 100% offline y arqueo ciego anti-faltantes.",
       disambiguatingDescription:
