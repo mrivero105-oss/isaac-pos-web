@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Star,
   ShieldCheck,
@@ -12,25 +13,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { trackGoogleAdsEvent } from "@/lib/gtag";
-
-export interface ApprovedReview {
-  id: string;
-  name: string;
-  role: string;
-  business: string;
-  city: string;
-  category: string;
-  rating: number;
-  comment: string;
-  verifiedDate: string;
-}
-
-/**
- * Listado de reseñas reales aprobadas manualmente tras verificar licencia activa.
- * Se mantiene vacío mientras no existan reseñas verificadas aprobadas por administración,
- * garantizando 0% contenido sintético o generado por IA.
- */
-const APPROVED_REVIEWS: ApprovedReview[] = [];
+import type { PublicCustomerReview } from "@/lib/reviewsStore";
 
 const BUSINESS_CATEGORIES = [
   "Minimarket y Víveres",
@@ -44,6 +27,7 @@ const BUSINESS_CATEGORIES = [
 ];
 
 export const Testimonials: React.FC = () => {
+  const [approvedReviews, setApprovedReviews] = useState<PublicCustomerReview[]>([]);
   const [name, setName] = useState("");
   const [role, setRole] = useState("Propietario");
   const [business, setBusiness] = useState("");
@@ -62,6 +46,21 @@ export const Testimonials: React.FC = () => {
     whatsappUrl: string;
     message: string;
   } | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/reviews", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((json) => {
+        if (mounted && json?.success && Array.isArray(json.reviews)) {
+          setApprovedReviews(json.reviews);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -147,10 +146,10 @@ export const Testimonials: React.FC = () => {
           </p>
         </div>
 
-        {/* Grilla de Reseñas Reales Aprobadas (solo visible cuando existen reseñas verificadas) */}
-        {APPROVED_REVIEWS.length > 0 && (
+        {/* Grilla de Reseñas Reales Aprobadas desde el Panel de Moderación */}
+        {approvedReviews.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
-            {APPROVED_REVIEWS.map((rev) => (
+            {approvedReviews.map((rev) => (
               <div
                 key={rev.id}
                 className="bg-slate-50/90 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between shadow-xs"
@@ -250,20 +249,31 @@ export const Testimonials: React.FC = () => {
                     Se publica en el portal oficial
                   </h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Una vez aprobada, tu reseña aparece en esta sección con el sello de Licencia Verificada.
+                    Una vez aprobada en el panel de moderación, tu reseña aparece en esta sección con el sello de Licencia Verificada.
                   </p>
                 </div>
               </div>
             </div>
 
-            {APPROVED_REVIEWS.length === 0 && (
+            {approvedReviews.length === 0 && (
               <div className="p-4 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/90 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center gap-3">
                 <MessageSquarePlus className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
                 <span>
-                  Sé el primero en registrar la reseña verificada de tu comercio en nuestro nuevo muro de clientes.
+                  Sé el primero en registrar la reseña verificada de tu comercio en nuestro muro de clientes.
                 </span>
               </div>
             )}
+
+            <div className="pt-2 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+              <span>Moderación verificada por Isaac Ventas</span>
+              <Link
+                href="/admin/resenas"
+                className="inline-flex items-center gap-1 text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 font-mono transition-colors"
+              >
+                <Lock className="w-3 h-3" />
+                <span>Panel Admin</span>
+              </Link>
+            </div>
           </div>
 
           {/* Columna Derecha: Caja de Comentarios para Clientes (7 cols) */}
@@ -296,7 +306,7 @@ export const Testimonials: React.FC = () => {
                     className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Confirmar reseña por WhatsApp</span>
+                    <span>Notificar por WhatsApp</span>
                   </a>
 
                   <button
