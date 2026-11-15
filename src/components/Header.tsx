@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
       "seguridad",
       "hardware",
       "soporte-humano",
+      "testimonios",
     ];
 
     const handleScroll = () => {
@@ -139,6 +140,12 @@ export const Header: React.FC<HeaderProps> = ({
               className={getNavLinkClass("soporte-humano")}
             >
               Soporte
+            </a>
+            <a
+              href="#testimonios"
+              className={getNavLinkClass("testimonios")}
+            >
+              Comentarios
             </a>
           </nav>
 
@@ -310,6 +317,13 @@ export const Header: React.FC<HeaderProps> = ({
                 className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 Soporte & AnyDesk
+              </a>
+              <a
+                href="#testimonios"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                Comentarios de Clientes
               </a>
 
               <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2 mt-1">
