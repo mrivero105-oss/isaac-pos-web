@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ShieldCheck,
   CreditCard,
-  HelpCircle,
   ChevronDown,
   ChevronUp,
   Coins,
@@ -21,11 +20,6 @@ interface PricingProps {
 export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
   const [showMatrix, setShowMatrix] = useState<boolean>(false);
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-
-  const toggleFaq = (index: number) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
-  };
 
   const comparisonCategories = [
     {
@@ -199,40 +193,12 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
     },
   ];
 
-  const pricingFaqs = [
-    {
-      question: "¿Cobran algún porcentaje o comisión sobre mis ventas o cobros?",
-      answer:
-        "Absolutamente no. Isaac POS es un software de gestión comercial, no una pasarela de pago que descuenta comisiones. El 100% de lo que facturas y cobras en tu mostrador (sea en efectivo, Pago Móvil, Zelle o tarjeta) ingresa íntegro a tu negocio.",
-    },
-    {
-      question: "¿Cómo funciona exactamente la Licencia Vitalicia? ¿Cuántas cajas incluye?",
-      answer:
-        "La Licencia Vitalicia es una adquisición definitiva en un pago único de $199 USD. Incluye de base 1 Usuario Administrador (para gestión de costos, inventario, reportes y configuración) y 1 Terminal de Caja activa para el cajero. Si tu local cuenta con más puntos de cobro en simultáneo, puedes adquirir licencias para cajas o usuarios adicionales en red local por un pago único de solo $49 USD por cada caja, sin mensualidades ni cargos de renovación futuros jamás.",
-    },
-    {
-      question: "¿Qué ocurre si en mi zona comercial se corta la luz o se cae el internet?",
-      answer:
-        "Isaac POS continúa funcionando al 100%. Su motor nativo opera sobre una base de datos local SQLite instalada directamente en tu computadora o dispositivo. Puedes registrar productos, cobrar en dólares o bolívares a la tasa que guardaste, imprimir recibos térmicos y abrir la gaveta sin depender de que haya internet.",
-    },
-    {
-      question: "¿Puedo pagar en Bolívares y qué tasa se utiliza?",
-      answer:
-        "Sí. Aceptamos transferencias bancarias nacionales y Pago Móvil. La conversión se realiza de forma estricta y transparente a la tasa oficial del Banco Central de Venezuela (BCV) del día en que realizas el pago, sin sobreprecios ni comisiones bancarias adicionales.",
-    },
-    {
-      question: "¿Cómo me ayudan a pasar mis productos si ya tengo una lista en Excel?",
-      answer:
-        "No tienes que transcribir nada a mano. Si eliges el Plan Profesional o la Licencia Vitalicia, un especialista técnico de Isaac POS se conectará contigo mediante AnyDesk, adaptará las columnas de tu archivo Excel (.xlsx o .csv) e importará automáticamente tu inventario con precios, códigos de barra y stock inicial.",
-    },
-  ];
-
   return (
-    <section id="precios" className="py-24 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
+    <section id="precios" className="py-16 sm:py-20 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera Principal */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
             <Coins className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>INVERSIÓN CLARA · SIN COMISIONES OCULTAS</span>
@@ -796,46 +762,6 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
             </div>
           </div>
 
-        </div>
-
-        {/* Preguntas Frecuentes sobre Precios y Licencias */}
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono font-bold mb-2">
-              <HelpCircle className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              <span>DUDAS FRECUENTES DE COMERCIANTES</span>
-            </div>
-            <h3 className="text-2xl font-black text-slate-950 dark:text-white">
-              Preguntas clave sobre precios y licenciamiento
-            </h3>
-          </div>
-
-          <div className="space-y-3">
-            {pricingFaqs.map((faq, index) => {
-              const isOpen = openFaqIndex === index;
-              return (
-                <div
-                  key={index}
-                  className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden transition-all"
-                >
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-slate-100 text-xs sm:text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
-                  >
-                    <span>{faq.question}</span>
-                    <span className="text-slate-400 shrink-0">
-                      {isOpen ? <ChevronUp className="w-4 h-4 text-blue-600 dark:text-blue-400" /> : <ChevronDown className="w-4 h-4" />}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
         </div>
 
       </div>

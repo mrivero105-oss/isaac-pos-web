@@ -28,6 +28,7 @@ const BUSINESS_CATEGORIES = [
 
 export const Testimonials: React.FC = () => {
   const [approvedReviews, setApprovedReviews] = useState<PublicCustomerReview[]>([]);
+  const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [role, setRole] = useState("Propietario");
   const [business, setBusiness] = useState("");
@@ -129,26 +130,26 @@ export const Testimonials: React.FC = () => {
   return (
     <section
       id="testimonios"
-      className="py-20 relative bg-white/75 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200"
+      className="py-16 sm:py-20 relative bg-white/75 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Encabezado Principal */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
             <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>OPINIONES 100% VERIFICADAS • CERO RESEÑAS FICTICIAS</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
-            Comparte tu experiencia con Isaac POS.
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
+            Comercios reales que facturan con Isaac POS.
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
-            Si ya utilizas Isaac POS V24.04 en tu comercio, envíanos tu reseña. Todas las opiniones son verificadas contra licencias reales antes de publicarse.
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+            Cada opinión publicada pertenece a un establecimiento activo con licencia verificada.
           </p>
         </div>
 
         {/* Grilla de Reseñas Reales Aprobadas desde el Panel de Moderación */}
         {approvedReviews.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             {approvedReviews.map((rev) => (
               <div
                 key={rev.id}
@@ -194,90 +195,46 @@ export const Testimonials: React.FC = () => {
           </div>
         )}
 
-        {/* Contenedor Principal: Política de Transparencia + Formulario de Reseña */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Columna Izquierda: Explicación de Moderación y Transparencia (5 cols) */}
-          <div className="lg:col-span-5 bg-slate-50/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-3xl p-7 sm:p-8 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-bold">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Transparencia Comercial</span>
+        {/* Barra Compacta para Desplegar u Ocultar el Formulario de Reseña */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 sm:p-6 rounded-3xl bg-slate-50/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="hidden sm:flex w-11 h-11 rounded-2xl bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 items-center justify-center text-blue-600 dark:text-blue-400 shrink-0">
+              <MessageSquarePlus className="w-5 h-5" />
             </div>
-
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 dark:text-white leading-snug">
-              ¿Por qué verificamos cada comentario antes de publicarlo?
-            </h3>
-
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              En Isaac Ventas cuidamos la confianza de cada comerciante. No mostramos notificaciones automáticas ni testimonios inventados: cada opinión publicada corresponde a un negocio real que utiliza nuestro sistema.
-            </p>
-
-            <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-mono font-bold text-xs shrink-0 mt-0.5">
-                  1
-                </div>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                    Envías tu calificación y comentario
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Completa los datos de tu negocio y cómo te ha ayudado Isaac POS en tu facturación o inventario.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-mono font-bold text-xs shrink-0 mt-0.5">
-                  2
-                </div>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                    Confirmamos tu licencia o instalación
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Tu número de WhatsApp o correo solo se usa internamente para validar que eres cliente activo y evitar spam.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-mono font-bold text-xs shrink-0 mt-0.5">
-                  3
-                </div>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                    Se publica en el portal oficial
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Una vez aprobada en el panel de moderación, tu reseña aparece en esta sección con el sello de Licencia Verificada.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {approvedReviews.length === 0 && (
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/90 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center gap-3">
-                <MessageSquarePlus className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
-                <span>
-                  Sé el primero en registrar la reseña verificada de tu comercio en nuestro muro de clientes.
-                </span>
-              </div>
-            )}
-
-            <div className="pt-2 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Moderación verificada por Isaac Ventas</span>
-              <Link
-                href="/admin/resenas"
-                className="inline-flex items-center gap-1 text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 font-mono transition-colors"
-              >
-                <Lock className="w-3 h-3" />
-                <span>Panel Admin</span>
-              </Link>
+            <div>
+              <h3 className="text-sm sm:text-base font-black text-slate-950 dark:text-white">
+                ¿Ya utilizas Isaac POS en tu comercio?
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Envíanos tu calificación para publicarla con el sello de Licencia Verificada.
+              </p>
             </div>
           </div>
 
-          {/* Columna Derecha: Caja de Comentarios para Clientes (7 cols) */}
-          <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-blue-200/80 dark:border-slate-800 rounded-3xl p-7 sm:p-9 shadow-xl">
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-center">
+            <button
+              type="button"
+              onClick={() => setShowForm((prev) => !prev)}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 transition-all cursor-pointer"
+            >
+              <MessageSquarePlus className="w-4 h-4" />
+              <span>{showForm ? "Ocultar formulario" : "✍️ Escribir mi reseña"}</span>
+            </button>
+
+            <Link
+              href="/admin/resenas"
+              className="inline-flex items-center gap-1 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 font-mono transition-colors shrink-0"
+              title="Panel de Moderación"
+            >
+              <Lock className="w-3 h-3" />
+              <span className="hidden md:inline">Admin</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Formulario Desplegable bajo demanda */}
+        {showForm && (
+          <div className="mt-6 max-w-3xl mx-auto bg-white dark:bg-slate-900 border border-blue-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-9 shadow-xl animate-in fade-in duration-200">
             {submittedState ? (
               <div className="py-8 text-center space-y-5">
                 <div className="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
@@ -518,7 +475,7 @@ export const Testimonials: React.FC = () => {
               </form>
             )}
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

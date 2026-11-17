@@ -16,25 +16,25 @@ import {
 
 export const SecurityTrust: React.FC = () => {
   return (
-    <section id="seguridad" className="py-24 relative bg-blue-50/35 dark:bg-slate-900/60 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
+    <div id="seguridad" className="py-6 relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera de Seguridad */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
             <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>PROTECCIÓN DE CAJA & INTEGRIDAD FINANCIERA</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
+          <h3 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
             Blindaje estricto para cada dólar y bolívar que entra al mostrador.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
             Las pérdidas en comercios casi nunca ocurren por errores del sistema, sino por falta de controles en el cambio de turno. Isaac POS implementa el estándar bancario de Arqueo Ciego.
           </p>
         </div>
 
         {/* Comparativa Visual de Alto Impacto: Sistema Convencional vs Isaac POS */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
           
           {/* Tarjeta 1: Sistema Tradicional (Vulnerable) */}
           <div className="rounded-3xl bg-slate-50 dark:bg-rose-950/15 border border-rose-200 dark:border-rose-900/50 p-8 flex flex-col justify-between">
@@ -171,6 +171,6 @@ export const SecurityTrust: React.FC = () => {
         </div>
 
       </div>
-    </section>
+    </div>
   );
 };

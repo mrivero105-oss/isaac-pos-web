@@ -76,20 +76,20 @@ const HARDWARE_DEVICES: HardwareDevice[] = [
 
 export const HardwareSection: React.FC = () => {
   return (
-    <section id="hardware" className="py-24 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
+    <div id="hardware" className="py-6 relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera de Hardware */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/5 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-mono font-semibold mb-3">
               <Cable className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
               <span>COMPATIBILIDAD CON HARDWARE ESTÁNDAR</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
+            <h3 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-2">
               Usa los equipos que ya tienes, sin contratos forzosos.
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
               No estás atado a comprar hardware propietario con sobreprecio. Isaac POS se conecta directamente a los protocolos y periféricos universales del comercio.
             </p>
           </div>
@@ -158,6 +158,6 @@ export const HardwareSection: React.FC = () => {
         </div>
 
       </div>
-    </section>
+    </div>
   );
 };

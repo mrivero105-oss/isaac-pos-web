@@ -5,15 +5,10 @@ import dynamic from "next/dynamic";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
-import { UltraEditionShowcase } from "@/components/UltraEditionShowcase";
-import { RealSystemShowcase } from "@/components/RealSystemShowcase";
-import { IndustrySolutions } from "@/components/IndustrySolutions";
+import { ProductAndIndustryHub } from "@/components/ProductAndIndustryHub";
 import { InteractivePosDemo } from "@/components/InteractivePosDemo";
-import { HardwareSection } from "@/components/HardwareSection";
-import { HumanSupportSection } from "@/components/HumanSupportSection";
-import { SecurityTrust } from "@/components/SecurityTrust";
+import { TechAndSupportHub } from "@/components/TechAndSupportHub";
 import { Testimonials } from "@/components/Testimonials";
-import { RoiCalculator } from "@/components/RoiCalculator";
 import { Pricing } from "@/components/Pricing";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
@@ -105,7 +100,7 @@ export default function Home() {
         onToggleTheme={handleToggleTheme}
       />
 
-      {/* Flujo Principal Optimizado para Conversión */}
+      {/* Flujo Principal Compacto Optimizado para Conversión */}
       <main className="flex-1">
         {/* 1. Hero: Propuesta de valor, doble pantalla (POS + Visor QR) y acceso directo */}
         <Hero
@@ -114,37 +109,22 @@ export default function Home() {
           onOpenVideoDemo={() => setVideoDemoOpen(true)}
         />
 
-        {/* 2. Sistema Real: Los 13 Módulos V24.04 organizados en 3 Pilares */}
-        <RealSystemShowcase />
+        {/* 2. Escaparate Unificado: 13 Módulos del Sistema + Soluciones por Rubro */}
+        <ProductAndIndustryHub onOpenModal={handleOpenModal} />
 
-        {/* 3. Soluciones por Rubro Comercial (Minimarket, Farmacia, Carnicería, Ferretería, Cadenas) */}
-        <IndustrySolutions onOpenModal={handleOpenModal} />
-
-        {/* 4. Simulador Interactivo: Prueba de cobro en vivo + 2da pantalla en el navegador */}
+        {/* 3. Simulador Interactivo: Prueba de cobro en vivo + 2da pantalla en el navegador */}
         <InteractivePosDemo onOpenModal={handleOpenModal} />
 
-        {/* 5. Planes y Licencias: Oferta transparente ($12/mes, $24/mes y $199 Vitalicia) */}
+        {/* 4. Planes y Licencias: Oferta transparente ($12/mes, $24/mes y $199 Vitalicia) */}
         <Pricing onOpenModal={handleOpenModal} />
 
-        {/* 5. Seguridad, Blindaje de Caja y Arqueo Ciego Anti-Faltantes */}
-        <SecurityTrust />
+        {/* 5. Centro de Ingeniería, Hardware, Calculadora ROI y Soporte en 5 Pestañas */}
+        <TechAndSupportHub onOpenModal={handleOpenModal} />
 
-        {/* 6. Edición Ultra: Motor Local SQLite, Windows/Android e Instalación AnyDesk */}
-        <UltraEditionShowcase onOpenModal={handleOpenModal} />
-
-        {/* 7. Hardware y Periféricos Compatibles */}
-        <HardwareSection />
-
-        {/* 8. Acompañamiento Humano, Migración desde Excel y Soporte */}
-        <HumanSupportSection />
-
-        {/* 9. Caja de Experiencias y Reseñas Verificadas de Clientes */}
+        {/* 6. Reseñas Verificadas de Clientes (con formulario desplegable) */}
         <Testimonials />
 
-        {/* 10. Calculadora de Retorno de Inversión */}
-        <RoiCalculator onOpenModal={handleOpenModal} />
-
-        {/* 11. Preguntas Frecuentes */}
+        {/* 7. Preguntas Frecuentes Unificadas */}
         <Faq />
       </main>
 

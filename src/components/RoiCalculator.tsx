@@ -27,19 +27,19 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
   const recommendedPlanKey = terminalsCount === 1 ? "vitalicia" : "pro_anual";
 
   return (
-    <section className="py-24 relative bg-blue-50/40 dark:bg-slate-900/70 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
+    <div id="calculadora-roi" className="py-6 relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
             <Calculator className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>MODELADO FINANCIERO DE MOSTRADOR</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
+          <h3 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-2">
             Calcula el impacto real en tus horas y en tu caja.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
             Ajusta los parámetros de tu comercio para proyectar el tiempo recuperado y las fugas de caja que previenes con el Arqueo Ciego.
           </p>
         </div>
@@ -230,6 +230,6 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onOpenModal }) => 
         </div>
 
       </div>
-    </section>
+    </div>
   );
 };

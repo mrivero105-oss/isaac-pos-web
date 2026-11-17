@@ -311,18 +311,15 @@ export const RealSystemShowcase: React.FC = () => {
   };
 
   return (
-    <section id="sistema-real" className="py-20 relative bg-white/65 dark:bg-slate-950/85 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
+    <div className="py-4 relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
-            <span>SUITE OPERATIVA DE COMERCIO</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h3 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
             Explora la suite completa módulo por módulo.
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg">
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
             Desde el cobro rápido en mostrador y el visor de cliente hasta inventario multialmacén, cuentas por cobrar indexadas y arqueo ciego.
           </p>
         </div>
@@ -531,6 +528,6 @@ export const RealSystemShowcase: React.FC = () => {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };

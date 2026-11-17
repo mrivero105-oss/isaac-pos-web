@@ -6,27 +6,27 @@ import { trackGoogleAdsEvent } from "@/lib/gtag";
 
 export const HumanSupportSection: React.FC = () => {
   return (
-    <section id="soporte-humano" className="py-24 relative bg-blue-50/35 dark:bg-slate-900/60 backdrop-blur-[2px] border-t border-blue-100/80 dark:border-slate-800/80 transition-colors duration-200">
+    <div id="soporte-humano" className="py-6 relative transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Cabecera */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 text-blue-800 dark:text-slate-200 text-xs font-mono font-bold mb-3 shadow-2xs">
             <Headphones className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>ACOMPAÑAMIENTO EN SITIO Y POR ANYDESK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight mb-4">
+          <h3 className="text-2xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mb-3">
             Un equipo humano real detrás de cada mostrador.
-          </h2>
+          </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
             Cambiar o instalar un software genera dudas operativas. En Isaac POS no te entregamos un instalador huérfano: nos conectamos contigo, cargamos tu inventario y dejamos tu mostrador facturando.
           </p>
         </div>
 
         {/* 4 Fases de Puesta en Marcha */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           
           {/* Paso 1 */}
           <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl p-7 flex flex-col justify-between hover:bg-white dark:hover:bg-slate-800/80 hover:border-slate-400 dark:hover:border-slate-700 hover:shadow-md transition-all">
@@ -155,6 +155,6 @@ export const HumanSupportSection: React.FC = () => {
         </div>
 
       </div>
-    </section>
+    </div>
   );
 };

@@ -27,12 +27,9 @@ export const Header: React.FC<HeaderProps> = ({
   useEffect(() => {
     const sectionIds = [
       "sistema-real",
-      "rubros",
       "simulador",
       "precios",
-      "seguridad",
-      "hardware",
-      "soporte-humano",
+      "tecnologia",
       "testimonios",
     ];
 
@@ -105,12 +102,6 @@ export const Header: React.FC<HeaderProps> = ({
               Módulos
             </a>
             <a
-              href="#rubros"
-              className={getNavLinkClass("rubros")}
-            >
-              Rubros
-            </a>
-            <a
               href="#simulador"
               className={getNavLinkClass("simulador", "flex items-center gap-1.5")}
             >
@@ -124,22 +115,10 @@ export const Header: React.FC<HeaderProps> = ({
               Precios
             </a>
             <a
-              href="#seguridad"
-              className={getNavLinkClass("seguridad")}
+              href="#tecnologia"
+              className={getNavLinkClass("tecnologia")}
             >
-              Arqueo Ciego
-            </a>
-            <a
-              href="#hardware"
-              className={getNavLinkClass("hardware", "hidden xl:inline-block")}
-            >
-              Hardware
-            </a>
-            <a
-              href="#soporte-humano"
-              className={getNavLinkClass("soporte-humano")}
-            >
-              Soporte
+              Tecnología & Soporte
             </a>
             <a
               href="#testimonios"
@@ -270,14 +249,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
-                Módulos del Sistema
-              </a>
-              <a
-                href="#rubros"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                Soluciones por Rubro Comercial
+                Módulos y Soluciones por Rubro
               </a>
               <a
                 href="#simulador"
@@ -298,25 +270,11 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="text-[10px] font-mono text-blue-700 dark:text-blue-300">Desde $12/mes</span>
               </a>
               <a
-                href="#seguridad"
+                href="#tecnologia"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
-                Arqueo Ciego & Seguridad
-              </a>
-              <a
-                href="#hardware"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                Hardware Compatible
-              </a>
-              <a
-                href="#soporte-humano"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1.5 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                Soporte & AnyDesk
+                Tecnología, Hardware & Soporte
               </a>
               <a
                 href="#testimonios"
