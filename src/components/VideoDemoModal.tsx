@@ -397,21 +397,13 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
           {currentPhase !== 2 && (
             <div className="bg-[#0b101b] px-4 py-2 border-b border-slate-800/90 flex flex-wrap items-center justify-between gap-2 text-xs select-none">
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-slate-900 border border-cyan-500/40 p-0.5 flex items-center justify-center">
-                  <Image
-                    src="/isaac-logo-ultra.png"
-                    alt="Isaac POS"
-                    width={28}
-                    height={28}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-black text-white text-sm">Isaac</span>
-                  <span className="bg-slate-800 border border-slate-700 text-slate-200 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">
-                    POS
-                  </span>
-                </div>
+                <Image
+                  src="/isaac-logo-horizontal-dark.png"
+                  alt="Isaac POS • Sistema de Facturación"
+                  width={112}
+                  height={36}
+                  className="h-8 w-auto object-contain"
+                />
                 <div className="ml-2 bg-slate-900 border border-slate-700/80 px-2.5 py-1 rounded-full font-mono text-[11px] flex items-center gap-1.5">
                   <span className="text-slate-400">$ 1$ =</span>
                   <span className="text-white font-bold">
@@ -665,8 +657,14 @@ export const VideoDemoModal: React.FC<VideoDemoModalProps> = ({
               <div className="flex-1 bg-[#dce8f5] text-slate-900 p-4 sm:p-6 flex flex-col justify-between animate-fadeIn">
                 <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-300">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-blue-600 text-white font-black text-xs flex items-center justify-center">
-                      IP
+                    <div className="w-9 h-9 rounded-full bg-white border border-blue-200 flex items-center justify-center overflow-hidden p-0.5">
+                      <Image
+                        src="/icon-192x192.png"
+                        alt="Isaac POS"
+                        width={32}
+                        height={32}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <div>
                       <div className="font-black text-sm text-slate-950">MINIMARKET DEMO</div>

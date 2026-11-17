@@ -34,9 +34,9 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ className })
           {/* Header del Chat */}
           <div className="bg-emerald-600 p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-white/20 bg-emerald-700/60">
+              <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/40 bg-white">
                 <Image
-                  src="/isaac-logo-ultra.png"
+                  src="/icon-192x192.png"
                   alt="Isaac POS"
                   width={36}
                   height={36}
