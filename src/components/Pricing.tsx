@@ -242,254 +242,164 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
           </div>
         </div>
 
-        {/* 3 Tarjetas de Precios con Arquitectura Visual de Alto Nivel */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
+        {/* 3 Tarjetas de Precios Compactas (4 Puntos Clave por Plan) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch mb-8">
           
           {/* Plan 1: Emprendedor */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-md transition-all relative">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-md transition-all relative">
             <div>
-              <div className="flex justify-between items-start mb-4 gap-2">
+              <div className="flex justify-between items-start mb-3 gap-2">
                 <div>
-                  <h3 className="text-xl font-black text-slate-950 dark:text-white whitespace-nowrap">Plan Emprendedor</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">1 Caja Individual</p>
+                  <h3 className="text-lg font-black text-slate-950 dark:text-white">Plan Emprendedor</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">1 Caja Individual</p>
                 </div>
-                <span className="text-[10px] font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-1 rounded-md font-bold shrink-0">
+                <span className="text-[10px] font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded-md font-bold shrink-0">
                   1 TERMINAL
                 </span>
               </div>
 
-              <p className="text-xs text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                Ideal para bodegas, panaderías, tiendas de ropa o kioscos atendidos por su dueño que requieren rapidez en caja y cobro bimonetario sin complicaciones.
-              </p>
-
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 mb-6">
+              <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 mb-4">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-slate-950 dark:text-white font-mono tabular-nums">
+                  <span className="text-3xl font-black text-slate-950 dark:text-white font-mono tabular-nums">
                     ${billingCycle === "yearly" ? "9.90" : "12"}
                   </span>
                   <span className="text-slate-500 dark:text-slate-400 text-xs font-mono">USD / mes</span>
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                  {billingCycle === "yearly" ? "Facturado anualmente ($99 USD/año) · Ahorras $45" : "Sin compromiso de permanencia a largo plazo"}
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                  {billingCycle === "yearly" ? "$99 USD/año · Ahorras $45" : "Sin permanencia forzosa"}
                 </div>
               </div>
 
-              {/* Lo que incluye */}
-              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
-                  ¿Qué incluye exactamente?
-                </div>
-                <div className="flex items-start gap-2.5">
+              <div className="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>1 Terminal activa</strong> en Computadora (Windows) o Android.</span>
+                  <span><strong>1 Terminal activa</strong> en Windows o Android.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>Ventas y tickets ilimitados</strong> sin cobro de comisiones.</span>
+                  <span><strong>Cobro dual USD / Bs</strong> a tasa BCV en vivo.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>Cobro dual simultáneo</strong> (USD y Bs a tasa BCV en vivo).</span>
+                  <span><strong>Modo 100% Offline</strong> + Impresión térmica 58/80mm.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong>Modo 100% Offline</strong>: vende sin internet sin congelamientos.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Impresión térmica ESC/POS de 58mm y 80mm vía USB.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Corte de caja estándar (Reporte X y Z del turno).</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Catálogo ilimitado con lector de código de barras.</span>
-                </div>
-                
-                {/* Lo que no incluye con honestidad */}
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-slate-400 dark:text-slate-500 text-xs">
-                  <div className="flex items-center gap-2">
-                    <XIcon className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
-                    <span>Sin Arqueo Ciego Certificado</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <XIcon className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
-                    <span>Sin Visor de Cliente en 2da pantalla</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <XIcon className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 shrink-0" />
-                    <span>1 solo almacén (sin kardex multidepósito)</span>
-                  </div>
+                  <span>Catálogo ilimitado y Corte de Caja X/Z.</span>
                 </div>
               </div>
             </div>
 
             <button
               onClick={() => onOpenModal(billingCycle === "yearly" ? "basico_anual" : "basico_mensual")}
-              className="mt-8 w-full py-3.5 rounded-xl border-2 border-slate-300 dark:border-slate-700 hover:border-slate-950 dark:hover:border-blue-500 hover:bg-slate-950 dark:hover:bg-blue-600 hover:text-white text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition-all text-center cursor-pointer"
+              className="mt-6 w-full py-3 rounded-xl border-2 border-slate-300 dark:border-slate-700 hover:border-slate-950 dark:hover:border-blue-500 hover:bg-slate-950 dark:hover:bg-blue-600 hover:text-white text-slate-900 dark:text-white font-bold text-xs sm:text-sm transition-all text-center cursor-pointer"
             >
               Comenzar con Emprendedor
             </button>
           </div>
 
-          {/* Plan 2: Profesional (El más elegido - Diseño de Ingeniería Premium) */}
-          <div className="bg-slate-950 text-white rounded-3xl p-8 flex flex-col justify-between relative shadow-2xl ring-1 ring-blue-500/40 border-2 border-blue-600/60 transition-all">
+          {/* Plan 2: Profesional */}
+          <div className="bg-slate-950 text-white rounded-3xl p-6 flex flex-col justify-between relative shadow-2xl ring-1 ring-blue-500/40 border-2 border-blue-600/60 transition-all">
             <div>
-              <div className="flex justify-between items-start mb-4 gap-2">
+              <div className="flex justify-between items-start mb-3 gap-2">
                 <div>
-                  <h3 className="text-xl font-black text-white whitespace-nowrap">Plan Profesional</h3>
-                  <p className="text-xs text-blue-300/80 mt-1">Multi-Caja & Control Estricto</p>
+                  <h3 className="text-lg font-black text-white">Plan Profesional</h3>
+                  <p className="text-xs text-blue-300/80">Multi-Caja & Control Estricto</p>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-blue-300 bg-blue-950 border border-blue-600/40 px-2 py-1 rounded-md shrink-0">
+                <span className="text-[10px] font-mono font-bold text-blue-300 bg-blue-950 border border-blue-600/40 px-2 py-0.5 rounded-md shrink-0">
                   HASTA 3 CAJAS
                 </span>
               </div>
 
-              <p className="text-xs text-slate-300 mb-6 leading-relaxed">
-                Diseñado para minimarkets, bodegones, farmacias, ferreterías y comercios con empleados en caja que exigen <strong className="text-white">Arqueo Ciego anti-robo</strong> y control multi-terminal en red local.
-              </p>
-
-              <div className="p-4 rounded-2xl bg-slate-900/90 border border-blue-500/30 mb-6">
+              <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-blue-500/30 mb-4">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-white font-mono tabular-nums">
+                  <span className="text-3xl font-black text-white font-mono tabular-nums">
                     ${billingCycle === "yearly" ? "19" : "24"}
                   </span>
                   <span className="text-slate-400 text-xs font-mono">USD / mes</span>
                 </div>
-                <div className="text-[11px] text-blue-400 mt-1 font-medium">
-                  {billingCycle === "yearly" ? "Facturado anualmente ($190 USD/año) · Ahorras $98" : "Flexibilidad mensual sin cláusulas forzosas"}
+                <div className="text-[11px] text-blue-400 mt-0.5 font-medium">
+                  {billingCycle === "yearly" ? "$190 USD/año · Ahorras $98" : "Sin cláusulas forzosas"}
                 </div>
               </div>
 
-              {/* Lo que incluye */}
-              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-200">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-blue-400 mb-2">
-                  Todo lo del Plan Emprendedor, más:
-                </div>
-                <div className="flex items-start gap-2.5">
+              <div className="space-y-2.5 text-xs sm:text-sm text-slate-200">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Hasta 3 Cajas en Red Local (LAN/WiFi)</strong> sin requerir internet externo.</span>
+                  <span><strong className="text-white">Hasta 3 Cajas en Red Local</strong> + Balanzas USB/RS232.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Arqueo Ciego Certificado</strong>: el cajero cuenta sin ver el saldo del sistema para evitar robos hormiga.</span>
+                  <span><strong className="text-white">Arqueo Ciego Certificado</strong> anti-faltantes de caja.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Visor de Cliente en 2da pantalla</strong>: muestra el cálculo en tiempo real en USD y Bs.</span>
+                  <span><strong className="text-white">Visor de Cliente en 2da pantalla</strong> con QR Pago Móvil.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Inventario Multialmacén</strong> con Kardex detallado y trazabilidad de costo/ganancia.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Control de cajeros con <strong className="text-white">PIN de seguridad</strong> y restricción de anulaciones.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Integración de balanzas electrónicas (puerto RS232 y USB).</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Soporte prioritario 1 a 1 por AnyDesk</strong> y WhatsApp directo.</span>
+                  <span><strong className="text-white">Inventario Multialmacén</strong> + Instalación AnyDesk 1 a 1.</span>
                 </div>
               </div>
             </div>
 
             <button
               onClick={() => onOpenModal(billingCycle === "yearly" ? "pro_anual" : "pro_mensual")}
-              className="mt-8 w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="mt-6 w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Elegir Plan Profesional</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Plan 3: Licencia Vitalicia (Pago Único Perpetuo) */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-md transition-all relative">
+          {/* Plan 3: Licencia Vitalicia */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 shadow-xs hover:shadow-md transition-all relative">
             <div>
-              <div className="flex justify-between items-start mb-4 gap-2">
+              <div className="flex justify-between items-start mb-3 gap-2">
                 <div>
-                  <h3 className="text-xl font-black text-slate-950 dark:text-white whitespace-nowrap">Licencia Vitalicia</h3>
-                  <p className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-1">1 Admin + 1 Caja Incluida</p>
+                  <h3 className="text-lg font-black text-slate-950 dark:text-white">Licencia Vitalicia</h3>
+                  <p className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold">1 Admin + 1 Caja Incluida</p>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-700 px-2 py-1 rounded-md shrink-0">
+                <span className="text-[10px] font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-700 px-2 py-0.5 rounded-md shrink-0">
                   PAGO ÚNICO
                 </span>
               </div>
 
-              <p className="text-xs text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
-                Adquiere el sistema de forma definitiva sin suscripciones mensuales. Incluye de base 1 usuario Administrador para control gerencial y 1 Terminal de Caja activa para mostrador.
-              </p>
-
-              <div className="p-4 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/60 mb-5">
+              <div className="p-3.5 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/60 mb-4">
                 <div className="flex items-baseline gap-1.5">
-                  <span className="text-4xl font-black text-slate-950 dark:text-white font-mono tabular-nums">
+                  <span className="text-3xl font-black text-slate-950 dark:text-white font-mono tabular-nums">
                     $199
                   </span>
                   <span className="text-slate-600 dark:text-slate-400 text-xs font-mono">USD (Pago Único)</span>
                 </div>
-                <div className="text-[11px] text-emerald-800 dark:text-emerald-300 mt-1 font-semibold">
-                  Sin mensualidades ni anualidades forzadas de por vida
+                <div className="text-[11px] text-emerald-800 dark:text-emerald-300 mt-0.5 font-semibold">
+                  Sin mensualidades ni anualidades de por vida
                 </div>
               </div>
 
-              {/* Aclaratoria de Cajas y Usuarios Adicionales */}
-              <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200/80 dark:border-slate-800 mb-6">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white mb-1">
-                  <span>Alcance incluido de base:</span>
-                  <span className="text-emerald-700 dark:text-emerald-400 font-mono font-black">1 Admin + 1 Caja</span>
-                </div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
-                  1 Administrador (reportes, costos e inventario) + 1 Cajero operativo.
-                </div>
-                
-                <div className="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
-                  <span className="text-slate-700 dark:text-slate-300 font-medium">¿Caja / usuario adicional?</span>
-                  <span className="font-mono font-bold text-slate-950 dark:text-white bg-white dark:bg-slate-900 px-2 py-0.5 rounded border border-slate-300 dark:border-slate-700">
-                    +$49 USD <span className="text-[10px] text-slate-500 dark:text-slate-400 font-normal">pago único</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* Lo que incluye */}
-              <div className="space-y-3 pt-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
-                <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 mb-2">
-                  Propiedad perpetua garantizada:
-                </div>
-                <div className="flex items-start gap-2.5">
+              <div className="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950 dark:text-white">1 Admin + 1 Caja de cobro activa</strong> de por vida.</span>
+                  <span><strong className="text-slate-950 dark:text-white">1 Admin + 1 Caja de por vida</strong> (+$49/caja extra).</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950 dark:text-white">Cajas adicionales en red local</strong>: solo +$49 USD por caja (pago único perpetuo).</span>
+                  <span><strong className="text-slate-950 dark:text-white">Los 13 módulos activados</strong> (Arqueo, Visor QR, Kardex).</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950 dark:text-white">Todas las funciones activadas</strong>: Arqueo Ciego, 2da pantalla de cliente y Kardex.</span>
+                  <span><strong className="text-slate-950 dark:text-white">Base de datos SQLite 100% propia</strong> en tu equipo.</span>
                 </div>
-                <div className="flex items-start gap-2.5">
+                <div className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950 dark:text-white">Base de datos local SQLite 100% propia</strong>: tus datos en tu disco duro, sin depender de la nube.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-slate-950 dark:text-white">Instalación y configuración 1 a 1 por AnyDesk</strong> + migración de catálogo desde Excel.</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <span>Actualizaciones de seguridad y estabilidad perpetuas con licencia transferible.</span>
+                  <span><strong className="text-slate-950 dark:text-white">Instalación AnyDesk + Migración Excel</strong> incluida.</span>
                 </div>
               </div>
             </div>
 
             <button
               onClick={() => onOpenModal("vitalicia")}
-              className="mt-8 w-full py-3.5 rounded-xl bg-slate-950 dark:bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all text-center cursor-pointer"
+              className="mt-6 w-full py-3 rounded-xl bg-slate-950 dark:bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-md transition-all text-center cursor-pointer"
             >
               Comprar Licencia Vitalicia
             </button>
@@ -497,73 +407,8 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
 
         </div>
 
-        {/* Comparador Financiero a 3 Años: Por qué la Licencia Vitalicia de $199 vence a los sistemas de renta eterna */}
-        <div className="max-w-5xl mx-auto mb-14 rounded-3xl bg-slate-950 text-white border border-slate-800 p-6 sm:p-8 shadow-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            <div className="lg:col-span-5">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
-                MATEMÁTICA FINANCIERA A 3 AÑOS
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-white leading-tight mb-2">
-                ¿Por qué el 70% de los dueños eligen la Licencia Vitalicia de $199?
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Mientras otros sistemas te atan a rentas eternas de $30 a $45 mensuales y bloquean tu caja si te atrasas un día, con la Licencia Vitalicia pagas una sola vez y eres dueño perpetuo de tu software.
-              </p>
-            </div>
-
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Otros Sistemas de Renta */}
-              <div className="p-4 rounded-2xl bg-slate-900/90 border border-rose-500/30 flex flex-col justify-between">
-                <div>
-                  <span className="text-[10px] font-mono font-bold text-rose-400 uppercase block mb-1">
-                    OTROS SISTEMAS POS ($30/MES)
-                  </span>
-                  <div className="text-2xl sm:text-3xl font-black text-rose-400 font-mono tabular-nums">
-                    $1,080+ USD
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Gastados en 36 meses de alquiler continuo sin ser dueño de nada.
-                  </p>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-slate-800 text-[11px] text-rose-300 font-mono">
-                  ✕ Si dejas de pagar, pierdes el acceso
-                </div>
-              </div>
-
-              {/* Isaac POS Vitalicia */}
-              <div className="p-4 rounded-2xl bg-emerald-950/40 border-2 border-emerald-500/60 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">
-                      ISAAC POS VITALICIA
-                    </span>
-                    <span className="text-[10px] font-mono font-black bg-emerald-500 text-slate-950 px-2 py-0.5 rounded-full">
-                      AHORRAS +$880
-                    </span>
-                  </div>
-                  <div className="text-2xl sm:text-3xl font-black text-white font-mono tabular-nums">
-                    $199 USD
-                  </div>
-                  <p className="text-[11px] text-slate-300 mt-1">
-                    Un único pago de por vida (1 Admin + 1 Caja). $0 en mensualidades futuras.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onOpenModal("vitalicia")}
-                  className="mt-3 py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                >
-                  <span>Adquirir Vitalicia por $199</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Botón para Desplegar la Matriz Comparativa Detallada */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <button
             onClick={() => setShowMatrix(!showMatrix)}
             className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
@@ -683,85 +528,18 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
           </div>
         )}
 
-        {/* Bandeja de Garantía & Opciones de Pago */}
-        <div className="max-w-5xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
-          
-          {/* Tarjeta 1: Garantía Blindada de 30 Días (7 columnas) */}
-          <div className="md:col-span-7 bg-white dark:bg-slate-900 rounded-3xl p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-emerald-700 dark:text-emerald-400 tracking-wider">
-                    COMPROMISO SIN RIESGO
-                  </span>
-                  <h4 className="text-lg font-black text-slate-950 dark:text-white leading-tight">
-                    Garantía de Satisfacción Total de 30 Días
-                  </h4>
-                </div>
-              </div>
-
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5">
-                Instálalo en tu negocio y ponlo a prueba con tus cajeros en horas pico. Si durante los primeros 30 días Isaac POS no agiliza tus cobros o no se adapta a tu operativa, te reembolsamos el 100% de tu dinero de inmediato.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] font-medium text-slate-700 dark:text-slate-300">
-              <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                <span>Cero riesgo</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                <span>Reembolso directo</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                <span>Sin letra chica</span>
-              </div>
-            </div>
+        {/* Tira Compacta de Garantía & Formas de Pago */}
+        <div className="max-w-5xl mx-auto rounded-2xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 px-5 py-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+          <div className="flex items-center gap-2.5 text-slate-700 dark:text-slate-200 font-medium">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <span>
+              <strong className="text-slate-950 dark:text-white">Garantía de Satisfacción de 30 Días:</strong> Reembolso del 100% si no agiliza tus cobros.
+            </span>
           </div>
-
-          {/* Tarjeta 2: Métodos de Pago y Facturación Multimoneda (5 columnas) */}
-          <div className="md:col-span-5 bg-white dark:bg-slate-900 rounded-3xl p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <CreditCard className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <span className="text-[10px] font-mono uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider">
-                  FORMAS DE PAGO ACEPTADAS
-                </span>
-              </div>
-
-              <h4 className="text-base font-black text-slate-950 dark:text-white mb-1">
-                Facturación en Divisas y Bolívares
-              </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
-                Cobro transparente a la tasa oficial del Banco Central de Venezuela (BCV).
-              </p>
-
-              <div className="space-y-2.5">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 text-xs">
-                  <span className="font-semibold text-slate-900 dark:text-slate-100">Pago Móvil & Bancos Nacionales</span>
-                  <span className="font-mono text-[10px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded border border-blue-100 dark:border-blue-800">TASA BCV</span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 text-xs">
-                  <span className="font-semibold text-slate-900 dark:text-slate-100">Zelle</span>
-                  <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">Cuentas EE.UU.</span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-100 dark:border-slate-800 text-xs">
-                  <span className="font-semibold text-slate-900 dark:text-slate-100">Binance Pay (USDT)</span>
-                  <span className="font-mono text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">QR Instantáneo</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 dark:text-slate-500 text-center font-mono">
-              Activación inmediata tras confirmación del pago
-            </div>
+          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300 font-mono text-[11px] shrink-0">
+            <CreditCard className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+            <span>Pago Móvil (Tasa BCV) • Zelle • Binance USDT</span>
           </div>
-
         </div>
 
       </div>

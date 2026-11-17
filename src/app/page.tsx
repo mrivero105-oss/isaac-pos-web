@@ -6,7 +6,6 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { InteractiveEngineeringBackground } from "@/components/InteractiveEngineeringBackground";
 import { ProductAndIndustryHub } from "@/components/ProductAndIndustryHub";
-import { InteractivePosDemo } from "@/components/InteractivePosDemo";
 import { TechAndSupportHub } from "@/components/TechAndSupportHub";
 import { Testimonials } from "@/components/Testimonials";
 import { Pricing } from "@/components/Pricing";
@@ -109,13 +108,10 @@ export default function Home() {
           onOpenVideoDemo={() => setVideoDemoOpen(true)}
         />
 
-        {/* 2. Escaparate Unificado: 13 Módulos del Sistema + Soluciones por Rubro */}
+        {/* 2. Escaparate Unificado: 13 Módulos | Soluciones por Rubro | Simulador en Vivo */}
         <ProductAndIndustryHub onOpenModal={handleOpenModal} />
 
-        {/* 3. Simulador Interactivo: Prueba de cobro en vivo + 2da pantalla en el navegador */}
-        <InteractivePosDemo onOpenModal={handleOpenModal} />
-
-        {/* 4. Planes y Licencias: Oferta transparente ($12/mes, $24/mes y $199 Vitalicia) */}
+        {/* 3. Planes y Licencias Compactos ($12/mes, $24/mes y $199 Vitalicia) */}
         <Pricing onOpenModal={handleOpenModal} />
 
         {/* 5. Centro de Ingeniería, Hardware, Calculadora ROI y Soporte en 5 Pestañas */}

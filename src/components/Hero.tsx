@@ -1,22 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { useBcvRate } from "@/lib/useBcvRate";
+import React from "react";
 import {
   WifiOff,
   ArrowRight,
   Play,
   Headphones,
-  Maximize2,
-  X,
   ShieldCheck,
   DollarSign,
-  Monitor,
-  Banknote,
-  Sparkles,
-  CheckCircle2,
-  Lock,
 } from "lucide-react";
 
 interface HeroProps {
@@ -25,27 +16,19 @@ interface HeroProps {
   onOpenVideoDemo?: () => void;
 }
 
-type StageView = "pos" | "customer_display" | "arqueo";
-
 export const Hero: React.FC<HeroProps> = ({
   onOpenModal,
-  onOpenAiChat,
   onOpenVideoDemo,
 }) => {
-  const [activeView, setActiveView] = useState<StageView>("pos");
-  const [isZoomed, setIsZoomed] = useState(false);
-  const { rate: rateValue } = useBcvRate();
-
   return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-blue-50/40 via-transparent to-indigo-50/30 dark:from-transparent dark:via-slate-950/60 dark:to-slate-900/40 transition-colors duration-200">
-      {/* Halos de luz arquitectónica superior (Aurora Zafiro y Cian en Modo Claro) */}
-      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[920px] h-[380px] bg-gradient-to-r from-blue-600/20 via-cyan-400/15 to-indigo-600/15 dark:from-blue-500/20 dark:via-cyan-500/10 dark:to-indigo-500/15 blur-[110px] pointer-events-none rounded-full" />
+    <section className="relative pt-24 pb-10 md:pt-28 md:pb-14 overflow-hidden bg-gradient-to-b from-blue-50/40 via-transparent to-indigo-50/30 dark:from-transparent dark:via-slate-950/60 dark:to-slate-900/40 transition-colors duration-200">
+      {/* Halos de luz arquitectónica superior */}
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[920px] h-[340px] bg-gradient-to-r from-blue-600/20 via-cyan-400/15 to-indigo-600/15 dark:from-blue-500/20 dark:via-cyan-500/10 dark:to-indigo-500/15 blur-[110px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          
-          {/* Logo Oficial Principal a Gran Escala (Adapta versión clara/oscura automáticamente) */}
-          <div className="flex justify-center mb-6 sm:mb-8">
+          {/* Logo Oficial Principal */}
+          <div className="flex justify-center mb-4 sm:mb-5">
             <picture className="dark:hidden">
               <source srcSet="/isaac-logo-horizontal.webp" type="image/webp" />
               <img
@@ -56,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
-                className="w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_14px_30px_rgba(37,99,235,0.16)] select-none"
+                className="w-[240px] sm:w-[320px] md:w-[360px] h-auto object-contain drop-shadow-[0_14px_30px_rgba(37,99,235,0.16)] select-none"
               />
             </picture>
             <picture className="hidden dark:block">
@@ -69,13 +52,13 @@ export const Hero: React.FC<HeroProps> = ({
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
-                className="w-[300px] sm:w-[410px] md:w-[460px] h-auto object-contain drop-shadow-[0_10px_28px_rgba(56,189,248,0.18)] select-none"
+                className="w-[240px] sm:w-[320px] md:w-[360px] h-auto object-contain drop-shadow-[0_10px_28px_rgba(56,189,248,0.18)] select-none"
               />
             </picture>
           </div>
 
-          {/* Eyebrow de producto financiero / POS */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200/90 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold mb-6 shadow-[0_4px_16px_-2px_rgba(37,99,235,0.12)] backdrop-blur-md">
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 dark:bg-slate-800/80 border border-blue-200/90 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold mb-4 shadow-[0_4px_16px_-2px_rgba(37,99,235,0.12)] backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-500 status-breathing shrink-0" />
             <span className="font-mono text-blue-950 dark:text-white text-[11px] tracking-wider uppercase font-bold">
               ARQUITECTURA DE MOSTRADOR 100% OFFLINE
@@ -86,26 +69,26 @@ export const Hero: React.FC<HeroProps> = ({
             </span>
           </div>
 
-          {/* Título Principal Editorial & Contundente */}
-          <h1 className="text-4xl sm:text-6xl lg:text-[4.25rem] font-black tracking-[-0.035em] text-slate-950 dark:text-white leading-[1.08] mb-6">
+          {/* Título Principal */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-[-0.035em] text-slate-950 dark:text-white leading-[1.08] mb-4">
             El punto de venta diseñado para{" "}
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 dark:from-blue-400 dark:via-cyan-300 dark:to-indigo-400 bg-clip-text text-transparent">
               no detenerse jamás.
             </span>
           </h1>
 
-          {/* Subtítulo enfocado en la realidad operativa del comercio */}
-          <p className="text-base sm:text-xl text-slate-700 dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-            Cobra en menos de 2 segundos a <strong className="text-slate-950 dark:text-white font-bold">tasa oficial BCV</strong>, blinda tus turnos con <strong className="text-slate-950 dark:text-white font-bold">arqueo ciego anti-faltantes</strong> y factura <strong className="text-slate-950 dark:text-white font-bold">sin depender de internet</strong>. Con instalación remota guiada 1 a 1.
+          {/* Subtítulo */}
+          <p className="text-sm sm:text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto mb-7 leading-relaxed font-normal">
+            Cobra en menos de 2 segundos a <strong className="text-slate-950 dark:text-white font-bold">tasa oficial BCV</strong>, blinda tus turnos con <strong className="text-slate-950 dark:text-white font-bold">arqueo ciego anti-faltantes</strong> y factura <strong className="text-slate-950 dark:text-white font-bold">sin depender de internet</strong>.
           </p>
 
-          {/* Bloque de Acciones: Jerarquía de Dos Pasos Claros */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-5">
+          {/* Acciones Principales */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
             <a
               href="#sistema-real"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm sm:text-base shadow-[0_8px_24px_-4px_rgba(37,99,235,0.45)] hover:shadow-[0_12px_28px_-4px_rgba(37,99,235,0.55)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm shadow-[0_8px_24px_-4px_rgba(37,99,235,0.45)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
-              <span>Explorar los 13 Módulos Reales</span>
+              <span>Explorar Módulos y Simulador</span>
               <ArrowRight className="w-4 h-4 text-blue-100 group-hover:translate-x-0.5 transition-transform" />
             </a>
 
@@ -113,25 +96,25 @@ export const Hero: React.FC<HeroProps> = ({
               <button
                 type="button"
                 onClick={onOpenVideoDemo}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-950 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-sm sm:text-base shadow-[0_8px_20px_-4px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5 cursor-pointer border border-slate-800 dark:border-slate-700 group"
+                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-sm shadow-[0_8px_20px_-4px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer border border-slate-800 dark:border-slate-700 group"
               >
                 <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Play className="w-3 h-3 fill-emerald-400 text-emerald-400 ml-0.5" />
                 </div>
-                <span>Ver Video Demostrativo (40s)</span>
+                <span>Ver Video (40s)</span>
               </button>
             )}
 
             <button
               onClick={() => onOpenModal("demo_gratis")}
-              className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white/95 dark:bg-slate-900 hover:bg-blue-50/60 dark:hover:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-950 dark:text-slate-100 font-bold text-sm sm:text-base shadow-[0_4px_14px_rgba(37,99,235,0.08)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/95 dark:bg-slate-900 hover:bg-blue-50/60 dark:hover:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-950 dark:text-slate-100 font-bold text-sm shadow-[0_4px_14px_rgba(37,99,235,0.08)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Agendar Instalación Asistida</span>
+              <span>Agendar Instalación</span>
             </button>
           </div>
 
-          {/* Ancla Rápida de Transparencia de Precios */}
-          <div className="mb-12 flex items-center justify-center">
+          {/* Píldora Rápida de Precios */}
+          <div className="mb-8 flex items-center justify-center">
             <a
               href="#precios"
               className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50/95 dark:bg-emerald-950/60 hover:bg-emerald-100/90 dark:hover:bg-emerald-900/60 border border-emerald-300/90 dark:border-emerald-800/80 text-xs text-slate-800 dark:text-slate-200 shadow-xs transition-colors group"
@@ -142,346 +125,50 @@ export const Hero: React.FC<HeroProps> = ({
             </a>
           </div>
 
-          {/* Fila de Especificaciones y Certezas Operativas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-4xl mx-auto pt-6 border-t border-blue-200/60 dark:border-slate-800/80 mb-12 text-left">
-            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-emerald-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(16,185,129,0.14)] hover:-translate-y-0.5 transition-transform">
-              <div className="flex items-center gap-2 mb-1">
+          {/* 4 Certezas Operativas Compactas */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto pt-5 border-t border-blue-200/60 dark:border-slate-800/80 text-left">
+            <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-emerald-200/80 dark:border-slate-800">
+              <div className="flex items-center gap-2 mb-0.5">
                 <div className="p-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
                   <WifiOff className="w-3.5 h-3.5" />
                 </div>
                 <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">100% OFFLINE</span>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">SQLite local; cobra sin internet ni servidores.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Cobra sin internet ni caídas.</p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-blue-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(37,99,235,0.14)] hover:-translate-y-0.5 transition-transform">
-              <div className="flex items-center gap-2 mb-1">
+            <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-blue-200/80 dark:border-slate-800">
+              <div className="flex items-center gap-2 mb-0.5">
                 <div className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
                   <DollarSign className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">TASA OFICIAL BCV</span>
+                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">TASA BCV</span>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Conversión dual en tiempo real para USD y Bs.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Cálculo dual USD y Bs en vivo.</p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-amber-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(245,158,11,0.14)] hover:-translate-y-0.5 transition-transform">
-              <div className="flex items-center gap-2 mb-1">
+            <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-amber-200/80 dark:border-slate-800">
+              <div className="flex items-center gap-2 mb-0.5">
                 <div className="p-1 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
                   <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
                 <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">ARQUEO CIEGO</span>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Declaración física de billetes sin saldo a la vista.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Conteo de billetes anti-faltantes.</p>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-indigo-200/80 dark:border-slate-800 shadow-[0_8px_24px_-8px_rgba(79,70,229,0.14)] hover:-translate-y-0.5 transition-transform">
-              <div className="flex items-center gap-2 mb-1">
+            <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border border-indigo-200/80 dark:border-slate-800">
+              <div className="flex items-center gap-2 mb-0.5">
                 <div className="p-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
                   <Headphones className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">SOPORTE HUMANO</span>
+                <span className="text-slate-950 dark:text-white text-xs font-extrabold font-mono">SOPORTE 1 A 1</span>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Conexión AnyDesk y acompañamiento directo.</p>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-tight">Instalación remota por AnyDesk.</p>
             </div>
           </div>
-
-          {/* ============================================================== */}
-          {/* PRODUCT STAGE INTERACTIVO: Terminal, Visor y Arqueo Ciego      */}
-          {/* ============================================================== */}
-          <div className="relative max-w-6xl mx-auto text-left mt-4">
-            {/* Resplandor Perimetral Zafiro/Cian detrás del Monitor Hardware */}
-            <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-blue-600/25 via-cyan-500/20 to-indigo-600/25 rounded-[2rem] blur-2xl pointer-events-none opacity-90 dark:opacity-50" />
-
-            {/* Contenedor Hardware de Alta Definición */}
-            <div className="relative rounded-2xl sm:rounded-3xl bg-slate-950 border-2 border-blue-500/30 dark:border-slate-800 shadow-[0_30px_70px_-15px_rgba(37,99,235,0.28),0_15px_35px_-10px_rgba(15,23,42,0.3)] overflow-hidden">
-              
-              {/* Barra de Control de Hardware & Pestañas del Sistema */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800 gap-3">
-                
-                {/* Lado Izquierdo: Botones ventana OS + Título */}
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
-                  </div>
-                  <div className="h-4 w-px bg-slate-700 mx-1 hidden sm:block" />
-                  <span className="font-mono text-xs font-semibold text-slate-300 tracking-tight flex items-center gap-2">
-                    <span className="text-emerald-400">●</span>
-                    <span className="hidden sm:inline">Isaac POS Ultra •</span>
-                    <span className="text-slate-400">
-                      {activeView === "pos" && "Terminal de Ventas & Mostrador"}
-                      {activeView === "customer_display" && "Visor Secundario para Cliente (/#/display)"}
-                      {activeView === "arqueo" && "Módulo de Arqueo Ciego Anti-Fraude"}
-                    </span>
-                  </span>
-                </div>
-
-                {/* Centro / Switcher Interactivo de 3 Vistas */}
-                <div className="flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800 self-center sm:self-auto">
-                  <button
-                    type="button"
-                    onClick={() => setActiveView("pos")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
-                      activeView === "pos"
-                        ? "bg-blue-600 text-white shadow-xs"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <span>Terminal POS</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setActiveView("customer_display")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
-                      activeView === "customer_display"
-                        ? "bg-blue-600 text-white shadow-xs"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <Monitor className="w-3.5 h-3.5" />
-                    <span>Visor de Cliente</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setActiveView("arqueo")}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
-                      activeView === "arqueo"
-                        ? "bg-blue-600 text-white shadow-xs"
-                        : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <Banknote className="w-3.5 h-3.5" />
-                    <span>Arqueo Ciego</span>
-                  </button>
-                </div>
-
-                {/* Lado Derecho: Acciones de Expansión y Video */}
-                <div className="hidden md:flex items-center gap-2">
-                  {onOpenVideoDemo && (
-                    <button
-                      type="button"
-                      onClick={onOpenVideoDemo}
-                      className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold cursor-pointer transition-colors"
-                    >
-                      <Play className="w-3 h-3 fill-emerald-400" />
-                      <span>Video 40s</span>
-                    </button>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => setIsZoomed(true)}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-                    title="Ampliar captura"
-                  >
-                    <Maximize2 className="w-4 h-4" />
-                  </button>
-                </div>
-
-              </div>
-
-              {/* Contenido Visual Dinámico según la Pestaña Seleccionada */}
-              <div className="relative min-h-[360px] sm:min-h-[460px] lg:min-h-[540px] bg-slate-950 flex items-center justify-center overflow-hidden">
-                
-                {/* 1. Vista: Terminal POS Real + Visor 2da Pantalla Flotante en Simultáneo */}
-                {activeView === "pos" && (
-                  <div
-                    className="w-full relative cursor-pointer group"
-                    onClick={() => {
-                      if (onOpenVideoDemo) onOpenVideoDemo();
-                      else setIsZoomed(true);
-                    }}
-                  >
-                    <Image
-                      src="/real-system/v24_pos_terminal.png"
-                      alt="Isaac POS - Terminal de Ventas y Mostrador Real"
-                      width={1024}
-                      height={551}
-                      priority
-                      className="w-full h-auto object-cover select-none"
-                    />
-
-                    {/* Hotspots explicativos interactivos sobre el software */}
-                    <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-white text-xs font-mono flex items-center gap-2 shadow-lg">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span>1ra Pantalla (Cajero): Catálogo Táctil + Barras</span>
-                    </div>
-
-                    <div className="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/80 text-white text-xs font-mono hidden sm:flex items-center gap-2 shadow-lg">
-                      <DollarSign className="w-3.5 h-3.5 text-blue-400" />
-                      <span>Cálculo Bimonetario: USD & Bs a Tasa BCV ({rateValue.toFixed(2)} Bs)</span>
-                    </div>
-
-                    {/* Segunda Pantalla Flotante en Relieve (Visor de Cliente con QR Pago Móvil) */}
-                    <div
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveView("customer_display");
-                      }}
-                      title="Haz clic para ver el Visor de Cliente en tamaño completo"
-                      className="hidden md:block absolute bottom-4 right-4 w-[310px] lg:w-[360px] rounded-2xl bg-slate-950 border-2 border-emerald-400/80 shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] hover:border-emerald-300 z-20"
-                    >
-                      <div className="bg-slate-900 px-3 py-1.5 border-b border-slate-800 flex items-center justify-between text-[10px] font-mono">
-                        <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span>2DA PANTALLA CLIENTE • QR PAGO MÓVIL</span>
-                        </div>
-                        <span className="text-slate-400 hover:text-white underline">Ampliar ↗</span>
-                      </div>
-                      <Image
-                        src="/real-system/v24_visor_cliente_qr.png"
-                        alt="Visor de Cliente en 2da Pantalla con QR de Pago Móvil"
-                        width={512}
-                        height={266}
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-
-                    {/* Overlay al pasar el cursor */}
-                    <div className="absolute inset-0 bg-slate-950/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 pointer-events-none">
-                      {onOpenVideoDemo ? (
-                        <div className="bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl text-slate-950 font-bold text-sm shadow-2xl flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white">
-                            <Play className="w-4 h-4 fill-white ml-0.5" />
-                          </div>
-                          <span>Haz clic para ver demostración en video (40 segundos)</span>
-                        </div>
-                      ) : (
-                        <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl text-slate-950 font-bold text-xs shadow-xl">
-                          Haz clic para ampliar vista
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* 2. Vista: Visor de Cliente (2da Pantalla Real con QR Pago Móvil) */}
-                {activeView === "customer_display" && (
-                  <div
-                    className="w-full relative cursor-pointer group"
-                    onClick={() => setIsZoomed(true)}
-                  >
-                    <Image
-                      src="/real-system/v24_visor_cliente_qr.png"
-                      alt="Isaac POS - Visor de Cliente en 2da Pantalla con QR Pago Móvil"
-                      width={1024}
-                      height={533}
-                      className="w-full h-auto object-cover select-none"
-                    />
-
-                    <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-700/80 text-white text-xs max-w-sm shadow-xl">
-                      <div className="flex items-center gap-1.5 text-emerald-400 font-bold mb-1 font-mono">
-                        <Monitor className="w-3.5 h-3.5" />
-                        <span>VISOR 2DA PANTALLA + QR PAGO MÓVIL</span>
-                      </div>
-                      <p className="text-[11px] text-slate-300 leading-snug">
-                        El cliente audita sus productos en tiempo real y escanea el <strong>código QR de Pago Móvil</strong> con el monto exacto en Bolívares a tasa BCV ({rateValue.toFixed(2)} Bs).
-                      </p>
-                    </div>
-
-                    <div className="absolute bottom-4 right-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-white text-xs font-mono">
-                      Haz clic para ampliar captura real
-                    </div>
-                  </div>
-                )}
-
-                {/* 3. Vista: Arqueo Ciego de Caja */}
-                {activeView === "arqueo" && (
-                  <div
-                    className="w-full relative cursor-pointer group"
-                    onClick={() => setIsZoomed(true)}
-                  >
-                    <Image
-                      src="/real-system/v24_control_caja_arqueo.png"
-                      alt="Isaac POS - Arqueo Ciego de Caja Anti-Fraude"
-                      width={1024}
-                      height={585}
-                      className="w-full h-auto object-cover select-none"
-                    />
-
-                    {/* Explicación de la tecnología de arqueo ciego */}
-                    <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-700/80 text-white text-xs max-w-sm shadow-xl">
-                      <div className="flex items-center gap-1.5 text-amber-400 font-bold mb-1 font-mono">
-                        <Lock className="w-3.5 h-3.5" />
-                        <span>ARQUEO CIEGO CERTIFICADO</span>
-                      </div>
-                      <p className="text-[11px] text-slate-300 leading-snug">
-                        El cajero introduce la cantidad exacta de billetes físicos que tiene en su gaveta. <strong>No sabe cuánto espera el sistema</strong>. Si sobran o faltan $5 o Bs. 200, el sistema lo audita al instante.
-                      </p>
-                    </div>
-
-                    <div className="absolute bottom-4 right-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 text-white text-xs font-mono">
-                      Cierre Correlativo X y Z con Impresión de Comprobante
-                    </div>
-                  </div>
-                )}
-
-              </div>
-
-              {/* Pie de Hardware: Certificación de Integración */}
-              <div className="px-5 py-3 bg-slate-900/60 border-t border-slate-800 text-slate-400 text-xs flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                  <span className="font-mono text-[11px] text-slate-300">
-                    ESC/POS • Térmica 58/80mm • Básculas USB/Serial • Lectores Códigos 1D/2D QR
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 font-mono text-[11px] text-slate-400">
-                  <span>Instalable en Windows 7-11 y Android</span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
         </div>
       </div>
-
-      {/* MODAL ZOOM PANTALLA COMPLETA */}
-      {isZoomed && (
-        <div
-          className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
-          onClick={() => setIsZoomed(false)}
-        >
-          <div
-            className="relative max-w-7xl w-full bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl animate-in fade-in duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-slate-950 text-xs font-mono text-slate-300">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="font-bold text-white text-sm">
-                  Isaac POS Ultra • Captura Oficial en Alta Resolución
-                </span>
-              </div>
-              <button
-                onClick={() => setIsZoomed(false)}
-                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="p-2 sm:p-4 bg-slate-950 max-h-[85vh] overflow-auto">
-              <Image
-                src={
-                  activeView === "arqueo"
-                    ? "/real-system/v24_control_caja_arqueo.png"
-                    : activeView === "customer_display"
-                    ? "/real-system/v24_visor_cliente_qr.png"
-                    : "/real-system/v24_pos_terminal.png"
-                }
-                alt="Isaac POS Captura Real"
-                width={1024}
-                height={551}
-                className="w-full h-auto rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
