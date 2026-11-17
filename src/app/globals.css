@@ -114,11 +114,9 @@ html.dark ::selection {
   background-repeat: repeat-x;
 }
 
-/* Refined dot grid for engineering backdrops */
+/* Clean surface backdrop */
 .engineering-grid {
-  background-size: 32px 32px;
-  background-image: 
-    radial-gradient(circle, rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+  background: transparent;
 }
 
 /* Pulsing LED status */
