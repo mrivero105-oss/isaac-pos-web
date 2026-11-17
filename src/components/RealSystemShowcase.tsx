@@ -437,10 +437,11 @@ export const RealSystemShowcase: React.FC = () => {
                     onClick={() => setIsZoomed(true)}
                   >
                     <Image
-                      src={activeSubModule.image}
+                      src={`${activeSubModule.image}?v=20261117`}
                       alt={activeSubModule.title}
                       width={1024}
                       height={551}
+                      unoptimized
                       className="w-full h-auto object-cover rounded-xl transition-transform duration-300 group-hover:scale-[1.008]"
                     />
 
@@ -519,10 +520,11 @@ export const RealSystemShowcase: React.FC = () => {
               <span className="text-blue-600 dark:text-blue-400 font-semibold cursor-pointer">Clic en cualquier parte para cerrar ✕</span>
             </div>
             <Image
-              src={activeSubModule.image}
+              src={`${activeSubModule.image}?v=20261117`}
               alt={activeSubModule.title}
               width={1024}
               height={551}
+              unoptimized
               className="w-full h-auto rounded-xl"
             />
           </div>

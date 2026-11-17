@@ -243,10 +243,11 @@ export const IndustrySolutions: React.FC<IndustrySolutionsProps> = ({ onOpenModa
 
                 <div className="rounded-xl overflow-hidden bg-slate-900">
                   <Image
-                    src={activeIndustry.image}
+                    src={`${activeIndustry.image}?v=20261117`}
                     alt={activeIndustry.name}
                     width={1024}
                     height={551}
+                    unoptimized
                     className="w-full h-auto object-cover rounded-xl"
                   />
                 </div>
